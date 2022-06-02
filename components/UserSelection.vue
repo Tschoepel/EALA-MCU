@@ -1,4 +1,3 @@
-<!-- Please remove this file from your project -->
 <template>
   <div
     class="relative flex items-top justify-center min-h-screen bg-gray-100 sm:items-center sm:pt-0"
@@ -25,13 +24,13 @@
             title="Student"
             desc="Die normale Sicht eines Studenten, um verschiedene Tests abschließen zu können."
             :points="['Tests absolvieren', 'Feedback bekommen', 'Stoff lernen']"
-            link="student/login"
+            link="/student/login"
           />
           <UserCard
             title="Professor"
             desc="Die Sicht eines Professors, um verschiedene Tests auswerten und korrigieren zu können."
             :points="['Tests korrigieren', 'Tests auswerten', 'Statistiken abrufen']"
-            link="prof/login"
+            link="/prof/login"
           />
         </div>
       </div>
@@ -41,6 +40,6 @@
 
 <script>
 export default {
-  name: 'UserSelection',
-}
+  name: "UserSelection"
+};
 </script>

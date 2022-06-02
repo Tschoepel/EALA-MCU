@@ -1,10 +1,12 @@
 <template>
   <div
     class="border border-gray-200 rounded-lg shadow-sm divide-y divide-gray-200 hover:border-slate-400 cursor-pointer"
-    @click="$router.push(link); "
+    @click="$router.push(link);"
   >
     <div class="p-6">
-      <h2 class="text-lg leading-6 font-medium text-gray-900">{{ title }}</h2>
+      <h2 class="text-lg leading-6 font-medium text-gray-900">
+        {{ title }}
+      </h2>
       <p class="mt-4 text-sm text-gray-500">
         {{ desc }}
       </p>
@@ -27,7 +29,7 @@
               fill-rule="evenodd"
               d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
               clip-rule="evenodd"
-            ></path>
+            />
           </svg>
           <span class="text-sm text-gray-500 ml-2">{{ point }}</span>
         </li>
@@ -37,24 +39,24 @@
 </template>
 <script>
 export default {
-  name: 'UserCard',
+  name: "UserCard",
   props: {
     title: {
       type: String,
-      required: true,
+      required: true
     },
     desc: {
       type: String,
-      required: true,
+      required: true
     },
     points: {
       type: Array,
-      required: true,
+      required: true
     },
     link: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   }
-}
+};
 </script>
