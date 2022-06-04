@@ -1,5 +1,5 @@
 <template>
-  <Login-component mail="student.name@campus.lmu.de" />
+  <Login-component mail="prof.name@campus.lmu.de" />
 </template>
 
 <script>

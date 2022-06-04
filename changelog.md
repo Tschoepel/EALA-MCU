@@ -1,6 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.2] - 04.06.2022
+### Added
+- Dashboard for Profs.
+### Changed
+- Changed login forms.
 
 ## [0.0.1] - 02.06.2022
 ### Added
