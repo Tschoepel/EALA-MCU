@@ -1,6 +1,15 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.4] - 24.06.2022
+### Added
+- Seeds for seeding the database with initial data.
+- `InfoCard` component to display information.
+- `prof/statistics` page to display statistics.
+- `statistics` component to track page visits.
+### Changed
+- Student and prof dashboard components are now in a separate folder.
+- `student/training` page now has information regarding the training and a list of exercise sheets.
 
 ## [0.0.3] - 22.06.2022
 ### Added

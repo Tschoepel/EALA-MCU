@@ -139,6 +139,7 @@
         <slot />
       </main>
     </div>
+    <StatisticsComponent />
   </div>
 </template>
 
@@ -175,7 +176,7 @@ const navigation = reactive([
 const userNavigation = [
   { name: "Your Profile", href: "#" },
   { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" }
+  { name: "Sign out", href: "/" }
 ];
 const props = defineProps({
   nav: {

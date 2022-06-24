@@ -14,6 +14,14 @@ model ClosedText {
   answers String
 }
 
+model Statistics {
+  id      Int    @id @default(autoincrement())
+  userId  Int
+  action  String
+  params  String
+  createdAt DateTime @default(now())
+}
+
 model Post {
   id        Int      @id @default(autoincrement())
   title     String
