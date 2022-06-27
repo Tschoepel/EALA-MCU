@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.5] - 27.06.2022
+### Changed
+- Updated `nuxt` to `^3.0.0-rc.4`.
 ## [0.0.4] - 24.06.2022
 ### Added
 - Seeds for seeding the database with initial data.
