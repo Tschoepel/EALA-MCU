@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.7] - 27.06.2022
+### Changed
+- Changes in `package-lock.json`.
 ## [0.0.6] - 27.06.2022
 ### Added
 - `server/api/mutlipleChoice` route to return `multipleChoice` with given id.
