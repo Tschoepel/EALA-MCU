@@ -1,6 +1,14 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.8] - 27.06.2022
+### Changed
+- Changes in `package-lock.json`.
+- `schema.prisma` removed table column of `mutlipleChoice`.
+- `student/training` modified `MultipleChoice` component in training. 
+- `MultipleChoice` reworked component to use for multiple choice questions with db connection.
+-  Seed for seeding the database with reworked initial data mutlipleChoice.
+- `server/api/mutlipleChoice` reworked route to return `multipleChoice` with given id and updated database table.
 ## [0.0.7] - 27.06.2022
 ### Changed
 - Changes in `package-lock.json`.
