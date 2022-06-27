@@ -89,10 +89,12 @@
         </div>
         <!-- /End replace -->
       </div>
+      <DragDrop :id="1" />
     </div>
   </dashboardsStudent-dashboard>
 </template>
 
 <script setup>
+import DragDrop from "~~/components/items/DragDrop.vue";
 const date = new Date().toLocaleDateString("de-DE");
 </script>
