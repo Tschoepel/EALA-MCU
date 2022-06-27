@@ -1,6 +1,13 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.6] - 27.06.2022
+### Added
+- `server/api/mutlipleChoice` route to return `multipleChoice` with given id.
+### Changed
+- `MultipleChoice` component to use for multiple choice questions with db connection.
+- `student/training` added `MultipleChoice` component in training. 
+- Seed for seeding the database with initial data mutlipleChoice.
 ## [0.0.5] - 27.06.2022
 ### Changed
 - Updated `nuxt` to `^3.0.0-rc.4`.

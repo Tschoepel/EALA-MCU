@@ -10,6 +10,22 @@ async function main () {
       answers: "diversen,befüllt"
     }
   });
+  await prisma.multipleChoice.create({
+    data: {
+      title: "Test - Multiple Choice",
+      question: "Welche der folgenden Superhelden traten im ersten Avengersfilm auf",
+      answerI : "Dr. Strange",
+      answerICorrect: false,
+      answerI : "Thor",
+      answerICorrect: true,
+      answerI : "Loki",
+      answerICorrect: true,
+      answerI : "Spiderman",
+      answerICorrect: false
+
+
+    }
+  })
 }
 
 main()

@@ -85,7 +85,8 @@
               </div>
             </div>
           </div>
-          <ItemsClosed-text :id="1" />
+          <ItemsClosed-Text :id="1" />
+          <ItemsMultiple-Choice :id="1" />
         </div>
         <!-- /End replace -->
       </div>
