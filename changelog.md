@@ -1,6 +1,14 @@
 # Changelog
 
 ## [Unreleased]
+
+## [0.0.9] - 28.06.2022
+### Added
+- `FormComponent` to create forms to send to the server.
+- `api/training.post.js` to automatically check the answers.
+### Changed
+- `ClosedText` now also utilizes the index of the form.
+
 ## [0.0.8] - 27.06.2022
 ### Changed
 - Changes in `package-lock.json`.
@@ -9,9 +17,11 @@
 - `MultipleChoice` reworked component to use for multiple choice questions with db connection.
 -  Seed for seeding the database with reworked initial data mutlipleChoice.
 - `server/api/mutlipleChoice` reworked route to return `multipleChoice` with given id and updated database table.
+
 ## [0.0.7] - 27.06.2022
 ### Changed
 - Changes in `package-lock.json`.
+
 ## [0.0.6] - 27.06.2022
 ### Added
 - `server/api/mutlipleChoice` route to return `multipleChoice` with given id.
@@ -19,9 +29,11 @@
 - `MultipleChoice` component to use for multiple choice questions with db connection.
 - `student/training` added `MultipleChoice` component in training. 
 - Seed for seeding the database with initial data mutlipleChoice.
+
 ## [0.0.5] - 27.06.2022
 ### Changed
 - Updated `nuxt` to `^3.0.0-rc.4`.
+
 ## [0.0.4] - 24.06.2022
 ### Added
 - Seeds for seeding the database with initial data.

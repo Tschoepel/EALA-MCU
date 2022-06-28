@@ -19,6 +19,7 @@
         <b>Hinweistext: </b>Füllen Sie alle leeren Felder korrekt aus. Groß- und Kleinschreibung wird hierbei ignoriert.
       </div>
       <!-- eslint-disable vue/no-v-html -->
+      <input type="hidden" :name="'closedtext-'+props.index+'-id'" :value="props.id">
       <div class="px-4 py-5" v-html="htmlText" />
       <!--eslint-enable-->
     </div>
@@ -32,6 +33,10 @@ const props = defineProps({
   id: {
     type: Number,
     required: true
+  },
+  index: {
+    type: Number,
+    required: true
   }
 });
 // Allgemeine Fragen zu Thor; Dies ist ein Text mit $$ Lücken. Die Lücken müssen vorher $$ werden.;diversen,befüllt
@@ -40,7 +45,7 @@ const title = api.value.title;
 const text = api.value.text;
 let i = 0;
 const htmlText = computed(() => {
-  const input = "<input type=\"text\" name=\"closed-text-num\" class=\"shadow-sm text-sm border-gray-300 rounded-md\">";
+  const input = "<input type=\"text\" name=\"closedtext-" + props.index + "-num\" class=\"shadow-sm text-sm border-gray-300 rounded-md\">";
   return text.replaceAll("$$", () => {
     i = i + 1;
     return input.replace("num", i);

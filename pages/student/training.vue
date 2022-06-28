@@ -69,7 +69,7 @@
                             {{ date }}
                           </td>
                           <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                            Caption America &amp; Captian Marvel
+                            Captain America &amp; Captain Marvel
                           </td>
                           <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
                             -/10
@@ -85,9 +85,11 @@
               </div>
             </div>
           </div>
-          <ItemsClosed-text :id="1" />
-        <div><b></b></div>
-          <ItemsMultiple-choice :id="1" />
+          <FormComponent :list="[{c: 'ItemsClosed-text', id: 1}, {c: 'ItemsMultiple-choice', id:1},{c: 'ItemsClosed-text', id: 1}]">
+          <!-- <ItemsClosed-text :id="1" />
+          <div><b /></div>
+          <ItemsMultiple-choice :id="1" /> -->
+          </FormComponent>
         </div>
         <!-- /End replace -->
       </div>

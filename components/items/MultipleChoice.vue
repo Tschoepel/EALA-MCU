@@ -49,7 +49,7 @@
   </div>
 </template>
 <script setup>
-import { ref } from "@vue/reactivity";
+import { ref } from "vue";
 const props = defineProps({
   id: {
     type: Number,
@@ -68,6 +68,7 @@ const answerIIICorrect = api.value.answerIIICorrect;
 const answerIVCorrect = api.value.answerIVCorrect;
 const helpOpen = ref(false);
 const submitSolution = ref(false);
+// const answers = ref([]);
 </script>
 <script>
 export default {
