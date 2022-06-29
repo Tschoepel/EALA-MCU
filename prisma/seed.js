@@ -10,6 +10,13 @@ async function main () {
       answers: "diversen,befüllt"
     }
   });
+  await prisma.closedText.create({
+    data: {
+      title: "Captain America: The First Avenger",
+      text: "Im Jahr $$, während des Zweiten Weltkriegs, dringen Soldaten der Organisation $$, der Wissenschaftsdivision des Dritten Reichs, in die norwegische Stadt Tønsberg ein. In einem Kloster findet Johann Schmidt, ein mysteriöses, würfelförmiges Artefakt, das er als $$ bezeichnet. Dem Wissenschaftler Arnim Zola gelingt es, die Energien des Würfels zu bändigen und als Quelle für neuartige Energiewaffen zu nutzen.",
+      answers: "1942,hydra,tesserakt"
+    }
+  });
   await prisma.multipleChoice.create({
     data: {
       question: "Welche der folgenden Superhelden traten im ersten Avengersfilm auf",

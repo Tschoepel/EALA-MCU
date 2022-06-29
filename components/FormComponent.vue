@@ -1,20 +1,27 @@
 <template>
-  <form ref="form" action="/api/training" method="POST">
-    <div v-for="(l, index) in props.list" :key="l.c+l.id">
-      <ItemsClosed-text v-if="l.c == 'ItemsClosed-text'" :id="l.id" :index="index" />
-      <ItemsMultiple-choice v-if="l.c == 'ItemsMultiple-choice'" :id="l.id" :index="index" />
+  <form ref="form" action="/api/training" method="POST" class="p-5 rounded bg-gray-300">
+    <div v-for="(l, i) in props.list" :key="l.c+':'+l.id">
+      <ItemsClosed-text v-if="l.c == 'ItemsClosed-text'" :id="l.id" :index="i" />
+      <!-- <ItemsMultiple-choice v-if="l.c == 'ItemsMultiple-choice'" :id="l.id" :index="index" /> -->
     </div>
     <div class="max-w-none mx-auto mt-4">
-      <div class="bg-white overflow-hidden sm:rounded-lg sm:shadow">
-        <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
-          <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
-            <div class="flex-grow" />
-            <div class="ml-4 mt-2 flex-shrink-0">
-              <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="sendForm">
-                Übung abschicken
-              </button>
-            </div>
-          </div>
+      <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap pt-3">
+        <div class="flex-grow" />
+        <div class="ml-4 mt-2 flex-shrink-0">
+          <button type="button" class="btn btn-primary" :disabled="state.loading" @click="sendForm">
+            Übung abschicken
+            <svg v-show="state.loading" class="animate-spin -mr-1 ml-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              />
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
@@ -28,6 +35,7 @@ const props = defineProps({
     required: true
   }
 });
+const state = reactive({ loading: false });
 const form = ref(null);
 onMounted(() => {
   // console.log(form);
@@ -55,10 +63,15 @@ onMounted(() => {
 //   // return elements;
 // }
 async function sendForm () {
+  state.loading = true;
   const formData = new FormData(form.value);
   await $fetch("/api/training", {
     method: "POST",
     body: Array.from(formData)
+  }).then((res) => {
+    state.loading = false;
+    const router = useRouter();
+    router.push({ path: "/student/training/" + res.id });
   });
 }
 </script>

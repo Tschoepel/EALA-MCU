@@ -1,11 +1,11 @@
 <template>
-  <div class="max-w-none mx-auto">
-    <div class="bg-white overflow-hidden sm:rounded-lg sm:shadow">
-      <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+  <div class="max-w-none mx-auto mb-4">
+    <div class="bg-white overflow-hidden sm:rounded sm:shadow">
+      <div class="bg-white px-3 py-4 border-b border-gray-200 sm:px-6">
         <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
           <div class="ml-4 mt-2">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
-              {{ title }}
+              {{ props.index+1 }}. {{ api.title }}
             </h3>
           </div>
           <div class="ml-4 mt-2 flex-shrink-0">
@@ -27,8 +27,7 @@
 </template>
 
 <script setup>
-// import { ref } from "@vue/reactivity";
-import { ref, computed } from "@vue/reactivity";
+import { onMounted } from "vue";
 const props = defineProps({
   id: {
     type: Number,
@@ -41,14 +40,19 @@ const props = defineProps({
 });
 // Allgemeine Fragen zu Thor; Dies ist ein Text mit $$ Lücken. Die Lücken müssen vorher $$ werden.;diversen,befüllt
 const { data: api } = await useFetch("/api/closedText/" + props.id);
-const title = api.value.title;
-const text = api.value.text;
+// const title = api.value.title;
+onMounted(() => {
+  // console.log(api.value);
+  // title = api.value.title;
+  // ({ title, text } = api.value);
+  // console.log(title, text);
+});
 let i = 0;
 const htmlText = computed(() => {
-  const input = "<input type=\"text\" name=\"closedtext-" + props.index + "-num\" class=\"shadow-sm text-sm border-gray-300 rounded-md\">";
-  return text.replaceAll("$$", () => {
+  const input = "<input type=\"text\" name=\"closedtext-" + props.index + "-num\" class=\"shadow-sm text-sm border-gray-300 rounded-md\" value=\"testnum\">";
+  return api.value.text.replaceAll("$$", () => {
     i = i + 1;
-    return input.replace("num", i);
+    return input.replaceAll("num", i);
   });
 });
 const helpOpen = ref(false);

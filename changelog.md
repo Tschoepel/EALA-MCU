@@ -2,6 +2,17 @@
 
 ## [Unreleased]
 
+## [0.0.10] - 29.06.2022
+### Added
+- `training/[id].vue` to view the training results.
+- `btn` and `btn-primary` classes.
+- `Trainings`, `TrainingSubmissions` and `TrainingResults` to the db schema.
+### Changed
+- Updated all dependencies.
+- `api/training.post.js` will now correct the `ClosedText` element.
+- `FormComponent` will now redirect to the results page.
+- Disabled nuxt telemetry.
+
 ## [0.0.9] - 28.06.2022
 ### Added
 - `FormComponent` to create forms to send to the server.
