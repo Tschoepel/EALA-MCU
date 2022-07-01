@@ -10,6 +10,13 @@ async function main () {
       answers: "diversen,befüllt"
     }
   });
+  await prisma.dragDrop.create({
+    data: {
+      title: "Drag & Drop: Sortieren Sie die folgenden Filme nach ihrem Erscheinungsjahr",
+      texts: "Thor,Iron Man 2,Marvel's the Avengers,Doctor Strange",
+      solution: "Iron Man 2,Thor,Marvel's the Avengers,Doctor Strange"
+    }
+  });
 }
 
 main()
