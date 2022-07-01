@@ -2,6 +2,17 @@
 
 ## [Unreleased]
 
+## [0.0.11] - 01.07.2022
+### Added
+- `d3` to have a look at the charts.
+- `BarChart`, `DoughnutChart` and `RadarChart` as components.
+- `BannerComponent` to display information in the dashboard.
+- `prof/analysis` to display warnings and suggestions from the automated analysis.
+- `prof/progress` page for our presentation.
+### Changed
+- Both dashboards were changed to remove unused parts.
+- `prof/dashboard` now displays the different statistics and warnings from the analysis.
+
 ## [0.0.10] - 29.06.2022
 ### Added
 - `training/[id].vue` to view the training results.

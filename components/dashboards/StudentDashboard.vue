@@ -174,9 +174,9 @@ const navigation = reactive([
   { name: "Exam", href: "/student/training", icon: ClipboardCheckIcon, current: false }
 ]);
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "/" }
+  // { name: "Your Profile", href: "#" },
+  // { name: "Settings", href: "#" },
+  { name: "Logout", href: "/" }
 ];
 const props = defineProps({
   nav: {

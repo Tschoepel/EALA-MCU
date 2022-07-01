@@ -90,7 +90,7 @@
         <div class="flex-1 px-4 flex justify-between">
           <div class="flex-1 flex items-center">
             <h2 class="text-2xl font-semibold text-gray-900">
-              Professor Dashboard
+              Professoren Ansicht
             </h2>
             <!-- <form class="w-full flex md:ml-0" action="#" method="GET">
               <label for="search-field" class="sr-only">Search</label>
@@ -158,24 +158,27 @@ import {
 import {
   // ClipboardCheckIcon,
   BellIcon,
-  ChartPieIcon,
-  ChatAlt2Icon,
+  // ChartPieIcon,
+  // ChatAlt2Icon,
   FilmIcon,
   HomeIcon,
   MenuAlt2Icon,
+  PresentationChartBarIcon,
+  TerminalIcon,
   XIcon
 } from "@heroicons/vue/outline";
 // import { SearchIcon } from "@heroicons/vue/solid";
 
 const navigation = reactive([
-  { name: "Dashboard", href: "/prof", icon: HomeIcon, current: false },
-  { name: "Feedback", href: "/prof/feedback", icon: ChatAlt2Icon, current: false },
-  { name: "Statistics", href: "/prof/statistics", icon: ChartPieIcon, current: false }
+  { name: "Dashboard", href: "/prof", icon: HomeIcon, nav: "dashboard", current: false },
+  { name: "Analyse", href: "/prof/analysis", icon: PresentationChartBarIcon, nav: "analysis", current: false },
+  // { name: "Statistiken", href: "/prof/statistics", icon: PresentationChartBarIcon, current: false },
+  { name: "Aktueller Stand", href: "/prof/progress", icon: TerminalIcon, nav: "progress", current: false }
 ]);
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "/" }
+  // { name: "Your Profile", href: "#" },
+  // { name: "Settings", href: "#" },
+  { name: "Logout", href: "/" }
 ];
 const props = defineProps({
   nav: {
@@ -187,7 +190,7 @@ const props = defineProps({
 onMounted(() => {
   // console.log(props.nav);
   navigation.forEach((element) => {
-    if (element.name.toLowerCase() === props.nav) { element.current = true; }
+    if (element.nav.toLowerCase() === props.nav) { element.current = true; }
   });
 });
 const sidebarOpen = ref(false);
