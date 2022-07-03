@@ -87,6 +87,29 @@ const onDrop = (event, list) => {
     window.console.log("Wrong solution");
   }
 };
+// Automated Item Generation: Load Wikidata SPARQL Query with all Films and their premiere
+// Need to preprocess data because it contains multiple premieres for different countries: We take the first premiere of all countries
+const preprocessesFilms = [];
+const url = "https://query.wikidata.org/sparql?query=SELECT%20DISTINCT%20%3Fitem%20%3FVer_ffentlichungsdatum%20%3FitemLabel%20WHERE%20%7B%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%20%20%7B%0A%20%20%20%20SELECT%20DISTINCT%20%3Fitem%20WHERE%20%7B%0A%20%20%20%20%20%20%3Fitem%20p%3AP179%20%3Fstatement0.%0A%20%20%20%20%20%20%3Fstatement0%20(ps%3AP179%2F(wdt%3AP279*))%20wd%3AQ642878.%0A%20%20%20%20%20%20%3Fitem%20p%3AP577%20%3Fstatement_1.%0A%20%20%20%20%20%20%3Fstatement_1%20psv%3AP577%20%3FstatementValue_1.%0A%20%20%20%20%20%20%3FstatementValue_1%20wikibase%3AtimeValue%20%3FP577_1.%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%7D%0A%20%20%20%20LIMIT%201000%0A%20%20%7D%0A%20%20OPTIONAL%20%7B%3Fitem%20wdt%3AP577%20%3FVer_ffentlichungsdatum.%7D%0A%7D%0AORDER%20BY%20%3FVer_ffentlichungsdatum%0A%20%0A&format=json";
+const LoadData = async () => {
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    // console.log(data.results.bindings);
+    for (let i = 0; i < data.results.bindings.length; i++) {
+      const tuple = [data.results.bindings[i].Ver_ffentlichungsdatum.value, data.results.bindings[i].itemLabel.value];
+      if (!(preprocessesFilms.some(a => a[1] === data.results.bindings[i].itemLabel.value))) {
+        preprocessesFilms.push(tuple);
+      }
+    }
+    console.log(preprocessesFilms);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+LoadData();
+// Need to preprocess data because it contains multiple premieres for different countries: We take the first premiere of all countries
 </script>
 
 <style>
