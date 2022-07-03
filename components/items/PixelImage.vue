@@ -6,6 +6,7 @@
           <div class="ml-4 mt-2">
             <h3 class="text-lg text-align: center leading-6 font-medium text-gray-900">
               {{ "Welcher Superheld ist das?" }}
+                <sparql xmlns="https://w.wiki/5Nzf"></sparql>
             </h3>
               <div class="image">
                 <img src="~/assets/images/ironman.jpg">
