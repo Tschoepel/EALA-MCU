@@ -28,6 +28,9 @@
                 </div>
               </div>
             </div>
+            <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="submitAnswer">
+              Submit
+            </button>
           </div>
         </div>
       </div>
@@ -45,11 +48,11 @@ const props = defineProps({
 });
 const { data: api } = await useFetch("/api/dragDrop/" + props.id);
 const title = api.value.title;
-const texts = api.value.texts;
-const textsArr = texts.split(",");
+// const texts = api.value.texts;
+// const textsArr = texts.split(",");
 
-const solution = api.value.solution;
-const solutionArr = solution.split(",");
+// const solution = api.value.solution;
+// const solutionArr = solution.split(",");
 
 const dropObj = ref([
   { id: "" }
@@ -60,12 +63,18 @@ const getList = (list) => {
 };
 
 const items = ref([
-  { id: "0", title: textsArr[0], list: 1 }, // 2011
-  { id: "1", title: textsArr[1], list: 2 }, // 2010
-  { id: "2", title: textsArr[2], list: 3 }, // 2012
-  { id: "3", title: textsArr[3], list: 4 } // 2016
+  { id: "0", title: "", list: 1 }, // 2011
+  { id: "1", title: "", list: 2 }, // 2010
+  { id: "2", title: "", list: 3 }, // 2012
+  { id: "3", title: "", list: 4 } // 2016
 
 ]);
+
+const changeItems = (items, newArr) => {
+  for (let i = 0; i < items.value.length; i++) {
+    items.value[i].title = newArr[i][2];
+  }
+};
 
 const startDrag = (event, item) => {
   event.dataTransfer.dropEffect = "move";
@@ -90,26 +99,38 @@ const onDrop = (event, list) => {
 // Automated Item Generation: Load Wikidata SPARQL Query with all Films and their premiere
 // Need to preprocess data because it contains multiple premieres for different countries: We take the first premiere of all countries
 const preprocessesFilms = [];
+let filmSelection = [];
 const url = "https://query.wikidata.org/sparql?query=SELECT%20DISTINCT%20%3Fitem%20%3FVer_ffentlichungsdatum%20%3FitemLabel%20WHERE%20%7B%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%20%20%7B%0A%20%20%20%20SELECT%20DISTINCT%20%3Fitem%20WHERE%20%7B%0A%20%20%20%20%20%20%3Fitem%20p%3AP179%20%3Fstatement0.%0A%20%20%20%20%20%20%3Fstatement0%20(ps%3AP179%2F(wdt%3AP279*))%20wd%3AQ642878.%0A%20%20%20%20%20%20%3Fitem%20p%3AP577%20%3Fstatement_1.%0A%20%20%20%20%20%20%3Fstatement_1%20psv%3AP577%20%3FstatementValue_1.%0A%20%20%20%20%20%20%3FstatementValue_1%20wikibase%3AtimeValue%20%3FP577_1.%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%7D%0A%20%20%20%20LIMIT%201000%0A%20%20%7D%0A%20%20OPTIONAL%20%7B%3Fitem%20wdt%3AP577%20%3FVer_ffentlichungsdatum.%7D%0A%7D%0AORDER%20BY%20%3FVer_ffentlichungsdatum%0A%20%0A&format=json";
 const LoadData = async () => {
   try {
     const res = await fetch(url);
     const data = await res.json();
     // console.log(data.results.bindings);
-    for (let i = 0; i < data.results.bindings.length; i++) {
-      const tuple = [data.results.bindings[i].Ver_ffentlichungsdatum.value, data.results.bindings[i].itemLabel.value];
-      if (!(preprocessesFilms.some(a => a[1] === data.results.bindings[i].itemLabel.value))) {
-        preprocessesFilms.push(tuple);
+    for (let i = 0; i < data.results.bindings.length - 1; i++) {
+      const filmTriple = [Date.parse(data.results.bindings[i].Ver_ffentlichungsdatum.value), data.results.bindings[i].Ver_ffentlichungsdatum.value, data.results.bindings[i].itemLabel.value];
+      if (!(preprocessesFilms.some(a => a[2] === data.results.bindings[i].itemLabel.value))) {
+        preprocessesFilms.push(filmTriple);
       }
     }
-    console.log(preprocessesFilms);
+    // console.log(preprocessesFilms);
+    // Now shuffle list to generate randomization
+    const randomizeArray = (array, num) => {
+      const shuffledList = [...array].sort(() => 0.5 - Math.random());
+      return shuffledList.slice(0, num);
+    };
+    filmSelection = randomizeArray(preprocessesFilms, 4);
+    // console.log(filmSelection);
+    changeItems(items, filmSelection);
   } catch (err) {
     console.error(err);
   }
 };
 
 LoadData();
-// Need to preprocess data because it contains multiple premieres for different countries: We take the first premiere of all countries
+function submitAnswer () {
+  console.log("Klick");
+  LoadData();
+}
 </script>
 
 <style>
