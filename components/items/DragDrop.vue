@@ -55,7 +55,10 @@ const title = api.value.title;
 // const solutionArr = solution.split(",");
 
 const dropObj = ref([
-  { id: "" }
+  {
+    id: "",
+    list: 99
+  }
 ]);
 
 const getList = (list) => {
@@ -81,6 +84,7 @@ const startDrag = (event, item) => {
   event.dataTransfer.effectAllowed = "move";
   event.dataTransfer.setData = ("itemID", item.id);
   dropObj.value.id = item.id;
+  dropObj.value.list = item.list;
 };
 
 const onDrop = (event, list) => {
@@ -88,6 +92,14 @@ const onDrop = (event, list) => {
   const itemID = dropObj.value.id;// event.dataTransfer.getData("itemID");
   dropObj.value.id = "";
   const item = items.value.find(item => item.id === itemID);
+  console.log(list);
+
+  for (let i = 0; i < items.value.length; i++) {
+    if (items.value[i].list === list) {
+      console.log("Item " + items.value[i].title + " should go on " + dropObj.value.list);
+      items.value[i].list = dropObj.value.list;
+    }
+  }
   item.list = list;
 
   if (getList(1)[0].title === solutionArr[0] && getList(2)[0].title === solutionArr[1] && getList(3)[0].title === solutionArr[2] && getList(4)[0].title === solutionArr[3]) {
@@ -128,7 +140,7 @@ const LoadData = async () => {
 
 LoadData();
 function submitAnswer () {
-  console.log("Klick");
+  console.log("Submitted");
   LoadData();
 }
 </script>
