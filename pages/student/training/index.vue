@@ -94,6 +94,7 @@
         <!-- /End replace -->
       </div>
       <DragDrop :id="1" />
+      <HearingTask :id="1"  />
     </div>
     <PixelImage :id="1" />
   </dashboardsStudent-dashboard>
@@ -102,5 +103,6 @@
 <script setup>
 import DragDrop from "~~/components/items/DragDrop.vue";
 import PixelImage from "~~/components/items/PixelImage.vue";
+import HearingTask from "~~/components/items/HearingTask.vue";
 const date = new Date().toLocaleDateString("de-DE");
 </script>
