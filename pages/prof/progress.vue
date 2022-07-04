@@ -20,6 +20,7 @@
                   <ul class="list-disc list-inside">
                     <li>Gerüst der WebApp mit unterschiedlichen Bereichen und einem einheitlichen Styling.</li>
                     <li>ClosedText item type mit automatischer Korrektur.</li>
+                    <li>Sort by question mittels DragDrop: Daten zur Laufzeit aus wikidata ziehen und zufällige Frage generieren, Auswertung klappt auch (Max)</li>
                     <li>Statistiken werden in unterschiedlichen Bereichen im Studenten Dashboard erhoben.</li>
                     <li>Statistiken werden automatisch ausgewertet und im Dashboard angezeigt.</li>
                   </ul>
@@ -31,6 +32,8 @@
                     <li>Vorschläge an den Prof basierend auf den Analysen.</li>
                     <li>Weitere Statistiken erheben und evtl. Trends schon früh erkennen können.</li>
                     <li>Dashboard weiter ausbauen.</li>
+                    <li>Verpixeltes/Gezoomtes Bild auf Zeit erraten als Item (Max)</li>
+                    <li>Ein anspruchsvolleres AIG-Item erstellen (Max)</li>
                   </ul>
                 </p>
               </div>
