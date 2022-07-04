@@ -12,7 +12,7 @@ async function main () {
   });
   await prisma.dragDrop.create({
     data: {
-      title: "Drag & Drop: Sortieren Sie die folgenden Filme nach ihrem Erscheinungsjahr",
+      title: "Drag & Drop: Sortieren Sie die folgenden Filme nach ihrem Erscheinungsjahr von alt nach neu",
       texts: "Thor,Iron Man 2,Marvel's the Avengers,Doctor Strange",
       solution: "Iron Man 2,Thor,Marvel's the Avengers,Doctor Strange"
     }
