@@ -20,7 +20,6 @@
                   <ul class="list-disc list-inside">
                     <li>Gerüst der WebApp mit unterschiedlichen Bereichen und einem einheitlichen Styling.</li>
                     <li>ClosedText item type mit automatischer Korrektur.</li>
-                    <li>Sort by question mittels DragDrop: Daten zur Laufzeit aus wikidata ziehen und zufällige Frage generieren, Auswertung klappt auch (Max)</li>
                     <li>Statistiken werden in unterschiedlichen Bereichen im Studenten Dashboard erhoben.</li>
                     <li>Statistiken werden automatisch ausgewertet und im Dashboard angezeigt.</li>
                   </ul>
@@ -32,8 +31,6 @@
                     <li>Vorschläge an den Prof basierend auf den Analysen.</li>
                     <li>Weitere Statistiken erheben und evtl. Trends schon früh erkennen können.</li>
                     <li>Dashboard weiter ausbauen.</li>
-                    <li>Verpixeltes/Gezoomtes Bild auf Zeit erraten als Item (Max)</li>
-                    <li>Ein anspruchsvolleres AIG-Item erstellen (Max)</li>
                   </ul>
                 </p>
               </div>
@@ -46,6 +43,9 @@
               </h3>
               <div class="mt-2 max-w-xl text-gray-600">
                 <p />
+                  <li>Sort by question via DragDrop: Get data from Wikidata with SPARQL and generate random question, correct solution and submitted answer is also checked </li>
+                  <li>ToDo: Pixel/Zoom game with image: Guess the superhero as fast as possible to get more points </li>
+                  <li>ToDo: Build a more complex AIG Item </li>
               </div>
             </div>
           </div>
@@ -56,6 +56,8 @@
               </h3>
               <div class="mt-2 max-w-xl text-gray-600">
                 <p />
+                  <li>Built hearing item, where you have to guess from a short audio snippet </li>
+                  <li>ToDo: Build more complex and creative drag and drop tasks </li>
               </div>
             </div>
           </div>
