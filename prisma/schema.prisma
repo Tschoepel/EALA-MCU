@@ -15,46 +15,54 @@ model ClosedText {
 }
 
 model MultipleChoice {
-  id                Int    @id @default(autoincrement())
-  question          String
-  answerI           String
-  answerICorrect    Boolean
-  answerII          String
-  answerIICorrect   Boolean
-  answerIII         String
-  answerIIICorrect  Boolean
-  answerIV          String
-  answerIVCorrect   Boolean
+  id               Int     @id @default(autoincrement())
+  question         String
+  answerI          String
+  answerICorrect   Boolean
+  answerII         String
+  answerIICorrect  Boolean
+  answerIII        String
+  answerIIICorrect Boolean
+  answerIV         String
+  answerIVCorrect  Boolean
 }
 
 model Statistics {
-  id      Int    @id @default(autoincrement())
-  userId  Int
-  action  String
-  params  String
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  action    String
+  params    String
   createdAt DateTime @default(now())
 }
 
 model Trainings {
-  id      Int    @id @default(autoincrement())
-  name    String
-  list    String
-}
-model TrainingSubmissions {
-  id          Int     @id @default(autoincrement())
-  userId      Int
-  submission  String
-  resultId    Int?    @unique
-  result      TrainingResults?
-  createdAt DateTime @default(now())
-}
-model TrainingResults {
-  id            Int     @id @default(autoincrement())
-  userId        Int
-  scored        Int
-  total         Int
-  grade         Float
-  submissionId  Int     @unique
-  submission   	TrainingSubmissions @relation(fields: [submissionId], references: [id])
+  id   Int    @id @default(autoincrement())
+  name String
+  list String
 }
 
+model TrainingSubmissions {
+  id         Int              @id @default(autoincrement())
+  userId     Int
+  submission String
+  resultId   Int?             @unique
+  createdAt  DateTime         @default(now())
+  result     TrainingResults?
+}
+
+model TrainingResults {
+  id           Int                 @id @default(autoincrement())
+  userId       Int
+  scored       Int
+  total        Int
+  grade        Float
+  submissionId Int                 @unique
+  submission   TrainingSubmissions @relation(fields: [submissionId], references: [id])
+}
+
+model DragDrop {
+  id         Int              @id @default(autoincrement())
+  title      String     
+  texts      String
+  solution   String   
+}

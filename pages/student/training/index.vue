@@ -93,10 +93,14 @@
         </div>
         <!-- /End replace -->
       </div>
+      <DragDrop :id="1" />
     </div>
+    <PixelImage :id="1" />
   </dashboardsStudent-dashboard>
 </template>
 
 <script setup>
+import DragDrop from "~~/components/items/DragDrop.vue";
+import PixelImage from "~~/components/items/PixelImage.vue";
 const date = new Date().toLocaleDateString("de-DE");
 </script>
