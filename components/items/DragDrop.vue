@@ -48,6 +48,7 @@ const props = defineProps({
 });
 const { data: api } = await useFetch("/api/dragDrop/" + props.id);
 const title = api.value.title;
+
 // const texts = api.value.texts;
 // const textsArr = texts.split(",");
 
@@ -137,6 +138,7 @@ LoadData();
 let submittedAnswer = "";
 let solutionString = "";
 let correctAnswer = false;
+let percentCorrect = 0.0;
 
 function submitAnswer () {
   console.log("Submitted");
@@ -148,8 +150,20 @@ function submitAnswer () {
     solutionString += (solution[i][1] + "-" + solution[i][2] + ",");
   }
   console.log(solutionString);
-
-  if (getList(1)[0].title === solution[0][2] && getList(2)[0].title === solution[1][2] && getList(3)[0].title === solution[2][2] && getList(4)[0].title === solution[3][2]) {
+  percentCorrect = 0.0;
+  if (getList(1)[0].title === solution[0][2]) {
+    percentCorrect += 0.25;
+  }
+  if (getList(2)[0].title === solution[1][2]) {
+    percentCorrect += 0.25;
+  }
+  if (getList(3)[0].title === solution[2][2]) {
+    percentCorrect += 0.25;
+  }
+  if (getList(4)[0].title === solution[3][2]) {
+    percentCorrect += 0.25;
+  }
+  if (percentCorrect === 1) {
     correctAnswer = true;
     window.console.log("Right solution");
   } else {
@@ -160,6 +174,7 @@ function submitAnswer () {
 
   LoadData();
 }
+
 </script>
 
 <style>

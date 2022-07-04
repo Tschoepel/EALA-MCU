@@ -63,6 +63,12 @@ model TrainingResults {
 model DragDrop {
   id         Int              @id @default(autoincrement())
   title      String     
-  texts      String
-  solution   String   
+}
+
+model TrainingSubmissionsDragDrop {
+  id         Int              @id @default(autoincrement())
+  submission String
+  solution   String
+  everythingCorrect Boolean  
+  percentageCorrect Float  
 }

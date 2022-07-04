@@ -6,9 +6,7 @@ export default defineEventHandler(async (event) => {
   return await prisma.dragDrop.findFirst({
     where: { id: parseInt(event.context.params.id) },
     select: {
-      title: true,
-      texts: true,
-      solution: true
+      title: true
     }
   });
 });
