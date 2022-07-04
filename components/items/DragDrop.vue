@@ -101,17 +101,12 @@ const onDrop = (event, list) => {
     }
   }
   item.list = list;
-
-  if (getList(1)[0].title === solutionArr[0] && getList(2)[0].title === solutionArr[1] && getList(3)[0].title === solutionArr[2] && getList(4)[0].title === solutionArr[3]) {
-    window.console.log("Right solution");
-  } else {
-    window.console.log("Wrong solution");
-  }
 };
 // Automated Item Generation: Load Wikidata SPARQL Query with all Films and their premiere
 // Need to preprocess data because it contains multiple premieres for different countries: We take the first premiere of all countries
 const preprocessesFilms = [];
 let filmSelection = [];
+let solution = [];
 const url = "https://query.wikidata.org/sparql?query=SELECT%20DISTINCT%20%3Fitem%20%3FVer_ffentlichungsdatum%20%3FitemLabel%20WHERE%20%7B%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%20%20%7B%0A%20%20%20%20SELECT%20DISTINCT%20%3Fitem%20WHERE%20%7B%0A%20%20%20%20%20%20%3Fitem%20p%3AP179%20%3Fstatement0.%0A%20%20%20%20%20%20%3Fstatement0%20(ps%3AP179%2F(wdt%3AP279*))%20wd%3AQ642878.%0A%20%20%20%20%20%20%3Fitem%20p%3AP577%20%3Fstatement_1.%0A%20%20%20%20%20%20%3Fstatement_1%20psv%3AP577%20%3FstatementValue_1.%0A%20%20%20%20%20%20%3FstatementValue_1%20wikibase%3AtimeValue%20%3FP577_1.%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%7D%0A%20%20%20%20LIMIT%201000%0A%20%20%7D%0A%20%20OPTIONAL%20%7B%3Fitem%20wdt%3AP577%20%3FVer_ffentlichungsdatum.%7D%0A%7D%0AORDER%20BY%20%3FVer_ffentlichungsdatum%0A%20%0A&format=json";
 const LoadData = async () => {
   try {
@@ -131,7 +126,7 @@ const LoadData = async () => {
       return shuffledList.slice(0, num);
     };
     filmSelection = randomizeArray(preprocessesFilms, 4);
-    // console.log(filmSelection);
+    solution = filmSelection.slice().sort();
     changeItems(items, filmSelection);
   } catch (err) {
     console.error(err);
@@ -139,8 +134,30 @@ const LoadData = async () => {
 };
 
 LoadData();
+let submittedAnswer = "";
+let solutionString = "";
+let correctAnswer = false;
+
 function submitAnswer () {
   console.log("Submitted");
+  submittedAnswer = (getList(1)[0].title + ", " + getList(2)[0].title + ", " + getList(3)[0].title + ", " + getList(4)[0].title);
+  console.log(submittedAnswer);
+  console.log(solution);
+  solutionString = "";
+  for (let i = 0; i < solution.length; i++) {
+    solutionString += (solution[i][1] + "-" + solution[i][2] + ",");
+  }
+  console.log(solutionString);
+
+  if (getList(1)[0].title === solution[0][2] && getList(2)[0].title === solution[1][2] && getList(3)[0].title === solution[2][2] && getList(4)[0].title === solution[3][2]) {
+    correctAnswer = true;
+    window.console.log("Right solution");
+  } else {
+    correctAnswer = false;
+    window.console.log("Wrong solution");
+  }
+  console.log(correctAnswer);
+
   LoadData();
 }
 </script>
