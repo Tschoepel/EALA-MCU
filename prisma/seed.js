@@ -20,14 +20,9 @@ async function main () {
   await prisma.multipleChoice.create({
     data: {
       question: "Welche der folgenden Superhelden traten im ersten Avengersfilm auf",
-      answerI : "Dr. Strange",
-      answerICorrect: false,
-      answerII : "Thor",
-      answerIICorrect: true,
-      answerIII : "Loki",
-      answerIIICorrect: true,
-      answerIV : "Spiderman",
-      answerIVCorrect: false
+      answers : "Dr. Strange,Thor,Loki,Spiderman",
+      answersCorrect: "false,true,true,false"
+
     }
   });
   await prisma.dragDrop.create({

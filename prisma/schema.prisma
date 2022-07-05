@@ -15,16 +15,10 @@ model ClosedText {
 }
 
 model MultipleChoice {
-  id               Int     @id @default(autoincrement())
-  question         String
-  answerI          String
-  answerICorrect   Boolean
-  answerII         String
-  answerIICorrect  Boolean
-  answerIII        String
-  answerIIICorrect Boolean
-  answerIV         String
-  answerIVCorrect  Boolean
+  id                Int    @id @default(autoincrement())
+  question          String
+  answers           String
+  answersCorrect    String
 }
 
 model Statistics {

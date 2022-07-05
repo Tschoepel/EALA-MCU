@@ -7,14 +7,7 @@ export default defineEventHandler(async (event) => {
     where: { id: parseInt(event.context.params.id) },
     select: {
       question: true,
-      answerI: true,
-      answerICorrect: true,
-      answerII: true,
-      answerIICorrect: true,
-      answerIII: true,
-      answerIIICorrect: true,
-      answerIV: true,
-      answerIVCorrect: true
+      answers: true,
     }
   });
 });

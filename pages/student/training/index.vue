@@ -85,6 +85,7 @@
               </div>
             </div>
           </div>
+
           <FormComponent :list="[{c: 'ItemsClosed-text', id: 1}, {c: 'ItemsClosed-text', id: 2}, {c: 'ItemsMultiple-choice', id: 1}]">
           <!-- <ItemsClosed-text :id="1" />
           <div><b /></div>

@@ -20,6 +20,7 @@
                   <ul class="list-disc list-inside">
                     <li>Skeleton of the WebApp with a general styling.</li>
                     <li>ClosedText item type with automated correction.</li>
+                    <li>MultipleChoice item type with automated correction.</li>
                     <li>Statistics will be collected in different parts of the student dashboard</li>
                     <li>Statistics are evaluated automatically and displayed in the prof dashboard.</li>
                   </ul>
@@ -31,6 +32,10 @@
                     <li>Suggestions for the prof based on that analytics.</li>
                     <li>Collect more data for the statistics and possibly the detection of trends.</li>
                     <li>Further expand the prof dashboard.</li>
+                    <li>Further expand the student dashboard.</li>
+                    <li>Explicit informative Feedback at the end of a Training/Exercise Sheet/Test</li>
+                    <li>Elaborate Feedback and Visualization of Progress and Development Stage of Student in Student Dashboard</li>
+                    <li>Optional expansion on ItemTypes (Randomised Battles/ Battle groups: Who wins)</li>
                   </ul>
                 </p>
               </div>
