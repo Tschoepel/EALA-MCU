@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.0.12] - 05.07.2022
+### Changed
+- Merged into the `master` branch.
+### Fixed
+- Various fixes regarding styling and implementation.
+
 ## [0.0.11] - 01.07.2022
 ### Added
 - `d3` to have a look at the charts.

@@ -3,37 +3,37 @@
     <div class="bg-white overflow-hidden sm:rounded-lg sm:shadow">
       <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
         <div class="ml-4 mt-2 flex-shrink-0 text-align: center">
-           <h3 class="text-lg text-align: center leading-6 font-medium text-gray-900">
-              {{ title }}
-            </h3>
-              <div>
-              <div class="drop-zone" @drop="onDrop($event, 1)" @dragenter.prevent @dragover.prevent>
-                <div v-for="item in getList(1)" :key="item.id" class="drag-el" draggable="true" @dragstart="startDrag($event, item)">
-                  {{ item.title }}
-                </div>
-              </div>
-              <div class="drop-zone" @drop="onDrop($event, 2)" @dragenter.prevent @dragover.prevent>
-                <div v-for="item in getList(2)" :key="item.id" class="drag-el" draggable="true" @dragstart="startDrag($event, item)">
-                  {{ item.title }}
-                </div>
-              </div>
-              <div class="drop-zone" @drop="onDrop($event, 3)" @dragenter.prevent @dragover.prevent>
-                <div v-for="item in getList(3)" :key="item.id" class="drag-el" draggable="true" @dragstart="startDrag($event, item)">
-                  {{ item.title }}
-                </div>
-              </div>
-              <div class="drop-zone" @drop="onDrop($event, 4)" @dragenter.prevent @dragover.prevent>
-                <div v-for="item in getList(4)" :key="item.id" class="drag-el" draggable="true" @dragstart="startDrag($event, item)">
-                  {{ item.title }}
-                </div>
+          <h3 class="text-lg text-align: center leading-6 font-medium text-gray-900">
+            {{ title }}
+          </h3>
+          <div>
+            <div class="drop-zone" @drop="onDrop($event, 1)" @dragenter.prevent @dragover.prevent>
+              <div v-for="item in getList(1)" :key="item.id" class="drag-el" draggable="true" @dragstart="startDrag($event, item)">
+                {{ item.title }}
               </div>
             </div>
-            <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="submitAnswer">
-              Submit
-            </button>
+            <div class="drop-zone" @drop="onDrop($event, 2)" @dragenter.prevent @dragover.prevent>
+              <div v-for="item in getList(2)" :key="item.id" class="drag-el" draggable="true" @dragstart="startDrag($event, item)">
+                {{ item.title }}
+              </div>
+            </div>
+            <div class="drop-zone" @drop="onDrop($event, 3)" @dragenter.prevent @dragover.prevent>
+              <div v-for="item in getList(3)" :key="item.id" class="drag-el" draggable="true" @dragstart="startDrag($event, item)">
+                {{ item.title }}
+              </div>
+            </div>
+            <div class="drop-zone" @drop="onDrop($event, 4)" @dragenter.prevent @dragover.prevent>
+              <div v-for="item in getList(4)" :key="item.id" class="drag-el" draggable="true" @dragstart="startDrag($event, item)">
+                {{ item.title }}
+              </div>
+            </div>
           </div>
+          <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="submitAnswer">
+            Submit
+          </button>
         </div>
       </div>
+    </div>
   </div>
 </template>
 

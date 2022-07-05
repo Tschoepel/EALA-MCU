@@ -13,10 +13,10 @@
               Play Sound
             </button>
           </div>
-    </div>
-    </div>
+        </div>
+      </div>
       <p> {{ message }}</p>
-      <input v-model="message" placeholder="Which film is it?" />
+      <input v-model="message" placeholder="Which film is it?">
     </div>
   </div>
 </template>

@@ -16,21 +16,21 @@
               </h3>
               <div class="mt-2 text-gray-600">
                 <p>
-                  Was wurde bereits umgesetzt:
+                  What was achieved:
                   <ul class="list-disc list-inside">
-                    <li>Gerüst der WebApp mit unterschiedlichen Bereichen und einem einheitlichen Styling.</li>
-                    <li>ClosedText item type mit automatischer Korrektur.</li>
-                    <li>Statistiken werden in unterschiedlichen Bereichen im Studenten Dashboard erhoben.</li>
-                    <li>Statistiken werden automatisch ausgewertet und im Dashboard angezeigt.</li>
+                    <li>Skeleton of the WebApp with a general styling,</li>
+                    <li>ClosedText item type with automated correction.</li>
+                    <li>Statistics will be collected in different parts of the student dashboard</li>
+                    <li>Statistics are evaluated automatically and displayed in the prof dashboard.</li>
                   </ul>
                 </p><hr class="my-3">
                 <p>
-                  Was soll noch umgesetzt werden:
+                  What needs to be done:
                   <ul class="list-disc list-inside">
-                    <li>Automatische Analysen bezüglich der verschiedenen Module.</li>
-                    <li>Vorschläge an den Prof basierend auf den Analysen.</li>
-                    <li>Weitere Statistiken erheben und evtl. Trends schon früh erkennen können.</li>
-                    <li>Dashboard weiter ausbauen.</li>
+                    <li>Automatic analysis based on different modules.</li>
+                    <li>Suggestions for the prof based on that analytics.</li>
+                    <li>Collect more data for the statistics and possibly the detection of trends.</li>
+                    <li>Further expand the prof dashboard.</li>
                   </ul>
                 </p>
               </div>
@@ -42,10 +42,13 @@
                 Max
               </h3>
               <div class="mt-2 max-w-xl text-gray-600">
-                <p />
-                  <li>Sort by question via DragDrop: Get data from Wikidata with SPARQL and generate random question, correct solution and submitted answer is also checked </li>
-                  <li>ToDo: Pixel/Zoom game with image: Guess the superhero as fast as possible to get more points </li>
-                  <li>ToDo: Build a more complex AIG Item </li>
+                <p>
+                  <ul class="list-disc list-inside">
+                    <li>Sort by question via DragDrop: Get data from Wikidata with SPARQL and generate random question, correct solution and submitted answer is also checked </li>
+                    <li>ToDo: Pixel/Zoom game with image: Guess the superhero as fast as possible to get more points </li>
+                    <li>ToDo: Build a more complex AIG Item </li>
+                  </ul>
+                </p>
               </div>
             </div>
           </div>
@@ -55,9 +58,12 @@
                 Romy
               </h3>
               <div class="mt-2 max-w-xl text-gray-600">
-                <p />
-                  <li>Built hearing item, where you have to guess from a short audio snippet </li>
-                  <li>ToDo: Build more complex and creative drag and drop tasks </li>
+                <p>
+                  <ul class="list-disc list-inside">
+                    <li>Built hearing item, where you have to guess from a short audio snippet </li>
+                    <li>ToDo: Build more complex and creative drag and drop tasks </li>
+                  </ul>
+                </p>
               </div>
             </div>
           </div>

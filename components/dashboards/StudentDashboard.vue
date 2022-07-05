@@ -158,9 +158,9 @@ import {
 import {
   BellIcon,
   BookOpenIcon,
-  ChatAlt2Icon,
+  // ChatAlt2Icon,
   FilmIcon,
-  ClipboardCheckIcon,
+  // ClipboardCheckIcon,
   HomeIcon,
   MenuAlt2Icon,
   XIcon
@@ -169,9 +169,9 @@ import {
 
 const navigation = reactive([
   { name: "Dashboard", href: "/student", icon: HomeIcon, current: false },
-  { name: "Feedback", href: "/student/feedback", icon: ChatAlt2Icon, current: false },
-  { name: "Training", href: "/student/training", icon: BookOpenIcon, current: false },
-  { name: "Exam", href: "/student/training", icon: ClipboardCheckIcon, current: false }
+  // { name: "Feedback", href: "/student/feedback", icon: ChatAlt2Icon, current: false },
+  { name: "Training", href: "/student/training", icon: BookOpenIcon, current: false }
+  // { name: "Exam", href: "/student/training", icon: ClipboardCheckIcon, current: false }
 ]);
 const userNavigation = [
   // { name: "Your Profile", href: "#" },

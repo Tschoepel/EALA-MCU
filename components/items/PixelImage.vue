@@ -7,9 +7,9 @@
             <h3 class="text-lg text-align: center leading-6 font-medium text-gray-900">
               {{ "Welcher Superheld ist das?" }}
             </h3>
-              <div class="image">
-                <img src="~/assets/images/ironman.jpg">
-              </div>
+            <div class="image">
+              <img src="~/assets/images/ironman.jpg">
+            </div>
           </div>
         </div>
       </div>
