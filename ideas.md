@@ -7,6 +7,10 @@ Aufgaben:
 - Team Kämpfe
 
 - Höre eine bekannte Filmszene (z.B. 30 sec Ausschnitt) und ordne sie per Short text zu (so ist auch mal ein anderer Sinn gefragt)
+- !Common Misconceptions!
+- Dashboard timings
+- Summaries => list of words
+- SortBy with images
 
 
 Feedback: 
