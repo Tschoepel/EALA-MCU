@@ -96,7 +96,7 @@
       <ItemsDragDrop :id="1" />
       <ItemsHearingTask :id="1" />
     </div>
-    <ItemsPixelImage :id="1" />
+    <!-- <ItemsPixelImage :id="1" /> -->
   </dashboardsStudent-dashboard>
 </template>
 
