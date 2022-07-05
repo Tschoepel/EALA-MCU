@@ -68,10 +68,10 @@ export default {
         responsive: true,
         scales: {
           r: {
-            beginAtZero: true
-            // ticks: {
-            //   stepSize: 1
-            // }
+            beginAtZero: true,
+            ticks: {
+              display: false
+            }
           }
         },
         elements: {

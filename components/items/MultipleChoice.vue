@@ -5,7 +5,7 @@
         <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
           <div class="ml-4 mt-2">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
-              {{ question }}
+              {{ props.index+1 }}. {{ question }}
             </h3>
           </div>
           <div class="ml-4 mt-2 flex-shrink-0">
@@ -18,23 +18,25 @@
       <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
         <b>Hinweistext: </b>Wählen sie die 0,1..n Antworten, die Sie für richtig halten.
       </div>
-      <input type="hidden" :name="'multiplechoice-'+props.index+'-id'" :value="props.id+','+input">
-      <div class="grid grid-cols-5 cols-gap-0.5">
-        <div>
-          <input id="answerI" v-model="input" type="checkbox" value="answer1">
-          <label for="answerI">{{ answerI }}</label>
-        </div>
-        <div>
-          <input id="answerII" v-model="input" type="checkbox" value="answer2">
-          <label for="answerII">{{ answerII }}</label>
-        </div>
-        <div>
-          <input id="answerIII" v-model="input" type="checkbox" value="answer3">
-          <label for="answerIII">{{ answerIII }}</label>
-        </div>
-        <div>
-          <input id="answerIV" v-model="input" type="checkbox" value="answer4">
-          <label for="answerIV">{{ answerIV }}</label>
+      <div class="px-4 py-5">
+        <input type="hidden" :name="'multiplechoice-'+props.index+'-id'" :value="props.id+','+input">
+        <div class="grid grid-cols-5 cols-gap-0.5">
+          <div>
+            <input id="answerI" v-model="input" type="checkbox" value="answer1" class="mr-2">
+            <label for="answerI">{{ answerI }}</label>
+          </div>
+          <div>
+            <input id="answerII" v-model="input" type="checkbox" value="answer2" class="mr-2">
+            <label for="answerII">{{ answerII }}</label>
+          </div>
+          <div>
+            <input id="answerIII" v-model="input" type="checkbox" value="answer3" class="mr-2">
+            <label for="answerIII">{{ answerIII }}</label>
+          </div>
+          <div>
+            <input id="answerIV" v-model="input" type="checkbox" value="answer4" class="mr-2">
+            <label for="answerIV">{{ answerIV }}</label>
+          </div>
         </div>
       </div>
     </div>

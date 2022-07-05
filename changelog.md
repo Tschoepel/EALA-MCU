@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.14] - 05.07.2022
+### Changed
+- Various changes and fixes regard the previous commits.
+
 ## [0.0.13] - 05.07.2022
 ### Changed
 - `api/training.post.js` will now correct the `MultipleChoice` element.

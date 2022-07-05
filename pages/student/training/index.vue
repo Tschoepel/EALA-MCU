@@ -91,11 +91,12 @@
           <div><b /></div>
           <ItemsMultiple-choice :id="1" /> -->
           </FormComponent>
+
+          <ItemsDragDrop :id="1" class="mt-6" />
+          <ItemsHearingTask :id="1" class="mt-6" />
         </div>
         <!-- /End replace -->
       </div>
-      <ItemsDragDrop :id="1" />
-      <ItemsHearingTask :id="1" />
     </div>
     <!-- <ItemsPixelImage :id="1" /> -->
   </dashboardsStudent-dashboard>
