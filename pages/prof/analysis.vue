@@ -15,15 +15,13 @@
                 <QuestionMarkCircleIcon class="h-6 w-6 inline-block text-yellow-400" aria-hidden="true" />
                 Modul: Meist besuchte Seiten
               </h3>
-              <div class="mt-2 max-w-xl text-gray-600">
-                <p>
-                  Wenige Studenten besuchen die Übungsseiten.<br><br>
-                  Folgende Punkte könnten vielleicht helfen:
-                  <ul class="list-disc list-inside">
-                    <li>Studenten darauf hinweisen, dass die Übungen helfen  die Klausur zu bestehen.</li>
-                    <li>Studenten mittels Bonuspunkten motivieren, die Übungsaufgaben abzugeben.</li>
-                  </ul>
-                </p>
+              <div class="mt-2 text-gray-600">
+                Wenige Studenten besuchen die Übungsseiten.<br><br>
+                Folgende Punkte könnten vielleicht helfen:
+                <ul class="list-disc list-inside">
+                  <li>Studenten darauf hinweisen, dass die Übungen helfen  die Klausur zu bestehen.</li>
+                  <li>Studenten mittels Bonuspunkten motivieren, die Übungsaufgaben abzugeben.</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -33,7 +31,7 @@
                 <CheckCircleIcon class="h-6 w-6 inline-block text-green-600" aria-hidden="true" />
                 Modul: Feedback
               </h3>
-              <div class="mt-2 max-w-xl text-gray-600">
+              <div class="mt-2 text-gray-600">
                 <p>
                   In diesem Modul liegen alle Werte im Normalbereich.
                 </p>
@@ -46,15 +44,13 @@
                 <QuestionMarkCircleIcon class="h-6 w-6 inline-block text-yellow-400" aria-hidden="true" />
                 Modul: Übungsaktivitäten
               </h3>
-              <div class="mt-2 max-w-xl text-gray-600">
-                <p>
-                  Die Übungen werden häufig abgebrochen.<br><br>
-                  Folgende Punkte könnten vielleicht helfen:
-                  <ul class="list-disc list-inside">
-                    <li>Studenten fragen, ob sie Probleme mit den Übungsaufgaben haben.</li>
-                    <li>Die Schwierigkeit der Übungsaufgaben verringern.</li>
-                  </ul>
-                </p>
+              <div class="mt-2 text-gray-600">
+                Die Übungen werden häufig abgebrochen.<br><br>
+                Folgende Punkte könnten vielleicht helfen:
+                <ul class="list-disc list-inside">
+                  <li>Studenten fragen, ob sie Probleme mit den Übungsaufgaben haben.</li>
+                  <li>Die Schwierigkeit der Übungsaufgaben verringern.</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -64,15 +60,13 @@
                 <ExclamationIcon class="h-6 w-6 inline-block text-yellow-600 animate-pulse" aria-hidden="true" />
                 Modul: Übungsverteilung
               </h3>
-              <div class="mt-2 max-w-xl text-gray-600">
-                <p>
-                  Viele Studenten (<b>60%</b>) haben die Übungen nicht bestanden.<br><br>
-                  Folgende Punkte könnten vielleicht helfen:
-                  <ul class="list-disc list-inside">
-                    <li>Studenten darauf hinweisen, dass die Übungen helfen  die Klausur zu bestehen.</li>
-                    <li>Studenten mittels Bonuspunkten motivieren, die Übungsaufgaben abzugeben.</li>
-                  </ul>
-                </p>
+              <div class="mt-2 text-gray-600">
+                Viele Studenten (<b>60%</b>) haben die Übungen nicht bestanden.<br><br>
+                Folgende Punkte könnten vielleicht helfen:
+                <ul class="list-disc list-inside">
+                  <li>Studenten darauf hinweisen, dass die Übungen helfen  die Klausur zu bestehen.</li>
+                  <li>Studenten mittels Bonuspunkten motivieren, die Übungsaufgaben abzugeben.</li>
+                </ul>
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@
     <div class="py-6">
       <div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8">
         <h1 class="text-2xl font-semibold text-gray-900">
-          Aktueller Stand &amp; Zukunftsaussichten
+          Current progress &amp; todos
         </h1>
       </div>
       <div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8 pt-4">
@@ -18,7 +18,7 @@
                 <p>
                   What was achieved:
                   <ul class="list-disc list-inside">
-                    <li>Skeleton of the WebApp with a general styling,</li>
+                    <li>Skeleton of the WebApp with a general styling.</li>
                     <li>ClosedText item type with automated correction.</li>
                     <li>Statistics will be collected in different parts of the student dashboard</li>
                     <li>Statistics are evaluated automatically and displayed in the prof dashboard.</li>

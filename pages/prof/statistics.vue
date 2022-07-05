@@ -53,8 +53,7 @@
 </template>
 
 <script setup>
-import { Bar } from "vue-chartjs";
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from "chart.js";
+// import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from "chart.js";
 const { data: api } = await useFetch("/api/statistics");
 const data = api.value;
 const navs = [];
