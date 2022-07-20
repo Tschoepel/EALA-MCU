@@ -94,14 +94,16 @@
 
           <ItemsDragDrop :id="1" class="mt-6" />
           <ItemsHearingTask :id="1" class="mt-6" />
+          <ItemsPixelImage :id="1" class="mt-6"/>
+          <!--ActorQuiz :id="1" class="mt-6" /> -->
         </div>
         <!-- /End replace -->
       </div>
     </div>
-    <!-- <ItemsPixelImage :id="1" /> -->
   </dashboardsStudent-dashboard>
 </template>
 
 <script setup>
+// import ActorQuiz from "~~/components/items/ActorQuiz.vue";
 const date = new Date().toLocaleDateString("de-DE");
 </script>

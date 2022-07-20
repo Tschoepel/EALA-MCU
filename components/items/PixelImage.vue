@@ -7,12 +7,48 @@
             <h3 class="text-lg text-align: center leading-6 font-medium text-gray-900">
               {{ "Welcher Superheld ist das?" }}
             </h3>
-            <div class="image">
-              <img src="~/assets/images/ironman.jpg">
-            </div>
+              <client-only>
+                <div class="image">
+                  <img src="~/assets/images/ironman.jpg">
+                </div>
+              </client-only>
           </div>
         </div>
+         <div>
+    <div class="text">hello</div>
+  </div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref } from "vue";
+
+const color = ref("red");
+let blurInt = 10;
+let blurIntString = "";
+const pxString = "px";
+let blurValue = ref("10px");
+console.log(blurValue);
+
+setInterval(function () {
+  // this code runs every second
+  blurInt--;
+  blurIntString = blurInt.toString();
+  blurIntString += pxString;
+  blurValue = ref(blurIntString);
+  console.log(blurValue);
+  ref.forceUpdate();
+}, 5000);
+</script>
+
+<style>
+.text {
+  color: v-bind(color);
+}
+
+.image {
+  filter: blur(v-bind(blurValue));
+}
+</style>
