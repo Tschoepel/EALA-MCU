@@ -18,7 +18,7 @@
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="loadOtherImg">
             Start
           </button>
-    <div class="text">hello</div>
+       <div class="text">hello</div>
   </div>
       </div>
     </div>
@@ -26,8 +26,7 @@
 </template>
 
 <script>
-// import { ref } from "vue";
-
+import { ref } from "vue";
 import image from "~/assets/images/ironman.jpg";
 import image2 from "~/assets/images/Thor.jpg";
 
@@ -35,13 +34,16 @@ export default {
   data: function () {
     changeImage();
     return {
-      imgSrc: image2
+      imgSrc: image2,
+      blurValue: ref("10px"),
+      color: ref("red")
     };
   },
   methods: {
     loadOtherImg () {
       console.log("klappt");
       this.imgSrc = image;
+      this.blurValue = ref("0px");
     }
   }
 
