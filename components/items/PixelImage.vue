@@ -9,12 +9,15 @@
             </h3>
               <client-only>
                 <div class="image">
-                  <img src="~/assets/images/ironman.jpg">
+                  <img id="test" :src="imgSrc"/>
                 </div>
               </client-only>
           </div>
         </div>
-         <div>
+         <div id="app">
+          <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="loadOtherImg">
+            Start
+          </button>
     <div class="text">hello</div>
   </div>
       </div>
@@ -22,25 +25,52 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script>
+// import { ref } from "vue";
 
-const color = ref("red");
+import image from "~/assets/images/ironman.jpg";
+import image2 from "~/assets/images/Thor.jpg";
+
+export default {
+  data: function () {
+    changeImage();
+    return {
+      imgSrc: image2
+    };
+  },
+  methods: {
+    loadOtherImg () {
+      console.log("klappt");
+      this.imgSrc = image;
+    }
+  }
+
+};
+
+function changeImage () {
+  console.log("Hello World");
+}
+/*
+// const color = ref("red");
 let blurInt = 10;
 let blurIntString = "";
 const pxString = "px";
 let blurValue = ref("10px");
 console.log(blurValue);
 
-setInterval(function () {
+function startTimer () {
+  setInterval(function () {
   // this code runs every second
-  blurInt--;
-  blurIntString = blurInt.toString();
-  blurIntString += pxString;
-  blurValue = ref(blurIntString);
-  console.log(blurValue);
-  ref.forceUpdate();
-}, 5000);
+    blurInt--;
+    blurIntString = blurInt.toString();
+    blurIntString += pxString;
+    blurValue = ref(blurIntString);
+    console.log(blurValue);
+    // location.reload(true);
+  }, 5000);
+}
+startTimer();
+*/
 </script>
 
 <style>
