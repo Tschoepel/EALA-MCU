@@ -32,7 +32,7 @@
 
 <script>
 import { ref } from "vue";
-import IronMan from "~/assets/images/ironman.resized.jpg";
+import IronMan from "~/assets/images/ironMan.resized.jpg";
 import Thor from "~/assets/images/Thor.resized.jpg";
 import Ajak from "~/assets/images/ajak.resized.jpeg";
 import AntMan from "~/assets/images/antman.resized.jpg";
@@ -86,8 +86,9 @@ export default {
   data: function () {
     return {
       imgList: [IronMan, Thor, Ajak, AntMan, Aquaman, Batman, BlackPanther, BlackWidow, CaptainAmerica, CaptainMarvel, Cyborg, Deadshot, DoctorStrange, Drax, ElDiablo, Falcon, Gamora, Groot, Hawkeye, Heimdall, Hulk, Korg, Loki, Mantis, Nebula, NickFury, Phastos, QuickSilver, RocketRacoon, ScarletWitch, Shuri, Spiderman, StarLord, Superman, TheFlash, TheWasp, Valkyrie, Vision, WarMachine, WinterSoldier, WonderWoman, YonduOlunta],
+      wrongAnwers: ["Batman", "Superman", "Wonder Woman", "Aquaman", "The Flash", "Cyborg", "Deadshot", "El Diablo"],
       imgSrc: BlackImage,
-      blurValue: ref("100px"),
+      blurValue: ref("50px"),
       polling: null,
       timer: 0,
       input: null
@@ -95,23 +96,24 @@ export default {
   },
   methods: {
     loadOtherImg () {
+      this.input = null;
       console.log("klappt");
       gameRunning = true;
       this.timer = 0;
       const min = 0;
       const max = this.imgList.length - 1;
       const x = Math.round((Math.random() * (max - min)) + min);
-      blurInt = 100;
-      this.changeBlur("100px");
+      blurInt = 50;
+      this.changeBlur("50px");
       this.imgSrc = this.imgList[x];
       this.polling = setInterval(function () {
         // this code runs every second
-        blurInt--;
+        blurInt -= 0.2;
         blurIntString = blurInt.toString();
         blurIntString += pxString;
         if (blurInt <= 0) {
           blurInt = 0;
-          clearInterval(this.polling);
+          this.submitAnswer();
         }
         this.changeBlur(blurIntString);
         this.timer += 100;
@@ -126,7 +128,6 @@ export default {
     submitAnswer () {
       if (gameRunning) {
         gameRunning = false;
-        console.log("Hallo");
         clearInterval(this.polling);
         const time = this.timer / 1000;
         console.log(time + " Seconds");
@@ -139,7 +140,11 @@ export default {
         s = s.split(/(?=[A-Z])/).join(" ");
         s = (s.charAt(0).toUpperCase() + s.slice(1));
         console.log(s);
-        this.imgSrc = BlackImage;
+        // this.imgSrc = BlackImage;
+
+        if (this.wrongAnwers.includes(this.input || s)) {
+          console.log("Wrong Universe");
+        }
 
         if (this.input === s) {
           console.log("Right answer");
