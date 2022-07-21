@@ -30,20 +30,44 @@ import { ref } from "vue";
 import image from "~/assets/images/ironman.jpg";
 import image2 from "~/assets/images/Thor.jpg";
 
+let blurInt = 10;
+let blurIntString = "";
+const pxString = "px";
+
 export default {
   data: function () {
     changeImage();
     return {
       imgSrc: image2,
       blurValue: ref("10px"),
-      color: ref("red")
+      color: ref("red"),
+      polling: null
     };
   },
   methods: {
     loadOtherImg () {
       console.log("klappt");
       this.imgSrc = image;
-      this.blurValue = ref("0px");
+      // this.blurValue = ref("0px");
+      this.changeBlur("0px");
+      this.polling = setInterval(function () {
+        // this code runs every second
+        blurInt--;
+        blurIntString = blurInt.toString();
+        blurIntString += pxString;
+        // blurValue = ref(blurIntString);
+        console.log(blurIntString);
+        this.blurValue = ref(blurIntString);
+        this.imgSrc = image2;
+        // location.reload(true);
+        console.log(this.blurValue);
+        this.changeBlur("5px");
+      }.bind(this), 1000);
+    },
+
+    changeBlur (blurPixel) {
+      this.blurValue = ref(blurPixel);
+      changeImage();
     }
   }
 
