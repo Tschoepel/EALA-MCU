@@ -75,7 +75,7 @@
                             -/10
                           </td>
                           <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 md:pr-0">
-                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Abgabe hochladen</a>
+                            <a href="/student/training/1" class="text-indigo-600 hover:text-indigo-900">Abgabe hochladen</a>
                           </td>
                         </tr>
                       </tbody>
@@ -85,15 +85,6 @@
               </div>
             </div>
           </div>
-
-          <FormComponent :list="[{c: 'ItemsClosed-text', id: 1}, {c: 'ItemsClosed-text', id: 2}, {c: 'ItemsMultiple-choice', id: 1}]">
-          <!-- <ItemsClosed-text :id="1" />
-          <div><b /></div>
-          <ItemsMultiple-choice :id="1" /> -->
-          </FormComponent>
-
-          <ItemsDragDrop :id="1" class="mt-6" />
-          <ItemsHearingTask :id="1" class="mt-6" />
         </div>
         <!-- /End replace -->
       </div>

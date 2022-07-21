@@ -1,6 +1,23 @@
 # Changelog
 
 ## [Unreleased]
+
+## [0.0.15] - 21.07.2022
+### Added
+- Timeline and timeline comparison.
+- Training site for a single training.
+- Result site for a single training.
+- `.gitignore` for the database.
+- Analysis of training actions was added.
+### Changed
+- Updated all dependencies.
+- Items were moved to the single trainings site.
+- Unstyled items were removed.
+- Updated the progress page.
+- Extended the statistics collection.
+### Removed
+- All `console.log()` statements were removed or commented out.
+
 ## [0.0.14] - 05.07.2022
 ### Changed
 - Various changes and fixes regard the previous commits.

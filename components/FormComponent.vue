@@ -3,14 +3,13 @@
     <div v-for="(l, i) in props.list" :key="l.c+':'+l.id">
       <ItemsClosed-text v-if="l.c == 'ItemsClosed-text'" :id="l.id" :index="i" />
       <ItemsMultiple-choice v-if="l.c == 'ItemsMultiple-choice'" :id="l.id" :index="i" />
-
     </div>
     <div class="max-w-none mx-auto mt-4">
       <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap pt-3">
         <div class="flex-grow" />
         <div class="ml-4 mt-2 flex-shrink-0">
           <button type="button" class="btn btn-primary" :disabled="state.loading" @click="sendForm">
-            Übung abschicken
+            Übungungsblatt abgeben
             <svg v-show="state.loading" class="animate-spin -mr-1 ml-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle
                 class="opacity-25"
@@ -69,10 +68,11 @@ async function sendForm () {
   await $fetch("/api/training", {
     method: "POST",
     body: Array.from(formData)
-  }).then((res) => {
+  }).then(() => {
     state.loading = false;
     const router = useRouter();
-    router.push({ path: "/student/training/" + res.id });
+    const route = useRoute();
+    router.push({ path: "/student/results/" + route.params.id });
   });
 }
 </script>

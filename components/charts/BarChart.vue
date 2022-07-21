@@ -4,9 +4,7 @@
     :chart-data="chartData"
     :chart-id="chartId"
     :dataset-id-key="datasetIdKey"
-    :plugins="plugins"
     :css-classes="cssClasses"
-    :styles="styles"
     :width="width"
     :height="height"
   />
@@ -58,7 +56,18 @@ export default {
         datasets: this.datasets
       },
       chartOptions: {
-        responsive: true
+        responsive: true,
+        scales: {
+          y: {
+            // type: "logarithmic",
+            beginAtZero: true,
+            ticks: {
+              max: 50,
+              min: 1,
+              maxTicksLimit: 5
+            }
+          }
+        }
       }
     };
   }
