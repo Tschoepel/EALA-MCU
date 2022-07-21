@@ -22,7 +22,6 @@ async function main () {
       question: "Welche der folgenden Superhelden traten im ersten Avengersfilm auf",
       answers : "Dr. Strange,Thor,Loki,Spiderman",
       answersCorrect: "false,true,true,false"
-
     }
   });
   await prisma.dragDrop.create({
@@ -36,6 +35,13 @@ async function main () {
       solution:   "",
       everythingCorrect: false,  
       percentageCorrect: 0.0  
+    }
+  });
+  await prisma.shortText.create({
+    data: {
+      title: "Bitte beantworten Sie die Frage in in eigenen Worten",
+      question: "Ist Robert Downing Jr. eine gute Wahl um die Rolle des Iron Man darzustellen? Begründe dies bitte kurz",
+      answer: "test"
     }
   });
 }

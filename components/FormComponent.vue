@@ -3,7 +3,8 @@
     <div v-for="(l, i) in props.list" :key="l.c+':'+l.id">
       <ItemsClosed-text v-if="l.c == 'ItemsClosed-text'" :id="l.id" :index="i" />
       <ItemsMultiple-choice v-if="l.c == 'ItemsMultiple-choice'" :id="l.id" :index="i" />
-
+      <ItemsShort-text v-if="l.c == 'ItemsShort-text'" :id="l.id" :index="i" />
+      <ItemsDraw-item v-if="l.c == 'ItemsDraw-item'" :id="l.id" :index="i" />
     </div>
     <div class="max-w-none mx-auto mt-4">
       <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap pt-3">
