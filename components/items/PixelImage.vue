@@ -73,7 +73,7 @@ import Vision from "~/assets/images/vision.resized.jpg";
 import WarMachine from "~/assets/images/warmachine.resized.jpg";
 import WinterSoldier from "~/assets/images/winterSoldier.resized.webp";
 import WonderWoman from "~/assets/images/wonderWoman.resized.webp";
-import YonduOlunta from "~/assets/images/yonduOlunta.resized.webp";
+import YonduOlunta from "~/assets/images/yonduUdonta.resized.webp";
 
 import BlackImage from "~/assets/images/Solid_black.svg.png";
 
@@ -131,7 +131,7 @@ export default {
         clearInterval(this.polling);
         const time = this.timer / 1000;
         console.log(time + " Seconds");
-        this.changeBlur("100px");
+        this.changeBlur("0px");
         console.log(this.input);
         let s = this.imgSrc;
         s = s.substring(s.indexOf("images/"));
