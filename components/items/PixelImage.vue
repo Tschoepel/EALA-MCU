@@ -48,20 +48,12 @@ export default {
     loadOtherImg () {
       console.log("klappt");
       this.imgSrc = image;
-      // this.blurValue = ref("0px");
-      this.changeBlur("0px");
       this.polling = setInterval(function () {
         // this code runs every second
         blurInt--;
         blurIntString = blurInt.toString();
-        blurIntString += pxString;
-        // blurValue = ref(blurIntString);
-        console.log(blurIntString);
-        this.blurValue = ref(blurIntString);
-        this.imgSrc = image2;
-        // location.reload(true);
-        console.log(this.blurValue);
-        this.changeBlur("5px");
+        blurIntString += pxString;     
+        this.changeBlur(blurIntString);
       }.bind(this), 1000);
     },
 
