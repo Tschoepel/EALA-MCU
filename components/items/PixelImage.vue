@@ -16,9 +16,9 @@
         </div>
          <div id="app">
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="loadOtherImg">
-            Start
+            Start Game
           </button>
-          <input id="answerI" v-model="input" type="text">
+          <input id="answerPixelImage" v-model="input" type="text">
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="submitAnswer">
             Submit
           </button>
@@ -80,6 +80,7 @@ import BlackImage from "~/assets/images/Solid_black.svg.png";
 let blurInt = 100;
 let blurIntString = "";
 const pxString = "px";
+let gameRunning = false;
 
 export default {
   data: function () {
@@ -87,12 +88,16 @@ export default {
       imgList: [IronMan, Thor, Ajak, AntMan, Aquaman, Batman, BlackPanther, BlackWidow, CaptainAmerica, CaptainMarvel, Cyborg, Deadshot, DoctorStrange, Drax, ElDiablo, Falcon, Gamora, Groot, Hawkeye, Heimdall, Hulk, Korg, Loki, Mantis, Nebula, NickFury, Phastos, QuickSilver, RocketRacoon, ScarletWitch, Shuri, Spiderman, StarLord, Superman, TheFlash, TheWasp, Valkyrie, Vision, WarMachine, WinterSoldier, WonderWoman, YonduOlunta],
       imgSrc: BlackImage,
       blurValue: ref("100px"),
-      polling: null
+      polling: null,
+      timer: 0,
+      input: null
     };
   },
   methods: {
     loadOtherImg () {
       console.log("klappt");
+      gameRunning = true;
+      this.timer = 0;
       const min = 0;
       const max = this.imgList.length - 1;
       const x = Math.round((Math.random() * (max - min)) + min);
@@ -109,6 +114,7 @@ export default {
           clearInterval(this.polling);
         }
         this.changeBlur(blurIntString);
+        this.timer += 100;
         // console.log(blurInt);
       }.bind(this), 100);
     },
@@ -118,8 +124,29 @@ export default {
     },
 
     submitAnswer () {
-      console.log("Hallo");
-      clearInterval(this.polling);
+      if (gameRunning) {
+        gameRunning = false;
+        console.log("Hallo");
+        clearInterval(this.polling);
+        const time = this.timer / 1000;
+        console.log(time + " Seconds");
+        this.changeBlur("100px");
+        console.log(this.input);
+        let s = this.imgSrc;
+        s = s.substring(s.indexOf("images/"));
+        s = s.substring(7);
+        s = s.substring(0, s.indexOf("."));
+        s = s.split(/(?=[A-Z])/).join(" ");
+        s = (s.charAt(0).toUpperCase() + s.slice(1));
+        console.log(s);
+        this.imgSrc = BlackImage;
+
+        if (this.input === s) {
+          console.log("Right answer");
+        } else {
+          console.log("Wrong answer");
+        }
+      }
     }
   }
 
