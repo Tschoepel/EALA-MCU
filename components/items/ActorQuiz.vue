@@ -52,11 +52,7 @@
   Korg:{HeroName: "Korg" ,},
   Shuri:{HeroName: "Shuri" ,},
   CaptainMarvel:{HeroName: "Captain Marvel" ,},
-  MonicaRambeau:{HeroName: "Monica Rambeau" ,},
-  YelenaBelova:{HeroName: "Yelena Belova" ,},
   Heimdall:{HeroName: "Heimdall" ,},
-  SylvieLaufeydottir:{HeroName: "Sylvie Laufeydottir" ,},
-  Sersi:{HeroName: "Sersi" ,},
   Phastos:{HeroName: "Phastos" ,},
   Ajak:{HeroName: "Ajak" ,},
   // DC
@@ -66,11 +62,7 @@
   Aquaman:{HeroName: "Aquaman" ,},
   TheFlash:{HeroName: "The Flash" ,},
   Cyborg:{HeroName: "Cyborg" ,},
-  Shazam:{HeroName: "Shazam" ,},
   Deadshot:{HeroName: "Deadshot" ,},
-  HarleyQuinn:{HeroName: "Harley Quinn" ,},
-  RickFlag:{HeroName: "Rick Flag" ,},
-  CaptainBoomerang:{HeroName: "Captain Boomerang" ,},
   ElDiablo:{HeroName: "El Diablo" ,},
 }];
 console.log(data);
