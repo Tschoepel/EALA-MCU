@@ -7,6 +7,12 @@
             <h3 class="text-lg text-align: center leading-6 font-medium text-gray-900">
               {{ "Welcher Superheld ist das?" }}
             </h3>
+            <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="openText">
+              ?
+            </button>
+             <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
+              Ein Bild eines Superhelden entpixelt sich langsam. Geben Sie den Namen des Superhelden ein, sobald Sie ihn erkennen, jedoch nur, wenn es sich um einen Marvel-Helden handelt!
+            </div>
               <client-only>
                 <div class="image">
                   <img id="test" :src="imgSrc"/>
@@ -91,7 +97,8 @@ export default {
       blurValue: ref("50px"),
       polling: null,
       timer: 0,
-      input: null
+      input: null,
+      helpOpen: false
     };
   },
   methods: {
@@ -152,6 +159,9 @@ export default {
           console.log("Wrong answer");
         }
       }
+    },
+    openText () {
+      this.helpOpen = !this.helpOpen;
     }
   }
 

@@ -6,6 +6,14 @@
           <h3 class="text-lg text-align: center leading-6 font-medium text-gray-900">
             {{ title }}
           </h3>
+          <div class="ml-4 mt-2 flex-shrink-0">
+            <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="helpOpen = !helpOpen">
+              ?
+            </button>
+          </div>
+           <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
+            Durch Drag and Drop mit der Maus können Sie die Filme an die richtige Stelle verschieben. Sortieren Sie die Filme vom Ältesten zum Neuesten.
+          </div>
           <div>
             <div class="drop-zone" @drop="onDrop($event, 1)" @dragenter.prevent @dragover.prevent>
               <div v-for="item in getList(1)" :key="item.id" class="drag-el" draggable="true" @dragstart="startDrag($event, item)">
@@ -39,6 +47,7 @@
 
 <script setup>
 import { ref } from "vue";
+const helpOpen = ref(false);
 
 const props = defineProps({
   id: {
