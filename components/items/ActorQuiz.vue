@@ -5,7 +5,7 @@
         <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
           <div class="ml-4 mt-2">
             <h3 class="text-lg text-align: center leading-6 font-medium text-gray-900">
-              {{ "In welchen der Filmen spielt dieser Superheld mit?" }}
+              {{ "Steckbrief-Quiz:" }}
             </h3>
               <client-only>
                 <div class="image2">
@@ -39,17 +39,14 @@
                         <input id="avengerInput" v-model="input5" type="text" style="padding: 2px;">
                       </tr>
                     </table>
+                      <div id="app">
+                      <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="loadOtherImg">
+                        Submit
+                      </button>
+                    </div>
                   </div>
               </client-only>
           </div>
-        </div>
-         <div id="app">
-          <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="loadOtherImg">
-            Start Game
-          </button>
-          <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="submitAnswer">
-            Submit
-          </button>
         </div>
         <div>
           </div>
@@ -59,7 +56,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+// import { ref } from "vue";
 import IronMan from "~/assets/images/ironMan.resized.jpg";
 import Thor from "~/assets/images/Thor.resized.jpg";
 import Ajak from "~/assets/images/ajak.resized.jpeg";
@@ -98,128 +95,220 @@ import WinterSoldier from "~/assets/images/winterSoldier.resized.webp";
 import YonduUdonta from "~/assets/images/yonduUdonta.resized.webp";
 import BlackImage from "~/assets/images/Solid_black.svg.png";
 
-let blurInt = 100;
-let blurIntString = "";
-const pxString = "px";
-let gameRunning = false;
-
 export default {
   data: function () {
     return {
       imgList: [IronMan, CaptainAmerica, WinterSoldier, NickFury, Hulk, BlackWidow, Thor, Loki, Hawkeye, WarMachine, Falcon, StarLord, Gamora, Drax, YonduUdonta, Mantis, AntMan, BlackPanther, ScarlettWitch, Quicksilver, TheWasp, Spiderman, DoctorStrange, Valkyrie, Korg, Shuri, Heimdall, Phastos, Ajak, Batman, Superman, Aquaman, TheFlash, Cyborg, Deadshot, ElDiablo],
-      wrongAnwers: ["Batman", "Superman", "Aquaman", "The Flash", "Cyborg", "Deadshot", "El Diablo"],
+      wrongAnwers: [Batman, Superman, Aquaman, TheFlash, Cyborg, Deadshot, ElDiablo],
       imgSrc: BlackImage,
-      blurValue: ref("50px"),
-      polling: null,
-      timer: 0,
-      input: null,
       name: "",
       firstFilm: "",
       actor: "",
       planet: "",
-      isAvenger: ""
+      isAvenger: "",
+      answer1Wrong: null,
+      answer2Wrong: null,
+      answer3Wrong: null,
+      answer4Wrong: null,
+      answer5Wrong: null,
+      trickQuestion: false,
+      input1: null,
+      input2: null,
+      input3: null,
+      input4: null,
+      input5: null,
+      firstQuestion: true,
+      knownWrongAnswers: 0,
+      correctRemediation: 0,
+      x: null
     };
   },
   methods: {
     loadOtherImg () {
-      this.input = null;
-      gameRunning = true;
-      this.timer = 0;
+      // first check Solution
+      if (!this.firstQuestion) {
+        // const solutionString = (this.input1 + this.input2 + this.input3 + this.input4 + this.input5);
+        this.checkSolution();
+        this.input1 = null;
+        this.input2 = null;
+        this.input3 = null;
+        this.input4 = null;
+        this.input5 = null;
+      }
+      this.firstQuestion = false;
       const min = 0;
       const max = this.imgList.length - 1;
-      const x = Math.round((Math.random() * (max - min)) + min);
-      blurInt = 50;
-      this.changeBlur("50px");
-      this.imgSrc = this.imgList[x];
-      console.log(this.imgList[x]);
-      console.log(data[x]);
-      this.polling = setInterval(function () {
-        // this code runs every second
-        blurInt -= 0.2;
-        blurIntString = blurInt.toString();
-        blurIntString += pxString;
-        if (blurInt <= 0) {
-          blurInt = 0;
-          this.submitAnswer();
-        }
-        this.changeBlur(blurIntString);
-        this.timer += 100;
-      }.bind(this), 100);
-    },
+      this.x = Math.round((Math.random() * (max - min)) + min);
+      this.imgSrc = this.imgList[this.x];
+      this.trickQuestion = false;
+      if (this.wrongAnwers.includes(this.imgSrc)) {
+        this.trickQuestion = true;
+      }
 
-    changeBlur (blurPixel) {
-      this.blurValue = ref(blurPixel);
-    },
+      this.answer1Wrong = false;
+      this.answer2Wrong = false;
+      this.answer3Wrong = false;
+      this.answer4Wrong = false;
+      this.answer5Wrong = false;
 
-    submitAnswer () {
-      if (gameRunning) {
-        gameRunning = false;
-        clearInterval(this.polling);
-        this.changeBlur("100px");
-        let s = this.imgSrc;
-        s = s.substring(s.indexOf("images/"));
-        s = s.substring(7);
-        s = s.substring(0, s.indexOf("."));
-        s = s.split(/(?=[A-Z])/).join(" ");
-        s = (s.charAt(0).toUpperCase() + s.slice(1));
-        // this.imgSrc = BlackImage;
+      const a1 = Math.random() < 0.5;
+      const a2 = Math.random() < 0.5;
+      const a3 = Math.random() < 0.5;
+      const a4 = Math.random() < 0.5;
+      const a5 = Math.random() < 0.5;
+      const r1 = Math.round((Math.random() * (max - min)) + min);
 
-        if (this.wrongAnwers.includes(this.input || s)) {
-          console.log("Wrong Universe");
-        }
-
-        if (this.input === s) {
-          console.log("Right answer");
-        } else {
-          console.log("Wrong answer");
+      if (a1) {
+        this.name = data[this.x].HeroName;
+      } else {
+        this.name = data[r1].HeroName;
+        if (data[this.x].HeroName !== data[r1].HeroName) {
+          this.answer1Wrong = true;
         }
       }
+      if (a2) {
+        this.firstFilm = data[this.x].FirstFilm;
+      } else {
+        const a6 = Math.random() < 0.5;
+        const r2 = Math.round((Math.random() * (max - min)) + min);
+        if (a6 && a1) {
+          this.firstFilm = data[r2].FirstFilm;
+        } else {
+          this.firstFilm = data[r1].HeroName;
+        }
+        if (data[this.x].FirstFilm !== data[r2].FirstFilm) {
+          this.answer2Wrong = true;
+        }
+      }
+      if (a3) {
+        this.actor = data[this.x].Actor;
+      } else {
+        const r3 = Math.round((Math.random() * (max - min)) + min);
+        this.actor = data[r3].Actor;
+        if (data[this.x].Actor !== data[r3].Actor) {
+          this.answer3Wrong = true;
+        }
+      }
+      if (a4) {
+        this.planet = data[this.x].Planet;
+      } else {
+        const r4 = Math.round((Math.random() * (max - min)) + min);
+        this.planet = data[r4].Planet;
+        if (data[this.x].Planet !== data[r4].Planet) {
+          this.answer4Wrong = true;
+        }
+      }
+      if (a5) {
+        this.isAvenger = "Ja";
+        if (!data[this.x].IsAvenger) {
+          this.answer5Wrong = true;
+        }
+      } else {
+        this.isAvenger = "Nein";
+        if (data[this.x].IsAvenger) {
+          this.answer5Wrong = true;
+        }
+      }
+    },
+    checkSolution () {
+      if (this.trickQuestion && ((this.input1 !== null) || (this.input2 !== null) || (this.input3 !== null) || (this.input4 !== null) || (this.input5 !== null))) {
+        console.log("Wrong Answer - Fell for Trick Question");
+      } else if (this.trickQuestion && ((this.input1 === null) || (this.input2 === null) || (this.input3 === null) || (this.input4 === null) || (this.input5 === null))) {
+        console.log("You got the trick question right");
+      }
+      this.knownWrongAnswers = 0;
+      this.correctRemediation = 0;
+      // first check wheather student knows all wrong statements:
+      if (this.answer1Wrong && (this.input1 !== null)) {
+        this.knownWrongAnswers++;
+        if (data[this.x].HeroName === this.input1) {
+          console.log("Right hero name");
+          this.correctRemediation++;
+        }
+      }
+      if (this.answer2Wrong && (this.input2 !== null)) {
+        this.knownWrongAnswers++;
+        if (data[this.x].FirstFilm === this.input2) {
+          console.log("Right first film");
+          this.correctRemediation++;
+        }
+      }
+      if (this.answer3Wrong && (this.input3 !== null)) {
+        this.knownWrongAnswers++;
+        if (data[this.x].Actor === this.input3) {
+          console.log("Right actor name");
+          this.correctRemediation++;
+        }
+      }
+      if (this.answer4Wrong && (this.input4 !== null)) {
+        this.knownWrongAnswers++;
+        if (data[this.x].Planet === this.input4) {
+          console.log("Right planet name");
+          this.correctRemediation++;
+        }
+      }
+      if (this.answer5Wrong && (this.input5 !== null)) {
+        this.knownWrongAnswers++;
+        if ((this.isAvenger === "Nein" && this.input5 === "Ja") || (this.isAvenger === "Ja" && this.input5 === "Nein")) {
+          console.log("Right avenger membership");
+          this.correctRemediation++;
+        }
+      }
+      if (this.knownWrongAnswers === (this.answer1Wrong + this.answer2Wrong + this.answer3Wrong + this.answer4Wrong + this.answer5Wrong)) {
+        console.log("You knew all false statements in the profile!");
+      }
+      if (this.correctRemediation === (this.answer1Wrong + this.answer2Wrong + this.answer3Wrong + this.answer4Wrong + this.answer5Wrong)) {
+        console.log("You got everything right");
+      }
+      // Now check wheather he knows the corrections of the wrong statements
     }
+  },
+  mounted: function () {
+    this.loadOtherImg();
   }
 
 };
 
 const data = [
   // Marvel
-  { HeroName: "Iron Man", Actor: "Robert Downey Jr.", FirstFilm: "Iron Man", Planet: "Earth", IsAvenger: true },
-  { HeroName: "Captain America", Actor: "Chris Evans", FirstFilm: "Captain America: The First Avenger", Planet: "Earth", IsAvenger: true },
-  { HeroName: "Winter Soldier", Actor: "Sebastian Stan", FirstFilm: "Captain America: The First Avenger", Planet: "Earth", IsAvenger: false },
-  { HeroName: "Nick Fury", Actor: "Samuel L. Jackson", FirstFilm: "Iron Man 2", Planet: "Earth", IsAvenger: false },
-  { HeroName: "Hulk", Actor: "Mark Ruffalo", FirstFilm: "The Incredible Hulk", Planet: "Earth", IsAvenger: true },
-  { HeroName: "Black Widow", Actor: "Scarlett Johansson", FirstFilm: "Iron Man 2", Planet: "Earth", IsAvenger: true },
+  { HeroName: "Iron Man", Actor: "Robert Downey Jr.", FirstFilm: "Iron Man", Planet: "Erde", IsAvenger: true },
+  { HeroName: "Captain America", Actor: "Chris Evans", FirstFilm: "Captain America: The First Avenger", Planet: "Erde", IsAvenger: true },
+  { HeroName: "Winter Soldier", Actor: "Sebastian Stan", FirstFilm: "Captain America: The First Avenger", Planet: "Erde", IsAvenger: false },
+  { HeroName: "Nick Fury", Actor: "Samuel L. Jackson", FirstFilm: "Iron Man 2", Planet: "Erde", IsAvenger: false },
+  { HeroName: "Hulk", Actor: "Mark Ruffalo", FirstFilm: "The Incredible Hulk", Planet: "Erde", IsAvenger: true },
+  { HeroName: "Black Widow", Actor: "Scarlett Johansson", FirstFilm: "Iron Man 2", Planet: "Erde", IsAvenger: true },
   { HeroName: "Thor", Actor: "Chris Hemsworth", FirstFilm: "Thor", Planet: "Asgard", IsAvenger: true },
   { HeroName: "Loki", Actor: "Tom Hiddleston", FirstFilm: "Thor", Planet: "Asgard", IsAvenger: false },
-  { HeroName: "Hawkeye", Actor: "Jeremy Renner", FirstFilm: "Thor", Planet: "Earth", IsAvenger: true },
-  { HeroName: "War Machine", Actor: "Don Cheadle", FirstFilm: "Iron Man", Planet: "Earth", IsAvenger: true },
-  { HeroName: "Falcon", Actor: "Anthony Mackie", FirstFilm: "Captain America: The Winter Soldier", Planet: "Earth", IsAvenger: true },
-  { HeroName: "Star Lord", Actor: "Chris Pratt", FirstFilm: "Guardians of the Galaxy", Planet: "Earth", IsAvenger: false },
+  { HeroName: "Hawkeye", Actor: "Jeremy Renner", FirstFilm: "Thor", Planet: "Erde", IsAvenger: true },
+  { HeroName: "War Machine", Actor: "Don Cheadle", FirstFilm: "Iron Man", Planet: "Erde", IsAvenger: true },
+  { HeroName: "Falcon", Actor: "Anthony Mackie", FirstFilm: "Captain America: The Winter Soldier", Planet: "Erde", IsAvenger: true },
+  { HeroName: "Star Lord", Actor: "Chris Pratt", FirstFilm: "Guardians of the Galaxy", Planet: "Erde", IsAvenger: false },
   { HeroName: "Gamora", Actor: "Zoe Saldana", FirstFilm: "Guardians of the Galaxy", Planet: "Zen-Whoberi", IsAvenger: false },
   { HeroName: "Drax", Actor: "Dave Bautista", FirstFilm: "Guardians of the Galaxy", Planet: "Kylos", IsAvenger: false },
   { HeroName: "Yondu Udonta", Actor: "Michael Rooker", FirstFilm: "Guardians of the Galaxy", Planet: "Centauri-IV", IsAvenger: false },
   { HeroName: "Mantis", Actor: "Pom Klementieff", FirstFilm: "Guardians of the Galaxy Vol. 2", Planet: "Angoma", IsAvenger: false },
-  { HeroName: "Ant Man", Actor: "Paul Rudd", FirstFilm: "Ant-Man", Planet: "Earth", IsAvenger: true },
-  { HeroName: "Black Panther", Actor: "Chadwick Boseman", FirstFilm: "Captain America: Civil War", Planet: "Earth", IsAvenger: false },
-  { HeroName: "Scarlett Witch", Actor: "Elizabeth Olsen", FirstFilm: "Captain America: The Winter Soldier", Planet: "Earth", IsAvenger: true },
-  { HeroName: "Quicksilver", Actor: "Aaron Taylor-Johnson", FirstFilm: "Captain America: The Winter Soldier", Planet: "Earth", IsAvenger: true },
-  { HeroName: "The Wasp", Actor: "Evangeline Lilly", FirstFilm: "Ant-Man", Planet: "Earth", IsAvenger: false },
-  { HeroName: "Spider Man", Actor: "Tom Holland", FirstFilm: "Iron Man 2", Planet: "Earth", IsAvenger: true },
-  { HeroName: "Doctor Strange", Actor: "Benedict Cumberbatch", FirstFilm: "Doctor Strange", Planet: "Earth", IsAvenger: false },
+  { HeroName: "Ant Man", Actor: "Paul Rudd", FirstFilm: "Ant-Man", Planet: "Erde", IsAvenger: true },
+  { HeroName: "Black Panther", Actor: "Chadwick Boseman", FirstFilm: "Captain America: Civil War", Planet: "Erde", IsAvenger: false },
+  { HeroName: "Scarlett Witch", Actor: "Elizabeth Olsen", FirstFilm: "Captain America: The Winter Soldier", Planet: "Erde", IsAvenger: true },
+  { HeroName: "Quicksilver", Actor: "Aaron Taylor-Johnson", FirstFilm: "Captain America: The Winter Soldier", Planet: "Erde", IsAvenger: true },
+  { HeroName: "The Wasp", Actor: "Evangeline Lilly", FirstFilm: "Ant-Man", Planet: "Erde", IsAvenger: false },
+  { HeroName: "Spider Man", Actor: "Tom Holland", FirstFilm: "Iron Man 2", Planet: "Erde", IsAvenger: true },
+  { HeroName: "Doctor Strange", Actor: "Benedict Cumberbatch", FirstFilm: "Doctor Strange", Planet: "Erde", IsAvenger: false },
   { HeroName: "Valkyrie", Actor: "Tessa Thompson", FirstFilm: "Thor: Ragnarok", Planet: "Asgard", IsAvenger: false },
   { HeroName: "Korg", Actor: "Taika Waititi", FirstFilm: "Thor: Ragnarok", Planet: "Sakaar", IsAvenger: false },
-  { HeroName: "Shuri", Actor: "Letitia Wright", FirstFilm: "Black Panther", Planet: "Earth", IsAvenger: false },
+  { HeroName: "Shuri", Actor: "Letitia Wright", FirstFilm: "Black Panther", Planet: "Erde", IsAvenger: false },
   { HeroName: "Heimdall", Actor: "Idris Elba", FirstFilm: "Thor", Planet: "Asgard", IsAvenger: false },
-  { HeroName: "Phastos", Actor: "Brian Tyree Henry", FirstFilm: "Eternals", Planet: "Earth", IsAvenger: false },
-  { HeroName: "Ajak", Actor: "Salma Hayek", FirstFilm: "Eternals", Planet: "Earth", IsAvenger: false },
+  { HeroName: "Phastos", Actor: "Brian Tyree Henry", FirstFilm: "Eternals", Planet: "Erde", IsAvenger: false },
+  { HeroName: "Ajak", Actor: "Salma Hayek", FirstFilm: "Eternals", Planet: "Erde", IsAvenger: false },
   // DC
-  { HeroName: "Batman", Actor: "Ben Affleck", FirstFilm: "Batman v Superman: Dawn of Justice", Planet: "Earth", IsAvenger: false },
+  { HeroName: "Batman", Actor: "Ben Affleck", FirstFilm: "Batman v Superman: Dawn of Justice", Planet: "Erde", IsAvenger: false },
   { HeroName: "Superman", Actor: "Henry Cavill", FirstFilm: "Man of Steel", Planet: "Krypton", IsAvenger: false },
-  { HeroName: "Aquaman", Actor: "Jason Momoa", FirstFilm: "Justice League", Planet: "Earth", IsAvenger: false },
-  { HeroName: "The Flash", Actor: "Ezra Miller", FirstFilm: "Batman v Superman: Dawn of Justice", Planet: "Earth", IsAvenger: false },
-  { HeroName: "Cyborg", Actor: "Ray Fisher", FirstFilm: "Justice League", Planet: "Earth", IsAvenger: false },
-  { HeroName: "Deadshot", Actor: "Will Smith", FirstFilm: "Suicide Squad", Planet: "Earth", IsAvenger: false },
-  { HeroName: "El Diablo", Actor: "Jay Hernandez", FirstFilm: "Suicide Squad", Planet: "Earth", IsAvenger: false }
+  { HeroName: "Aquaman", Actor: "Jason Momoa", FirstFilm: "Justice League", Planet: "Erde", IsAvenger: false },
+  { HeroName: "The Flash", Actor: "Ezra Miller", FirstFilm: "Batman v Superman: Dawn of Justice", Planet: "Erde", IsAvenger: false },
+  { HeroName: "Cyborg", Actor: "Ray Fisher", FirstFilm: "Justice League", Planet: "Erde", IsAvenger: false },
+  { HeroName: "Deadshot", Actor: "Will Smith", FirstFilm: "Suicide Squad", Planet: "Erde", IsAvenger: false },
+  { HeroName: "El Diablo", Actor: "Jay Hernandez", FirstFilm: "Suicide Squad", Planet: "Erde", IsAvenger: false }
 ];
-console.log(data);
 </script>
 
 <style>
