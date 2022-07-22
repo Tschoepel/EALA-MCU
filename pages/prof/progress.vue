@@ -41,13 +41,14 @@
               <div class="mt-2 text-gray-600">
                 What was achieved:
                 <ul class="list-disc list-inside">
-                  <li>Sort by question via DragDrop: Get data from Wikidata with SPARQL and generate random question, correct solution and submitted answer is also checked </li>
+                  <li>Sort by question via DragDrop: Daten von Wikidata mit SPARQL geholt und Fragen zufällig generiert. Lösung wird automatisch ausgewertet. Item: Sortiere Filme nach ihrem Erscheinungsdatum </li>
+                  <li>Pixel Game: Ein Bild entpixelt sich langsam und zeigt einen Superhelden. Zeit wird gemessen, wie schnell man den Helden erkennt und ob man ihn richtig erkennt  </li>
+                  <li>AIG3: Ein Bild von einem Helden mit seinem Steckbrief wird automatisch aufgebaut. Jeder der Stichpunkte ist zu 50% falsch/richtig. Man muss erkennen welche Aussagen falsch sind und diese korrigieren. Dabei wird geprüft ob zum einen alle falschen Statements erkannt worden sind und ob diese auch richtig korrigiert worden sind </li>
                 </ul>
                 <hr class="my-3">
                 What needs to be done:
                 <ul class="list-disc list-inside">
-                  <li>Pixel/Zoom game with image: Guess the superhero as fast as possible to get more points </li>
-                  <li>Build a more complex AIG Item </li>
+                  <li> - </li>
                 </ul>
               </div>
             </div>
