@@ -41,11 +41,12 @@
           <div class="bg-white shadow sm:rounded-lg">
             <div class="px-4 py-5 sm:p-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900">
-                <QuestionMarkCircleIcon class="h-6 w-6 inline-block text-yellow-400" aria-hidden="true" />
+                <ExclamationIcon v-if="state.analyzeTrainingPercentage > 25" class="h-6 w-6 inline-block text-yellow-600 animate-pulse" aria-hidden="true" />
+                <QuestionMarkCircleIcon v-else class="h-6 w-6 inline-block text-yellow-400" aria-hidden="true" />
                 Modul: Übungsaktivitäten
               </h3>
               <div class="mt-2 text-gray-600">
-                Die Übungen werden häufig abgebrochen.<br><br>
+                Die Übungen werden <span v-if="state.analyzeTrainingPercentage <= 25">mäßig</span> häufig (<b>{{ state.analyzeTrainingPercentage }}%</b>) abgebrochen.<br><br>
                 Folgende Punkte könnten vielleicht helfen:
                 <ul class="list-disc list-inside">
                   <li>Studenten fragen, ob sie Probleme mit den Übungsaufgaben haben.</li>
@@ -83,4 +84,10 @@ import {
   CheckCircleIcon,
   QuestionMarkCircleIcon
 } from "@heroicons/vue/outline";
+
+const state = reactive({ analyzeTrainingPercentage: 0 });
+onMounted(() => {
+  state.analyzeTrainingPercentage = localStorage.getItem("analyzeTraining");
+});
+
 </script>

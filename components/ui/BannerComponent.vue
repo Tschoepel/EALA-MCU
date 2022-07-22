@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2 rounded bg-yellow-600 sm:p-3">
+  <div v-show="state.modules.length > 0" class="p-2 rounded bg-yellow-600 sm:p-3">
     <div class="flex items-center justify-between flex-wrap">
       <div class="w-0 flex-1 flex items-center">
         <span class="flex p-2 rounded-lg bg-yellow-800">
@@ -21,7 +21,7 @@
             Es wurden Verbesserungen entdeckt.
           </span>
           <span class="hidden md:inline">
-            Es wurden mögliche Verbesserungen entdeckt, bezüglich der Übungsverteilung.
+            Es wurden mögliche Verbesserungen entdeckt in folgenden Modulen: {{ state.modules.join(", ") }}
           </span>
         </p>
       </div>
@@ -50,3 +50,10 @@
     </div>
   </div>
 </template>
+<script setup>
+const state = reactive({ analyzeTrainingPercentage: 0, modules: ["Übungsverteilung"] });
+onMounted(() => {
+  state.analyzeTrainingPercentage = localStorage.getItem("analyzeTraining");
+  if (state.analyzeTrainingPercentage > 25) { state.modules.push("Übungsaktivitäten"); }
+});
+</script>

@@ -163,6 +163,7 @@ import {
   FilmIcon,
   HomeIcon,
   MenuAlt2Icon,
+  ClockIcon,
   PresentationChartBarIcon,
   TerminalIcon,
   XIcon
@@ -172,7 +173,7 @@ import {
 const navigation = reactive([
   { name: "Dashboard", href: "/prof", icon: HomeIcon, nav: "dashboard", current: false },
   { name: "Analyse", href: "/prof/analysis", icon: PresentationChartBarIcon, nav: "analysis", current: false },
-  // { name: "Statistiken", href: "/prof/statistics", icon: PresentationChartBarIcon, current: false },
+  { name: "Timeline", href: "/prof/timeline", icon: ClockIcon, nav: "timeline", current: false },
   { name: "Aktueller Stand", href: "/prof/progress", icon: TerminalIcon, nav: "progress", current: false }
 ]);
 const userNavigation = [
@@ -188,7 +189,6 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  // console.log(props.nav);
   navigation.forEach((element) => {
     if (element.nav.toLowerCase() === props.nav) { element.current = true; }
   });

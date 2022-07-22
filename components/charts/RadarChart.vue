@@ -70,7 +70,10 @@ export default {
           r: {
             beginAtZero: true,
             ticks: {
-              display: false
+              display: false,
+              max: 50,
+              min: 1,
+              maxTicksLimit: 5
             }
           }
         },

@@ -19,13 +19,16 @@
           </div>
           <div class="bg-white px-4 py-5 sm:px-6">
             <div class="flex space-x-3">
-              <h3 class="text-sm font-bold text-gray-900">
-                Übungsaktivitäten
+              <h3 v-if="state.analyzeTrainingPercentage && state.analyzeTrainingPercentage > 25" class="text-sm font-bold text-yellow-600">
+                <ExclamationIcon class="h-6 w-6 inline-block animate-pulse" aria-hidden="true" /> Übungsaktivitäten
+              </h3>
+              <h3 v-else class="text-sm font-bold text-green-700">
+                <CheckIcon class="h-6 w-6 inline-block" aria-hidden="true" /> Übungsaktivitäten
               </h3>
             </div>
             <div class="px-4 pb-5 sm:p-6 sm:pt-0">
               <ClientOnly>
-                <ChartsBarChart :labels="trainingActionsLabels" :datasets="trainingActionsData" />
+                <ChartsBarChart :labels="trainingLabels" :datasets="trainingDataObject" />
               </ClientOnly>
             </div>
           </div>
@@ -51,7 +54,8 @@
 <script setup>
 import {
   // ClipboardCheckIcon,
-  ExclamationIcon
+  ExclamationIcon,
+  CheckIcon
 } from "@heroicons/vue/outline";
 // import { onMounted } from "vue";
 // import { Radar, Line } from "vue-chartjs";
@@ -60,37 +64,80 @@ const { data: api } = await useFetch("/api/statistics");
 const data = api.value;
 const pageVisitsLabels = [];
 const pageVisitsData = [];
+
+const trainingLabels = [];
+const trainingData = [];
+let trainingDataObject = [];
+
 // const students = [];
 data.forEach((item) => {
   if (item.action === "nav") {
-    const name = mapToName(item.params);
+    const name = mapToName(item.params, item.action);
     const index = pageVisitsLabels.findIndex(el => el === name);
-    console.log(name, index);
+    // console.log(name, index);
     if (index === -1) {
       pageVisitsLabels.push(name);
       pageVisitsData.push(1);
     } else {
       pageVisitsData[index] = pageVisitsData[index] + 1;
     }
+  } else if (item.action === "training-1") {
+    const name = mapToName(item.params, item.action);
+    const index = trainingLabels.findIndex(el => el === name);
+    // console.log(name, index);
+    if (index === -1) {
+      trainingLabels.push(name);
+      trainingData.push(1);
+    } else {
+      trainingData[index] = trainingData[index] + 1;
+    }
+    trainingDataObject = [{
+      data: trainingData,
+      label: "Studenten",
+      backgroundColor: ["rgba(67, 56, 202, 0.5)", "rgba(22, 163, 74, 0.5)", "rgba(220, 38, 38, 0.5)"]
+    }];
   }
 });
-// console.log(pageVisits);
-function mapToName (route) {
-  route = route.toString().substring(1);
-  const arr = [/student\/training\/\d+/g, /student\/training/g, /student/g];
-  const repl = ["Übungsergebnisse", "Dashboard", "Übungen"];
-  for (let i = 0; i < arr.length; i++) {
-    route = route.replace(arr[i], repl[i]);
+function mapToName (param, action) {
+  if (action === "nav") {
+    param = param.toString().substring(1);
+    const arr = [/student\/results\/\d+/g, /student\/training\/\d+/g, /student\/training/g, /student/g];
+    const repl = ["Übungsergebnisse", "Übungsblätter", "Übungen", "Dashboard"];
+    for (let i = 0; i < arr.length; i++) {
+      param = param.replace(arr[i], repl[i]);
+    }
+    return param;
+  } else if (action === "training-1") {
+    const arr = ["start", "submitted", "canceled"];
+    const repl = ["Übung begonnen", "Übung abgeschickt", "Übung abgebrochen"];
+    for (let i = 0; i < arr.length; i++) {
+      param = param.replace(arr[i], repl[i]);
+    }
+    return param;
   }
-  return route;
 }
 
-const trainingActionsLabels = ["Übung begonnen", "Übung abgeschickt", "Übung abgebrochen"];
-const trainingActionsData = [{
-  data: [20, 5, 15],
-  label: "Studenten",
-  backgroundColor: ["rgba(67, 56, 202, 0.5)", "rgba(22, 163, 74, 0.5)", "rgba(220, 38, 38, 0.5)"]
-}];
+const state = reactive({ analyzeTrainingPercentage: 0, loading: true, timelineItems: [] });
+onMounted(() => {
+  state.analyzeTrainingPercentage = localStorage.getItem("analyzeTraining");
+  analyzeTraining(trainingDataObject);
+  // console.log(trainingDataObject);
+});
+
+function analyzeTraining () {
+  const data = trainingDataObject[0].data;
+  const percentage = 100 * data[2] / (data[1] + data[2]);
+  // console.log(percentage);
+  localStorage.setItem("analyzeTraining", percentage);
+  // if(trainingDataObject)
+}
+
+// const trainingActionsLabels = ["Übung begonnen", "Übung abgeschickt", "Übung abgebrochen"];
+// const trainingActionsData = [{
+//   data: [20, 5, 15],
+//   label: "Studenten",
+//   backgroundColor: ["rgba(67, 56, 202, 0.5)", "rgba(22, 163, 74, 0.5)", "rgba(220, 38, 38, 0.5)"]
+// }];
 
 const trainingDistributionLabels = ["Bestanden", "Nicht bestanden"];
 const trainingDistributionData = [{ data: [10, 15], backgroundColor: ["rgba(22, 163, 74, 0.5)", "rgba(220, 38, 38, 0.5)"] }];
