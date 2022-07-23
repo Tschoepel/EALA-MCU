@@ -22,7 +22,13 @@ async function main () {
       question: "Welche der folgenden Superhelden traten im ersten Avengersfilm auf",
       answers : "Dr. Strange,Thor,Loki,Spiderman",
       answersCorrect: "false,true,true,false"
-
+    }  
+  });
+  await prisma.imageSelection.create({
+    data: {
+      question: "Welche Waffen gehören zu Gamora",
+      answers: "Repulsor,Bifrost Sword,Vibranium Shield,Redwing,Vibranium Arm,Quadblaster,Gloves,Godslayer,Weapon9,Weapon10",
+      answersCorrect: "true,false,false,false,false,false,false,false,false,false"
     }
   });
   await prisma.dragDrop.create({

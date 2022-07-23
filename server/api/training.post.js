@@ -13,11 +13,12 @@ export default defineEventHandler(async (event) => {
   });
   const [scoredC,totalC] = await closedText(body);
   const [scoredM,totalM] = await multipleChoice(body);
+  const [scoredI,totalI] = await imageSelection (body);
   const result = await prisma.trainingResults.create({
     data: {
       userId: 1,
-      scored:scoredC+scoredM,
-      total:totalC+totalM,
+      scored:scoredC+scoredM+scoredI,
+      total:totalC+totalM+totalI,
       grade: 1.0,
       submissionId: submission.id
     }
@@ -119,3 +120,59 @@ async function multipleChoiceAnswers (items) {
   });
   return await Promise.all(results);
 }
+
+async function imageSelection(elements) {
+
+  const items = [];
+
+  elements.forEach((element) => {
+    if (element[0].includes("imageselection")) {
+      const answersBoolean = ["false", "false", "false", "false","false", "false", "false", "false"];
+      const name = element[0].replace("imageselection-", "");
+      const index = name.substr(0, 1);
+      const id = element[1].split(',')[0];
+      const answers = element[1].split(',').slice(1);
+      for(let i = 0; i <answers.length;i++){
+        switch(answers[i]){
+          case "answer1": answersBoolean[0] = "true";break;
+          case "answer2": answersBoolean[1] = "true";break;
+          case "answer3": answersBoolean[2] = "true";break;
+          case "answer4": answersBoolean[3] = "true";break;
+          case "answer5": answersBoolean[4] = "true";break;
+          case "answer6": answersBoolean[5] = "true";break;
+          case "answer7": answersBoolean[6] = "true";break;
+          case "answer8": answersBoolean[7] = "true";break;
+          case "answer9": answersBoolean[8] = "true";break;
+          case "answer10": answersBoolean[9] = "true";break;
+        }
+      }
+      const item = {
+        id : id,
+        answers : answersBoolean
+      }
+      items.push(item);
+    }
+  });
+  const answers = await imageSelectionAnswers(items);
+  let score = 0; let total = 0;
+  for (let i = 0; i < answers.length; i++) {
+    const answer = answers[i].answersCorrect.split(",");
+    for (let o = 0; o < answer.length; o++) {
+      total = total + 1;
+      const a = answer[o];
+      if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { score = score + 1; }
+    }
+  }
+  return [score, total];
+}
+async function imageSelectionAnswers (items) {
+  const results = [];
+  items.forEach((i) => {
+    results.push(prisma.imageSelection.findFirst({
+      where: { id: parseInt(i.id) },
+      select: { answersCorrect: true }
+    }));
+  });
+  return await Promise.all(results);
+}
+
