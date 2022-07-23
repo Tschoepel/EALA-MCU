@@ -26,6 +26,7 @@ model ShortText {
   title             String
   question          String
   answer            String
+  answerKeywords    String
 }
 
 model DrawItem {

@@ -13,11 +13,12 @@ export default defineEventHandler(async (event) => {
   });
   const [scoredC,totalC] = await closedText(body);
   const [scoredM,totalM] = await multipleChoice(body);
+  const [scoredS,totalS] = await shortText(body);
   const result = await prisma.trainingResults.create({
     data: {
       userId: 1,
-      scored:scoredC+scoredM,
-      total:totalC+totalM,
+      scored:scoredC+scoredM+scoredS,
+      total:totalC+totalM+totalS,
       grade: 1.0,
       submissionId: submission.id
     }
@@ -33,6 +34,47 @@ export default defineEventHandler(async (event) => {
   return { id: result.id };
 });
 
+async function shortText (elements) {
+
+  const items = [];
+
+  elements.forEach((element) => {
+    if (element[0].includes("shorttext")) {
+      const name = element[0].replace("shorttext-", "");
+      const index = name.substr(0, 1);
+      const answerS = element[1].split(',')[0];
+      if (typeof (items[index]) === "undefined") {
+        items.splice(index, 0, { id: index, answer: answerS });
+      } else {
+        const obj = items[index];
+        obj.answer.push(index.answerS);
+        console.log(index);
+      }
+    }
+  });
+  console.log(items);
+  const answers = await shortTextAnswers(items);
+  let score = 0; let total = 0;
+  for (let i = 0; i < answers.length; i++) {
+    const answer = answers[i].answerKeywords.split(",");
+    for (let o = 0; o < answer.length; o++) {
+      total = answer.length //total + 1;
+      const a = answer[o];
+      if (items[i].answer.toLowerCase().includes(a)) { score = score + 1; }
+    }
+  }
+  return [score, total];
+}
+async function shortTextAnswers (items) {
+  const results = [];
+  items.forEach((i) => {
+    results.push(prisma.shortText.findFirst({
+      where: { id: parseInt(i.id) },
+      select: { answerKeywords: true }
+    }));
+  });
+  return await Promise.all(results);
+}
 async function closedText (elements) {
   const items = [];
   elements.forEach((element) => {

@@ -22,7 +22,7 @@
         <input
           v-model="answer"
           type="text"
-          name="'shorttext-'+props.index+ '-id'"
+          :name="'shorttext-'+props.index+ '-id'"
           size="60"
           height="20"
           placeholder="Your answer goes here..."
@@ -50,4 +50,13 @@ const { data: api } = await useFetch("/api/shortText/" + props.id);
 const question = api.value.question;
 const helpOpen = ref(false);
 
+</script>
+<script>
+export default {
+  data () {
+    return {
+      answer: []
+    };
+  }
+};
 </script>
