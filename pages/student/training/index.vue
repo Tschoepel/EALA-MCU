@@ -86,16 +86,11 @@
             </div>
           </div>
 
-          <FormComponent :list="[{c: 'ItemsClosed-text', id: 1}, {c: 'ItemsClosed-text', id: 2}, {c: 'ItemsMultiple-choice', id: 1}]">
+          <FormComponent :list="[{c: 'ItemsClosed-text', id: 1}, {c: 'ItemsClosed-text', id: 2}, {c: 'ItemsDragDrop', id: 1}, {c: 'ItemsPixelImage', id: 1}, {c: 'ItemsMultiple-choice', id: 1}, {c: 'ItemsActorQuiz', id: 1}]">
           <!-- <ItemsClosed-text :id="1" />
           <div><b /></div>
           <ItemsMultiple-choice :id="1" /> -->
           </FormComponent>
-
-          <ItemsDragDrop :id="1" class="mt-6" />
-          <ItemsHearingTask :id="1" class="mt-6" />
-          <ItemsPixelImage :id="1" class="mt-6"/>
-          <ItemsActorQuiz :id="1" class="mt-6" />
         </div>
         <!-- /End replace -->
       </div>

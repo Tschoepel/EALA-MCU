@@ -3,6 +3,9 @@
     <div v-for="(l, i) in props.list" :key="l.c+':'+l.id">
       <ItemsClosed-text v-if="l.c == 'ItemsClosed-text'" :id="l.id" :index="i" />
       <ItemsMultiple-choice v-if="l.c == 'ItemsMultiple-choice'" :id="l.id" :index="i" />
+      <ItemsActorQuiz  v-if="l.c == 'ItemsActorQuiz'" :id="l.id" :index="i" />
+      <ItemsDragDrop v-if="l.c == 'ItemsDragDrop'" :id="l.id" :index="i" />
+      <ItemsPixelImage v-if="l.c == 'ItemsPixelImage'" :id="l.id" :index="i"/>
 
     </div>
     <div class="max-w-none mx-auto mt-4">
