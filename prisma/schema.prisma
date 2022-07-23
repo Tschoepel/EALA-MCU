@@ -21,6 +21,13 @@ model MultipleChoice {
   answersCorrect    String
 }
 
+model HearingTask {
+  id                Int    @id @default(autoincrement())
+  question          String
+  answers           String
+  answersCorrect    String
+}
+
 model Statistics {
   id        Int      @id @default(autoincrement())
   userId    Int
