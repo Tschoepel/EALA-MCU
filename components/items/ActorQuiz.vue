@@ -11,7 +11,7 @@
               ?
             </button>
             <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
-              Gegeben ist ein Bild eines Superhelden mit seinem Steckbrief. Prüfen Sie den Steckbrief und korrigieren Sie Fehler - falls vorhanden - im Textfeld daneben, jedoch nur, wenn es sich um einen Marvek-Helden handelt!
+              Gegeben ist ein Bild eines Superhelden mit seinem Steckbrief. Prüfen Sie den Steckbrief auf Fehler - falls vorhanden - und markieren Sie diese, indem Sie auf die Checkbox neben der falschen Aussage klicken. Anschließend geben Sie die richtige Antwort im Textfeld daneben ein. Machen Sie beides jedoch nur, wenn es sich um einen Marvek-Helden handelt!
               </div>
               <client-only>
                 <div class="image2">
@@ -20,34 +20,44 @@
                     </div>
                       <table style="width:100%">
                       <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Falsch? &emsp;&emsp; Korrektur</td>
+                      </tr>
+                      <tr>
                         <td>Helden-Name:</td>
                         <td><b>{{ name }}</b></td>
-                        <input id="nameInput" v-model="input1" type="text" style="padding: 2px;">
+                        <td><input id="answerI" v-model="inputA" type="checkbox" value="answer1" class="mr-2"> &emsp;&emsp;
+                        <input id="nameInput" v-model="input1" type="text" style="padding: 2px;"></td>
                       </tr>
                       <tr>
                         <td>Erster Filmauftritt:</td>
                         <td><b>{{ firstFilm }}</b></td>
-                        <input id="firstFilmInput" v-model="input2" type="text" style="padding: 2px;">
+                        <td><input id="answerII" v-model="inputB" type="checkbox" value="answer2" class="mr-2"> &emsp;&emsp;
+                        <input id="firstFilmInput" v-model="input2" type="text" style="padding: 2px;"></td>
                       </tr>
                       <tr>
                         <td>Schauspieler:</td>
                         <td><b>{{ actor }}</b></td>
-                        <input id="actorInput" v-model="input3" type="text" style="padding: 2px;">
+                        <td><input id="answerIII" v-model="inputC" type="checkbox" value="answer3" class="mr-2"> &emsp;&emsp;
+                        <input id="actorInput" v-model="input3" type="text" style="padding: 2px;"></td>
                       </tr>
                       <tr>
                         <td>Heimatplanet:</td>
                         <td><b>{{ planet }}</b></td>
-                        <input id="planetInput" v-model="input4" type="text" style="padding: 2px;">
+                        <td><input id="answerIV" v-model="inputD" type="checkbox" value="answer4" class="mr-2"> &emsp;&emsp;
+                        <input id="planetInput" v-model="input4" type="text" style="padding: 2px;"></td>
                       </tr>
                       <tr>
                         <td>Mitglied der Avengers?:</td>
                         <td><b> {{ isAvenger }} </b></td>
-                        <input id="avengerInput" v-model="input5" type="text" style="padding: 2px;">
+                        <td><input id="answerV" v-model="inputE" type="checkbox" value="answer5" class="mr-2"> &emsp;&emsp;
+                        <input id="avengerInput" v-model="input5" type="text" style="padding: 2px;"></td>
                       </tr>
                     </table>
                       <div id="app">
-                      <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="loadOtherImg">
-                        Submit
+                      <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="checkSolution">
+                        Lösung Abschicken
                       </button>
                     </div>
                   </div>
@@ -123,6 +133,11 @@ export default {
       input3: null,
       input4: null,
       input5: null,
+      inputA: false,
+      inputB: false,
+      inputC: false,
+      inputD: false,
+      inputE: false,
       firstQuestion: true,
       knownWrongAnswers: 0,
       correctRemediation: 0,
@@ -133,16 +148,7 @@ export default {
   methods: {
     loadOtherImg () {
       // first check Solution
-      if (!this.firstQuestion) {
-        // const solutionString = (this.input1 + this.input2 + this.input3 + this.input4 + this.input5);
-        this.checkSolution();
-        this.input1 = null;
-        this.input2 = null;
-        this.input3 = null;
-        this.input4 = null;
-        this.input5 = null;
-      }
-      this.firstQuestion = false;
+      // const solutionString = (this.input1 + this.input2 + this.input3 + this.input4 + this.input5);
       const min = 0;
       const max = this.imgList.length - 1;
       this.x = Math.round((Math.random() * (max - min)) + min);
@@ -218,43 +224,43 @@ export default {
       }
     },
     checkSolution () {
-      if (this.trickQuestion && ((this.input1 !== null) || (this.input2 !== null) || (this.input3 !== null) || (this.input4 !== null) || (this.input5 !== null))) {
+      if (this.trickQuestion && ((this.inputA) || (this.inputB) || (this.inputC) || (this.inputD) || (this.inputE))) {
         console.log("Wrong Answer - Fell for Trick Question");
-      } else if (this.trickQuestion && ((this.input1 === null) || (this.input2 === null) || (this.input3 === null) || (this.input4 === null) || (this.input5 === null))) {
+      } else if (this.trickQuestion && ((!this.inputA) && (!this.inputB) && (!this.inputC) && (!this.inputD) && (!this.inputE))) {
         console.log("You got the trick question right");
       }
       this.knownWrongAnswers = 0;
       this.correctRemediation = 0;
       // first check wheather student knows all wrong statements:
-      if (this.answer1Wrong && (this.input1 !== null)) {
+      if (this.answer1Wrong && (this.inputA)) {
         this.knownWrongAnswers++;
         if (data[this.x].HeroName === this.input1) {
           console.log("Right hero name");
           this.correctRemediation++;
         }
       }
-      if (this.answer2Wrong && (this.input2 !== null)) {
+      if (this.answer2Wrong && (this.inputB)) {
         this.knownWrongAnswers++;
         if (data[this.x].FirstFilm === this.input2) {
           console.log("Right first film");
           this.correctRemediation++;
         }
       }
-      if (this.answer3Wrong && (this.input3 !== null)) {
+      if (this.answer3Wrong && (this.inputC)) {
         this.knownWrongAnswers++;
         if (data[this.x].Actor === this.input3) {
           console.log("Right actor name");
           this.correctRemediation++;
         }
       }
-      if (this.answer4Wrong && (this.input4 !== null)) {
+      if (this.answer4Wrong && (this.inputD)) {
         this.knownWrongAnswers++;
         if (data[this.x].Planet === this.input4) {
           console.log("Right planet name");
           this.correctRemediation++;
         }
       }
-      if (this.answer5Wrong && (this.input5 !== null)) {
+      if (this.answer5Wrong && (this.inputE)) {
         this.knownWrongAnswers++;
         if ((this.isAvenger === "Nein" && this.input5 === "Ja") || (this.isAvenger === "Ja" && this.input5 === "Nein")) {
           console.log("Right avenger membership");
@@ -267,7 +273,6 @@ export default {
       if (this.correctRemediation === (this.answer1Wrong + this.answer2Wrong + this.answer3Wrong + this.answer4Wrong + this.answer5Wrong)) {
         console.log("You got everything right");
       }
-      // Now check wheather he knows the corrections of the wrong statements
     },
     openText () {
       this.helpOpen = !this.helpOpen;

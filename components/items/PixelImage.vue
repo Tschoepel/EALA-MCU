@@ -22,11 +22,11 @@
         </div>
          <div id="app">
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="loadOtherImg">
-            Start Game
+            Spiel starten
           </button>
           <input id="answerPixelImage" v-model="input" type="text">
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="submitAnswer">
-            Submit
+            Lösung Abschicken
           </button>
         </div>
         <div>
@@ -98,34 +98,38 @@ export default {
       polling: null,
       timer: 0,
       input: null,
-      helpOpen: false
+      helpOpen: false,
+      firstGame: true
     };
   },
   methods: {
     loadOtherImg () {
-      this.input = null;
-      console.log("klappt");
-      gameRunning = true;
-      this.timer = 0;
-      const min = 0;
-      const max = this.imgList.length - 1;
-      const x = Math.round((Math.random() * (max - min)) + min);
-      blurInt = 50;
-      this.changeBlur("50px");
-      this.imgSrc = this.imgList[x];
-      this.polling = setInterval(function () {
-        // this code runs every second
-        blurInt -= 0.2;
-        blurIntString = blurInt.toString();
-        blurIntString += pxString;
-        if (blurInt <= 0) {
-          blurInt = 0;
-          this.submitAnswer();
-        }
-        this.changeBlur(blurIntString);
-        this.timer += 100;
-        // console.log(blurInt);
-      }.bind(this), 100);
+      if (this.firstGame) {
+        this.firstGame = false;
+        this.input = null;
+        console.log("klappt");
+        gameRunning = true;
+        this.timer = 0;
+        const min = 0;
+        const max = this.imgList.length - 1;
+        const x = Math.round((Math.random() * (max - min)) + min);
+        blurInt = 50;
+        this.changeBlur("50px");
+        this.imgSrc = this.imgList[x];
+        this.polling = setInterval(function () {
+          // this code runs every second
+          blurInt -= 0.2;
+          blurIntString = blurInt.toString();
+          blurIntString += pxString;
+          if (blurInt <= 0) {
+            blurInt = 0;
+            this.submitAnswer();
+          }
+          this.changeBlur(blurIntString);
+          this.timer += 100;
+          // console.log(blurInt);
+        }.bind(this), 100);
+      }
     },
 
     changeBlur (blurPixel) {
