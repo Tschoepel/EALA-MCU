@@ -5,7 +5,7 @@
         <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
           <div class="ml-4 mt-2">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
-              {{ props.index+1 }}. {{ api.title }}
+              {{ props.index+1 }}. {{ title }}
             </h3>
           </div>
           <div class="ml-4 mt-2 flex-shrink-0">
@@ -28,6 +28,7 @@
 
 <script setup>
 import { onMounted } from "vue";
+import { hash } from "ohash";
 const props = defineProps({
   id: {
     type: Number,
@@ -39,18 +40,24 @@ const props = defineProps({
   }
 });
 // Allgemeine Fragen zu Thor; Dies ist ein Text mit $$ Lücken. Die Lücken müssen vorher $$ werden.;diversen,befüllt
-const { data: api } = await useFetch("/api/closedText/" + props.id);
+const url = "/api/closedText/" + props.id;
+const { data: api } = await useFetch(url, {
+  key: hash([url])
+});
+let title = null; let text = null;
+if (api.value !== null)
+  ({ title, text } = api.value); // eslint-disable-line
 // const title = api.value.title;
 onMounted(() => {
-  // console.log(api.value);
-  // title = api.value.title;
-  // ({ title, text } = api.value);
   // console.log(title, text);
 });
 let i = 0;
 const htmlText = computed(() => {
+  if (text === null) {
+    return "Es gibt aktuell Probleme mit der API";
+  }
   const input = "<input type=\"text\" name=\"closedtext-" + props.index + "-num\" class=\"shadow-sm text-sm border-gray-300 rounded-md\" value=\"testnum\">";
-  return api.value.text.replaceAll("$$", () => {
+  return text.replaceAll("$$", () => {
     i = i + 1;
     return input.replaceAll("num", i);
   });

@@ -102,11 +102,11 @@ const onDrop = (event, list) => {
   const itemID = dropObj.value.id;// event.dataTransfer.getData("itemID");
   dropObj.value.id = "";
   const item = items.value.find(item => item.id === itemID);
-  console.log(list);
+  // console.log(list);
 
   for (let i = 0; i < items.value.length; i++) {
     if (items.value[i].list === list) {
-      console.log("Item " + items.value[i].title + " should go on " + dropObj.value.list);
+      // console.log("Item " + items.value[i].title + " should go on " + dropObj.value.list);
       items.value[i].list = dropObj.value.list;
     }
   }
@@ -139,26 +139,26 @@ const LoadData = async () => {
     solution = filmSelection.slice().sort();
     changeItems(items, filmSelection);
   } catch (err) {
-    console.error(err);
+    // console.error(err);
   }
 };
 
 LoadData();
-let submittedAnswer = "";
-let solutionString = "";
-let correctAnswer = false;
+// let submittedAnswer = "";
+// let solutionString = "";
+// let correctAnswer = false;
 let percentCorrect = 0.0;
 
 function submitAnswer () {
-  console.log("Submitted");
-  submittedAnswer = (getList(1)[0].title + ", " + getList(2)[0].title + ", " + getList(3)[0].title + ", " + getList(4)[0].title);
-  console.log(submittedAnswer);
-  console.log(solution);
-  solutionString = "";
+  // console.log("Submitted");
+  // submittedAnswer = (getList(1)[0].title + ", " + getList(2)[0].title + ", " + getList(3)[0].title + ", " + getList(4)[0].title);
+  // console.log(submittedAnswer);
+  // console.log(solution);
+  // solutionString = "";
   for (let i = 0; i < solution.length; i++) {
-    solutionString += (solution[i][1] + "-" + solution[i][2] + ",");
+    // solutionString += (solution[i][1] + "-" + solution[i][2] + ",");
   }
-  console.log(solutionString);
+  // console.log(solutionString);
   percentCorrect = 0.0;
   if (getList(1)[0].title === solution[0][2]) {
     percentCorrect += 0.25;
@@ -173,10 +173,10 @@ function submitAnswer () {
     percentCorrect += 0.25;
   }
   if (percentCorrect === 1) {
-    correctAnswer = true;
+    // correctAnswer = true;
     window.console.log("Right solution");
   } else {
-    correctAnswer = false;
+    // correctAnswer = false;
     window.console.log("Wrong solution");
   }
   console.log(correctAnswer);

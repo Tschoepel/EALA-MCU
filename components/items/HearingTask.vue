@@ -24,6 +24,7 @@
 export default {
   data () {
     return {
+      message: "",
       myObject: {
         title: "The Iron Man 2",
         userURL: "~/assets/images/ironman.jpg"

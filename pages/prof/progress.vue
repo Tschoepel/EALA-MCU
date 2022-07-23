@@ -17,16 +17,18 @@
               <div class="mt-2 text-gray-600">
                 What was achieved:
                 <ul class="list-disc list-inside">
-                  <li>Skeleton of the WebApp with a general styling.</li>
+                  <!-- <li>Skeleton of the WebApp with a general styling.</li> -->
                   <li>ClosedText item type with automated correction.</li>
                   <li>Statistics will be collected in different parts of the student dashboard</li>
                   <li>Statistics are evaluated automatically and displayed in the prof dashboard.</li>
+                  <li>Timeline for all students, which will show their training activities.</li>
+                  <li>Comparison of timelines of different students.</li>
+                  <li>Automatic analysis based on different modules.</li>
+                  <li>Suggestions for the prof based on that analytics.</li>
                 </ul>
                 <hr class="my-3">
                 What needs to be done:
                 <ul class="list-disc list-inside">
-                  <li>Automatic analysis based on different modules.</li>
-                  <li>Suggestions for the prof based on that analytics.</li>
                   <li>Collect more data for the statistics and possibly the detection of trends.</li>
                   <li>Further expand the prof dashboard.</li>
                 </ul>
@@ -98,7 +100,15 @@
                 Elias
               </h3>
               <div class="mt-2 text-gray-600">
-                <p />
+                <!-- What was achieved:
+                <ul class="list-disc list-inside">
+                  <li />
+                </ul>
+                <hr class="my-3"> -->
+                What needs to be done:
+                <ul class="list-disc list-inside">
+                  <li>Short Text Item with automated correction.</li>
+                </ul>
               </div>
             </div>
           </div>
