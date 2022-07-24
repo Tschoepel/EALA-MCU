@@ -22,20 +22,45 @@
         <input type="hidden" :name="'multiplechoice-'+props.index+'-id'" :value="props.id+','+input">
         <div class="grid grid-cols-5 cols-gap-0.5">
           <div>
-            <input id="answerI" v-model="input" type="checkbox" value="answer1" class="mr-2">
-            <label for="answerI">{{ answerI }}</label>
+            <input
+              id="answerI"
+              ref="answerI"
+              v-model="input"
+              type="checkbox"
+              value="answer1"
+              class="mr-2"
+            >
+            <label id="aILabel" for="answerI" :style="[answersGiven.aGI ? {color:'red'}:{color:'blue'}]">{{ answerI }}</label>
           </div>
           <div>
-            <input id="answerII" v-model="input" type="checkbox" value="answer2" class="mr-2">
-            <label for="answerII">{{ answerII }}</label>
+            <input
+              id="answerII"
+              v-model="input"
+              type="checkbox"
+              value="answer2"
+              class="mr-2"
+            >
+            <label id="aIILabel" for="answerII" :style="[answersGiven.aGII ? {color:'red'}:{color:'blue'}]">{{ answerII }}</label>
           </div>
           <div>
-            <input id="answerIII" v-model="input" type="checkbox" value="answer3" class="mr-2">
-            <label for="answerIII">{{ answerIII }}</label>
+            <input
+              id="answerIII"
+              v-model="input"
+              type="checkbox"
+              value="answer3"
+              class="mr-2"
+            >
+            <label id="aIIILabel" for="answerIII" :style="[answersGiven.aGIII ? {color:'red'}:{color:'blue'}]">{{ answerIII }}</label>
           </div>
           <div>
-            <input id="answerIV" v-model="input" type="checkbox" value="answer4" class="mr-2">
-            <label for="answerIV">{{ answerIV }}</label>
+            <input
+              id="answerIV"
+              v-model="input"
+              type="checkbox"
+              value="answer4"
+              class="mr-2"
+            >
+            <label id="aIVLabel" for="answerIV" :style="[answersGiven.agIV ? {color:'red'}:{color:'blue'}]">{{ answerIV }}</label>
           </div>
         </div>
       </div>
@@ -52,6 +77,14 @@ const props = defineProps({
   index: {
     type: Number,
     required: true
+  },
+  fill: {
+    type: Boolean,
+    required: true
+  },
+  fillElements: {
+    type: String,
+    required: true
   }
 });
 const { data: api } = await useFetch("/api/multipleChoice/" + props.id);
@@ -62,14 +95,41 @@ const answerII = answers[1];
 const answerIII = answers[2];
 const answerIV = answers[3];
 const helpOpen = ref(false);
-// const answers = ref([]);
-</script>
-<script>
-export default {
-  data () {
-    return {
-      input: []
-    };
+const answersGiven = reactive({ aGI: false, aGII: false, aGIII: false, aGIV: false });
+console.log(props.fill);
+console.log(props.id);
+console.log(props.index);
+console.log(props.fillElements);
+onMounted(() => {
+  console.log(props.fillElements);
+  console.log("HELLIR");
+  answersGiven.aGI = true;
+  if (props.fill) {
+    if (props.fillElements.includes("answer1")) {
+      answersGiven.aGIII = true;
+      document.getElementById("answerI").checked = true;
+      answersGiven.aGI = true;
+    }
+    if (props.fillElements.includes("answer2")) {
+      document.getElementById("answerII").checked = true;
+      answersGiven.aGII = true;
+    }
+    if (props.fillElements.includes("answer3")) {
+      document.getElementById("answerIII").checked = true;
+      answersGiven.aGIII = true;
+    }
+    if (props.fillElements.includes("answer4")) {
+      document.getElementById("answerIV").checked = true;
+      answersGiven.aGIV = true;
+    }
   }
-};
+});
 </script>
+<style scoped>
+.green{
+  color:green;
+}
+.red{
+  color:red;
+}
+</style>

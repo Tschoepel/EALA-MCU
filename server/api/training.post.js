@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 export default defineEventHandler(async (event) => {
   // return event.context.params.id;
   const body = Array.from(await useBody(event));
-  // console.log(body);
+  console.log(JSON.stringify(body));
   const submission = await prisma.trainingSubmissions.create({
     data: {
       userId: 1,
@@ -77,6 +77,7 @@ async function multipleChoice(elements) {
 
   elements.forEach((element) => {
     if (element[0].includes("multiplechoice")) {
+      console.log(element);
       const answersBoolean = ["false", "false", "false", "false"];
       const name = element[0].replace("multiplechoice-", "");
       const index = name.substr(0, 1);
