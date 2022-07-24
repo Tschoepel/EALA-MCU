@@ -54,7 +54,7 @@
             <img src="../../assets/images/12.jpg" style="height: 120px; width: fit-content;"/>
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/Batons_Natasha_Romanoff.jpg" style="height: 120px; width: 120px;" />
+            <img src="../../assets/images/Batons_Natasha_Romanoff.jpg" style="height: 100px; width: fit-content;" />
           </div>
           <div style="padding:10px;">
             <img src="../../assets/images/captainamerica.jpg" style="height: 120px; width: fit-content;" />
@@ -87,10 +87,10 @@
             <img src="../../assets/images/Mjolnir.jpg" style="height: 120px; width: fit-content;" />
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/Necrowords_hela.jp" style="height: 120px; width: fit-content;" />
+            <img src="../../assets/images/Necrowords_hela.jpg" style="height: 100px; width: fit-content;" />
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/quadmaster_Peter_Quill.jpg" style="height: 120px; width: fit-content;" />
+            <img src="../../assets/images/quadmaster_Peter_Quill.jpg" style="height: 100px; width: fit-content;" />
           </div>
           <div style="padding:10px;">
             <img src="../../assets/images/8.jpg" style="height: 120px; width: fit-content;" />
