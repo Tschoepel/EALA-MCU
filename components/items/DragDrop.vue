@@ -37,13 +37,16 @@
               </div>
             </div>
           </div>
-            <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="LoadData">
+          <div class="solutionText">
+                  <p>Korrekte Zuordnungen: {{count}}</p>
+                  <p>{{ success }}</p></div>
+        </div>
+          <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="LoadData">
             Neues Spiel
           </button>
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="submitAnswer">
             Lösung Abschicken
           </button>
-        </div>
       </div>
     </div>
   </div>
@@ -52,7 +55,6 @@
 <script setup>
 import { ref } from "vue";
 const helpOpen = ref(false);
-
 const props = defineProps({
   id: {
     type: Number,
@@ -126,7 +128,6 @@ let solution = [];
 const url = "https://query.wikidata.org/sparql?query=SELECT%20DISTINCT%20%3Fitem%20%3FVer_ffentlichungsdatum%20%3FitemLabel%20WHERE%20%7B%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%20%20%7B%0A%20%20%20%20SELECT%20DISTINCT%20%3Fitem%20WHERE%20%7B%0A%20%20%20%20%20%20%3Fitem%20p%3AP179%20%3Fstatement0.%0A%20%20%20%20%20%20%3Fstatement0%20(ps%3AP179%2F(wdt%3AP279*))%20wd%3AQ642878.%0A%20%20%20%20%20%20%3Fitem%20p%3AP577%20%3Fstatement_1.%0A%20%20%20%20%20%20%3Fstatement_1%20psv%3AP577%20%3FstatementValue_1.%0A%20%20%20%20%20%20%3FstatementValue_1%20wikibase%3AtimeValue%20%3FP577_1.%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%7D%0A%20%20%20%20LIMIT%201000%0A%20%20%7D%0A%20%20OPTIONAL%20%7B%3Fitem%20wdt%3AP577%20%3FVer_ffentlichungsdatum.%7D%0A%7D%0AORDER%20BY%20%3FVer_ffentlichungsdatum%0A%20%0A&format=json";
 const LoadData = async () => {
   try {
-    color1 = ref("#32CD32");
     const res = await fetch(url);
     const data = await res.json();
     // console.log(data.results.bindings);
@@ -136,6 +137,8 @@ const LoadData = async () => {
         preprocessesFilms.push(filmTriple);
       }
     }
+    success.value = "";
+    count.value = null;
     // console.log(preprocessesFilms);
     // Now shuffle list to generate randomization
     const randomizeArray = (array, num) => {
@@ -154,10 +157,11 @@ LoadData();
 let submittedAnswer = "";
 let solutionString = "";
 let correctAnswer = false;
-let percentCorrect = 0.0;
+let correctStatements = 0;
+const count = ref(correctStatements);
+const success = ref("");
 
 function submitAnswer () {
-  color1 = ref("#32CD32");
   console.log("Submitted");
   submittedAnswer = (getList(1)[0].title + ", " + getList(2)[0].title + ", " + getList(3)[0].title + ", " + getList(4)[0].title);
   console.log(submittedAnswer);
@@ -167,29 +171,29 @@ function submitAnswer () {
     solutionString += (solution[i][1] + "-" + solution[i][2] + ",");
   }
   console.log(solutionString);
-  percentCorrect = 0.0;
+  correctStatements = 0.0;
   if (getList(1)[0].title === solution[0][2]) {
-    percentCorrect += 0.25;
-    color1 = ref("#32CD32");
-    console.log(color1);
+    correctStatements += 1;
   }
   if (getList(2)[0].title === solution[1][2]) {
-    percentCorrect += 0.25;
+    correctStatements += 1;
   }
   if (getList(3)[0].title === solution[2][2]) {
-    percentCorrect += 0.25;
+    correctStatements += 1;
   }
   if (getList(4)[0].title === solution[3][2]) {
-    percentCorrect += 0.25;
+    correctStatements += 1;
   }
-  if (percentCorrect === 1) {
+  if (correctStatements === 4) {
     correctAnswer = true;
-    window.console.log("Right solution");
+    success.value = "Gratulation! Alles korrekt!";
   } else {
     correctAnswer = false;
-    window.console.log("Wrong solution");
+    success.value = "";
   }
   console.log(correctAnswer);
+  console.log(correctStatements);
+  count.value = correctStatements;
   // LoadData();
 }
 
@@ -214,25 +218,25 @@ function submitAnswer () {
 }
 
 .drag-el1 {
-  background-color: v-bind(color1);
+  background-color: #3498db;
   color: white;
   padding: 5px;
   margin-bottom: 5px;
 }
 .drag-el2 {
-  background-color: v-bind(color2);
+  background-color: #3498db;
   color: white;
   padding: 5px;
   margin-bottom: 5px;
 }
 .drag-el3 {
-  background-color: v-bind(color3);
+  background-color: #3498db;
   color: white;
   padding: 5px;
   margin-bottom: 5px;
 }
 .drag-el4 {
-  background-color: v-bind(color4);
+  background-color: #3498db;
   color: white;
   padding: 5px;
   margin-bottom: 5px;
