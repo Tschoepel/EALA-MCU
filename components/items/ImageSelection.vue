@@ -22,52 +22,53 @@
         <input type="hidden" :name="'imageselection-'+props.index+'-id'" :value="props.id+','+input">
         <div class="grid grid-cols-5 cols-gap-0.5">
           <div style="padding:10px;">
-            <img src="../../assets/images/7.jpg" />
+            <img src="../../assets/images/3.jpg"
+                 height="100px" />
             <input id="answerI" v-model="input" type="checkbox" value="answer1" class="mr-2">
             <label for="answerI">{{ answerI }}</label>
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/2 (1).jpg" />
+            <img src="../../assets/images/5.jpg" />
             <input id="answerII" v-model="input" type="checkbox" value="answer2" class="mr-2">
             <label for="answerII">{{ answerII }}</label>
           </div>
           <div style="padding:10px;" >
-            <img src="../../assets/images/3.jpg" style="height: 160px; width: fit-content;"/>
+            <img src="../../assets/images/12.jpg" style="height: 160px; width: fit-content;"/>
             <input id="answerIII" v-model="input" type="checkbox" value="answer3" class="mr-2">
             <label for="answerIII">{{ answerIII }}</label>
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/4.jpg" />
+            <img src="../../assets/images/Batons_Natasha_Romanoff.jpg" />
             <input id="answerIV" v-model="input" type="checkbox" value="answer4" class="mr-2">
             <label for="answerIV">{{ answerIV }}</label>
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/5.jpg" />
+            <img src="../../assets/images/captainamerica.jpg" />
             <input id="answerV" v-model="input" type="checkbox" value="answer5" class="mr-2">
             <label for="answerV">{{ answerV }}</label>
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/6.jpg" />
+            <img src="../../assets/images/Mjolnir.jpg" />
             <input id="answerVI" v-model="input" type="checkbox" value="answer6" class="mr-2">
             <label for="answerVI">{{ answerVI }}</label>
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/7.jpg" />
+            <img src="../../assets/images/Necrowords_hela.jp" />
             <input id="answerVII" v-model="input" type="checkbox" value="answer7" class="mr-2">
             <label for="answerVII">{{ answerVII }}</label>
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/8.jpg" />
+            <img src="../../assets/images/quadmaster_Peter_Quill.jpg" />
             <input id="answerVIII" v-model="input" type="checkbox" value="answer8" class="mr-2">
             <label for="answerVIII">{{ answerVIII }}</label>
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/12.jpg" />
+            <img src="../../assets/images/8.jpg" />
             <input id="answerIX" v-model="input" type="checkbox" value="answer9" class="mr-2">
             <label for="answerVIII">{{ answerIX }}</label>
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/10.jpg" />
+            <img src="../../assets/images/6.jpg" />
             <input id="answerX" v-model="input" type="checkbox" value="answer10" class="mr-2">
             <label for="answerX">{{ answerX }}</label>
           </div>

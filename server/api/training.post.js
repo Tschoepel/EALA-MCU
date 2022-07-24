@@ -17,12 +17,13 @@ export default defineEventHandler(async (event) => {
   const result = await prisma.trainingResults.create({
     data: {
       userId: 1,
-      scored:scoredC+scoredM,
-      total:totalC+totalM,
+      scored:scoredC+scoredM+scoredI,
+      total:totalC+totalM+totalI,
       grade: 1.0,
       submissionId: submission.id
     }
   });
+  console.log(result);
   await prisma.trainingSubmissions.update({
     where: {
       id: submission.id
@@ -153,12 +154,13 @@ async function imageSelection(elements) {
       items.push(item);
     }
   });
+  console.log(items);
   const answers = await imageSelectionAnswers(items);
-  let score = 0; let total = 0;
+  console.log(answers);
+  let score = 0; let total = 1;
   for (let i = 0; i < answers.length; i++) {
     const answer = answers[i].answersCorrect.split(",");
     for (let o = 0; o < answer.length; o++) {
-      total = total + 1;
       const a = answer[o];
       if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { score = score + 1; }
     }
@@ -168,7 +170,7 @@ async function imageSelection(elements) {
 async function imageSelectionAnswers (items) {
   const results = [];
   items.forEach((i) => {
-    results.push(prisma.multipleChoice.findFirst({
+    results.push(prisma.imageSelection.findFirst({
       where: { id: parseInt(i.id) },
       select: { answersCorrect: true }
     }));
