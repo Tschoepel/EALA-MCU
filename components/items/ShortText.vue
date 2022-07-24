@@ -20,7 +20,7 @@
       </div>
       <div class="px-4 py-5">
         <video v-show="videoEnabled" id="embVideo" controls>
-         <source :src="imageSrcM" type="video/webm">
+          <source :src="imageSrcM" type="video/webm">
         </video>
         <br>
         <input
@@ -39,6 +39,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { hash } from "ohash";
 const props = defineProps({
   id: {
     type: Number,
@@ -50,20 +51,16 @@ const props = defineProps({
   }
 });
 
-const { data: api } = await useFetch("/api/shortText/" + props.id);
+const answer = reactive("");
+
+const url = "/api/shortText/" + props.id;
+const { data: api } = await useFetch(url, {
+  key: hash([url])
+});
 const question = api.value.question;
 const videoEnabled = api.value.videoExists;
 const imageSrcM = "/assets/video/video" + props.id + ".webm";
 const helpOpen = ref(false);
 console.log(props.index);
 console.log(props.id);
-</script>
-<script>
-export default {
-  data () {
-    return {
-      answer: []
-    };
-  }
-};
 </script>
