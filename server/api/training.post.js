@@ -175,4 +175,3 @@ async function imageSelectionAnswers (items) {
   });
   return await Promise.all(results);
 }
-

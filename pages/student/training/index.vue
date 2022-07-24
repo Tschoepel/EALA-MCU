@@ -90,7 +90,6 @@
       </div>
     </div>
     <!-- <ItemsPixelImage :id="1" /> -->
-    <ItemsImageSelection :id="1" class="mt-6" />
   </dashboardsStudent-dashboard>
 </template>
 
