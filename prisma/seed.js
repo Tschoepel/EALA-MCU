@@ -60,6 +60,11 @@ async function main () {
       question: "Skizzieren Sie grob Mjölnir"
     }
   });
+  await prisma.drawItem.create({
+    data: {
+      question: "Zeichnen sie das S.H.I.E.L.D Logo"
+    }
+  });
 }
 
 main()

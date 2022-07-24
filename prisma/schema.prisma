@@ -27,6 +27,7 @@ model ShortText {
   question          String
   answer            String
   answerKeywords    String
+  videoExists       Boolean @default(false)
 }
 
 model DrawItem {

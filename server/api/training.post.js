@@ -44,7 +44,7 @@ async function shortText (elements) {
       const index = name.substr(0, 1);
       const answerS = element[1].split(',')[0];
       if (typeof (items[index]) === "undefined") {
-        items.splice(index, 0, { id: index, answer: answerS });
+        items.splice(index, 0, { id: element[1], answer: answerS });
       } else {
         const obj = items[index];
         obj.answer.push(index.answerS);

@@ -19,6 +19,10 @@
         <b>Hinweistext: </b>Bitte beantworten sie die Frage kurz.
       </div>
       <div class="px-4 py-5">
+        <video v-show="videoEnabled" id="embVideo" controls>
+         <source :src="imageSrcM" type="video/webm">
+        </video>
+        <br>
         <input
           v-model="answer"
           type="text"
@@ -48,8 +52,11 @@ const props = defineProps({
 
 const { data: api } = await useFetch("/api/shortText/" + props.id);
 const question = api.value.question;
+const videoEnabled = api.value.videoExists;
+const imageSrcM = "/assets/video/video" + props.id + ".webm";
 const helpOpen = ref(false);
-
+console.log(props.index);
+console.log(props.id);
 </script>
 <script>
 export default {
