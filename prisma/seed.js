@@ -25,6 +25,14 @@ async function main () {
 
     }
   });
+  await prisma.hearingTask.create({
+    data: {
+      question: "Aus welchem Film ist dieser Ausschnitt?",
+      answers : "",
+      answersCorrect: "Thor"
+
+    }
+  });
   await prisma.dragDrop.create({
     data: {
       title: "Drag & Drop: Sortieren Sie die folgenden Filme nach ihrem Erscheinungsjahr von alt nach neu"

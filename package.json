@@ -33,7 +33,8 @@
     "ohash": "^0.1.4",
     "typed.js": "^2.0.12",
     "vue-audio-visual": "^2.5.0",
-    "vue-chartjs": "^4.1.1"
+    "vue-chartjs": "^4.1.1",
+    "vue3-audio-player": "^1.0.5"
   },
   "prisma": {
     "seed": "node prisma/seed.js"

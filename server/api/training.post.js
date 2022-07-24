@@ -14,6 +14,7 @@ export default defineEventHandler(async (event) => {
   const [scoredC,totalC] = await closedText(body);
   const [scoredM,totalM] = await multipleChoice(body);
   const [scoredI,totalI] = await imageSelection (body);
+  //const [scoredH,totalH] = await hearingTask (body);
   const result = await prisma.trainingResults.create({
     data: {
       userId: 1,
