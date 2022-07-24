@@ -41,8 +41,23 @@ async function main () {
     data: {
       title: "Bitte beantworten Sie die Frage in in eigenen Worten",
       question: "Nennen sie je 2 Stärken und 2 Schwächen von Iron Man. Begründe diese bitte kurz",
-      answer: "Er alle wichtigen Eigenschaften, die ein richtiger Superheld braucht: Er kann fliegen, ist nahezu unverwundbar und kann ordentlich austeilen. Er ist arrogant, überheblich und egozentrisch. Das macht ihn verwundbar und oft unvorsichtig. Er bringt sich selbst und manchmal auch andere damit in Gefahr. Doch gerade diese Eigenschaften brechen das sonst manchmal so stereotype Muster des Superhelden auf",
-      answerKeywords: "fliegen, unverwundbar, arrogant, überheblich, egozentrisch, verwundbar, intelligent, alkohol, true"
+      answer: "Hier könnte eine Antwort stehen",
+      answerKeywords: "fliegen, unverwundbar, arrogant, überheblich, egozentrisch, verwundbar, intelligent, alkohol, true",
+      videoExists: false
+    }
+  });
+  await prisma.shortText.create({
+    data: {
+      title: "Bitte beantworten Sie die Frage in in eigenen Worten",
+      question: "Um welchen Film handelt es sich im folgenden Video? Begründen ihre Entscheidung.",
+      answer: "Hier könnte eine Antwort stehen",
+      answerKeywords: "iron, iron man, roboter, meer, kampf, true",
+      videoExists: true
+    }
+  });
+  await prisma.drawItem.create({
+    data: {
+      question: "Skizzieren Sie grob Mjölnir"
     }
   });
 }

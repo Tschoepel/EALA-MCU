@@ -21,7 +21,7 @@
       <div id="app" class="px-4 py-5">
         <canvas
           id="canvas"
-          name="'drawitem-'+props.index+ '-id'"
+          :name="'drawitem-'+props.index+ '-id'"
           style="border:solid;"
           width="800px"
           height="500px"

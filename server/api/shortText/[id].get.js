@@ -8,7 +8,9 @@ export default defineEventHandler(async (event) => {
     select: {
       title: true,
       question: true,
-      answer: true
+      answer: true,
+      answerKeywords: true,
+      videoExists: true
     }
   });
 });
