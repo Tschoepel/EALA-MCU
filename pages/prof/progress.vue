@@ -102,13 +102,13 @@
                 What was achieved:
                 <ul class="list-disc list-inside">
                   <li>ShortText item type.</li>
+                  <li>ShortText Item with automated correction based on keywords</li>
                   <li>DrawItem type.</li>
                 </ul>
                 <hr class="my-3">
                 What needs to be done:
                 <ul class="list-disc list-inside">
                   <li>Adding Hints which can be used by the examinee but result in point deduction</li>
-                  <li>Short Text Item with automated correction.</li>
                 </ul>
               </div>
               <div class="mt-2 text-gray-600">
