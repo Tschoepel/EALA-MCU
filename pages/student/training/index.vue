@@ -85,7 +85,7 @@
               </div>
             </div>
           </div>
-          <FormComponent :list="[{c: 'ItemsClosed-text', id: 1}, {c: 'ItemsClosed-text', id: 2}, {c: 'ItemsDragDrop', id: 1}, {c: 'ItemsPixelImage', id: 1}, {c: 'ItemsMultiple-choice', id: 1}, {c: 'ItemsActorQuiz', id: 1}]">
+          <FormComponent :list="[{c: 'ItemsClosed-text', id: 1}, {c: 'ItemsClosed-text', id: 2}, {c: 'ItemsMultiple-choice', id: 3}]">
           <!-- <ItemsClosed-text :id="1" />
           <div><b /></div>
           <ItemsMultiple-choice :id="1" /> -->

@@ -14,10 +14,14 @@
               Gegeben ist ein Bild eines Superhelden mit seinem Steckbrief. Prüfen Sie den Steckbrief auf Fehler - falls vorhanden - und markieren Sie diese, indem Sie auf die Checkbox neben der falschen Aussage klicken. Anschließend geben Sie die richtige Antwort im Textfeld daneben ein. Machen Sie beides jedoch nur, wenn es sich um einen Marvek-Helden handelt!
               </div>
               <client-only>
+                <input type="hidden" :name="'actorQuiz'" :value="test2">
                 <div class="image2">
                    <div class="spalte-1">
-                      <img id="test" :src="imgSrc"/>
+                      <img id="test" :src="imgSrc" style="width=200px height=200px"/>
                     </div>
+                      <div class="solutionText2">
+                      <p><b>{{ solutionName }}</b></p>
+                      </div>
                       <table style="width:100%">
                       <tr>
                         <td></td>
@@ -29,35 +33,48 @@
                         <td><b>{{ name }}</b></td>
                         <td><input id="answerI" v-model="inputA" type="checkbox" value="answer1" class="mr-2"> &emsp;&emsp;
                         <input id="nameInput" v-model="input1" type="text" style="padding: 2px;"></td>
+                        <h3 v-if="submitted&&correct1">&#9989;</h3>
+                        <h3 v-if="submitted&&!correct1">&#10060;</h3>
                       </tr>
                       <tr>
                         <td>Erster Filmauftritt:</td>
                         <td><b>{{ firstFilm }}</b></td>
                         <td><input id="answerII" v-model="inputB" type="checkbox" value="answer2" class="mr-2"> &emsp;&emsp;
                         <input id="firstFilmInput" v-model="input2" type="text" style="padding: 2px;"></td>
+                        <h3 v-if="submitted&&correct2">&#9989;</h3>
+                        <h3 v-if="submitted&&!correct2">&#10060;</h3>
                       </tr>
                       <tr>
                         <td>Schauspieler:</td>
                         <td><b>{{ actor }}</b></td>
                         <td><input id="answerIII" v-model="inputC" type="checkbox" value="answer3" class="mr-2"> &emsp;&emsp;
                         <input id="actorInput" v-model="input3" type="text" style="padding: 2px;"></td>
+                        <h3 v-if="submitted&&correct3">&#9989;</h3>
+                        <h3 v-if="submitted&&!correct3">&#10060;</h3>
                       </tr>
                       <tr>
                         <td>Heimatplanet:</td>
                         <td><b>{{ planet }}</b></td>
                         <td><input id="answerIV" v-model="inputD" type="checkbox" value="answer4" class="mr-2"> &emsp;&emsp;
                         <input id="planetInput" v-model="input4" type="text" style="padding: 2px;"></td>
+                        <h3 v-if="submitted&&correct4">&#9989;</h3>
+                        <h3 v-if="submitted&&!correct4">&#10060;</h3>
                       </tr>
                       <tr>
                         <td>Mitglied der Avengers?:</td>
                         <td><b> {{ isAvenger }} </b></td>
                         <td><input id="answerV" v-model="inputE" type="checkbox" value="answer5" class="mr-2"> &emsp;&emsp;
                         <input id="avengerInput" v-model="input5" type="text" style="padding: 2px;"></td>
+                        <h3 v-if="submitted&&correct5">&#9989;</h3>
+                        <h3 v-if="submitted&&!correct5">&#10060;</h3>
                       </tr>
                     </table>
                       <div id="app">
+                        <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="loadOtherImg">
+                          Neues Spiel
+                        </button>
                       <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="checkSolution">
-                        Lösung Abschicken
+                        Lösung abschicken
                       </button>
                     </div>
                   </div>
@@ -142,7 +159,21 @@ export default {
       knownWrongAnswers: 0,
       correctRemediation: 0,
       x: null,
-      helpOpen: false
+      helpOpen: false,
+      correct1: false,
+      correct2: false,
+      correct3: false,
+      correct4: false,
+      correct5: false,
+      submitted: false,
+      solutionName: "",
+      color: ref("green"),
+      solutionChecked: false,
+      nameColor: ref("green"),
+      filmColor: ref("green"),
+      actorColor: ref("green"),
+      planetColor: ref("green"),
+      avengerColor: ref("green")
     };
   },
   methods: {
@@ -163,6 +194,29 @@ export default {
       this.answer3Wrong = false;
       this.answer4Wrong = false;
       this.answer5Wrong = false;
+      this.inputA = false;
+      this.inputB = false;
+      this.inputC = false;
+      this.inputD = false;
+      this.inputE = false;
+      this.input1 = null;
+      this.input2 = null;
+      this.input3 = null;
+      this.input4 = null;
+      this.input5 = null;
+      this.submitted = false;
+      this.correct1 = false;
+      this.correct2 = false;
+      this.correct3 = false;
+      this.correct4 = false;
+      this.correct5 = false;
+      this.solutionName = "";
+      this.solutionChecked = false;
+      this.nameColor = ref("black");
+      this.filmColor = ref("black");
+      this.actorColor = ref("black");
+      this.planetColor = ref("black");
+      this.avengerColor = ref("black");
 
       const a1 = Math.random() < 0.5;
       const a2 = Math.random() < 0.5;
@@ -224,54 +278,103 @@ export default {
       }
     },
     checkSolution () {
-      if (this.trickQuestion && ((this.inputA) || (this.inputB) || (this.inputC) || (this.inputD) || (this.inputE))) {
-        console.log("Wrong Answer - Fell for Trick Question");
-      } else if (this.trickQuestion && ((!this.inputA) && (!this.inputB) && (!this.inputC) && (!this.inputD) && (!this.inputE))) {
-        console.log("You got the trick question right");
-      }
-      this.knownWrongAnswers = 0;
-      this.correctRemediation = 0;
-      // first check wheather student knows all wrong statements:
-      if (this.answer1Wrong && (this.inputA)) {
-        this.knownWrongAnswers++;
-        if (data[this.x].HeroName === this.input1) {
-          console.log("Right hero name");
-          this.correctRemediation++;
+      if (!this.solutionChecked) {
+        this.submitted = true;
+        this.solutionChecked = true;
+        if (this.trickQuestion && ((this.inputA) || (this.inputB) || (this.inputC) || (this.inputD) || (this.inputE) || (this.input1 !== null) || (this.input2 !== null) || (this.input3 !== null) || (this.input4 !== null) || (this.input5 !== null))) {
+          this.color = ref("red");
+          this.solutionName = "Leider falsch, denn dies ist kein Marvel-Held!";
+          this.submitted = false;
+        } else if (this.trickQuestion && ((!this.inputA) && (!this.inputB) && (!this.inputC) && (!this.inputD) && (!this.inputE) && (this.input1 === null) && (this.input2 === null) && (this.input3 === null) && (this.input4 === null) && (this.input5 === null))) {
+          this.color = ref("green");
+          this.submitted = false;
+          this.solutionName = "Korrekt, denn dies ist kein Marvel-Held!";
         }
-      }
-      if (this.answer2Wrong && (this.inputB)) {
-        this.knownWrongAnswers++;
-        if (data[this.x].FirstFilm === this.input2) {
-          console.log("Right first film");
-          this.correctRemediation++;
+        this.knownWrongAnswers = 0;
+        this.correctRemediation = 0;
+        if (!this.answer1Wrong && this.input1 === null) {
+          this.correct1 = true;
         }
-      }
-      if (this.answer3Wrong && (this.inputC)) {
-        this.knownWrongAnswers++;
-        if (data[this.x].Actor === this.input3) {
-          console.log("Right actor name");
-          this.correctRemediation++;
+        if (!this.answer2Wrong && this.input2 === null) {
+          this.correct2 = true;
         }
-      }
-      if (this.answer4Wrong && (this.inputD)) {
-        this.knownWrongAnswers++;
-        if (data[this.x].Planet === this.input4) {
-          console.log("Right planet name");
-          this.correctRemediation++;
+        if (!this.answer3Wrong && this.input3 === null) {
+          this.correct3 = true;
         }
-      }
-      if (this.answer5Wrong && (this.inputE)) {
-        this.knownWrongAnswers++;
-        if ((this.isAvenger === "Nein" && this.input5 === "Ja") || (this.isAvenger === "Ja" && this.input5 === "Nein")) {
-          console.log("Right avenger membership");
-          this.correctRemediation++;
+        if (!this.answer4Wrong && this.input4 === null) {
+          this.correct4 = true;
         }
-      }
-      if (this.knownWrongAnswers === (this.answer1Wrong + this.answer2Wrong + this.answer3Wrong + this.answer4Wrong + this.answer5Wrong)) {
-        console.log("You knew all false statements in the profile!");
-      }
-      if (this.correctRemediation === (this.answer1Wrong + this.answer2Wrong + this.answer3Wrong + this.answer4Wrong + this.answer5Wrong)) {
-        console.log("You got everything right");
+        if (!this.answer5Wrong && this.input5 === null) {
+          this.correct5 = true;
+        }
+        // first check wheather student knows all wrong statements:
+        if (this.answer1Wrong && (this.inputA)) {
+          this.knownWrongAnswers++;
+          if (data[this.x].HeroName === this.input1) {
+            console.log("Right hero name");
+            this.correctRemediation++;
+            this.correct1 = true;
+            this.nameColor = ref("green");
+          } else {
+            this.nameColor = ref("red");
+            this.input1 = this.input1 + "-> " + data[this.x].HeroName;
+          }
+        }
+        if (this.answer2Wrong && (this.inputB)) {
+          this.knownWrongAnswers++;
+          if (data[this.x].FirstFilm === this.input2) {
+            console.log("Right first film");
+            this.correctRemediation++;
+            this.correct2 = true;
+            this.filmColor = ref("green");
+          } else {
+            this.filmColor = ref("red");
+            this.input2 = this.input2 + "-> " + data[this.x].FirstFilm;
+          }
+        }
+        if (this.answer3Wrong && (this.inputC)) {
+          this.knownWrongAnswers++;
+          if (data[this.x].Actor === this.input3) {
+            console.log("Right actor name");
+            this.correctRemediation++;
+            this.correct3 = true;
+            this.actorColor = ref("green");
+          } else {
+            this.actorColor = ref("red");
+            this.input3 = this.input3 + "-> " + data[this.x].Actor;
+          }
+        }
+        if (this.answer4Wrong && (this.inputD)) {
+          this.knownWrongAnswers++;
+          if (data[this.x].Planet === this.input4) {
+            console.log("Right planet name");
+            this.correctRemediation++;
+            this.correct4 = true;
+            this.planetColor = ref("green");
+          } else {
+            this.planetColor = ref("red");
+            this.input4 = this.input4 + "-> " + data[this.x].Planet;
+          }
+        }
+        if (this.answer5Wrong && (this.inputE)) {
+          this.knownWrongAnswers++;
+          if ((this.isAvenger === "Nein" && this.input5 === "Ja") || (this.isAvenger === "Ja" && this.input5 === "Nein")) {
+            console.log("Right avenger membership");
+            this.correctRemediation++;
+            this.correct5 = true;
+            this.avengerColor = ref("green");
+          } else {
+            this.avengerColor = ref("red");
+          }
+        }
+        if (this.knownWrongAnswers === (this.answer1Wrong + this.answer2Wrong + this.answer3Wrong + this.answer4Wrong + this.answer5Wrong) && !this.trickQuestion) {
+          this.color = ref("green");
+          this.solutionName = "Gratulation, Sie haben alle falschen Aussagen gewusst. Üben Sie weiter, um in Zukunft auch die richtigen Korrekturen zu wissen.";
+        }
+        if (this.correctRemediation === (this.answer1Wrong + this.answer2Wrong + this.answer3Wrong + this.answer4Wrong + this.answer5Wrong && !this.trickQuestion)) {
+          this.color = ref("green");
+          this.solutionName = "Gratulation, Sie haben alle falschen Aussagen gewusst und auch richtig korrigier. Weiter so!";
+        }
       }
     },
     openText () {
@@ -336,5 +439,25 @@ td {
 
 .answerPixelImage {
  line-height: 3px;
+}
+
+.solutionText2 {
+  color: v-bind(color);
+}
+
+#nameInput {
+  color: v-bind(nameColor);
+}
+#firstFilmInput {
+  color: v-bind(filmColor);
+}
+#actorInput {
+  color: v-bind(actorColor);
+}
+#planetInput {
+  color: v-bind(planetColor);
+}
+#avengerInput {
+  color: v-bind(avengerColor);
 }
 </style>

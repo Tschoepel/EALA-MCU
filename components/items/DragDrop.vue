@@ -14,28 +14,32 @@
            <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
             Durch Drag and Drop mit der Maus können Sie die Filme an die richtige Stelle verschieben. Sortieren Sie die Filme vom Ältesten zum Neuesten.
           </div>
+          <input type="hidden" :name="'dragDrop'" :value="test3">
           <div>
             <div class="drop-zone" @drop="onDrop($event, 1)" @dragenter.prevent @dragover.prevent>
-              <div v-for="item in getList(1)" :key="item.id" class="drag-el" draggable="true" @dragstart="startDrag($event, item)">
+              <div v-for="item in getList(1)" :key="item.id" class="drag-el1" draggable="true" @dragstart="startDrag($event, item)">
                 {{ item.title }}
               </div>
             </div>
             <div class="drop-zone" @drop="onDrop($event, 2)" @dragenter.prevent @dragover.prevent>
-              <div v-for="item in getList(2)" :key="item.id" class="drag-el" draggable="true" @dragstart="startDrag($event, item)">
+              <div v-for="item in getList(2)" :key="item.id" class="drag-el2" draggable="true" @dragstart="startDrag($event, item)">
                 {{ item.title }}
               </div>
             </div>
             <div class="drop-zone" @drop="onDrop($event, 3)" @dragenter.prevent @dragover.prevent>
-              <div v-for="item in getList(3)" :key="item.id" class="drag-el" draggable="true" @dragstart="startDrag($event, item)">
+              <div v-for="item in getList(3)" :key="item.id" class="drag-el3" draggable="true" @dragstart="startDrag($event, item)">
                 {{ item.title }}
               </div>
             </div>
             <div class="drop-zone" @drop="onDrop($event, 4)" @dragenter.prevent @dragover.prevent>
-              <div v-for="item in getList(4)" :key="item.id" class="drag-el" draggable="true" @dragstart="startDrag($event, item)">
+              <div v-for="item in getList(4)" :key="item.id" class="drag-el4" draggable="true" @dragstart="startDrag($event, item)">
                 {{ item.title }}
               </div>
             </div>
           </div>
+            <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="LoadData">
+            Neues Spiel
+          </button>
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="submitAnswer">
             Lösung Abschicken
           </button>
@@ -99,6 +103,7 @@ const startDrag = (event, item) => {
 
 const onDrop = (event, list) => {
   window.console.log(event);
+
   const itemID = dropObj.value.id;// event.dataTransfer.getData("itemID");
   dropObj.value.id = "";
   const item = items.value.find(item => item.id === itemID);
@@ -117,9 +122,11 @@ const onDrop = (event, list) => {
 const preprocessesFilms = [];
 let filmSelection = [];
 let solution = [];
+
 const url = "https://query.wikidata.org/sparql?query=SELECT%20DISTINCT%20%3Fitem%20%3FVer_ffentlichungsdatum%20%3FitemLabel%20WHERE%20%7B%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%20%20%7B%0A%20%20%20%20SELECT%20DISTINCT%20%3Fitem%20WHERE%20%7B%0A%20%20%20%20%20%20%3Fitem%20p%3AP179%20%3Fstatement0.%0A%20%20%20%20%20%20%3Fstatement0%20(ps%3AP179%2F(wdt%3AP279*))%20wd%3AQ642878.%0A%20%20%20%20%20%20%3Fitem%20p%3AP577%20%3Fstatement_1.%0A%20%20%20%20%20%20%3Fstatement_1%20psv%3AP577%20%3FstatementValue_1.%0A%20%20%20%20%20%20%3FstatementValue_1%20wikibase%3AtimeValue%20%3FP577_1.%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%7D%0A%20%20%20%20LIMIT%201000%0A%20%20%7D%0A%20%20OPTIONAL%20%7B%3Fitem%20wdt%3AP577%20%3FVer_ffentlichungsdatum.%7D%0A%7D%0AORDER%20BY%20%3FVer_ffentlichungsdatum%0A%20%0A&format=json";
 const LoadData = async () => {
   try {
+    color1 = ref("#32CD32");
     const res = await fetch(url);
     const data = await res.json();
     // console.log(data.results.bindings);
@@ -144,24 +151,27 @@ const LoadData = async () => {
 };
 
 LoadData();
-// let submittedAnswer = "";
-// let solutionString = "";
-// let correctAnswer = false;
+let submittedAnswer = "";
+let solutionString = "";
+let correctAnswer = false;
 let percentCorrect = 0.0;
 
 function submitAnswer () {
-  // console.log("Submitted");
-  // submittedAnswer = (getList(1)[0].title + ", " + getList(2)[0].title + ", " + getList(3)[0].title + ", " + getList(4)[0].title);
-  // console.log(submittedAnswer);
-  // console.log(solution);
-  // solutionString = "";
+  color1 = ref("#32CD32");
+  console.log("Submitted");
+  submittedAnswer = (getList(1)[0].title + ", " + getList(2)[0].title + ", " + getList(3)[0].title + ", " + getList(4)[0].title);
+  console.log(submittedAnswer);
+  console.log(solution);
+  solutionString = "";
   for (let i = 0; i < solution.length; i++) {
-    // solutionString += (solution[i][1] + "-" + solution[i][2] + ",");
+    solutionString += (solution[i][1] + "-" + solution[i][2] + ",");
   }
-  // console.log(solutionString);
+  console.log(solutionString);
   percentCorrect = 0.0;
   if (getList(1)[0].title === solution[0][2]) {
     percentCorrect += 0.25;
+    color1 = ref("#32CD32");
+    console.log(color1);
   }
   if (getList(2)[0].title === solution[1][2]) {
     percentCorrect += 0.25;
@@ -173,13 +183,14 @@ function submitAnswer () {
     percentCorrect += 0.25;
   }
   if (percentCorrect === 1) {
-    // correctAnswer = true;
+    correctAnswer = true;
     window.console.log("Right solution");
   } else {
-    // correctAnswer = false;
+    correctAnswer = false;
     window.console.log("Wrong solution");
   }
   console.log(correctAnswer);
+  // LoadData();
 }
 
 </script>
@@ -202,8 +213,26 @@ function submitAnswer () {
   min-height: 5px;
 }
 
-.drag-el {
-  background-color: #3498db;
+.drag-el1 {
+  background-color: v-bind(color1);
+  color: white;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+.drag-el2 {
+  background-color: v-bind(color2);
+  color: white;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+.drag-el3 {
+  background-color: v-bind(color3);
+  color: white;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+.drag-el4 {
+  background-color: v-bind(color4);
   color: white;
   padding: 5px;
   margin-bottom: 5px;

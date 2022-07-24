@@ -15,18 +15,22 @@
             </div>
               <client-only>
                 <div class="image">
-                  <img id="test" :src="imgSrc"/>
+                  <img id="test" :src="imgSrc" style="width=200px height=200px"/>
+                </div>
+                 <div class="solutionText">
+                  <p><b>{{ solutionName }}</b></p>
                 </div>
               </client-only>
           </div>
         </div>
+        <input type="hidden" :name="'pixelImage'" :value="test">
          <div id="app">
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="loadOtherImg">
-            Spiel starten
+            Neues Spiel
           </button>
           <input id="answerPixelImage" v-model="input" type="text">
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="submitAnswer">
-            Lösung Abschicken
+            Lösung abschicken
           </button>
         </div>
         <div>
@@ -89,25 +93,28 @@ const pxString = "px";
 let gameRunning = false;
 
 export default {
-  data: function () {
+  data () {
     return {
       imgList: [IronMan, Thor, Ajak, AntMan, Aquaman, Batman, BlackPanther, BlackWidow, CaptainAmerica, CaptainMarvel, Cyborg, Deadshot, DoctorStrange, Drax, ElDiablo, Falcon, Gamora, Groot, Hawkeye, Heimdall, Hulk, Korg, Loki, Mantis, Nebula, NickFury, Phastos, QuickSilver, RocketRacoon, ScarletWitch, Shuri, Spiderman, StarLord, Superman, TheFlash, TheWasp, Valkyrie, Vision, WarMachine, WinterSoldier, WonderWoman, YonduOlunta],
       wrongAnwers: ["Batman", "Superman", "Wonder Woman", "Aquaman", "The Flash", "Cyborg", "Deadshot", "El Diablo"],
       imgSrc: BlackImage,
       blurValue: ref("50px"),
+      color: ref("green"),
       polling: null,
       timer: 0,
       input: null,
       helpOpen: false,
-      firstGame: true
+      firstGame: true,
+      timeOut: false,
+      solutionName: ""
     };
   },
   methods: {
     loadOtherImg () {
+      this.solutionName = "";
       if (this.firstGame) {
-        this.firstGame = false;
+        // this.firstGame = false;
         this.input = null;
-        console.log("klappt");
         gameRunning = true;
         this.timer = 0;
         const min = 0;
@@ -124,6 +131,7 @@ export default {
           if (blurInt <= 0) {
             blurInt = 0;
             this.submitAnswer();
+            this.timeOut = true;
           }
           this.changeBlur(blurIntString);
           this.timer += 100;
@@ -153,15 +161,35 @@ export default {
         console.log(s);
         // this.imgSrc = BlackImage;
 
-        if (this.wrongAnwers.includes(this.input || s)) {
-          console.log("Wrong Universe");
-        }
-
-        if (this.input === s) {
-          console.log("Right answer");
+        if (this.wrongAnwers.includes(s)) {
+          console.log("klappt");
+          if (this.input === null) {
+            this.color = ref("green");
+            this.solutionName = "Korrekt, denn dies ist kein Marvel-Held!";
+          }
+          if (this.input !== null) {
+            this.color = ref("green");
+            this.solutionName = "Leider falsch, denn dies ist kein Marvel-Held!";
+          }
         } else {
-          console.log("Wrong answer");
+          console.log("");
+          if (this.input === s) {
+            console.log("Right answer");
+            this.color = ref("green");
+            this.solutionName = "Korrekt!";
+
+            if ((this.timer / 1000) < 12.5) {
+              this.solutionName += " Und du warst sehr schnell mit " + (this.timer / 1000) + " Sekunden. Weiter so!";
+            } else {
+              this.solutionName += " Du hast " + (this.timer / 1000) + " Sekunden gebraucht. Übe weiter, um ein richtiger Profi zu werden";
+            }
+          } else {
+            console.log("Wrong answer");
+            this.color = ref("red");
+            this.solutionName = "Leider falsch, der richtige Superheld ist " + s;
+          }
         }
+        // this.loadOtherImg();
       }
     },
     openText () {
@@ -197,5 +225,8 @@ startTimer();
 
 .image {
   filter: blur(v-bind(blurValue));
+}
+.solutionText {
+  color: v-bind(color);
 }
 </style>

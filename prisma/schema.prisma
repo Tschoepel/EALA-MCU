@@ -66,3 +66,11 @@ model TrainingSubmissionsDragDrop {
   everythingCorrect Boolean  
   percentageCorrect Float  
 }
+
+model PixelImageResults {
+  id          Int          @id @default(autoincrement())
+  submission  String
+  solution    String
+  correctSubmission Boolean
+  timer       Float
+}

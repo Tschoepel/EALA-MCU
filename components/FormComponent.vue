@@ -3,9 +3,9 @@
     <div v-for="(l, i) in props.list" :key="l.c+':'+l.id">
       <ItemsClosed-text v-if="l.c == 'ItemsClosed-text'" :id="l.id" :index="i" />
       <ItemsMultiple-choice v-if="l.c == 'ItemsMultiple-choice'" :id="l.id" :index="i" />
-      <ItemsActorQuiz  v-if="l.c == 'ItemsActorQuiz'" :id="l.id" :index="i" />
-      <ItemsDragDrop v-if="l.c == 'ItemsDragDrop'" :id="l.id" :index="i" />
-      <ItemsPixelImage v-if="l.c == 'ItemsPixelImage'" :id="l.id" :index="i"/>
+      <ItemsActor-quiz  v-if="l.c == 'ItemsActor-quiz'" :id="l.id" :index="i" />
+      <ItemsDrag-drop v-if="l.c == 'ItemsDrag-drop'" :id="l.id" :index="i" />
+      <ItemsPixel-image v-if="l.c == 'ItemsPixel-image'" :id="l.id" :index="i"/>
     </div>
     <div class="max-w-none mx-auto mt-4">
       <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap pt-3">
@@ -40,6 +40,7 @@ const props = defineProps({
 });
 const state = reactive({ loading: false });
 const form = ref(null);
+console.log(form.value);
 onMounted(() => {
   // console.log(form);
   // const formData = new FormData(form.value);
