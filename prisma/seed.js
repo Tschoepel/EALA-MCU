@@ -25,6 +25,14 @@ async function main () {
 
     }
   });
+  await prisma.hearingTask.create({
+    data: {
+      question: "Aus welchem Film ist dieser Ausschnitt?",
+      answers : "Black Widow,Iron Man 2,Thor: The Dark Kingdom, Thor: Tag der Entscheidung,Iron Man",
+      answersCorrect: "Thor: The Dark Kingdom"
+
+    }
+  });
   await prisma.multipleChoice.create({
     data: {
       question: "Welche der folgenden Infinity-Steine gibt es nicht?",

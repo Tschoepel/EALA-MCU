@@ -66,3 +66,17 @@ model TrainingSubmissionsDragDrop {
   everythingCorrect Boolean
   percentageCorrect Float
 }
+
+model ImageSelection {
+  id             Int    @id @default(autoincrement())
+  question       String
+  answers        String
+  answersCorrect String
+}
+
+model HearingTask {
+  id             Int    @id @default(autoincrement())
+  question       String
+  answers        String
+  answersCorrect String
+}

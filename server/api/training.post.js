@@ -14,16 +14,19 @@ export default defineEventHandler(async (event) => {
   const [scoredC,totalC] = await closedText(body);
   const [scoredM,totalM] = await multipleChoice(body);
   const [scoredPixel,totalPixel] = await pixelImage(body);
+  const [scoredI,totalI] = await imageSelection (body);
+  const [scoredH,totalH] = await hearingTask (body);
 
   const result = await prisma.trainingResults.create({
     data: {
       userId: 1,
-      scored:scoredC+scoredM,
-      total:totalC+totalM,
+      scored:scoredC+scoredM+scoredI+scoredH,
+      total:totalC+totalM+totalI+totalH,
       grade: 1.0,
       submissionId: submission.id
     }
   });
+  console.log(result);
   await prisma.trainingSubmissions.update({
     where: {
       id: submission.id
@@ -132,6 +135,30 @@ async function pixelImage(elements) {
     if (element[0].includes("pixel")) {
       const answersBoolean = ["false", "false", "false", "false"];
       const name = element[0].replace("multiplechoice-", "");
+      const answers = await pixelImageAnswer(items);
+}});}
+
+async function pixelImageAnswer (items) {
+  console.log("XXXXXXXX");
+  console.log(items);
+  const results = [];
+  items.forEach((i) => {
+    results.push(prisma.pixelImageResults.findFirst({
+      where: { id: parseInt(i.id) },
+      select: { submission: "EEEEEEEEEE" }
+    }));
+  });
+  return await Promise.all(results);
+}
+
+async function imageSelection(elements) {
+
+  const items = [];
+
+  elements.forEach((element) => {
+    if (element[0].includes("imageselection")) {
+      const answersBoolean = ["false", "false", "false", "false", "false", "false", "false", "false", "false", "false"];
+      const name = element[0].replace("imageselection-", "");
       const index = name.substr(0, 1);
       const id = element[1].split(',')[0];
       const answers = element[1].split(',').slice(1);
@@ -141,6 +168,12 @@ async function pixelImage(elements) {
           case "answer2": answersBoolean[1] = "true";break;
           case "answer3": answersBoolean[2] = "true";break;
           case "answer4": answersBoolean[3] = "true";break;
+          case "answer5": answersBoolean[4] = "true";break;
+          case "answer6": answersBoolean[5] = "true";break;
+          case "answer7": answersBoolean[6] = "true";break;
+          case "answer8": answersBoolean[7] = "true";break;
+          case "answer9": answersBoolean[8] = "true";break;
+          case "answer10": answersBoolean[9] = "true";break;
         }
       }
       const item = {
@@ -150,7 +183,58 @@ async function pixelImage(elements) {
       items.push(item);
     }
   });
-  const answers = await pixelImageAnswer(items);
+  console.log(items);
+  const answers = await imageSelectionAnswers(items);
+  console.log(answers);
+  let score = 0; let total = 1;
+  for (let i = 0; i < answers.length; i++) {
+    const answer = answers[i].answersCorrect.split(",");
+    for (let o = 0; o < answer.length; o++) {
+      const a = answer[o];
+      if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { score = score + 1; }
+    }
+  }
+  return [score, total];
+}
+async function imageSelectionAnswers (items) {
+  const results = [];
+  items.forEach((i) => {
+    results.push(prisma.imageSelection.findFirst({
+      where: { id: parseInt(i.id) },
+      select: { answersCorrect: true }
+    }));
+  });
+  return await Promise.all(results);
+}
+
+async function hearingTask (elements) {
+
+  const items = [];
+
+  elements.forEach((element) => {
+    if (element[0].includes("hearingtask")) {
+      const answersBoolean = ["false", "false", "false", "false", "false"];
+      const name = element[0].replace("hearingtask-", "");
+      const index = name.substr(0, 1);
+      const id = element[1].split(',')[0];
+      const answers = element[1].split(',').slice(1);
+      for(let i = 0; i <answers.length;i++){
+        switch(answers[i]){
+          case "answer1": answersBoolean[0] = "true";break;
+          case "answer2": answersBoolean[1] = "true";break;
+          case "answer3": answersBoolean[2] = "true";break;
+          case "answer4": answersBoolean[3] = "true";break;
+          case "answer5": answersBoolean[4] = "true";break;
+        }
+      }
+      const item = {
+        id : id,
+        answers : answersBoolean
+      }
+      items.push(item);
+    }
+  });
+  const answers = await hearingTaskAnswers(items);
   let score = 0; let total = 0;
   for (let i = 0; i < answers.length; i++) {
     const answer = answers[i].answersCorrect.split(",");
@@ -162,15 +246,15 @@ async function pixelImage(elements) {
   }
   return [score, total];
 }
-async function pixelImageAnswer (items) {
-  console.log("XXXXXXXX");
-  console.log(items);
+
+async function hearingTaskAnswers (items) {
   const results = [];
   items.forEach((i) => {
-    results.push(prisma.pixelImageResults.findFirst({
+    results.push(prisma.hearingTask.findFirst({
       where: { id: parseInt(i.id) },
-      select: { submission: "EEEEEEEEEE" }
+      select: { answersCorrect: true }
     }));
   });
+  console.log(results);
   return await Promise.all(results);
 }

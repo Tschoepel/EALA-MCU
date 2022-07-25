@@ -3,6 +3,8 @@
     <div v-for="(l, i) in props.list" :key="l.c+':'+l.id">
       <ItemsClosed-text v-if="l.c == 'ItemsClosed-text'" :id="l.id" :index="i" :fill="false" :fillElements="empty"/>
       <ItemsMultiple-choice v-if="l.c == 'ItemsMultiple-choice'" :id="l.id" :index="i" :fill="false" :fillElements="empty"/>
+      <ItemsImage-selection v-if="l.c == 'ItemsImage-selection'" :id="l.id" :index="i" :fill="false" :fillElements="empty"/>
+      <ItemsHearing-task v-if="l.c == 'ItemsHearing-task'" :id="l.id" :index="i" :fill="false" :fillElements="empty"/>
     </div>
     <div class="max-w-none mx-auto mt-4">
       <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap pt-3">
