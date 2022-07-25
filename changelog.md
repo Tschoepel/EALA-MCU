@@ -1,6 +1,14 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.16] - 25.07.2022
+### Added
+- feedback for ClosedText and MultipleChoice
+- dashboard for student showing exercise activities, overall score, and items variety
+### Changed
+- Umultiple choice can now occur in multiple instances
+### Removed
+- All `console.log()` statements were removed or commented out.
 
 ## [0.0.15] - 21.07.2022
 ### Added
