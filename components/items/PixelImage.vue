@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-none mx-auto">
+  <div class="max-w-none mx-auto" >
     <div class="bg-white overflow-hidden sm:rounded-lg sm:shadow">
       <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
         <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
@@ -8,38 +8,39 @@
               {{ "Welcher Superheld ist das?" }}
             </h3>
             <div class="ml-4 mt-2 flex-shrink-0">
-              <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="openText">
-                ?
-              </button>
+            <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="openText">
+              ?
+            </button>
             </div>
-            <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
+             <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
               Ein Bild eines Superhelden entpixelt sich langsam. Geben Sie den Namen des Superhelden ein, sobald Sie ihn erkennen, jedoch nur, wenn es sich um einen Marvel-Helden handelt!
             </div>
-            <client-only>
-              <div class="image ">
-                <div class="ml-4 mt-2 flex-shrink-0">
-                  <img id="test" :src="imgSrc" style="width=200px height=200px">
+              <client-only>
+                <div class="image ">
+                  <div class="ml-4 mt-2 flex-shrink-0">
+                  <img id="test" :src="imgSrc" style="width=200px height=200px"/>
                 </div>
-              </div>
-              <div class="solutionText" style="text-align:center">
-                <p><b>{{ solutionName }}</b></p>
-              </div>
-            </client-only>
+                </div>
+                 <div class="solutionText" style="text-align:center">
+                  <p><b>{{ solutionName }}</b></p>
+                </div>
+              </client-only>
           </div>
         </div>
         <input type="hidden" :name="'pixelImage'" :value="test">
-        <div id="app" style="text-align:center">
+         <div id="app" style="text-align:center">
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="loadOtherImg">
             Neues Spiel
           </button>
-          <div class="divider" />
+              <div class="divider"/>
           <input id="answerPixelImage" v-model="input" type="text">
-          <div class="divider" />
+              <div class="divider"/>
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="submitAnswer">
             Lösung abschicken
           </button>
         </div>
-        <div />
+        <div>
+          </div>
       </div>
     </div>
   </div>
@@ -82,7 +83,6 @@ import Spiderman from "~/assets/images/spiderman.resized.jpg";
 import StarLord from "~/assets/images/starLord.resized.webp";
 import Superman from "~/assets/images/superman.resized.webp";
 import TheFlash from "~/assets/images/theFlash.resized.jpg";
-import TheWasp from "~/assets/images/theWasp.resized.jpg";
 import Valkyrie from "~/assets/images/valkyrie.resized.webp";
 import Vision from "~/assets/images/vision.resized.jpg";
 import WarMachine from "~/assets/images/warmachine.resized.jpg";
@@ -100,7 +100,7 @@ let gameRunning = false;
 export default {
   data () {
     return {
-      imgList: [IronMan, Thor, Ajak, AntMan, Aquaman, Batman, BlackPanther, BlackWidow, CaptainAmerica, CaptainMarvel, Cyborg, Deadshot, DoctorStrange, Drax, ElDiablo, Falcon, Gamora, Groot, Hawkeye, Heimdall, Hulk, Korg, Loki, Mantis, Nebula, NickFury, Phastos, QuickSilver, RocketRacoon, ScarletWitch, Shuri, Spiderman, StarLord, Superman, TheFlash, TheWasp, Valkyrie, Vision, WarMachine, WinterSoldier, WonderWoman, YonduOlunta],
+      imgList: [IronMan, Thor, Ajak, AntMan, Aquaman, Batman, BlackPanther, BlackWidow, CaptainAmerica, CaptainMarvel, Cyborg, Deadshot, DoctorStrange, Drax, ElDiablo, Falcon, Gamora, Groot, Hawkeye, Heimdall, Hulk, Korg, Loki, Mantis, Nebula, NickFury, Phastos, QuickSilver, RocketRacoon, ScarletWitch, Shuri, Spiderman, StarLord, Superman, TheFlash, Valkyrie, Vision, WarMachine, WinterSoldier, WonderWoman, YonduOlunta],
       wrongAnwers: ["Batman", "Superman", "Wonder Woman", "Aquaman", "The Flash", "Cyborg", "Deadshot", "El Diablo"],
       imgSrc: BlackImage,
       blurValue: ref("50px"),
@@ -230,6 +230,7 @@ startTimer();
 
 .image {
   filter: blur(v-bind(blurValue));
+
 }
 .solutionText {
   color: v-bind(color);
@@ -237,4 +238,5 @@ startTimer();
 input {
 text-align: center;
 }
+
 </style>

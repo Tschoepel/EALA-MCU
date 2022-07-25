@@ -11,7 +11,7 @@
               ?
             </button>
           </div>
-          <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
+           <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
             Durch Drag and Drop mit der Maus können Sie die Filme an die richtige Stelle verschieben. Sortieren Sie die Filme vom Ältesten zum Neuesten.
           </div>
           <input type="hidden" :name="'dragDrop'" :value="test3">
@@ -38,21 +38,18 @@
             </div>
           </div>
           <div class="solutionText" style="text-align: center">
-            <p>Korrekte Zuordnungen: {{ count }}</p>
-            <p style="color:green;">
-              {{ success }}
-            </p>
-          </div>
+                  <p>Korrekte Zuordnungen: {{count}}</p>
+                  <p style="color:green;">{{ success }}</p></div>
         </div>
-        <div style="text-align: center;">
+        <div  style="text-align: center;">
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="LoadData">
             Neues Spiel
           </button>
-          <div class="divider" />
+          <div class="divider"/>
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="submitAnswer">
             Lösung Abschicken
           </button>
-        </div>
+          </div>
       </div>
     </div>
   </div>
