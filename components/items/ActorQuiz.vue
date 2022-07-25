@@ -21,7 +21,7 @@
                    <div class="spalte-1">
                       <img id="test" :src="imgSrc" class="center" style="width=200px height=200px;"/>
                     </div>
-                      <div class="solutionText2" style="text-align:center">
+                    <div class="solutionText2" style="text-align:center">
                       <p><b>{{ solutionName }}</b></p>
                       </div>
                       <table style="width:100%">
@@ -123,7 +123,6 @@ import Spiderman from "~/assets/images/spiderman.resized.jpg";
 import StarLord from "~/assets/images/starLord.resized.webp";
 import Superman from "~/assets/images/superman.resized.webp";
 import TheFlash from "~/assets/images/theFlash.resized.jpg";
-import TheWasp from "~/assets/images/theWasp.resized.jpg";
 import Valkyrie from "~/assets/images/valkyrie.resized.webp";
 import WarMachine from "~/assets/images/warmachine.resized.jpg";
 import WinterSoldier from "~/assets/images/winterSoldier.resized.webp";
@@ -133,7 +132,7 @@ import BlackImage from "~/assets/images/Solid_black.svg.png";
 export default {
   data: function () {
     return {
-      imgList: [IronMan, CaptainAmerica, WinterSoldier, NickFury, Hulk, BlackWidow, Thor, Loki, Hawkeye, WarMachine, Falcon, StarLord, Gamora, Drax, YonduUdonta, Mantis, AntMan, BlackPanther, ScarlettWitch, TheWasp, Spiderman, DoctorStrange, Valkyrie, Korg, Shuri, Heimdall, Phastos, Ajak, Batman, Superman, Aquaman, TheFlash, Cyborg, Deadshot, ElDiablo],
+      imgList: [IronMan, CaptainAmerica, WinterSoldier, NickFury, Hulk, BlackWidow, Thor, Loki, Hawkeye, WarMachine, Falcon, StarLord, Gamora, Drax, YonduUdonta, Mantis, AntMan, BlackPanther, ScarlettWitch, Spiderman, DoctorStrange, Valkyrie, Korg, Shuri, Heimdall, Phastos, Ajak, Batman, Superman, Aquaman, TheFlash, Cyborg, Deadshot, ElDiablo],
       wrongAnwers: [Batman, Superman, Aquaman, TheFlash, Cyborg, Deadshot, ElDiablo],
       imgSrc: BlackImage,
       name: "",
@@ -219,6 +218,7 @@ export default {
       this.actorColor = ref("black");
       this.planetColor = ref("black");
       this.avengerColor = ref("black");
+      this.knownWrongAnswers = 0;
 
       const a1 = Math.random() < 0.5;
       const a2 = Math.random() < 0.5;
@@ -292,7 +292,6 @@ export default {
           this.submitted = false;
           this.solutionName = "Korrekt, denn dies ist kein Marvel-Held!";
         }
-        this.knownWrongAnswers = 0;
         this.correctRemediation = 0;
         if (!this.answer1Wrong && this.input1 === null) {
           this.correct1 = true;
@@ -319,7 +318,9 @@ export default {
             this.nameColor = ref("green");
           } else {
             this.nameColor = ref("red");
-            this.input1 = this.input1 + "-> " + data[this.x].HeroName;
+            if (this.input1 !== null) {
+              this.input1 = this.input1 + "-> " + data[this.x].HeroName;
+            }
           }
         }
         if (this.answer2Wrong && (this.inputB)) {
@@ -331,7 +332,9 @@ export default {
             this.filmColor = ref("green");
           } else {
             this.filmColor = ref("red");
-            this.input2 = this.input2 + "-> " + data[this.x].FirstFilm;
+            if (this.input2 !== null) {
+              this.input2 = this.input2 + "-> " + data[this.x].FirstFilm;
+            }
           }
         }
         if (this.answer3Wrong && (this.inputC)) {
@@ -343,7 +346,9 @@ export default {
             this.actorColor = ref("green");
           } else {
             this.actorColor = ref("red");
-            this.input3 = this.input3 + "-> " + data[this.x].Actor;
+            if (this.input3 !== null) {
+              this.input3 = this.input3 + "-> " + data[this.x].Actor;
+            }
           }
         }
         if (this.answer4Wrong && (this.inputD)) {
@@ -355,7 +360,9 @@ export default {
             this.planetColor = ref("green");
           } else {
             this.planetColor = ref("red");
-            this.input4 = this.input4 + "-> " + data[this.x].Planet;
+            if (this.input4 !== null) {
+              this.input4 = this.input4 + "-> " + data[this.x].Planet;
+            }
           }
         }
         if (this.answer5Wrong && (this.inputE)) {
@@ -367,18 +374,23 @@ export default {
             this.avengerColor = ref("green");
           } else {
             this.avengerColor = ref("red");
+            if (this.input5 !== null) {
+              this.input5 = this.input5 + "-> " + data[this.x].isAvenger;
+            }
           }
         }
-        if (this.knownWrongAnswers === (this.answer1Wrong + this.answer2Wrong + this.answer3Wrong + this.answer4Wrong + this.answer5Wrong) && !this.trickQuestion) {
+        console.log(this.knownWrongAnswers);
+        console.log(this.answer1Wrong + this.answer2Wrong + this.answer3Wrong + this.answer4Wrong + this.answer5Wrong);
+        console.log(this.correctRemediation);
+        console.log(this.inputA + this.inputB + this.inputC + this.inputD + this.inputE);
+        if ((this.correctRemediation === (this.answer1Wrong + this.answer2Wrong + this.answer3Wrong + this.answer4Wrong + this.answer5Wrong)) && (!this.trickQuestion)) {
           this.color = ref("green");
+          this.solutionName = "Gratulation, Sie haben alle falschen Aussagen gewusst und auch richtig korrigiert. Weiter so!";
+        } else if (this.knownWrongAnswers === (this.inputA + this.inputB + this.inputC + this.inputD + this.inputE) && !this.trickQuestion && this.knownWrongAnswers === (this.answer1Wrong + this.answer2Wrong + this.answer3Wrong + this.answer4Wrong + this.answer5Wrong)) {
+          this.color = ref("orange");
           this.solutionName = "Gratulation, Sie haben alle falschen Aussagen gewusst. Üben Sie weiter, um in Zukunft auch die richtigen Korrekturen zu wissen.";
         }
-        if (this.correctRemediation === (this.answer1Wrong + this.answer2Wrong + this.answer3Wrong + this.answer4Wrong + this.answer5Wrong && !this.trickQuestion)) {
-          this.color = ref("green");
-          this.solutionName = "Gratulation, Sie haben alle falschen Aussagen gewusst und auch richtig korrigier. Weiter so!";
-        }
       }
-      this.imgSrc = AntMan;
     },
     openText () {
       this.helpOpen = !this.helpOpen;
@@ -411,7 +423,6 @@ const data = [
   { HeroName: "Ant-Man", Actor: "Paul Rudd", FirstFilm: "Ant-Man", Planet: "Erde", IsAvenger: true },
   { HeroName: "Black Panther", Actor: "Chadwick Boseman", FirstFilm: "Captain America: Civil War", Planet: "Erde", IsAvenger: false },
   { HeroName: "Scarlett Witch", Actor: "Elizabeth Olsen", FirstFilm: "Captain America: The Winter Soldier", Planet: "Erde", IsAvenger: true },
-  { HeroName: "The Wasp", Actor: "Evangeline Lilly", FirstFilm: "Ant-Man", Planet: "Erde", IsAvenger: false },
   { HeroName: "Spider Man", Actor: "Tom Holland", FirstFilm: "Iron Man 2", Planet: "Erde", IsAvenger: true },
   { HeroName: "Doctor Strange", Actor: "Benedict Cumberbatch", FirstFilm: "Doctor Strange", Planet: "Erde", IsAvenger: false },
   { HeroName: "Valkyrie", Actor: "Tessa Thompson", FirstFilm: "Thor: Ragnarok", Planet: "Asgard", IsAvenger: false },
@@ -440,10 +451,8 @@ td {
 }
 
 img {
-    float: left;
-    width:  800px;
-    height: 500px;
-    object-fit: cover;
+    width:  750px;
+    height: 450px;
 }
 
 .answerPixelImage {

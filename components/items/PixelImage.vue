@@ -83,7 +83,6 @@ import Spiderman from "~/assets/images/spiderman.resized.jpg";
 import StarLord from "~/assets/images/starLord.resized.webp";
 import Superman from "~/assets/images/superman.resized.webp";
 import TheFlash from "~/assets/images/theFlash.resized.jpg";
-import TheWasp from "~/assets/images/theWasp.resized.jpg";
 import Valkyrie from "~/assets/images/valkyrie.resized.webp";
 import Vision from "~/assets/images/vision.resized.jpg";
 import WarMachine from "~/assets/images/warmachine.resized.jpg";
@@ -101,7 +100,7 @@ let gameRunning = false;
 export default {
   data () {
     return {
-      imgList: [IronMan, Thor, Ajak, AntMan, Aquaman, Batman, BlackPanther, BlackWidow, CaptainAmerica, CaptainMarvel, Cyborg, Deadshot, DoctorStrange, Drax, ElDiablo, Falcon, Gamora, Groot, Hawkeye, Heimdall, Hulk, Korg, Loki, Mantis, Nebula, NickFury, Phastos, QuickSilver, RocketRacoon, ScarletWitch, Shuri, Spiderman, StarLord, Superman, TheFlash, TheWasp, Valkyrie, Vision, WarMachine, WinterSoldier, WonderWoman, YonduOlunta],
+      imgList: [IronMan, Thor, Ajak, AntMan, Aquaman, Batman, BlackPanther, BlackWidow, CaptainAmerica, CaptainMarvel, Cyborg, Deadshot, DoctorStrange, Drax, ElDiablo, Falcon, Gamora, Groot, Hawkeye, Heimdall, Hulk, Korg, Loki, Mantis, Nebula, NickFury, Phastos, QuickSilver, RocketRacoon, ScarletWitch, Shuri, Spiderman, StarLord, Superman, TheFlash, Valkyrie, Vision, WarMachine, WinterSoldier, WonderWoman, YonduOlunta],
       wrongAnwers: ["Batman", "Superman", "Wonder Woman", "Aquaman", "The Flash", "Cyborg", "Deadshot", "El Diablo"],
       imgSrc: BlackImage,
       blurValue: ref("50px"),
