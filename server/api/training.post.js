@@ -14,12 +14,12 @@ export default defineEventHandler(async (event) => {
   const [scoredC,totalC] = await closedText(body);
   const [scoredM,totalM] = await multipleChoice(body);
   const [scoredI,totalI] = await imageSelection (body);
-  //const [scoredH,totalH] = await hearingTask (body);
+  const [scoredH,totalH] = await hearingTask (body);
   const result = await prisma.trainingResults.create({
     data: {
       userId: 1,
-      scored:scoredC+scoredM+scoredI,
-      total:totalC+totalM+totalI,
+      scored:scoredC+scoredM+scoredI+scoredH,
+      total:totalC+totalM+totalI+totalH,
       grade: 1.0,
       submissionId: submission.id
     }
@@ -176,5 +176,55 @@ async function imageSelectionAnswers (items) {
       select: { answersCorrect: true }
     }));
   });
+  return await Promise.all(results);
+}
+async function hearingTask (elements) {
+
+  const items = [];
+
+  elements.forEach((element) => {
+    if (element[0].includes("hearingtask")) {
+      const answersBoolean = ["false", "false", "false", "false", "false"];
+      const name = element[0].replace("hearingtask-", "");
+      const index = name.substr(0, 1);
+      const id = element[1].split(',')[0];
+      const answers = element[1].split(',').slice(1);
+      for(let i = 0; i <answers.length;i++){
+        switch(answers[i]){
+          case "answer1": answersBoolean[0] = "true";break;
+          case "answer2": answersBoolean[1] = "true";break;
+          case "answer3": answersBoolean[2] = "true";break;
+          case "answer4": answersBoolean[3] = "true";break;
+          case "answer5": answersBoolean[4] = "true";break;
+        }
+      }
+      const item = {
+        id : id,
+        answers : answersBoolean
+      }
+      items.push(item);
+    }
+  });
+  const answers = await hearingTaskAnswers(items);
+  let score = 0; let total = 0;
+  for (let i = 0; i < answers.length; i++) {
+    const answer = answers[i].answersCorrect.split(",");
+    for (let o = 0; o < answer.length; o++) {
+      total = total + 1;
+      const a = answer[o];
+      if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { score = score + 1; }
+    }
+  }
+  return [score, total];
+}
+async function hearingTaskAnswers (items) {
+  const results = [];
+  items.forEach((i) => {
+    results.push(prisma.hearingTask.findFirst({
+      where: { id: parseInt(i.id) },
+      select: { answersCorrect: true }
+    }));
+  });
+  console.log(results);
   return await Promise.all(results);
 }

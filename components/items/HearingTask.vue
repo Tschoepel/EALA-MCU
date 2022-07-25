@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-none mx-auto">
+  <div class="max-w-none mx-auto" style="margin-top: 15px">
     <div class="bg-white overflow-hidden sm:rounded-lg sm:shadow">
       <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
         <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
@@ -25,10 +25,45 @@
             title: ''
             //coverImage: 'https://your-cover-image.png',
           }" />
-          <div style="text-align:center">
-            <input id="answerI" v-model="input" type="text" class="shadow-sm text-sm border-gray-300 rounded-md" style="text-align:center" >
+        <div class="grid grid-cols-5 cols-gap-0.5">
+          <div style="padding:10px;">
+            <img src="../../assets/images/black_widow.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+          </div>
+          <div style="padding:10px;">
+            <img src="../../assets/images/iron_man2.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+          </div>
+          <div style="padding:10px;" >
+            <img src="../../assets/images/thor_the_dark.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+          </div>
+          <div style="padding:10px;">
+            <img src="../../assets/images/thor.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+          </div>
+          <div style="padding:10px;">
+            <img src="../../assets/images/iron_man.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+          </div>
+        </div>
+        <div class="grid grid-cols-5 cols-gap-1.5">
+          <div style="padding:10px;">
+            <input id="answerI" v-model="input" type="checkbox" value="answer1" class="mr-2">
             <label for="answerI">{{ answerI }}</label>
           </div>
+          <div style="padding:10px;">
+            <input id="answerII" v-model="input" type="checkbox" value="answer2" class="mr-2">
+            <label for="answerII">{{ answerII }}</label>
+          </div>
+          <div style="padding:10px;" >
+            <input id="answerIII" v-model="input" type="checkbox" value="answer3" class="mr-2">
+            <label for="answerIII">{{ answerIII }}</label>
+          </div>
+          <div style="padding:10px;">
+            <input id="answerIV" v-model="input" type="checkbox" value="answer4" class="mr-2">
+            <label for="answerIV">{{ answerIV }}</label>
+          </div>
+          <div style="padding:10px;">
+            <input id="answerV" v-model="input" type="checkbox" value="answer5" class="mr-2">
+            <label for="answerV">{{ answerV }}</label>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -52,6 +87,10 @@ const { data: api } = await useFetch("/api/hearingTask/" + props.id);
 const question = api.value.question;
 const answers = api.value.answers.split(",");
 const answerI = answers[0];
+const answerII = answers[1];
+const answerIII = answers[2];
+const answerIV = answers[3];
+const answerV = answers[4];
 const helpOpen = ref(false);
 </script>
 <script>

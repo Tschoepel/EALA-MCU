@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-none mx-auto">
+  <div class="max-w-none mx-auto" style="margin-top: 15px">
     <div class="bg-white overflow-hidden sm:rounded-lg sm:shadow">
       <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
         <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
@@ -42,7 +42,7 @@
             <label for="answerV">{{ answerV }}</label>
           </div>
         </div>
-                <div class="grid grid-cols-5 cols-gap-0.5">
+        <div class="grid grid-cols-5 cols-gap-0.5">
           <div style="padding:10px;">
             <img src="../../assets/images/3.jpg"
                  height="100px" />
