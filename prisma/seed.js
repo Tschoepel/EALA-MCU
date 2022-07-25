@@ -19,9 +19,17 @@ async function main () {
   });
   await prisma.multipleChoice.create({
     data: {
-      question: "Welche der folgenden Superhelden traten im ersten Avengersfilm auf",
+      question: "Welche der folgenden Superhelden traten im ersten Avengersfilm auf?",
       answers : "Dr. Strange,Thor,Loki,Spiderman",
       answersCorrect: "false,true,true,false"
+
+    }
+  });
+  await prisma.multipleChoice.create({
+    data: {
+      question: "Welche der folgenden Infinity-Steine gibt es nicht?",
+      answers : "Zeistein, Geiststein, Gedankenstein, Raumstein",
+      answersCorrect: "false,true,false,false"
 
     }
   });

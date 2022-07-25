@@ -67,6 +67,7 @@
   </div>
 </template>
 <script setup>
+import { hash } from "ohash";
 import { ref } from "vue";
 const props = defineProps({
   id: {
@@ -86,12 +87,14 @@ const props = defineProps({
     required: true
   }
 });
-const { data: api } = await useFetch("/api/multipleChoice/" + props.id);
+const url = "/api/multipleChoice/" + props.id;
+const { data: api } = await useFetch(url, {
+  key: hash([url])
+});
 const question = api.value.question;
 const answers = api.value.answers.split(",");
+const input = reactive("");
 const answersCorrectList = api.value.answersCorrect.split(",");
-
-console.log(answersCorrectList[3]);
 const answersCorrect = { aCI: answersCorrectList[0] === "true", aCII: answersCorrectList[1] === "true", aCIII: answersCorrectList[2] === "true", aCIV: answersCorrectList[3] === "true" };
 const answerI = answers[0];
 const answerII = answers[1];
@@ -105,7 +108,6 @@ if (props.fill) {
   answersGiven.aGIII = (props.fillElements.includes("answer3") && answersCorrect.aCIII) || (!props.fillElements.includes("answer3") && !answersCorrect.aCIII);
   answersGiven.aGIV = (props.fillElements.includes("answer4") && answersCorrect.aCIV) || (!props.fillElements.includes("answer4") && !answersCorrect.aCIV);
 }
-console.log(answersGiven);
 onMounted(() => {
   if (props.fill) {
     if (props.fillElements.includes("answer1")) {
@@ -122,15 +124,13 @@ onMounted(() => {
     }
   }
 });
-</script>
-<script>
-export default {
+/* export default {
   data () {
     return {
       input: []
     };
   }
-};
+}; */
 </script>
 <style scoped>
 .green{

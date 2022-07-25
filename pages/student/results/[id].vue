@@ -27,11 +27,8 @@
                 Status: Nicht Bestanden
               </h3>
             </template>
-            </InfoCard>
-            <FilledComponent :list=objects>
-            </FilledComponent>
-          <!-- <ItemsDragDrop :id="1" class="mt-6" />
-          <ItemsHearingTask :id="1" class="mt-6" /> -->
+          </InfoCard>
+          <FilledComponent :list=objects />
         </div>
         <!-- /End replace -->
       </div>
@@ -42,7 +39,6 @@
 <script setup>
 const route = useRoute();
 const index = route.params.id;
-// const date = new Date().toLocaleDateString("de-DE");
 const { data: api } = await useFetch("/api/training/" + index);
 let lastEntry = 1;
 let currentSubmission;
@@ -50,8 +46,6 @@ const valuesArray = Array.from(api.value);
 
 valuesArray.forEach((element) => {
   const currentObject = Object.values(element);
-  // console.log("ELement " + lastEntry + " : " + currentObject);
-  // console.log("Element[0]: " + currentObject[0]);
   const id = currentObject[0];
   if (lastEntry <= parseInt(id)) {
     lastEntry = parseInt(id);
@@ -59,8 +53,6 @@ valuesArray.forEach((element) => {
   }
 });
 const result = Object.values(currentSubmission[5]);
-
-console.log("Result: " + result);
 const scored = result[2];
 const total = result[3];
 const grade = result[4];
@@ -92,17 +84,14 @@ submissionElements.forEach((element) => {
     }
   }
   if (element.includes("multiplechoice")) {
-    console.log(element);
     c = "ItemsMultiple-choice";
     id = parseInt(element.split(",")[1]);
     fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (counter === length) {
-    console.log(fillElements);
     fillElements = fillElements.substring(0, fillElements.length - 1);
     object = { c, id, fillElements };
     objects.push(object);
   }
 });
-console.log(objects);
 </script>

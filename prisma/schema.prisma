@@ -15,10 +15,10 @@ model ClosedText {
 }
 
 model MultipleChoice {
-  id                Int    @id @default(autoincrement())
-  question          String
-  answers           String
-  answersCorrect    String
+  id             Int    @id @default(autoincrement())
+  question       String
+  answers        String
+  answersCorrect String
 }
 
 model Statistics {
@@ -55,14 +55,14 @@ model TrainingResults {
 }
 
 model DragDrop {
-  id         Int              @id @default(autoincrement())
-  title      String     
+  id    Int    @id @default(autoincrement())
+  title String
 }
 
 model TrainingSubmissionsDragDrop {
-  id         Int              @id @default(autoincrement())
-  submission String
-  solution   String
-  everythingCorrect Boolean  
-  percentageCorrect Float  
+  id                Int     @id @default(autoincrement())
+  submission        String
+  solution          String
+  everythingCorrect Boolean
+  percentageCorrect Float
 }
