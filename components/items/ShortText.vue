@@ -29,7 +29,7 @@
           :name="'shorttext-'+props.index+ '-id'"
           size="60"
           height="20"
-          placeholder="Your answer goes here..."
+          placeholder="Bitte schreiben Sie hier hinein..."
           class="shadow-sm text-sm border-gray-300 rounded-md"
         >
       </div>
