@@ -18,7 +18,7 @@
               <client-only>
                 <div class="image ">
                   <div class="ml-4 mt-2 flex-shrink-0">
-                  <img id="test" :src="imgSrc" style="width=200px height=200px"/>
+                  <img id="test" :src="imgSrc" draggable="false" style="width=200px height=200px"/>
                 </div>
                 </div>
                  <div class="solutionText" style="text-align:center">
