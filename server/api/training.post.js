@@ -126,31 +126,6 @@ async function multipleChoiceAnswers (items) {
   return await Promise.all(results);
 }
 
-async function pixelImage(elements) {
-  const items = [];
-  console.log(elements);
-  
-  elements.forEach((element) => {
-    console.log(element);
-    if (element[0].includes("pixel")) {
-      const answersBoolean = ["false", "false", "false", "false"];
-      const name = element[0].replace("multiplechoice-", "");
-      const answers = await pixelImageAnswer(items);
-}});
-
-async function pixelImageAnswer (items) {
-  console.log("XXXXXXXX");
-  console.log(items);
-  const results = [];
-  items.forEach((i) => {
-    results.push(prisma.pixelImageResults.findFirst({
-      where: { id: parseInt(i.id) },
-      select: { submission: "EEEEEEEEEE" }
-    }));
-  });
-  return await Promise.all(results);
-}
-
 async function imageSelection(elements) {
 
   const items = [];
@@ -257,4 +232,4 @@ async function hearingTaskAnswers (items) {
   });
   console.log(results);
   return await Promise.all(results);
-}}
+}
