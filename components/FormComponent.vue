@@ -37,6 +37,7 @@ const props = defineProps({
 });
 const state = reactive({ loading: false });
 const form = ref(null);
+console.log(form.value);
 onMounted(() => {
   // console.log(form);
   // const formData = new FormData(form.value);

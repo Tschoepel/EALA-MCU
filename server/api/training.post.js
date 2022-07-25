@@ -13,6 +13,8 @@ export default defineEventHandler(async (event) => {
   });
   const [scoredC,totalC] = await closedText(body);
   const [scoredM,totalM] = await multipleChoice(body);
+  const [scoredPixel,totalPixel] = await pixelImage(body);
+
   const result = await prisma.trainingResults.create({
     data: {
       userId: 1,
@@ -116,6 +118,58 @@ async function multipleChoiceAnswers (items) {
     results.push(prisma.multipleChoice.findFirst({
       where: { id: parseInt(i.id) },
       select: { answersCorrect: true }
+    }));
+  });
+  return await Promise.all(results);
+}
+
+async function pixelImage(elements) {
+  const items = [];
+  console.log(elements);
+  
+  elements.forEach((element) => {
+    console.log(element);
+    if (element[0].includes("pixel")) {
+      const answersBoolean = ["false", "false", "false", "false"];
+      const name = element[0].replace("multiplechoice-", "");
+      const index = name.substr(0, 1);
+      const id = element[1].split(',')[0];
+      const answers = element[1].split(',').slice(1);
+      for(let i = 0; i <answers.length;i++){
+        switch(answers[i]){
+          case "answer1": answersBoolean[0] = "true";break;
+          case "answer2": answersBoolean[1] = "true";break;
+          case "answer3": answersBoolean[2] = "true";break;
+          case "answer4": answersBoolean[3] = "true";break;
+        }
+      }
+      const item = {
+        id : id,
+        answers : answersBoolean
+      }
+      items.push(item);
+    }
+  });
+  const answers = await pixelImageAnswer(items);
+  let score = 0; let total = 0;
+  for (let i = 0; i < answers.length; i++) {
+    const answer = answers[i].answersCorrect.split(",");
+    for (let o = 0; o < answer.length; o++) {
+      total = total + 1;
+      const a = answer[o];
+      if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { score = score + 1; }
+    }
+  }
+  return [score, total];
+}
+async function pixelImageAnswer (items) {
+  console.log("XXXXXXXX");
+  console.log(items);
+  const results = [];
+  items.forEach((i) => {
+    results.push(prisma.pixelImageResults.findFirst({
+      where: { id: parseInt(i.id) },
+      select: { submission: "EEEEEEEEEE" }
     }));
   });
   return await Promise.all(results);

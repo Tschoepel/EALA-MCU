@@ -85,14 +85,19 @@
               </div>
             </div>
           </div>
+          <FormComponent :list="[{c: 'ItemsClosed-text', id: 1}, {c: 'ItemsClosed-text', id: 2}, {c: 'ItemsMultiple-choice', id: 3}]">
+          <!-- <ItemsClosed-text :id="1" />
+          <div><b /></div>
+          <ItemsMultiple-choice :id="1" /> -->
+          </FormComponent>
         </div>
         <!-- /End replace -->
       </div>
     </div>
-    <!-- <ItemsPixelImage :id="1" /> -->
   </dashboardsStudent-dashboard>
 </template>
 
 <script setup>
+// import ActorQuiz from "~~/components/items/ActorQuiz.vue";
 const date = new Date().toLocaleDateString("de-DE");
 </script>
