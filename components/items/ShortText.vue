@@ -61,6 +61,4 @@ const question = api.value.question;
 const videoEnabled = api.value.videoExists;
 const imageSrcM = "/assets/video/video" + props.id + ".webm";
 const helpOpen = ref(false);
-console.log(props.index);
-console.log(props.id);
 </script>

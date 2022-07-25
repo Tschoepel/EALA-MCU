@@ -49,7 +49,6 @@ const props = defineProps({
 
 const { data: api } = await useFetch("/api/drawItem/" + props.id);
 const question = api.value.question;
-// const answer = "";
 const helpOpen = ref(false);
 </script>
 <script>
