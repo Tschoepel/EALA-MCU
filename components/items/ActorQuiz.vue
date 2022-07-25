@@ -7,9 +7,11 @@
             <h3 class="text-lg text-align: center leading-6 font-medium text-gray-900">
               {{ "Steckbrief-Quiz:" }}
             </h3>
+             <div class="ml-4 mt-2 flex-shrink-0" style="padding-bottom: 20px">
             <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="openText">
               ?
             </button>
+            </div>
             <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
               Gegeben ist ein Bild eines Superhelden mit seinem Steckbrief. Prüfen Sie den Steckbrief auf Fehler - falls vorhanden - und markieren Sie diese, indem Sie auf die Checkbox neben der falschen Aussage klicken. Anschließend geben Sie die richtige Antwort im Textfeld daneben ein. Machen Sie beides jedoch nur, wenn es sich um einen Marvek-Helden handelt!
               </div>
@@ -17,9 +19,9 @@
                 <input type="hidden" :name="'actorQuiz'" :value="test2">
                 <div class="image2">
                    <div class="spalte-1">
-                      <img id="test" :src="imgSrc" style="width=200px height=200px"/>
+                      <img id="test" :src="imgSrc" class="center" style="width=200px height=200px;"/>
                     </div>
-                      <div class="solutionText2">
+                      <div class="solutionText2" style="text-align:center">
                       <p><b>{{ solutionName }}</b></p>
                       </div>
                       <table style="width:100%">
@@ -73,6 +75,7 @@
                         <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="loadOtherImg">
                           Neues Spiel
                         </button>
+                            <div class="divider"/>
                       <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="checkSolution">
                         Lösung abschicken
                       </button>
@@ -93,28 +96,27 @@
 import IronMan from "~/assets/images/ironMan.resized.jpg";
 import Thor from "~/assets/images/Thor.resized.jpg";
 import Ajak from "~/assets/images/ajak.resized.jpeg";
-import AntMan from "~/assets/images/antman.resized.jpg";
+import AntMan from "~/assets/images/antMan.resized.jpg";
 import Aquaman from "~/assets/images/aquaman.resized.webp";
 import Batman from "~/assets/images/batman.resized.jpg";
 import BlackPanther from "~/assets/images/blackPanther.resized.jpg";
 import BlackWidow from "~/assets/images/blackWidow.resized.jpg";
 import CaptainAmerica from "~/assets/images/captainAmerica.resized.jpg";
-import Cyborg from "~/assets/images/cyborg.resized.webp";
+import Cyborg from "~/assets/images/cyborg.jpg";
 import Deadshot from "~/assets/images/deadshot.resized.jpg";
 import DoctorStrange from "~/assets/images/doctorStrange.resized.jpg";
 import Drax from "~/assets/images/drax.resized.jpg";
 import ElDiablo from "~/assets/images/elDiablo.resized.webp";
-import Falcon from "~/assets/images/falcon.resized.jpg";
+import Falcon from "~/assets/images/falcon.webp";
 import Gamora from "~/assets/images/gamora.resized.webp";
 import Hawkeye from "~/assets/images/hawkeye.resized.webp";
-import Heimdall from "~/assets/images/heimdall.resized.webp";
+import Heimdall from "~/assets/images/heimdall.jpg";
 import Hulk from "~/assets/images/hulk.resized.jpg";
 import Korg from "~/assets/images/korg.resized.jpg";
 import Loki from "~/assets/images/loki.resized.jpeg";
 import Mantis from "~/assets/images/mantis.resized.jpg";
 import NickFury from "~/assets/images/nickFury.resized.jpg";
 import Phastos from "~/assets/images/phastos.resized.jpg";
-import Quicksilver from "~/assets/images/quickSilver.resized.webp";
 import ScarlettWitch from "~/assets/images/scarlettWitch.resized.jpg";
 import Shuri from "~/assets/images/shuri.resized.webp";
 import Spiderman from "~/assets/images/spiderman.resized.jpg";
@@ -131,7 +133,7 @@ import BlackImage from "~/assets/images/Solid_black.svg.png";
 export default {
   data: function () {
     return {
-      imgList: [IronMan, CaptainAmerica, WinterSoldier, NickFury, Hulk, BlackWidow, Thor, Loki, Hawkeye, WarMachine, Falcon, StarLord, Gamora, Drax, YonduUdonta, Mantis, AntMan, BlackPanther, ScarlettWitch, Quicksilver, TheWasp, Spiderman, DoctorStrange, Valkyrie, Korg, Shuri, Heimdall, Phastos, Ajak, Batman, Superman, Aquaman, TheFlash, Cyborg, Deadshot, ElDiablo],
+      imgList: [IronMan, CaptainAmerica, WinterSoldier, NickFury, Hulk, BlackWidow, Thor, Loki, Hawkeye, WarMachine, Falcon, StarLord, Gamora, Drax, YonduUdonta, Mantis, AntMan, BlackPanther, ScarlettWitch, TheWasp, Spiderman, DoctorStrange, Valkyrie, Korg, Shuri, Heimdall, Phastos, Ajak, Batman, Superman, Aquaman, TheFlash, Cyborg, Deadshot, ElDiablo],
       wrongAnwers: [Batman, Superman, Aquaman, TheFlash, Cyborg, Deadshot, ElDiablo],
       imgSrc: BlackImage,
       name: "",
@@ -376,6 +378,7 @@ export default {
           this.solutionName = "Gratulation, Sie haben alle falschen Aussagen gewusst und auch richtig korrigier. Weiter so!";
         }
       }
+      this.imgSrc = AntMan;
     },
     openText () {
       this.helpOpen = !this.helpOpen;
@@ -405,10 +408,9 @@ const data = [
   { HeroName: "Drax", Actor: "Dave Bautista", FirstFilm: "Guardians of the Galaxy", Planet: "Kylos", IsAvenger: false },
   { HeroName: "Yondu Udonta", Actor: "Michael Rooker", FirstFilm: "Guardians of the Galaxy", Planet: "Centauri-IV", IsAvenger: false },
   { HeroName: "Mantis", Actor: "Pom Klementieff", FirstFilm: "Guardians of the Galaxy Vol. 2", Planet: "Angoma", IsAvenger: false },
-  { HeroName: "Ant Man", Actor: "Paul Rudd", FirstFilm: "Ant-Man", Planet: "Erde", IsAvenger: true },
+  { HeroName: "Ant-Man", Actor: "Paul Rudd", FirstFilm: "Ant-Man", Planet: "Erde", IsAvenger: true },
   { HeroName: "Black Panther", Actor: "Chadwick Boseman", FirstFilm: "Captain America: Civil War", Planet: "Erde", IsAvenger: false },
   { HeroName: "Scarlett Witch", Actor: "Elizabeth Olsen", FirstFilm: "Captain America: The Winter Soldier", Planet: "Erde", IsAvenger: true },
-  { HeroName: "Quicksilver", Actor: "Aaron Taylor-Johnson", FirstFilm: "Captain America: The Winter Soldier", Planet: "Erde", IsAvenger: true },
   { HeroName: "The Wasp", Actor: "Evangeline Lilly", FirstFilm: "Ant-Man", Planet: "Erde", IsAvenger: false },
   { HeroName: "Spider Man", Actor: "Tom Holland", FirstFilm: "Iron Man 2", Planet: "Erde", IsAvenger: true },
   { HeroName: "Doctor Strange", Actor: "Benedict Cumberbatch", FirstFilm: "Doctor Strange", Planet: "Erde", IsAvenger: false },
@@ -435,6 +437,13 @@ td {
   padding-bottom: 0px;
   padding-left: 40px;
   padding-right: 20px;
+}
+
+img {
+    float: left;
+    width:  800px;
+    height: 500px;
+    object-fit: cover;
 }
 
 .answerPixelImage {

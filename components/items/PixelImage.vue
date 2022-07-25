@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-none mx-auto">
+  <div class="max-w-none mx-auto" >
     <div class="bg-white overflow-hidden sm:rounded-lg sm:shadow">
       <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
         <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
@@ -7,28 +7,34 @@
             <h3 class="text-lg text-align: center leading-6 font-medium text-gray-900">
               {{ "Welcher Superheld ist das?" }}
             </h3>
+            <div class="ml-4 mt-2 flex-shrink-0">
             <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="openText">
               ?
             </button>
+            </div>
              <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
               Ein Bild eines Superhelden entpixelt sich langsam. Geben Sie den Namen des Superhelden ein, sobald Sie ihn erkennen, jedoch nur, wenn es sich um einen Marvel-Helden handelt!
             </div>
               <client-only>
-                <div class="image">
+                <div class="image ">
+                  <div class="ml-4 mt-2 flex-shrink-0">
                   <img id="test" :src="imgSrc" style="width=200px height=200px"/>
                 </div>
-                 <div class="solutionText">
+                </div>
+                 <div class="solutionText" style="text-align:center">
                   <p><b>{{ solutionName }}</b></p>
                 </div>
               </client-only>
           </div>
         </div>
         <input type="hidden" :name="'pixelImage'" :value="test">
-         <div id="app">
+         <div id="app" style="text-align:center">
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="loadOtherImg">
             Neues Spiel
           </button>
+              <div class="divider"/>
           <input id="answerPixelImage" v-model="input" type="text">
+              <div class="divider"/>
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="submitAnswer">
             Lösung abschicken
           </button>
@@ -228,5 +234,8 @@ startTimer();
 }
 .solutionText {
   color: v-bind(color);
+}
+input {
+text-align: center;
 }
 </style>

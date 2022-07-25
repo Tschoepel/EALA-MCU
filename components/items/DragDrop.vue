@@ -37,16 +37,19 @@
               </div>
             </div>
           </div>
-          <div class="solutionText">
+          <div class="solutionText" style="text-align: center">
                   <p>Korrekte Zuordnungen: {{count}}</p>
-                  <p>{{ success }}</p></div>
+                  <p style="color:green;">{{ success }}</p></div>
         </div>
+        <div  style="text-align: center;">
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="LoadData">
             Neues Spiel
           </button>
+          <div class="divider"/>
           <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="submitAnswer">
             Lösung Abschicken
           </button>
+          </div>
       </div>
     </div>
   </div>
@@ -240,5 +243,10 @@ function submitAnswer () {
   color: white;
   padding: 5px;
   margin-bottom: 5px;
+}
+.divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
 }
 </style>
