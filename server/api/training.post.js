@@ -37,6 +37,7 @@ async function closedText (elements) {
   const items = [];
   elements.forEach((element) => {
     if (element[0].includes("closedtext")) {
+      console.log(element);
       const name = element[0].replace("closedtext-", "");
       const index = name.substr(0, 1);
       if (typeof (items[index]) === "undefined") {
@@ -77,7 +78,6 @@ async function multipleChoice(elements) {
 
   elements.forEach((element) => {
     if (element[0].includes("multiplechoice")) {
-      console.log(element);
       const answersBoolean = ["false", "false", "false", "false"];
       const name = element[0].replace("multiplechoice-", "");
       const index = name.substr(0, 1);

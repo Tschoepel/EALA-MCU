@@ -37,6 +37,14 @@ const props = defineProps({
   index: {
     type: Number,
     required: true
+  },
+  fill: {
+    type: Boolean,
+    required: true
+  },
+  fillElements: {
+    type: String,
+    required: true
   }
 });
 // Allgemeine Fragen zu Thor; Dies ist ein Text mit $$ Lücken. Die Lücken müssen vorher $$ werden.;diversen,befüllt
@@ -44,9 +52,21 @@ const url = "/api/closedText/" + props.id;
 const { data: api } = await useFetch(url, {
   key: hash([url])
 });
-let title = null; let text = null;
+let title = null; let text = null; let answers = null;
 if (api.value !== null)
-  ({ title, text } = api.value); // eslint-disable-line
+  ({ title, text, answers } = api.value); // eslint-disable-line
+let correction = [];
+if (props.fill) {
+  const given = props.fillElements.split(",");
+  correction = [];
+  answers = answers.split(",");
+  console.log(given);
+  console.log(answers);
+  for (let i = 0; i < Math.min(given.length, answers.length); i++) {
+    correction.push(given[i].toLowerCase() === answers[i].toLowerCase());
+  }
+}
+console.log(correction);
 // const title = api.value.title;
 onMounted(() => {
   // console.log(title, text);
@@ -56,10 +76,24 @@ const htmlText = computed(() => {
   if (text === null) {
     return "Es gibt aktuell Probleme mit der API";
   }
-  const input = "<input type=\"text\" name=\"closedtext-" + props.index + "-num\" class=\"shadow-sm text-sm border-gray-300 rounded-md\" value=\"testnum\">";
-  return text.replaceAll("$$", () => {
+  console.log(correction);
+  console.log(text);
+  // [!props.fill ? {color: 'black'}: correction.num ? {color:'green'}:{color:'red'}]
+  const input = "<input type=\"text\" name=\"closedtext-" + props.index + "-num\" style=\"calcStyle;\" class=\"shadow-sm text-sm border-gray-300 rounded-md\" value=\"testnum\">";
+  const value = text.replaceAll("$$", () => {
     i = i + 1;
     return input.replaceAll("num", i);
+  });
+  i = 0;
+  return value.replaceAll("calcStyle", () => {
+    i = i + 1;
+    let color = "color:black";
+    if (props.fill) {
+      console.log("Number" + i);
+      console.log("Is " + correction[i - 1]);
+      color = (correction[i - 1]) ? "color:green" : "color:red";
+    }
+    return (color);
   });
 });
 const helpOpen = ref(false);

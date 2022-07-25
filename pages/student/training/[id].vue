@@ -19,7 +19,7 @@
               </p>
             </template>
           </InfoCard>
-          <FormComponent :list="[{c: 'ItemsClosed-text', id: 1}, {c: 'ItemsClosed-text', id: 2}, {c: 'ItemsMultiple-choice', id: 1}]">
+          <FormComponent :list="[{c: 'ItemsClosed-text', id: 1, fill: false}, {c: 'ItemsClosed-text', id: 2, fill: false}, {c: 'ItemsMultiple-choice', id: 1, fill: false}]">
             <!-- <ItemsClosed-text :id="1" />
           <div><b /></div>
           <ItemsMultiple-choice :id="1" /> -->

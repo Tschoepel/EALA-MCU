@@ -8,6 +8,7 @@ export default defineEventHandler(async (event) => {
     select: {
       question: true,
       answers: true,
+      answersCorrect: true
     }
   });
 });

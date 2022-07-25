@@ -52,17 +52,7 @@ export default {
     return {
       chartData: {
         labels: this.labels,
-        datasets: [{
-          data: this.datasets,
-          label: "Studenten",
-          fill: true,
-          backgroundColor: "rgba(67, 56, 202, 0.2)",
-          borderColor: "rgb(67, 56, 202)",
-          pointBackgroundColor: "rgb(67, 56, 202)",
-          pointBorderColor: "#fff",
-          pointHoverBackgroundColor: "#fff",
-          pointHoverBorderColor: "rgb(67, 56, 202)"
-        }]
+        datasets: this.datasets
       },
       chartOptions: {
         responsive: true,

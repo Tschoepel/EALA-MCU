@@ -24,13 +24,12 @@
           <div>
             <input
               id="answerI"
-              ref="answerI"
               v-model="input"
               type="checkbox"
               value="answer1"
               class="mr-2"
             >
-            <label id="aILabel" for="answerI" :style="[answersGiven.aGI ? {color:'red'}:{color:'blue'}]">{{ answerI }}</label>
+            <label id="aILabel" for="answerI" :style="[!props.fill ? {color: 'black'}: answersGiven.aGI ? {color:'green'}:{color:'red'}]">{{ answerI }}</label>
           </div>
           <div>
             <input
@@ -40,7 +39,7 @@
               value="answer2"
               class="mr-2"
             >
-            <label id="aIILabel" for="answerII" :style="[answersGiven.aGII ? {color:'red'}:{color:'blue'}]">{{ answerII }}</label>
+            <label id="aIILabel" for="answerII" :style="[!props.fill ? {color: 'black'}: answersGiven.aGII ? {color:'green'}:{color:'red'}]">{{ answerII }}</label>
           </div>
           <div>
             <input
@@ -50,7 +49,7 @@
               value="answer3"
               class="mr-2"
             >
-            <label id="aIIILabel" for="answerIII" :style="[answersGiven.aGIII ? {color:'red'}:{color:'blue'}]">{{ answerIII }}</label>
+            <label id="aIIILabel" for="answerIII" :style="[!props.fill ? {color: 'black'}: answersGiven.aGIII ? {color:'green'}:{color:'red'}]">{{ answerIII }}</label>
           </div>
           <div>
             <input
@@ -60,7 +59,7 @@
               value="answer4"
               class="mr-2"
             >
-            <label id="aIVLabel" for="answerIV" :style="[answersGiven.agIV ? {color:'red'}:{color:'blue'}]">{{ answerIV }}</label>
+            <label id="aIVLabel" for="answerIV" :style="[!props.fill ? {color: 'black'}: answersGiven.aGIV? {color:'green'}:{color:'red'}]">{{ answerIV }}</label>
           </div>
         </div>
       </div>
@@ -90,40 +89,48 @@ const props = defineProps({
 const { data: api } = await useFetch("/api/multipleChoice/" + props.id);
 const question = api.value.question;
 const answers = api.value.answers.split(",");
+const answersCorrectList = api.value.answersCorrect.split(",");
+
+console.log(answersCorrectList[3]);
+const answersCorrect = { aCI: answersCorrectList[0] === "true", aCII: answersCorrectList[1] === "true", aCIII: answersCorrectList[2] === "true", aCIV: answersCorrectList[3] === "true" };
 const answerI = answers[0];
 const answerII = answers[1];
 const answerIII = answers[2];
 const answerIV = answers[3];
 const helpOpen = ref(false);
 const answersGiven = reactive({ aGI: false, aGII: false, aGIII: false, aGIV: false });
-console.log(props.fill);
-console.log(props.id);
-console.log(props.index);
-console.log(props.fillElements);
+if (props.fill) {
+  answersGiven.aGI = (props.fillElements.includes("answer1") && answersCorrect.aCI) || (!props.fillElements.includes("answer1") && !answersCorrect.aCI);
+  answersGiven.aGII = (props.fillElements.includes("answer2") && answersCorrect.aCII) || (!props.fillElements.includes("answer2") && !answersCorrect.aCII);
+  answersGiven.aGIII = (props.fillElements.includes("answer3") && answersCorrect.aCIII) || (!props.fillElements.includes("answer3") && !answersCorrect.aCIII);
+  answersGiven.aGIV = (props.fillElements.includes("answer4") && answersCorrect.aCIV) || (!props.fillElements.includes("answer4") && !answersCorrect.aCIV);
+}
+console.log(answersGiven);
 onMounted(() => {
-  console.log(props.fillElements);
-  console.log("HELLIR");
-  answersGiven.aGI = true;
   if (props.fill) {
     if (props.fillElements.includes("answer1")) {
-      answersGiven.aGIII = true;
       document.getElementById("answerI").checked = true;
-      answersGiven.aGI = true;
     }
     if (props.fillElements.includes("answer2")) {
       document.getElementById("answerII").checked = true;
-      answersGiven.aGII = true;
     }
     if (props.fillElements.includes("answer3")) {
       document.getElementById("answerIII").checked = true;
-      answersGiven.aGIII = true;
     }
     if (props.fillElements.includes("answer4")) {
       document.getElementById("answerIV").checked = true;
-      answersGiven.aGIV = true;
     }
   }
 });
+</script>
+<script>
+export default {
+  data () {
+    return {
+      input: []
+    };
+  }
+};
 </script>
 <style scoped>
 .green{

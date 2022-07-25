@@ -7,7 +7,8 @@ export default defineEventHandler(async (event) => {
     where: { id: parseInt(event.context.params.id) },
     select: {
       title: true,
-      text: true
+      text: true,
+      answers: true
     }
   });
 });

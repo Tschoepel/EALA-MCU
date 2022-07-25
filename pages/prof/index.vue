@@ -13,7 +13,7 @@
             </div>
             <div class="px-4 pb-5 sm:p-6 sm:pt-0">
               <ClientOnly>
-                <ChartsRadarChart :labels="pageVisitsLabels" :datasets="pageVisitsData" />
+                <ChartsRadarChart :labels="pageVisitsLabels" :datasets="pageVisitsDataSet" />
               </ClientOnly>
             </div>
           </div>
@@ -98,6 +98,17 @@ data.forEach((item) => {
     }];
   }
 });
+const pageVisitsDataSet = [{
+  data: pageVisitsData,
+  label: "Studenten",
+  fill: true,
+  backgroundColor: "rgba(67, 56, 202, 0.2)",
+  borderColor: "rgb(67, 56, 202)",
+  pointBackgroundColor: "rgb(67, 56, 202)",
+  pointBorderColor: "#fff",
+  pointHoverBackgroundColor: "#fff",
+  pointHoverBorderColor: "rgb(67, 56, 202)"
+}];
 function mapToName (param, action) {
   if (action === "nav") {
     param = param.toString().substring(1);

@@ -6,44 +6,34 @@
           Ergebnisse für das Übungsblatt {{ index }}
         </h1>
       </div>
-      <div class="max-w-none mx-auto">
-        <div class="bg-white overflow-hidden sm:rounded-lg sm:shadow">
-          <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
-            <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
-              <div class="ml-4 mt-2">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                  Punkte: {{ scored }}/{{ total }}
-                </h3>
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                  Scored: {{ scored }}
-                </h3>
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                  Note: {{ grade }}
-                </h3>
-                <h3 v-if="scored/total >= 0.5" class="text-lg leading-6 font-medium text-gray-900">
-                  Status: Bestanden
-                </h3>
-                <h3 v-else class="text-lg leading-6 font-medium text-gray-900">
-                  Status: Nicht Bestanden
-                </h3>
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                  Submission: {{ submission }}
-                </h3>
-                 <h3 class="text-lg leading-6 font-medium text-gray-900">
-                  SubmissionElements: {{ submissionElements }}
-                </h3>
-                 <h3 class="text-lg leading-6 font-medium text-gray-900">
-                  SubmissionElementsLength: {{ submissionElementsLength }}
-                </h3>
-                  <h3 class="text-lg leading-6 font-medium text-gray-900">
-                  Objects: {{ objects[0].c }}/{{ objects[0].id }}/{{ objects[0].fillElements }}
-                </h3>
-              </div>
-              <FilledComponent :list=objects>
-              </FilledComponent>
-            </div>
-          </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        <!-- Replace with your content -->
+        <div class="py-4">
+          <InfoCard>
+            <template #title>
+              Ergebnisse für das Übungsblatt {{ index }}
+            </template>
+            <template #text>
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Punkte: {{ scored }}/{{ total }}
+              </h3>
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Note: {{ grade }}
+              </h3>
+              <h3 v-if="scored/total >= 0.5" class="text-lg leading-6 font-medium text-gray-900">
+                Status: Bestanden
+              </h3>
+              <h3 v-else class="text-lg leading-6 font-medium text-gray-900">
+                Status: Nicht Bestanden
+              </h3>
+            </template>
+            </InfoCard>
+            <FilledComponent :list=objects>
+            </FilledComponent>
+          <!-- <ItemsDragDrop :id="1" class="mt-6" />
+          <ItemsHearingTask :id="1" class="mt-6" /> -->
         </div>
+        <!-- /End replace -->
       </div>
     </div>
   </dashboardsStudent-dashboard>
@@ -102,15 +92,17 @@ submissionElements.forEach((element) => {
     }
   }
   if (element.includes("multiplechoice")) {
+    console.log(element);
     c = "ItemsMultiple-choice";
     id = parseInt(element.split(",")[1]);
     fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (counter === length) {
+    console.log(fillElements);
     fillElements = fillElements.substring(0, fillElements.length - 1);
     object = { c, id, fillElements };
     objects.push(object);
   }
 });
-const submissionElementsLength = submissionElements.length;
+console.log(objects);
 </script>
