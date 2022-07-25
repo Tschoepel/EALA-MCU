@@ -22,7 +22,6 @@ async function main () {
       question: "Welche der folgenden Superhelden traten im ersten Avengersfilm auf?",
       answers : "Dr. Strange,Thor,Loki,Spiderman",
       answersCorrect: "false,true,true,false"
-
     }
   });
   await prisma.hearingTask.create({
@@ -44,6 +43,34 @@ async function main () {
   await prisma.dragDrop.create({
     data: {
       title: "Drag & Drop: Sortieren Sie die folgenden Filme nach ihrem Erscheinungsjahr von alt nach neu"
+    }
+  });
+  await prisma.shortText.create({
+    data: {
+      title: "Bitte beantworten Sie die Frage in in eigenen Worten",
+      question: "Nennen sie je 2 Stärken und 2 Schwächen von Iron Man. Begründe diese bitte kurz",
+      answer: "Hier könnte eine Antwort stehen",
+      answerKeywords: "fliegen, unverwundbar, arrogant, überheblich, egozentrisch, verwundbar, intelligent, alkohol, true",
+      videoExists: false
+    }
+  });
+  await prisma.shortText.create({
+    data: {
+      title: "Bitte beantworten Sie die Frage in in eigenen Worten",
+      question: "Um welchen Film handelt es sich im folgenden Video? Begründen ihre Entscheidung.",
+      answer: "Hier könnte eine Antwort stehen",
+      answerKeywords: "iron, iron man, roboter, meer, kampf, true",
+      videoExists: true
+    }
+  });
+  await prisma.drawItem.create({
+    data: {
+      question: "Skizzieren Sie grob Mjölnir"
+    }
+  });
+  await prisma.drawItem.create({
+    data: {
+      question: "Zeichnen sie das S.H.I.E.L.D Logo"
     }
   });
 }

@@ -20,26 +20,28 @@
       </div>
       <div class="px-4 py-5">
         <input type="hidden" :name="'hearingtask-'+props.index+'-id'" :value="props.id+','+input">
-          <AudioPlayer :option=" {
+        <AudioPlayer
+          :option=" {
             src: '../../assets/audio/adopted.mp3',
             title: ''
-            //coverImage: 'https://your-cover-image.png',
-          }" />
+          //coverImage: 'https://your-cover-image.png',
+          }"
+        />
         <div class="grid grid-cols-5 cols-gap-0.5">
           <div style="padding:10px;">
-            <img src="../../assets/images/black_widow.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+            <img src="../../assets/images/black_widow.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/iron_man2.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
-          </div>
-          <div style="padding:10px;" >
-            <img src="../../assets/images/thor_the_dark.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+            <img src="../../assets/images/iron_man2.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/thor.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+            <img src="../../assets/images/thor_the_dark.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/iron_man.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+            <img src="../../assets/images/thor.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
+          </div>
+          <div style="padding:10px;">
+            <img src="../../assets/images/iron_man.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
           </div>
         </div>
         <div class="grid grid-cols-5 cols-gap-1.5">
@@ -51,7 +53,7 @@
             <input id="answerII" v-model="input" type="checkbox" value="answer2" class="mr-2">
             <label for="answerII">{{ answerII }}</label>
           </div>
-          <div style="padding:10px;" >
+          <div style="padding:10px;">
             <input id="answerIII" v-model="input" type="checkbox" value="answer3" class="mr-2">
             <label for="answerIII">{{ answerIII }}</label>
           </div>

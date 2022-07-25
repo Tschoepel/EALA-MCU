@@ -1,8 +1,8 @@
 <template>
   <form ref="form" action="/api/training" method="POST" class="p-5 rounded bg-gray-300">
     <div v-for="(l, i) in props.list" :key="l.c+':'+l.id">
-      <ItemsClosed-text v-if="l.c == 'ItemsClosed-text'" :id="l.id" :index="i" :fill="true" :fillElements="l.fillElements" />
-      <ItemsMultiple-choice v-if="l.c == 'ItemsMultiple-choice'" :id="l.id" :index="i" :fill="true" :fillElements="l.fillElements"/>
+      <ItemsClosed-text v-if="l.c == 'ItemsClosed-text'" :id="l.id" :index="i" :fill="true" :fill-elements="l.fillElements" />
+      <ItemsMultiple-choice v-if="l.c == 'ItemsMultiple-choice'" :id="l.id" :index="i" :fill="true" :fill-elements="l.fillElements" />
     </div>
   </form>
 </template>

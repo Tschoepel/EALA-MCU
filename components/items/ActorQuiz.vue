@@ -7,85 +7,114 @@
             <h3 class="text-lg text-align: center leading-6 font-medium text-gray-900">
               {{ "Steckbrief-Quiz:" }}
             </h3>
-             <div class="ml-4 mt-2 flex-shrink-0" style="padding-bottom: 20px">
-            <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="openText">
-              ?
-            </button>
+            <div class="ml-4 mt-2 flex-shrink-0" style="padding-bottom: 20px">
+              <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="openText">
+                ?
+              </button>
             </div>
             <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
               Gegeben ist ein Bild eines Superhelden mit seinem Steckbrief. Prüfen Sie den Steckbrief auf Fehler - falls vorhanden - und markieren Sie diese, indem Sie auf die Checkbox neben der falschen Aussage klicken. Anschließend geben Sie die richtige Antwort im Textfeld daneben ein. Machen Sie beides jedoch nur, wenn es sich um einen Marvek-Helden handelt!
+            </div>
+            <client-only>
+              <input type="hidden" :name="'actorQuiz'" :value="test2">
+              <div class="image2">
+                <div class="spalte-1">
+                  <img id="test" :src="imgSrc" class="center" style="width=200px height=200px;">
+                </div>
+                <div class="solutionText2" style="text-align:center">
+                  <p><b>{{ solutionName }}</b></p>
+                </div>
+                <table style="width:100%">
+                  <tr>
+                    <td />
+                    <td />
+                    <td>Falsch? &emsp;&emsp; Korrektur</td>
+                  </tr>
+                  <tr>
+                    <td>Helden-Name:</td>
+                    <td><b>{{ name }}</b></td>
+                    <td>
+                      <input id="answerI" v-model="inputA" type="checkbox" value="answer1" class="mr-2"> &emsp;&emsp;
+                      <input id="nameInput" v-model="input1" type="text" style="padding: 2px;">
+                    </td>
+                    <h3 v-if="submitted&&correct1">
+                      &#9989;
+                    </h3>
+                    <h3 v-if="submitted&&!correct1">
+                      &#10060;
+                    </h3>
+                  </tr>
+                  <tr>
+                    <td>Erster Filmauftritt:</td>
+                    <td><b>{{ firstFilm }}</b></td>
+                    <td>
+                      <input id="answerII" v-model="inputB" type="checkbox" value="answer2" class="mr-2"> &emsp;&emsp;
+                      <input id="firstFilmInput" v-model="input2" type="text" style="padding: 2px;">
+                    </td>
+                    <h3 v-if="submitted&&correct2">
+                      &#9989;
+                    </h3>
+                    <h3 v-if="submitted&&!correct2">
+                      &#10060;
+                    </h3>
+                  </tr>
+                  <tr>
+                    <td>Schauspieler:</td>
+                    <td><b>{{ actor }}</b></td>
+                    <td>
+                      <input id="answerIII" v-model="inputC" type="checkbox" value="answer3" class="mr-2"> &emsp;&emsp;
+                      <input id="actorInput" v-model="input3" type="text" style="padding: 2px;">
+                    </td>
+                    <h3 v-if="submitted&&correct3">
+                      &#9989;
+                    </h3>
+                    <h3 v-if="submitted&&!correct3">
+                      &#10060;
+                    </h3>
+                  </tr>
+                  <tr>
+                    <td>Heimatplanet:</td>
+                    <td><b>{{ planet }}</b></td>
+                    <td>
+                      <input id="answerIV" v-model="inputD" type="checkbox" value="answer4" class="mr-2"> &emsp;&emsp;
+                      <input id="planetInput" v-model="input4" type="text" style="padding: 2px;">
+                    </td>
+                    <h3 v-if="submitted&&correct4">
+                      &#9989;
+                    </h3>
+                    <h3 v-if="submitted&&!correct4">
+                      &#10060;
+                    </h3>
+                  </tr>
+                  <tr>
+                    <td>Mitglied der Avengers?:</td>
+                    <td><b> {{ isAvenger }} </b></td>
+                    <td>
+                      <input id="answerV" v-model="inputE" type="checkbox" value="answer5" class="mr-2"> &emsp;&emsp;
+                      <input id="avengerInput" v-model="input5" type="text" style="padding: 2px;">
+                    </td>
+                    <h3 v-if="submitted&&correct5">
+                      &#9989;
+                    </h3>
+                    <h3 v-if="submitted&&!correct5">
+                      &#10060;
+                    </h3>
+                  </tr>
+                </table>
+                <div id="app">
+                  <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="loadOtherImg">
+                    Neues Spiel
+                  </button>
+                  <div class="divider" />
+                  <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="checkSolution">
+                    Lösung abschicken
+                  </button>
+                </div>
               </div>
-              <client-only>
-                <input type="hidden" :name="'actorQuiz'" :value="test2">
-                <div class="image2">
-                   <div class="spalte-1">
-                      <img id="test" :src="imgSrc" class="center" style="width=200px height=200px;"/>
-                    </div>
-                      <div class="solutionText2" style="text-align:center">
-                      <p><b>{{ solutionName }}</b></p>
-                      </div>
-                      <table style="width:100%">
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Falsch? &emsp;&emsp; Korrektur</td>
-                      </tr>
-                      <tr>
-                        <td>Helden-Name:</td>
-                        <td><b>{{ name }}</b></td>
-                        <td><input id="answerI" v-model="inputA" type="checkbox" value="answer1" class="mr-2"> &emsp;&emsp;
-                        <input id="nameInput" v-model="input1" type="text" style="padding: 2px;"></td>
-                        <h3 v-if="submitted&&correct1">&#9989;</h3>
-                        <h3 v-if="submitted&&!correct1">&#10060;</h3>
-                      </tr>
-                      <tr>
-                        <td>Erster Filmauftritt:</td>
-                        <td><b>{{ firstFilm }}</b></td>
-                        <td><input id="answerII" v-model="inputB" type="checkbox" value="answer2" class="mr-2"> &emsp;&emsp;
-                        <input id="firstFilmInput" v-model="input2" type="text" style="padding: 2px;"></td>
-                        <h3 v-if="submitted&&correct2">&#9989;</h3>
-                        <h3 v-if="submitted&&!correct2">&#10060;</h3>
-                      </tr>
-                      <tr>
-                        <td>Schauspieler:</td>
-                        <td><b>{{ actor }}</b></td>
-                        <td><input id="answerIII" v-model="inputC" type="checkbox" value="answer3" class="mr-2"> &emsp;&emsp;
-                        <input id="actorInput" v-model="input3" type="text" style="padding: 2px;"></td>
-                        <h3 v-if="submitted&&correct3">&#9989;</h3>
-                        <h3 v-if="submitted&&!correct3">&#10060;</h3>
-                      </tr>
-                      <tr>
-                        <td>Heimatplanet:</td>
-                        <td><b>{{ planet }}</b></td>
-                        <td><input id="answerIV" v-model="inputD" type="checkbox" value="answer4" class="mr-2"> &emsp;&emsp;
-                        <input id="planetInput" v-model="input4" type="text" style="padding: 2px;"></td>
-                        <h3 v-if="submitted&&correct4">&#9989;</h3>
-                        <h3 v-if="submitted&&!correct4">&#10060;</h3>
-                      </tr>
-                      <tr>
-                        <td>Mitglied der Avengers?:</td>
-                        <td><b> {{ isAvenger }} </b></td>
-                        <td><input id="answerV" v-model="inputE" type="checkbox" value="answer5" class="mr-2"> &emsp;&emsp;
-                        <input id="avengerInput" v-model="input5" type="text" style="padding: 2px;"></td>
-                        <h3 v-if="submitted&&correct5">&#9989;</h3>
-                        <h3 v-if="submitted&&!correct5">&#10060;</h3>
-                      </tr>
-                    </table>
-                      <div id="app">
-                        <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="loadOtherImg">
-                          Neues Spiel
-                        </button>
-                            <div class="divider"/>
-                      <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="checkSolution">
-                        Lösung abschicken
-                      </button>
-                    </div>
-                  </div>
-              </client-only>
+            </client-only>
           </div>
         </div>
-        <div>
-          </div>
+        <div />
       </div>
     </div>
   </div>
@@ -177,6 +206,9 @@ export default {
       planetColor: ref("green"),
       avengerColor: ref("green")
     };
+  },
+  mounted: function () {
+    this.loadOtherImg();
   },
   methods: {
     loadOtherImg () {
@@ -383,9 +415,6 @@ export default {
     openText () {
       this.helpOpen = !this.helpOpen;
     }
-  },
-  mounted: function () {
-    this.loadOtherImg();
   }
 
 };

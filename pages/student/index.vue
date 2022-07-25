@@ -35,7 +35,8 @@
           </div>
           <div class="bg-white px-4 py-5 sm:px-6">
             <div class="flex space-x-3">
-              <h3 class="text-sm font-bold text-yellow-600">Punkte
+              <h3 class="text-sm font-bold text-yellow-600">
+                Punkte
               </h3>
             </div>
             <div class="px-4 pb-5 sm:p-6 sm:pt-0">

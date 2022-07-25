@@ -29,7 +29,7 @@
             <input id="answerII" v-model="input" type="checkbox" value="answer2" class="mr-2">
             <label for="answerII">{{ answerII }}</label>
           </div>
-          <div style="padding:10px;" >
+          <div style="padding:10px;">
             <input id="answerIII" v-model="input" type="checkbox" value="answer3" class="mr-2">
             <label for="answerIII">{{ answerIII }}</label>
           </div>
@@ -44,20 +44,22 @@
         </div>
         <div class="grid grid-cols-5 cols-gap-0.5">
           <div style="padding:10px;">
-            <img src="../../assets/images/3.jpg"
-                 height="100px" />
+            <img
+              src="../../assets/images/3.jpg"
+              height="100px"
+            >
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/5.jpg"  style="height: 120px; width: fit-content;" />
-          </div>
-          <div style="padding:10px;" >
-            <img src="../../assets/images/12.jpg" style="height: 120px; width: fit-content;"/>
+            <img src="../../assets/images/5.jpg" style="height: 120px; width: fit-content;">
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/Batons_Natasha_Romanoff.jpg" style="height: 100px; width: fit-content;" />
+            <img src="../../assets/images/12.jpg" style="height: 120px; width: fit-content;">
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/captainamerica.jpg" style="height: 120px; width: fit-content;" />
+            <img src="../../assets/images/Batons_Natasha_Romanoff.jpg" style="height: 100px; width: fit-content;">
+          </div>
+          <div style="padding:10px;">
+            <img src="../../assets/images/captainamerica.jpg" style="height: 120px; width: fit-content;">
           </div>
         </div>
         <div class="grid grid-cols-5 cols-gap-0.5">
@@ -84,19 +86,19 @@
         </div>
         <div class="grid grid-cols-5 cols-gap-0.5">
           <div style="padding:10px;">
-            <img src="../../assets/images/Mjolnir.jpg" style="height: 120px; width: fit-content;" />
+            <img src="../../assets/images/Mjolnir.jpg" style="height: 120px; width: fit-content;">
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/Necrowords_hela.jpg" style="height: 100px; width: fit-content;" />
+            <img src="../../assets/images/Necrowords_hela.jpg" style="height: 100px; width: fit-content;">
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/quadmaster_Peter_Quill.jpg" style="height: 100px; width: fit-content;" />
+            <img src="../../assets/images/quadmaster_Peter_Quill.jpg" style="height: 100px; width: fit-content;">
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/8.jpg" style="height: 120px; width: fit-content;" />
+            <img src="../../assets/images/8.jpg" style="height: 120px; width: fit-content;">
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/6.jpg" style="height: 120px; width: fit-content;" />
+            <img src="../../assets/images/6.jpg" style="height: 120px; width: fit-content;">
           </div>
         </div>
       </div>

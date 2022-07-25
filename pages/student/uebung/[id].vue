@@ -9,7 +9,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <!-- Replace with your content -->
         <div class="py-4">
-            <!-- <ItemsClosed-text :id="1" />
+          <!-- <ItemsClosed-text :id="1" />
           <div><b /></div>
           <ItemsMultiple-choice :id="1" /> -->
           <ItemsDrag-drop: :id="1" class="mt-6" />

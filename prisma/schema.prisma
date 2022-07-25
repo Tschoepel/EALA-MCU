@@ -21,6 +21,20 @@ model MultipleChoice {
   answersCorrect String
 }
 
+model ShortText {
+  id                Int    @id @default(autoincrement())
+  title             String
+  question          String
+  answer            String
+  answerKeywords    String
+  videoExists       Boolean @default(false)
+}
+
+model DrawItem {
+  id                Int    @id @default(autoincrement())
+  question          String
+}
+
 model Statistics {
   id        Int      @id @default(autoincrement())
   userId    Int

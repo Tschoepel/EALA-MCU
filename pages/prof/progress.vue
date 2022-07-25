@@ -97,18 +97,24 @@
           <div class="bg-white shadow sm:rounded-lg">
             <div class="px-4 py-5 sm:p-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900">
-                Elias
+                Elias - Item types
               </h3>
               <div class="mt-2 text-gray-600">
-                <!-- What was achieved:
+                What was achieved:
+                <ul class="list-disc list-inside">
+                  <li>ShortText item type.</li>
+                  <li>ShortText Item with automated correction based on keywords</li>
+                  <li>Videosupport ShortText / Answer about Video</li>
+                  <li>DrawItem type</li>
+                </ul>
+                <hr class="my-3">
+                What needs to be done:
                 <ul class="list-disc list-inside">
                   <li />
                 </ul>
-                <hr class="my-3"> -->
-                What needs to be done:
-                <ul class="list-disc list-inside">
-                  <li>Short Text Item with automated correction.</li>
-                </ul>
+              </div>
+              <div class="mt-2 text-gray-600">
+                <p />
               </div>
             </div>
           </div>
