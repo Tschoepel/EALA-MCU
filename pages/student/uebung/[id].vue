@@ -15,7 +15,6 @@
           <ItemsDrag-drop: :id="1" class="mt-6" />
           <ItemsActor-quiz :id="1" class="mt-6" />
           <ItemsHearingTask :id="1" class="mt-6" />
-          <ItemsDraw-item :id="1" class="mt-6" />
         </div>
         <!-- /End replace -->
       </div>

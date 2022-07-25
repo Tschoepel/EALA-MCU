@@ -5,7 +5,7 @@
         <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
           <div class="ml-4 mt-2">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
-              {{ question }}
+              {{ props.index+1 }}. {{ question }}
             </h3>
           </div>
           <div class="ml-4 mt-2 flex-shrink-0">
@@ -23,7 +23,7 @@
           id="canvas"
           :name="'drawitem-'+props.index+ '-id'"
           style="border:solid;"
-          width="900px"
+          width="800px"
           height="500px"
           @mousedown="startPainting"
           @mouseup="finishedPainting"

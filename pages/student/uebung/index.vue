@@ -25,7 +25,6 @@
               <ItemsDrag-drop :id="1" class="mt-6" />
               <ItemsActor-quiz :id="1" class="mt-6" />
               <ItemsPixel-image :id="1" class="mt-6" />
-              <ItemsDraw-item :id="1" class="mt-6" />
             </div>
             <div class="px-6 py-4">
               <div class="flex flex-col">
