@@ -136,7 +136,7 @@ async function pixelImage(elements) {
       const answersBoolean = ["false", "false", "false", "false"];
       const name = element[0].replace("multiplechoice-", "");
       const answers = await pixelImageAnswer(items);
-}});}
+}});
 
 async function pixelImageAnswer (items) {
   console.log("XXXXXXXX");
@@ -257,4 +257,4 @@ async function hearingTaskAnswers (items) {
   });
   console.log(results);
   return await Promise.all(results);
-}
+}}
