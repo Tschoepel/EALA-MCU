@@ -44,10 +44,7 @@
         </div>
         <div class="grid grid-cols-5 cols-gap-0.5">
           <div style="padding:10px;">
-            <img
-              src="../../assets/images/3.jpg"
-              height="100px"
-            >
+            <img src="../../assets/images/3.jpg" style="height: 120px; width: fit-content;">
           </div>
           <div style="padding:10px;">
             <img src="../../assets/images/5.jpg" style="height: 120px; width: fit-content;">

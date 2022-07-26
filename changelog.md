@@ -1,6 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.19] - 25.07.2022
+### Added
+- Type message on exercise finished, raw
+### Changed
+
+### Removed
 ## [0.0.18] - 25.07.2022
 ### Added
 - Correction components for 5 Itemtypes

@@ -81,15 +81,19 @@
               <div class="mt-2 text-gray-600">
                 What was achieved:
                 <ul class="list-disc list-inside">
-                  <li>MultipleChoice item type with automated correction.</li>
+                  <li>MultipleChoice item type with automated correction and automated feeback.</li>
+                  <li> ShortText item automated feeback.</li>
+                  <li>ClosedText item automated feeback.</li>
+                  <li>ImageSelection item automated feeback.</li>
+                  <li>HearingTask item automated feeback.</li>
+                  <li>student dashboard visualisation of items used</li>
+                  <li>student dashboard visualisation of excercises done</li>
+                  <li>student dashboard visualisation of overall score</li>
                 </ul>
                 <hr class="my-3">
                 What needs to be done:
                 <ul class="list-disc list-inside">
-                  <li>Further expand the student dashboard.</li>
-                  <li>Explicit informative Feedback at the end of a Training/Exercise Sheet/Test</li>
                   <li>Elaborate Feedback and Visualization of Progress and Development Stage of Student in Student Dashboard</li>
-                  <li>Optional expansion on ItemTypes (Randomized Battles/ Battle groups: Who wins)</li>
                 </ul>
               </div>
             </div>
