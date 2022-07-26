@@ -53,25 +53,39 @@ valuesArray.forEach((element) => {
     currentSubmission = currentObject;
   }
 });
-const result = Object.values(currentSubmission[5]);
+const result = Object.values(currentSubmission[6]);
 const scored = result[2];
 const total = result[3];
 const grade = result[4];
+console.log("current Sub 1: " + currentSubmission[0]);
+console.log("current result: " + currentSubmission[1]);
+console.log("current result: " + currentSubmission[2]);
+console.log("current result: " + currentSubmission[3]);
+console.log("current result: " + currentSubmission[4]);
+console.log("current result: " + currentSubmission[5]);
+console.log("current result: " + currentSubmission[6]);
+const correctString = currentSubmission[3];
+console.log(correctString);
+const correctArray = correctString.split(";");
 const submission = currentSubmission[2].replace(/"/g, "");
+
 const submissionElements = submission.substring(2, submission.length - 2).split("],[");
+// "mc1-true,true,true,true;mc2-true,true,true,true;"
 const objects = [];
 let counter = 0;
 let c = "";
 let id = -1;
 let fillElements = "";
 let object;
+let correct;
 const length = submissionElements.length;
 submissionElements.forEach((element) => {
   console.log("Current submission: " + element);
   counter++;
   if (element.includes("id") && id !== -1) {
     fillElements = fillElements.substring(0, fillElements.length - 1);
-    object = { c, id, fillElements };
+    console.log("correct: " + correct);
+    object = { c, id, fillElements, correct };
     objects.push(object);
     id = -1;
     c = "";
@@ -81,13 +95,43 @@ submissionElements.forEach((element) => {
     c = "ItemsClosed-text";
     if (element.includes("id")) {
       id = parseInt(element.split(",")[1]);
+      correctArray.forEach((elementCorrect) => {
+        if (elementCorrect.includes("ct" + id)) {
+          const returnElements = elementCorrect.split("-");
+          console.log("Retel: " + returnElements);
+          console.log("Retel[1]: " + returnElements[1]);
+          correct = returnElements[1];
+        }
+      });
     } else {
       fillElements += element.split(",")[1] + ",";
     }
   }
+  if (element.includes("imageselection")) {
+    c = "ItemsImage-selection";
+    id = parseInt(element.split(",")[1]);
+    correctArray.forEach((elementCorrect) => {
+      if (elementCorrect.includes("is" + id)) {
+        const returnElements = elementCorrect.split("-");
+        console.log("Retel: " + returnElements);
+        console.log("Retel[1]: " + returnElements[1]);
+        correct = returnElements[1];
+        console.log("CORRECT IMAGE: " + correct);
+      }
+    });
+    fillElements = element.split(",").slice(2).join(",") + ",";
+  }
   if (element.includes("multiplechoice")) {
     c = "ItemsMultiple-choice";
     id = parseInt(element.split(",")[1]);
+    correctArray.forEach((elementCorrect) => {
+      if (elementCorrect.includes("mc" + id)) {
+        const returnElements = elementCorrect.split("-");
+        console.log("Retel: " + returnElements);
+        console.log("Retel[1]: " + returnElements[1]);
+        correct = returnElements[1];
+      }
+    });
     fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (element.includes("shorttext")) {
@@ -98,6 +142,14 @@ submissionElements.forEach((element) => {
     console.log("ShortTextID:" + elementParts[1]);
     c = "ItemsShort-text";
     id = parseInt(elementParts[1]);
+    correctArray.forEach((elementCorrect) => {
+      if (elementCorrect.includes("st" + id)) {
+        const returnElements = elementCorrect.split("-");
+        console.log("Retel: " + returnElements);
+        console.log("Retel[1]: " + returnElements[1]);
+        correct = returnElements[1];
+      }
+    });
     fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (element.includes("hearingtask")) {
@@ -105,11 +157,17 @@ submissionElements.forEach((element) => {
     console.log(element);
     c = "ItemsHearing-task";
     id = parseInt(element.split(",")[1]);
+    correctArray.forEach((elementCorrect) => {
+      if (elementCorrect.includes("ht" + id)) {
+        correct = elementCorrect.split("-")[1];
+      }
+    });
     fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (counter === length) {
     fillElements = fillElements.substring(0, fillElements.length - 1);
-    object = { c, id, fillElements };
+    console.log("correct: " + correct);
+    object = { c, id, fillElements, correct };
     objects.push(object);
   }
 });

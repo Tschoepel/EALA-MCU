@@ -73,6 +73,77 @@ async function main () {
       question: "Zeichnen sie das S.H.I.E.L.D Logo"
     }
   });
+  await prisma.imageSelection.create({
+    data: {
+      question: "Welche Waffe gehört zu Falcon?",
+      answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
+      answersCorrect: "true,false,false,false,false,false,false,false,false,false"
+    }
+  });
+
+  await prisma.imageSelection.create({
+    data: {
+      question: "Welche Waffe gehört zu Clint Barton?",
+      answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
+      answersCorrect: "false,false,true,false,false,false,false,false,false,false"
+    }
+  });
+
+  await prisma.imageSelection.create({
+    data: {
+      question: "Welche Waffe gehört zu Tony Stark?",
+      answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
+      answersCorrect: "false,true,false,false,false,false,false,false,false,false"
+    }
+  });
+
+  await prisma.imageSelection.create({
+    data: {
+      question: "Welche Waffe gehört zu Natasha Romanoff?",
+      answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
+      answersCorrect: "false,false,false,true,false,false,false,false,false,false"
+    }
+  });
+
+  await prisma.imageSelection.create({
+    data: {
+      question: "Welche Waffe gehört zu Captain America?",
+      answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
+      answersCorrect: "false,false,false,false,true,false,false,false,false,false"
+    }
+  });
+
+  await prisma.imageSelection.create({
+    data: {
+      question: "Welche Waffe gehört zu Peter Quill?",
+      answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
+      answersCorrect: "false,false,false,false,false,false,false,true,false,false"
+    }
+  });
+
+  await prisma.imageSelection.create({
+    data: {
+      question: "Welche Waffe gehört zu Thor?",
+      answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
+      answersCorrect: "false,false,false,false,false,true,false,false,false,false"
+    }
+  });
+
+  await prisma.imageSelection.create({
+    data: {
+      question: "Welche Waffe gehört zu Gamora?",
+      answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
+      answersCorrect: "false,false,false,false,false,false,false,false,false,true"
+    }
+  });
+
+  await prisma.imageSelection.create({
+    data: {
+      question: "Welche Waffe gehört zu Wenwu?",
+      answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
+      answersCorrect: "false,false,false,false,false,false,false,false,true,false"
+    }
+  });
 }
 
 main()

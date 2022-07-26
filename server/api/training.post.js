@@ -8,23 +8,23 @@ export default defineEventHandler(async (event) => {
   const submission = await prisma.trainingSubmissions.create({
     data: {
       userId: 1,
-      submission: JSON.stringify(body)
+      submission: JSON.stringify(body),
+      correctionString: ""
     }
   });
-  const [scoredC,totalC] = await closedText(body);
-  const [scoredM,totalM] = await multipleChoice(body);
-  const [scoredI,totalI] = await imageSelection (body);
-  const [scoredH,totalH] = await hearingTask (body);
-  const [scoredS,totalS] = await shortText(body);
-
+  const [scoredC,totalC, corrC] = await closedText(body);
+  const [scoredM,totalM, corrM] = await multipleChoice(body);
+  const [scoredI,totalI, corrI] = await imageSelection (body);
+  const [scoredH,totalH, corrH] = await hearingTask (body);
+  const [scoredS,totalS, corrS] = await shortText(body);
   const result = await prisma.trainingResults.create({
     data: {
       userId: 1,
       scored:scoredC+scoredM+scoredI+scoredH+scoredS,
       total:totalC+totalM+totalI+totalH+totalS,
-
       grade: 1.0,
       submissionId: submission.id
+
     }
   });
   console.log(result);
@@ -33,10 +33,11 @@ export default defineEventHandler(async (event) => {
       id: submission.id
     },
     data: {
-      resultId: result.id
+      resultId: result.id,
+      correctionString: corrC+corrM+corrI+corrH+corrS
     }
   });
-  return { id: result.id };
+  return { id: result.id, correctionString: corrC+corrM+corrI+corrH+corrS };
 });
 
 async function shortText (elements) {
@@ -52,15 +53,18 @@ async function shortText (elements) {
     }
   });
   const answers = await shortTextAnswers(items);
-  let score = 0;
+  let score = 0; let corr = "";
   for (let i = 0; i < answers.length; i++) {
     const answer = answers[i].answerKeywords.split(",");
+    corr = corr + "st"+items[i].id + "-";
     for (let o = 0; o < answer.length; o++) {
       const a = answer[o];
-      if (items[i].answer.toLowerCase().includes(a)) { score = score + 1; }
+      if (items[i].answer.toLowerCase().includes(a)) { score = score + 1; corr = corr + "true,"; }
+      else { corr = corr + "false,";  }
     }
+    corr = corr.slice(0,-1) + ";";
   }
-  return [Math.min(score,4), 4];
+  return [Math.min(score,4), 4, corr];
 }
 async function shortTextAnswers (items) {
   const results = [];
@@ -92,16 +96,20 @@ async function closedText (elements) {
     }
   });
   const answers = await closedTextAnswers(items);
-  let score = 0; let total = 0;
+  let score = 0; let total = 0; let corr = "";
   for (let i = 0; i < answers.length; i++) {
     const answer = answers[i].answers.split(",");
+    corr = corr + "ct"+items[i].id + "-";
     for (let o = 0; o < answer.length; o++) {
       total = total + 1;
       const a = answer[o];
-      if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { score = score + 1; }
+      if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { score = score + 1; corr = corr + "true,"; }
+      else{corr = corr + "false,";}
     }
+    corr = corr.slice(0,-1) + ";";
   }
-  return [score, total];
+  console.log(corr);
+  return [score, total,corr];
 }
 async function closedTextAnswers (items) {
   const results = [];
@@ -119,6 +127,7 @@ async function multipleChoice(elements) {
 
   elements.forEach((element) => {
     if (element[0].includes("multiplechoice")) {
+      console.log("NEW MC: " + element);
       const answersBoolean = ["false", "false", "false", "false"];
       const name = element[0].replace("multiplechoice-", "");
       const index = name.substr(0, 1);
@@ -140,16 +149,20 @@ async function multipleChoice(elements) {
     }
   });
   const answers = await multipleChoiceAnswers(items);
-  let score = 0; let total = 0;
+  let score = 0; let total = 0; let corr = "";
   for (let i = 0; i < answers.length; i++) {
+    corr = corr + "mc"+items[i].id + "-";
     const answer = answers[i].answersCorrect.split(",");
     for (let o = 0; o < answer.length; o++) {
       total = total + 1;
       const a = answer[o];
-      if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { score = score + 1; }
+      if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { score = score + 1; corr = corr + "true,";}
+      else { corr = corr + "false,";} 
     }
+    corr = corr.slice(0,-1) + ";";
   }
-  return [score, total];
+  console.log(corr);
+  return [score, total,corr];
 }
 async function multipleChoiceAnswers (items) {
   const results = [];
@@ -195,15 +208,19 @@ async function imageSelection(elements) {
     }
   });
   const answers = await imageSelectionAnswers(items);
-  let score = 0; let total = 1;
+  let score = 0; let total = 1; let corr = "";
   for (let i = 0; i < answers.length; i++) {
     const answer = answers[i].answersCorrect.split(",");
+    corr = corr + "is"+items[i].id + "-";
     for (let o = 0; o < answer.length; o++) {
       const a = answer[o];
-      if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { score = score + 1; }
+      if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { score = score + 1; corr = corr + "true,"; }
+      else  { corr = corr + "false,"; }
     }
+    corr = corr.slice(0,-1) + ";";
   }
-  return [score, total];
+  console.log(corr);
+  return [score, total,corr];
 }
 async function imageSelectionAnswers (items) {
   const results = [];
@@ -244,16 +261,20 @@ async function hearingTask (elements) {
     }
   });
   const answers = await hearingTaskAnswers(items);
-  let score = 0; let total = 0;
+  let score = 0; let total = 0; let corr = "";
   for (let i = 0; i < answers.length; i++) {
     const answer = answers[i].answersCorrect.split(",");
+    corr = corr + "ht"+items[i].id + "-";
     for (let o = 0; o < answer.length; o++) {
       total = total + 1;
       const a = answer[o];
-      if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { score = score + 1; }
+      if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { score = score + 1; corr = corr + "true,"; }
+      else { corr = corr + "false,"; }
     }
+    corr = corr.slice(0,-1) + ";";
   }
-  return [score, total];
+  console.log(corr);
+  return [score, total,corr];
 }
 
 async function hearingTaskAnswers (items) {

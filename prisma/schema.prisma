@@ -53,6 +53,7 @@ model TrainingSubmissions {
   id         Int              @id @default(autoincrement())
   userId     Int
   submission String
+  correctionString String
   resultId   Int?             @unique
   createdAt  DateTime         @default(now())
   result     TrainingResults?

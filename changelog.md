@@ -1,6 +1,14 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.18] - 25.07.2022
+### Added
+- Correction components for 5 Itemtypes
+- check for complete answer to offer feedback text
+### Changed
+- fixed storing of data
+- fixed feedback bugs
+### Removed
 ## [0.0.17] - 25.07.2022
 ### Added
 - merged Branches with all Item Types
