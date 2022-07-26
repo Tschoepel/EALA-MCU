@@ -27,19 +27,19 @@
           }" />
         <div class="grid grid-cols-5 cols-gap-0.5">
           <div style="padding:10px;">
-            <img src="../../assets/images/black_widow.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+            <img src="../../assets/images/black_widow.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" style="height: 300px; width: fit-content;" />
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/iron_man2.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+            <img src="../../assets/images/iron_man2.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" style="height: 300px; width: fit-content;" />
           </div>
           <div style="padding:10px;" >
-            <img src="../../assets/images/thor_the_dark.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+            <img src="../../assets/images/thor_the_dark.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" style="height: 300px; width: fit-content;" />
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/thor.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+            <img src="../../assets/images/thor.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" style="height: 300px; width: fit-content;" />
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/iron_man.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+            <img src="../../assets/images/iron_man.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" style="height: 300px; width: fit-content;" />
           </div>
         </div>
         <div class="grid grid-cols-5 cols-gap-1.5">

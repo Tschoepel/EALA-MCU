@@ -46,8 +46,7 @@
           <div style="padding:10px;">
             <img
               src="../../assets/images/3.jpg"
-              height="100px"
-            >
+              style="height: 120px; width: fit-content;" >
           </div>
           <div style="padding:10px;">
             <img src="../../assets/images/5.jpg" style="height: 120px; width: fit-content;">

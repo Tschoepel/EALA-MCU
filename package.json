@@ -34,6 +34,7 @@
     "typed.js": "^2.0.12",
     "vue-audio-visual": "^2.5.0",
     "vue-chartjs": "^4.1.1",
+    "vue-slim-stackedbar": "^0.1.9",
     "vue3-audio-player": "^1.0.5"
   },
   "prisma": {
