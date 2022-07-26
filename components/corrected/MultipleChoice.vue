@@ -16,50 +16,49 @@
         </div>
       </div>
       <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
-        <b>Hinweistext: </b>Wählen sie die 0,1..n Antworten, die Sie für richtig halten.
+        <b>Fehler: </b> Ihre Antwort ist leider falsch!
       </div>
       <div class="px-4 py-5">
-        <input type="hidden" :name="'multiplechoice-'+props.index+'-id'" :value="props.id+','+input">
         <div class="grid grid-cols-5 cols-gap-0.5">
           <div>
             <input
               id="answerI"
-              v-model="input"
+              v-model="inputI"
               type="checkbox"
               value="answer1"
               class="mr-2"
             >
-            <label id="aILabel" for="answerI" :style="[!props.fill ? {color: 'black'}: answersGiven.aGI ? {color:'green'}:{color:'red'}]">{{ answerI }}</label>
+            <label id="aILabel" for="answerI" :style="[answersCorrect.aCI ? {color:'green'}:{color:'red'}]">{{ answerI }}</label>
           </div>
           <div>
             <input
               id="answerII"
-              v-model="input"
+              v-model="inputII"
               type="checkbox"
               value="answer2"
               class="mr-2"
             >
-            <label id="aIILabel" for="answerII" :style="[!props.fill ? {color: 'black'}: answersGiven.aGII ? {color:'green'}:{color:'red'}]">{{ answerII }}</label>
+            <label id="aIILabel" for="answerII" :style="[answersCorrect.aCII ? {color:'green'}:{color:'red'}]">{{ answerII }}</label>
           </div>
           <div>
             <input
               id="answerIII"
-              v-model="input"
+              v-model="inputIII"
               type="checkbox"
               value="answer3"
               class="mr-2"
             >
-            <label id="aIIILabel" for="answerIII" :style="[!props.fill ? {color: 'black'}: answersGiven.aGIII ? {color:'green'}:{color:'red'}]">{{ answerIII }}</label>
+            <label id="aIIILabel" for="answerIII" :style="[answersCorrect.aCIII ? {color:'green'}:{color:'red'}]">{{ answerIII }}</label>
           </div>
           <div>
             <input
               id="answerIV"
-              v-model="input"
+              v-model="inputIV"
               type="checkbox"
               value="answer4"
               class="mr-2"
             >
-            <label id="aIVLabel" for="answerIV" :style="[!props.fill ? {color: 'black'}: answersGiven.aGIV? {color:'green'}:{color:'red'}]">{{ answerIV }}</label>
+            <label id="aIVLabel" for="answerIV" :style="[answersCorrect.aCIV? {color:'green'}:{color:'red'}]">{{ answerIV }}</label>
           </div>
         </div>
       </div>
@@ -85,6 +84,10 @@ const props = defineProps({
   fillElements: {
     type: String,
     required: true
+  },
+  correct: {
+    type: String,
+    required: true
   }
 });
 const url = "/api/multipleChoice/" + props.id;
@@ -93,47 +96,25 @@ const { data: api } = await useFetch(url, {
 });
 const question = api.value.question;
 const answers = api.value.answers.split(",");
-// const input = reactive("");
-const answersCorrectList = api.value.answersCorrect.split(",");
-const answersCorrect = { aCI: answersCorrectList[0] === "true", aCII: answersCorrectList[1] === "true", aCIII: answersCorrectList[2] === "true", aCIV: answersCorrectList[3] === "true" };
 const answerI = answers[0];
 const answerII = answers[1];
 const answerIII = answers[2];
 const answerIV = answers[3];
-const helpOpen = ref(false);
-const answersGiven = reactive({ aGI: false, aGII: false, aGIII: false, aGIV: false });
-if (props.fill) {
-  answersGiven.aGI = (props.fillElements.includes("answer1") && answersCorrect.aCI) || (!props.fillElements.includes("answer1") && !answersCorrect.aCI);
-  answersGiven.aGII = (props.fillElements.includes("answer2") && answersCorrect.aCII) || (!props.fillElements.includes("answer2") && !answersCorrect.aCII);
-  answersGiven.aGIII = (props.fillElements.includes("answer3") && answersCorrect.aCIII) || (!props.fillElements.includes("answer3") && !answersCorrect.aCIII);
-  answersGiven.aGIV = (props.fillElements.includes("answer4") && answersCorrect.aCIV) || (!props.fillElements.includes("answer4") && !answersCorrect.aCIV);
-}
-onMounted(() => {
-  if (props.fill) {
-    if (props.fillElements.includes("answer1")) {
-      document.getElementById("answerI").checked = true;
-    }
-    if (props.fillElements.includes("answer2")) {
-      document.getElementById("answerII").checked = true;
-    }
-    if (props.fillElements.includes("answer3")) {
-      document.getElementById("answerIII").checked = true;
-    }
-    if (props.fillElements.includes("answer4")) {
-      document.getElementById("answerIV").checked = true;
-    }
-  }
-});
+const inputI = (props.fillElements.includes("answer1") ? "true" : "false");
+const inputII = (props.fillElements.includes("answer2") ? "true" : "false");
+const inputIII = (props.fillElements.includes("answer3") ? "true" : "false");
+const inputIV = (props.fillElements.includes("answer4") ? "true" : "false");
+const answersCorrectList = props.correct.split(",");
+const answersCorrect = { aCI: answersCorrectList[0] === "true", aCII: answersCorrectList[1] === "true", aCIII: answersCorrectList[2] === "true", aCIV: answersCorrectList[3] === "true" };
+const helpOpen = ref(answersCorrectList.includes("false"));
 
-</script>
-<script>
-export default {
+/* export default {
   data () {
     return {
       input: []
     };
   }
-};
+}; */
 </script>
 <style scoped>
 .green{

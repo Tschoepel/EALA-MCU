@@ -1,6 +1,26 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.19] - 25.07.2022
+### Added
+- Type message on exercise finished, raw
+### Changed
+
+### Removed
+## [0.0.18] - 25.07.2022
+### Added
+- Correction components for 5 Itemtypes
+- check for complete answer to offer feedback text
+### Changed
+- fixed storing of data
+- fixed feedback bugs
+### Removed
+## [0.0.17] - 25.07.2022
+### Added
+- merged Branches with all Item Types
+- created feedback for applicable item types
+### Changed
+### Removed
 ## [0.0.16] - 25.07.2022
 ### Added
 - feedback for ClosedText and MultipleChoice

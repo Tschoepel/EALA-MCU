@@ -85,11 +85,6 @@
               </div>
             </div>
           </div>
-          <FormComponent :list="[{c: 'ItemsClosed-text', id: 1}, {c: 'ItemsClosed-text', id: 2}, {c: 'ItemsMultiple-choice', id: 3}, {c: 'ItemsShort-text', id: 1}, {c: 'ItemsShort-text', id: 2}, {c: 'ItemsDraw-item', id: 1}]">
-          <!-- <ItemsClosed-text :id="1" />
-          <div><b /></div>
-          <ItemsMultiple-choice :id="1" /> -->
-          </FormComponent>
         </div>
         <!-- /End replace -->
       </div>

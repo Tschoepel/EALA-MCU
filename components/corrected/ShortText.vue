@@ -16,7 +16,7 @@
         </div>
       </div>
       <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
-        <b>Hinweistext: </b>Bitte beantworten sie die Frage kurz.
+        <b>Fehler: </b> Ihre Antwort ist leider falsch!
       </div>
       <div class="px-4 py-5">
         <video v-show="videoEnabled" id="embVideo" controls>
@@ -28,6 +28,7 @@
           type="text"
           :name="'shorttext-'+props.index+ '-id,' + props.id + answer"
           size="60"
+          :style="[correctValue.cI ? {color:'green'}:{color:'red'}]"
           height="20"
           :placeholder="placeholder"
           class="shadow-sm text-sm border-gray-300 rounded-md"
@@ -38,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { hash } from "ohash";
 const props = defineProps({
   id: {
@@ -56,32 +57,35 @@ const props = defineProps({
   fillElements: {
     type: String,
     required: true
+  },
+  correct: {
+    type: String,
+    required: true
   }
 });
 const answer = reactive("");
 const placeholder = (props.fill) ? props.fillElements : "Your answer goes here...";
-console.log("PLACEHOLDER: " + placeholder);
 const url = "/api/shortText/" + props.id;
-// :style="[!props.fill ? {color: 'black'}: correct.cI ? {color:'green'}:{color:'red'}]"
-// const correct = reactive({ cI: false });const answersGiven = reactive({ aGI: false, aGII: false, aGIII: false, aGIV: false });
 const { data: api } = await useFetch(url, {
   key: hash([url])
 });
 const question = api.value.question;
-const correct = reactive({ cI: false });
-// console.log(correct.cI);
+const correctValue = reactive({ cI: false });
 const videoEnabled = api.value.videoExists;
 const imageSrcM = "/assets/video/video" + props.id + ".webm";
-const helpOpen = ref(false);
+const helpOpen = ref(!correctValue);
 const correctWords = api.value.answerKeywords.split(",");
 console.log(correctWords);
-// console.log("CorrectBEFORE: " + correct.cI);
-if (props.fill && props.fillElements.length !== 0) {
-  correctWords.array.forEach((element) => {
-    if (props.fillElements.ignoreCase().contains(element.ignoreCase())) {
-      correct.cI = true;
+onMounted(() => {
+  console.log("MOUNTED");
+  document.addEventListener("DOMContentLoaded", function () {
+    if (props.fill && placeholder.length !== 0) {
+      correctWords.forEach((element) => {
+        if (placeholder.ignoreCase().contains(element)) {
+          correctValue.cI = true;
+        }
+      });
     }
   });
-}
-// console.log("CorrectAFTER: " + correct.cI);
+});
 </script>

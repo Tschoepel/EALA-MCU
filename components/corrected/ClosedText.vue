@@ -16,7 +16,7 @@
         </div>
       </div>
       <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
-        <b>Hinweistext: </b>Füllen Sie alle leeren Felder korrekt aus. Groß- und Kleinschreibung wird hierbei ignoriert.
+        <b>Fehler: </b> Ihre Antwort ist leider falsch!
       </div>
       <!-- eslint-disable vue/no-v-html -->
       <input type="hidden" :name="'closedtext-'+props.index+'-id'" :value="props.id">
@@ -45,7 +45,12 @@ const props = defineProps({
   fillElements: {
     type: String,
     required: true
+  },
+  correct: {
+    type: String,
+    required: true
   }
+
 });
 // Allgemeine Fragen zu Thor; Dies ist ein Text mit $$ Lücken. Die Lücken müssen vorher $$ werden.;diversen,befüllt
 const url = "/api/closedText/" + props.id;
@@ -56,16 +61,18 @@ let title = null; let text = null; let answers = null;
 if (api.value !== null)
   ({ title, text, answers } = api.value); // eslint-disable-line
 let correction = [];
+let allRight = true;
 if (props.fill) {
   const given = props.fillElements.split(",");
   correction = [];
   answers = answers.split(",");
   for (let i = 0; i < Math.min(given.length, answers.length); i++) {
     correction.push(given[i].toLowerCase() === answers[i].toLowerCase());
+    allRight = allRight & given[i].toLowerCase() === answers[i].toLowerCase();
   }
 }
 onMounted(() => {
-  console.log(title, text);
+  // console.log(title, text);
 });
 let i = 0;
 const htmlText = computed(() => {
@@ -73,10 +80,17 @@ const htmlText = computed(() => {
     return "Es gibt aktuell Probleme mit der API";
   }
   const input = "<input type=\"text\" name=\"closedtext-" + props.index + "-num\" style=\"calcStyle;\" class=\"shadow-sm text-sm border-gray-300 rounded-md\" value=\"testnum\">";
-  const value = text.replaceAll("$$", () => {
+  let value = text.replaceAll("$$", () => {
     i = i + 1;
     return input.replaceAll("num", i);
   });
+  let o = 0;
+  for (let j = 0; j < i; j++) {
+    o = o + 1;
+    const element = props.fillElements.split(",")[j];
+    console.log(element);
+    value = value.replaceAll("test" + o, element);
+  }
   i = 0;
   return value.replaceAll("calcStyle", () => {
     i = i + 1;
@@ -87,5 +101,5 @@ const htmlText = computed(() => {
     return (color);
   });
 });
-const helpOpen = ref(false);
+const helpOpen = ref(!allRight);
 </script>

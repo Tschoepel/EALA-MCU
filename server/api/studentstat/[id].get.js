@@ -8,6 +8,7 @@ export default defineEventHandler(async (event) => {
       id: true,
       userId: true,
       submission: true,
+      correctionString: true,
       resultId: true,
       createdAt: true,
       result: true

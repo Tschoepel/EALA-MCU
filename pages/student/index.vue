@@ -77,6 +77,9 @@ const valuesArray = Array.from(apiTrainings.value);
 let countItems = 0;
 let countClosed = 0;
 let countMultiple = 0;
+let countShort = 0;
+let countImage = 0;
+let countSound = 0;
 let countOther = 0;
 valuesArray.forEach((element) => {
   const currentObject = Object.values(element);
@@ -91,15 +94,21 @@ valuesArray.forEach((element) => {
         countClosed = countClosed + 1;
       } else if (element.includes("multiplechoice")) {
         countMultiple = countMultiple + 1;
+      } else if (element.includes("shorttext")) {
+        countShort = countShort + 1;
+      } else if (element.includes("imageselection")) {
+        countImage = countImage + 1;
+      } else if (element.includes("hearingtask")) {
+        countSound = countSound + 1;
       } else {
         countOther = countOther + 1;
       }
     }
   });
 });
-const itemsDoneLabels = ["Multiple-Choice", "Lückentext", "Andere"];
+const itemsDoneLabels = ["Multiple-Choice", "Lückentext", "Kurztext", "Sounderkennung", "Bilderkennung", "Andere"];
 const itemsDoneData = [{
-  data: [countMultiple, countClosed, countOther],
+  data: [countMultiple, countClosed, countShort, countSound, countImage, countOther],
   label: "Items",
   fill: true,
   backgroundColor: "rgba(67, 56, 202, 0.2)",
