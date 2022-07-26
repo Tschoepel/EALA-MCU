@@ -26,10 +26,11 @@
         <input
           v-model="answer"
           type="text"
-          :name="'shorttext-'+props.index+ '-id'"
+          :name="'shorttext-'+props.index+ '-id,' + props.id + answer"
+          :checked="checked"
           size="60"
           height="20"
-          placeholder="Bitte schreiben Sie hier hinein..."
+          :placeholder="placeholder"
           class="shadow-sm text-sm border-gray-300 rounded-md"
         >
       </div>
@@ -48,17 +49,40 @@ const props = defineProps({
   index: {
     type: Number,
     required: true
+  },
+  fill: {
+    type: Boolean,
+    required: true
+  },
+  fillElements: {
+    type: String,
+    required: true
   }
 });
-
 const answer = reactive("");
-
+const placeholder = (props.fill) ? props.fillElements : "Your answer goes here...";
+console.log("PLACEHOLDER: " + placeholder);
 const url = "/api/shortText/" + props.id;
+// :style="[!props.fill ? {color: 'black'}: correct.cI ? {color:'green'}:{color:'red'}]"
+// const correct = reactive({ cI: false });const answersGiven = reactive({ aGI: false, aGII: false, aGIII: false, aGIV: false });
 const { data: api } = await useFetch(url, {
   key: hash([url])
 });
 const question = api.value.question;
+const correct = reactive({ cI: false });
+// console.log(correct.cI);
 const videoEnabled = api.value.videoExists;
 const imageSrcM = "/assets/video/video" + props.id + ".webm";
 const helpOpen = ref(false);
+const correctWords = api.value.answerKeywords.split(",");
+console.log(correctWords);
+// console.log("CorrectBEFORE: " + correct.cI);
+if (props.fill && props.fillElements.length !== 0) {
+  correctWords.array.forEach((element) => {
+    if (props.fillElements.ignoreCase().contains(element.ignoreCase())) {
+      correct.cI = true;
+    }
+  });
+}
+// console.log("CorrectAFTER: " + correct.cI);
 </script>

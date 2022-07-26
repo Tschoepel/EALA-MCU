@@ -28,7 +28,7 @@
               </h3>
             </template>
           </InfoCard>
-          <FilledComponent :list=objects />
+          <FilledComponent :list="objects" />
         </div>
         <!-- /End replace -->
       </div>
@@ -46,6 +46,7 @@ const valuesArray = Array.from(api.value);
 
 valuesArray.forEach((element) => {
   const currentObject = Object.values(element);
+  console.log("CurrentObject: " + currentObject);
   const id = currentObject[0];
   if (lastEntry <= parseInt(id)) {
     lastEntry = parseInt(id);
@@ -66,6 +67,7 @@ let fillElements = "";
 let object;
 const length = submissionElements.length;
 submissionElements.forEach((element) => {
+  console.log("Current submission: " + element);
   counter++;
   if (element.includes("id") && id !== -1) {
     fillElements = fillElements.substring(0, fillElements.length - 1);
@@ -85,6 +87,23 @@ submissionElements.forEach((element) => {
   }
   if (element.includes("multiplechoice")) {
     c = "ItemsMultiple-choice";
+    id = parseInt(element.split(",")[1]);
+    fillElements = element.split(",").slice(2).join(",") + ",";
+  }
+  if (element.includes("shorttext")) {
+    console.log("Short Text");
+    console.log(element);
+    const elementParts = element.split(",");
+    console.log(elementParts);
+    console.log("ShortTextID:" + elementParts[1]);
+    c = "ItemsShort-text";
+    id = parseInt(elementParts[1]);
+    fillElements = element.split(",").slice(2).join(",") + ",";
+  }
+  if (element.includes("hearingtask")) {
+    console.log("HearingTask");
+    console.log(element);
+    c = "ItemsHearing-task";
     id = parseInt(element.split(",")[1]);
     fillElements = element.split(",").slice(2).join(",") + ",";
   }

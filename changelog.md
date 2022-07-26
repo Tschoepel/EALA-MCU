@@ -1,6 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.17] - 25.07.2022
+### Added
+- merged Branches with all Item Types
+- created feedback for applicable item types
+### Changed
+### Removed
 ## [0.0.16] - 25.07.2022
 ### Added
 - feedback for ClosedText and MultipleChoice

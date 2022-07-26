@@ -20,50 +20,48 @@
       </div>
       <div class="px-4 py-5">
         <input type="hidden" :name="'hearingtask-'+props.index+'-id'" :value="props.id+','+input">
-        <AudioPlayer
-          :option=" {
+          <AudioPlayer :option=" {
             src: '../../assets/audio/adopted.mp3',
             title: ''
-          //coverImage: 'https://your-cover-image.png',
-          }"
-        />
+            //coverImage: 'https://your-cover-image.png',
+          }" />
         <div class="grid grid-cols-5 cols-gap-0.5">
           <div style="padding:10px;">
-            <img src="../../assets/images/black_widow.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
+            <img src="../../assets/images/black_widow.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/iron_man2.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
+            <img src="../../assets/images/iron_man2.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+          </div>
+          <div style="padding:10px;" >
+            <img src="../../assets/images/thor_the_dark.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/thor_the_dark.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
+            <img src="../../assets/images/thor.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/thor.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
-          </div>
-          <div style="padding:10px;">
-            <img src="../../assets/images/iron_man.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
+            <img src="../../assets/images/iron_man.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
           </div>
         </div>
         <div class="grid grid-cols-5 cols-gap-1.5">
           <div style="padding:10px;">
             <input id="answerI" v-model="input" type="checkbox" value="answer1" class="mr-2">
-            <label for="answerI">{{ answerI }}</label>
+            <label id="aILabel" for="answerI" :style="[!props.fill ? {color: 'black'}: answersCorrect.aCI ? {color:'green'}:{color:'red'}]">{{ answerI }}</label>
           </div>
           <div style="padding:10px;">
             <input id="answerII" v-model="input" type="checkbox" value="answer2" class="mr-2">
-            <label for="answerII">{{ answerII }}</label>
+            <label id="aIILabel" for="answerII" :style="[!props.fill ? {color: 'black'}: answersCorrect.aCII ? {color:'green'}:{color:'red'}]">{{ answerII }}</label>
           </div>
-          <div style="padding:10px;">
+          <div style="padding:10px;" >
             <input id="answerIII" v-model="input" type="checkbox" value="answer3" class="mr-2">
-            <label for="answerIII">{{ answerIII }}</label>
+            <label id="aIIILabel" for="answerIII" :style="[!props.fill ? {color: 'black'}: answersCorrect.aCIII ? {color:'green'}:{color:'red'}]">{{ answerIII }}</label>
           </div>
           <div style="padding:10px;">
             <input id="answerIV" v-model="input" type="checkbox" value="answer4" class="mr-2">
-            <label for="answerIV">{{ answerIV }}</label>
+            <label id="aIVLabel" for="answerIV" :style="[!props.fill ? {color: 'black'}: answersCorrect.aCIV ? {color:'green'}:{color:'red'}]">{{ answerIV }}</label>
           </div>
           <div style="padding:10px;">
             <input id="answerV" v-model="input" type="checkbox" value="answer5" class="mr-2">
-            <label for="answerV">{{ answerV }}</label>
+            <label id="aVLabel" for="answerV" :style="[!props.fill ? {color: 'black'}: answersCorrect.aCV  ? {color:'green'}:{color:'red'}]">{{ answerV }}</label>
           </div>
         </div>
       </div>
@@ -72,6 +70,7 @@
 </template>
 
 <script setup>
+import { hash } from "ohash";
 import { ref } from "vue";
 import AudioPlayer from "vue3-audio-player";
 import "vue3-audio-player/dist/style.css";
@@ -83,24 +82,37 @@ const props = defineProps({
   index: {
     type: Number,
     required: true
+  },
+  fill: {
+    type: Boolean,
+    required: true
+  },
+  fillElements: {
+    type: String,
+    required: true
   }
 });
-const { data: api } = await useFetch("/api/hearingTask/" + props.id);
+const url = "/api/hearingTask/" + props.id;
+const { data: api } = await useFetch(url, {
+  key: hash([url])
+});
 const question = api.value.question;
 const answers = api.value.answers.split(",");
+const answersCorrectList = api.value.answersCorrect.split(",");
+const answersCorrect = { aCI: answersCorrectList[0] === "true", aCII: answersCorrectList[1] === "true", aCIII: answersCorrectList[2] === "true", aCIV: answersCorrectList[3] === "true" };
 const answerI = answers[0];
 const answerII = answers[1];
 const answerIII = answers[2];
 const answerIV = answers[3];
 const answerV = answers[4];
+const input = reactive("");
+const answersGiven = reactive({ aGI: false, aGII: false, aGIII: false, aGIV: false, aGV: false });
+if (props.fill) {
+  answersGiven.aGI = (props.fillElements.includes("answer1") && answersCorrect.aCI) || (!props.fillElements.includes("answer1") && !answersCorrect.aCI);
+  answersGiven.aGII = (props.fillElements.includes("answer2") && answersCorrect.aCII) || (!props.fillElements.includes("answer2") && !answersCorrect.aCII);
+  answersGiven.aGIII = (props.fillElements.includes("answer3") && answersCorrect.aCIII) || (!props.fillElements.includes("answer3") && !answersCorrect.aCIII);
+  answersGiven.aGIV = (props.fillElements.includes("answer4") && answersCorrect.aCIV) || (!props.fillElements.includes("answer4") && !answersCorrect.aCIV);
+  answersGiven.aGV = (props.fillElements.includes("answer4") && answersCorrect.aCV) || (!props.fillElements.includes("answer4") && !answersCorrect.aCV);
+}
 const helpOpen = ref(false);
-</script>
-<script>
-export default {
-  data () {
-    return {
-      input: []
-    };
-  }
-};
 </script>

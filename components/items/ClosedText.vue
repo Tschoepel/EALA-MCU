@@ -60,14 +60,10 @@ if (props.fill) {
   const given = props.fillElements.split(",");
   correction = [];
   answers = answers.split(",");
-  console.log(given);
-  console.log(answers);
   for (let i = 0; i < Math.min(given.length, answers.length); i++) {
     correction.push(given[i].toLowerCase() === answers[i].toLowerCase());
   }
 }
-console.log(correction);
-// const title = api.value.title;
 onMounted(() => {
   // console.log(title, text);
 });
@@ -76,9 +72,6 @@ const htmlText = computed(() => {
   if (text === null) {
     return "Es gibt aktuell Probleme mit der API";
   }
-  console.log(correction);
-  console.log(text);
-  // [!props.fill ? {color: 'black'}: correction.num ? {color:'green'}:{color:'red'}]
   const input = "<input type=\"text\" name=\"closedtext-" + props.index + "-num\" style=\"calcStyle;\" class=\"shadow-sm text-sm border-gray-300 rounded-md\" value=\"testnum\">";
   const value = text.replaceAll("$$", () => {
     i = i + 1;
@@ -89,8 +82,6 @@ const htmlText = computed(() => {
     i = i + 1;
     let color = "color:black";
     if (props.fill) {
-      console.log("Number" + i);
-      console.log("Is " + correction[i - 1]);
       color = (correction[i - 1]) ? "color:green" : "color:red";
     }
     return (color);

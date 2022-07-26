@@ -3,6 +3,9 @@
     <div v-for="(l, i) in props.list" :key="l.c+':'+l.id">
       <ItemsClosed-text v-if="l.c == 'ItemsClosed-text'" :id="l.id" :index="i" :fill="true" :fill-elements="l.fillElements" />
       <ItemsMultiple-choice v-if="l.c == 'ItemsMultiple-choice'" :id="l.id" :index="i" :fill="true" :fill-elements="l.fillElements" />
+      <ItemsImage-selection v-if="l.c == 'ItemsImage-selection'" :id="l.id" :index="i" :fill="true" :fill-elements="l.fillElements" />
+      <ItemsHearing-task v-if="l.c == 'ItemsHearing-task'" :id="l.id" :index="i" :fill="true" :fill-elements="l.fillElements" />
+      <ItemsShort-text v-if="l.c == 'ItemsShort-text'" :id="l.id" :index="i" :fill="true" :fill-elements="l.fillElements" />
     </div>
   </form>
 </template>

@@ -13,7 +13,6 @@ export default defineEventHandler(async (event) => {
   });
   const [scoredC,totalC] = await closedText(body);
   const [scoredM,totalM] = await multipleChoice(body);
-  const [scoredPixel,totalPixel] = await pixelImage(body);
   const [scoredI,totalI] = await imageSelection (body);
   const [scoredH,totalH] = await hearingTask (body);
   const [scoredS,totalS] = await shortText(body);
@@ -41,39 +40,32 @@ export default defineEventHandler(async (event) => {
 });
 
 async function shortText (elements) {
-
   const items = [];
-
+  let realIndex = 0;
+  let currentIndex = 0;
   elements.forEach((element) => {
     if (element[0].includes("shorttext")) {
-      const name = element[0].replace("shorttext-", "");
-      const index = name.substr(0, 1);
-      const answerS = element[1].split(',')[0];
-      if (typeof (items[index]) === "undefined") {
-        items.splice(index, 0, { id: element[1], answer: answerS });
-      } else {
-        const obj = items[index];
-        obj.answer.push(index.answerS);
-        console.log(index);
-      }
+      let elementArray = element[0].split(",");
+      items[realIndex] = {id: elementArray[1], answer: element[1]};
+      currentIndex = realIndex;
+      realIndex = realIndex +1;
     }
   });
-  console.log(items);
   const answers = await shortTextAnswers(items);
-  let score = 0; let total = 0;
+  let score = 0;
   for (let i = 0; i < answers.length; i++) {
     const answer = answers[i].answerKeywords.split(",");
     for (let o = 0; o < answer.length; o++) {
-      total = answer.length //total + 1;
       const a = answer[o];
       if (items[i].answer.toLowerCase().includes(a)) { score = score + 1; }
     }
   }
-  return [score, total];
+  return [Math.min(score,4), 4];
 }
 async function shortTextAnswers (items) {
   const results = [];
   items.forEach((i) => {
+
     results.push(prisma.shortText.findFirst({
       where: { id: parseInt(i.id) },
       select: { answerKeywords: true }
@@ -83,22 +75,23 @@ async function shortTextAnswers (items) {
 }
 async function closedText (elements) {
   const items = [];
+  let realIndex = 0;
+  let currentIndex = 0;
   elements.forEach((element) => {
     if (element[0].includes("closedtext")) {
-      console.log(element);
       const name = element[0].replace("closedtext-", "");
       const index = name.substr(0, 1);
-      if (typeof (items[index]) === "undefined") {
-        items.splice(index, 0, { id: element[1], answers: [] });
+      if (element[0].includes("id")) {
+        items[realIndex] = {id: element[1], answers: []};
+        currentIndex = realIndex;
+        realIndex = realIndex +1;
       } else {
-        const obj = items[index];
+        const obj = items[currentIndex];
         obj.answers.push(element[1]);
       }
     }
   });
-  console.log(items);
   const answers = await closedTextAnswers(items);
-  console.log(answers);
   let score = 0; let total = 0;
   for (let i = 0; i < answers.length; i++) {
     const answer = answers[i].answers.split(",");
@@ -201,9 +194,7 @@ async function imageSelection(elements) {
       items.push(item);
     }
   });
-  console.log(items);
   const answers = await imageSelectionAnswers(items);
-  console.log(answers);
   let score = 0; let total = 1;
   for (let i = 0; i < answers.length; i++) {
     const answer = answers[i].answersCorrect.split(",");
@@ -273,6 +264,5 @@ async function hearingTaskAnswers (items) {
       select: { answersCorrect: true }
     }));
   });
-  console.log(results);
   return await Promise.all(results);
 }
