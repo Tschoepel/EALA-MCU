@@ -3,25 +3,23 @@
     <div class="py-6">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <h1 class="text-2xl font-semibold text-gray-900">
-          Fohorum
+          Forum
         </h1>
       </div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <!-- Replace with your content -->
         <div class="py-4">
           <InfoCard>
-            <template #title>
-              Informationen zum Forum
-            </template>
             <template #text>
               <p>
-                Forum erklrtext<br>
+                Hier innerhalb des Forums können Sie sich mit Ihren Mitstudierenden zu verschiedenen Themen rund um das MCU austauschen.
               </p>
             </template>
           </InfoCard>
           <div class="bg-white overflow-hidden sm:rounded sm:shadow mb-6">
             <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
           <ItemsFightTask :id="1" class="mt-6" />
+          <ItemsComment :id="1" class="mt-6" />
             </div>
             <div class="px-6 py-4">
               <div class="flex flex-col">
