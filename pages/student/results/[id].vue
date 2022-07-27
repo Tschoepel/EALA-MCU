@@ -7,7 +7,6 @@
         </h1>
       </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-      <!-- Replace with your content -->
       <div class="py-4">
       <InfoCard>
             <template #title>
@@ -30,7 +29,6 @@
           </InfoCard>
           <FilledComponent :list="objects" />
         </div>
-        <!-- /End replace -->
       </div>
     </div>
   </dashboardsStudent-dashboard>
@@ -55,13 +53,6 @@ valuesArray.forEach((element) => {
 const result = Object.values(currentSubmission[6]);
 const scored = result[2];
 const total = result[3];
-console.log("current Sub 1: " + currentSubmission[0]);
-console.log("current result: " + currentSubmission[1]);
-console.log("current result: " + currentSubmission[2]);
-console.log("current result: " + currentSubmission[3]);
-console.log("current result: " + currentSubmission[4]);
-console.log("current result: " + currentSubmission[5]);
-console.log("current result: " + currentSubmission[6]);
 const correctString = currentSubmission[3];
 console.log(correctString);
 const correctArray = correctString.split(";");

@@ -107,20 +107,4 @@ const inputIV = (props.fillElements.includes("answer4") ? "true" : "false");
 const answersCorrectList = props.correct.split(",");
 const answersCorrect = { aCI: answersCorrectList[0] === "true", aCII: answersCorrectList[1] === "true", aCIII: answersCorrectList[2] === "true", aCIV: answersCorrectList[3] === "true" };
 const helpOpen = ref(answersCorrectList.includes("false"));
-
-/* export default {
-  data () {
-    return {
-      input: []
-    };
-  }
-}; */
 </script>
-<style scoped>
-.green{
-  color:green;
-}
-.red{
-  color:red;
-}
-</style>

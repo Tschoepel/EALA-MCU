@@ -24,13 +24,13 @@
         </video>
         <br>
         <input
+          id="someid"
           v-model="answer"
           type="text"
           :name="'shorttext-'+props.index+ '-id,' + props.id + answer"
           size="60"
-          :style="[correctValue.cI ? {color:'green'}:{color:'red'}]"
+          :style="[correctValue ? {color:'green'}:{color:'red'}]"
           height="20"
-          :placeholder="placeholder"
           class="shadow-sm text-sm border-gray-300 rounded-md"
         >
       </div>
@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { hash } from "ohash";
 const props = defineProps({
   id: {
@@ -63,29 +63,23 @@ const props = defineProps({
     required: true
   }
 });
-const answer = reactive("");
-const placeholder = (props.fill) ? props.fillElements : "Your answer goes here...";
+const answer = (props.fill) ? props.fillElements : "Question not answered!";
 const url = "/api/shortText/" + props.id;
 const { data: api } = await useFetch(url, {
   key: hash([url])
 });
 const question = api.value.question;
-const correctValue = reactive({ cI: false });
 const videoEnabled = api.value.videoExists;
 const imageSrcM = "/assets/video/video" + props.id + ".webm";
-const helpOpen = ref(!correctValue);
 const correctWords = api.value.answerKeywords.split(",");
-console.log(correctWords);
-onMounted(() => {
-  console.log("MOUNTED");
-  document.addEventListener("DOMContentLoaded", function () {
-    if (props.fill && placeholder.length !== 0) {
-      correctWords.forEach((element) => {
-        if (placeholder.ignoreCase().contains(element)) {
-          correctValue.cI = true;
-        }
-      });
+const correctValue = computed(() => {
+  let isCorrect = false;
+  correctWords.forEach((word) => {
+    if (answer.toLowerCase().includes(word.toLowerCase())) {
+      isCorrect = true;
     }
   });
+  return isCorrect;
 });
+const helpOpen = ref(!correctValue);
 </script>

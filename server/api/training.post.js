@@ -2,9 +2,8 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
-  // return event.context.params.id;
   const body = Array.from(await useBody(event));
-  console.log(JSON.stringify(body));
+  // console.log(JSON.stringify(body));
   const submission = await prisma.trainingSubmissions.create({
     data: {
       userId: 1,
@@ -12,6 +11,7 @@ export default defineEventHandler(async (event) => {
       correctionString: ""
     }
   });
+  await createStudentItemActions(body);
   const [scoredC,totalC, corrC] = await closedText(body);
   const [scoredM,totalM, corrM] = await multipleChoice(body);
   const [scoredI,totalI, corrI] = await imageSelection (body);
@@ -27,7 +27,6 @@ export default defineEventHandler(async (event) => {
 
     }
   });
-  console.log(result);
   await prisma.trainingSubmissions.update({
     where: {
       id: submission.id
@@ -39,7 +38,11 @@ export default defineEventHandler(async (event) => {
   });
   return { id: result.id, correctionString: corrC+corrM+corrI+corrH+corrS };
 });
-
+async function createStudentItemActions(elements){
+  elements.forEach((item) => {
+    console.log(item);
+  })
+}
 async function shortText (elements) {
   const items = [];
   let realIndex = 0;

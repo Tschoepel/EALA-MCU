@@ -8,14 +8,37 @@ datasource db {
 }
 
 model ClosedText {
-  id      Int    @id @default(autoincrement())
-  title   String
-  text    String
-  answers String
+  id          Int    @id @default(autoincrement())
+  area        String
+  difficulty  String
+  itemType    String
+  hint        String
+  title       String
+  text        String
+  answers     String
 }
-
+model StudentTrainingAction{
+  id          Int    @id @default(autoincrement())
+  exercise    Int
+  userID      Int
+  itemType    String
+  itemID      Int
+  answers     String
+  correct     String
+  started     DateTime
+  finished    DateTime
+  difficulty  String
+  area        String
+  score       Int
+  total       Int
+  keys        String?
+}
 model MultipleChoice {
   id             Int    @id @default(autoincrement())
+  area           String
+  difficulty     String
+  itemType       String
+  hint           String
   question       String
   answers        String
   answersCorrect String
@@ -23,6 +46,10 @@ model MultipleChoice {
 
 model ShortText {
   id                Int    @id @default(autoincrement())
+  area              String
+  difficulty        String
+  itemType          String
+  hint              String
   title             String
   question          String
   answer            String
@@ -84,6 +111,10 @@ model TrainingSubmissionsDragDrop {
 
 model ImageSelection {
   id             Int    @id @default(autoincrement())
+  area           String
+  difficulty     String
+  itemType       String
+  hint           String
   question       String
   answers        String
   answersCorrect String
@@ -91,6 +122,10 @@ model ImageSelection {
 
 model HearingTask {
   id             Int    @id @default(autoincrement())
+  area           String
+  difficulty     String
+  itemType       String
+  hint           String
   question       String
   answers        String
   answersCorrect String

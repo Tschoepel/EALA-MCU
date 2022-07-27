@@ -1,6 +1,15 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.20] - 25.07.2022
+### Added
+- Added metadata on items: hint,difficulty,area,
+- Added new StudentTrainingAction with values for indepth e assessment
+- Modified items to fit new schema, reworked the not well fitting questions
+- Added testset of StudentTrainingAction to show Assessement
+### Changed
+- worked on Short Text to show color.
+### Removed
 ## [0.0.19] - 25.07.2022
 ### Added
 - Type message on exercise finished, raw
