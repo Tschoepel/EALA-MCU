@@ -6,6 +6,9 @@ export default defineEventHandler(async (event) => {
   return await prisma.shortText.findFirst({
     where: { id: parseInt(event.context.params.id) },
     select: {
+      area: true,
+      difficulty: true,
+      hint: true,
       title: true,
       question: true,
       answer: true,

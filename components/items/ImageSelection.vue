@@ -19,7 +19,7 @@
         <b>Hinweistext: </b>Wähle die Waffe aus, die zum jeweiligen Charakter passen.
       </div>
       <div class="px-4 py-5">
-        <input type="hidden" :name="'imageselection-'+props.index+'-id'" :value="props.id+','+input">
+        <input type="hidden" :name="'imageselection-'+props.index+'-id-' + area + '-' + difficulty + '-' + hint" :value="props.id+','+input">
         <div class="grid grid-cols-5 cols-gap-0.5">
           <div style="padding:10px;">
             <input id="answerI" v-model="input" type="checkbox" value="answer1" class="mr-2">
@@ -113,14 +113,6 @@ const props = defineProps({
   index: {
     type: Number,
     required: true
-  },
-  fill: {
-    type: Boolean,
-    required: true
-  },
-  fillElements: {
-    type: String,
-    required: true
   }
 });
 const url = "/api/imageSelection/" + props.id;
@@ -128,6 +120,9 @@ const { data: api } = await useFetch(url, {
   key: hash([url])
 });
 const question = api.value.question;
+const area = api.value.area;
+const difficulty = api.value.difficulty;
+const hint = api.value.hint;
 const answers = api.value.answers.split(",");
 const answerI = answers[0];
 const answerII = answers[1];

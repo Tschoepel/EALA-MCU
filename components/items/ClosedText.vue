@@ -27,7 +27,6 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
 import { hash } from "ohash";
 const props = defineProps({
   id: {
@@ -36,10 +35,6 @@ const props = defineProps({
   },
   index: {
     type: Number,
-    required: true
-  },
-  fill: {
-    type: Boolean,
     required: true
   },
   fillElements: {
@@ -52,39 +47,24 @@ const url = "/api/closedText/" + props.id;
 const { data: api } = await useFetch(url, {
   key: hash([url])
 });
-let title = null; let text = null; let answers = null;
-if (api.value !== null)
-  ({ title, text, answers } = api.value); // eslint-disable-line
-let correction = [];
-if (props.fill) {
-  const given = props.fillElements.split(",");
-  correction = [];
-  answers = answers.split(",");
-  for (let i = 0; i < Math.min(given.length, answers.length); i++) {
-    correction.push(given[i].toLowerCase() === answers[i].toLowerCase());
-  }
-}
-onMounted(() => {
-  console.log(title, text);
-});
+
+const text = api.value.text;
+const title = api.value.title;
+const area = api.value.area;
+const difficulty = api.value.difficulty;
+const hint = api.value.hint;
 let i = 0;
 const htmlText = computed(() => {
   if (text === null) {
     return "Es gibt aktuell Probleme mit der API";
   }
-  const input = "<input type=\"text\" name=\"closedtext-" + props.index + "-num\" style=\"calcStyle;\" class=\"shadow-sm text-sm border-gray-300 rounded-md\" value=\"testnum\">";
+  const input = "<input type=\"text\" name=\"closedtext-" + props.index + "-num-" + area + "-" + difficulty + "-" + hint + "\" style=\"calcStyle;\" class=\"shadow-sm text-sm border-gray-300 rounded-md\" value=\"testnum\">";
   const value = text.replaceAll("$$", () => {
     i = i + 1;
     return input.replaceAll("num", i);
   });
-  i = 0;
   return value.replaceAll("calcStyle", () => {
-    i = i + 1;
-    let color = "color:black";
-    if (props.fill) {
-      color = (correction[i - 1]) ? "color:green" : "color:red";
-    }
-    return (color);
+    return ("color:black");
   });
 });
 const helpOpen = ref(false);

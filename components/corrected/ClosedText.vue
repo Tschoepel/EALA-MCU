@@ -27,7 +27,6 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
 import { hash } from "ohash";
 const props = defineProps({
   id: {
@@ -36,10 +35,6 @@ const props = defineProps({
   },
   index: {
     type: Number,
-    required: true
-  },
-  fill: {
-    type: Boolean,
     required: true
   },
   fillElements: {
@@ -62,18 +57,13 @@ if (api.value !== null)
   ({ title, text, answers } = api.value); // eslint-disable-line
 let correction = [];
 let allRight = true;
-if (props.fill) {
-  const given = props.fillElements.split(",");
-  correction = [];
-  answers = answers.split(",");
-  for (let i = 0; i < Math.min(given.length, answers.length); i++) {
-    correction.push(given[i].toLowerCase() === answers[i].toLowerCase());
-    allRight = allRight & given[i].toLowerCase() === answers[i].toLowerCase();
-  }
+const given = props.fillElements.split(",");
+correction = [];
+answers = answers.split(",");
+for (let i = 0; i < Math.min(given.length, answers.length); i++) {
+  correction.push(given[i].toLowerCase() === answers[i].toLowerCase());
+  allRight = allRight & given[i].toLowerCase() === answers[i].toLowerCase();
 }
-onMounted(() => {
-  // console.log(title, text);
-});
 let i = 0;
 const htmlText = computed(() => {
   if (text === null) {

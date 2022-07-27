@@ -18,7 +18,7 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"easy",
-      hint:"Captain America spielt 1942 im zweiten Weltkrieg und versucht zu verhindern, dass Hydra die Macht des Tessserakt erschließen kann.",
+      hint:"Captain America spielt 1942 im zweiten Weltkrieg und bekämpft Hydra.",
       title: "Captain America: The First Avenger",
       text: "Im Jahr $$, während des Zweiten Weltkriegs, dringen Soldaten der Organisation $$, der Wissenschaftsdivision des Dritten Reichs, in die norwegische Stadt Tønsberg ein. In einem Kloster findet Johann Schmidt, ein mysteriöses, würfelförmiges Artefakt, das er als $$ bezeichnet. Dem Wissenschaftler Arnim Zola gelingt es, die Energien des Würfels zu bändigen und als Quelle für neuartige Energiewaffen zu nutzen.",
       answers: "1942,hydra,tesserakt"
@@ -28,7 +28,7 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"easy",
-      hint:"Thor, Hulk, Captain America, Iron, Black Widow, Hawkeye stellten sich unter der Leitung von Nick Fury gegen Loki.",
+      hint:"Es gibt 7 Helden und einen Supervillain.",
       question: "Welche der folgenden Superhelden traten im ersten Avengersfilm auf?",
       answers : "Dr. Strange,Thor,Loki,Spiderman",
       answersCorrect: "false,true,true,false"
@@ -38,7 +38,7 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"difficult",
-      hint:"Hier unterhalten sich Thor und Captain America über Loki. Der Film muss also in Avengers oder Thor 2 spielen.",
+      hint:"Hier unterhalten sich Thor und Hulk über Loki. Der Film muss also in Avengers oder Thor 2 spielen.",
       question: "Aus welchem Film ist dieser Ausschnitt?",
       answers : "Black Widow,Iron Man 2,Thor: The Dark Kingdom, Thor: Tag der Entscheidung,Iron Man",
       answersCorrect: "false,false,true,false,false"
@@ -49,7 +49,7 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"easy",
-      hint:"Insgesamt sechs Infinity-Steine werden in den Filmen gessammelt: Raumstein, Zeitstein, Gedankenstein, Seelenstein, Realitätsstein, Machtstein",
+      hint:"Insgesamt sechs Infinity-Steine werden in den Filmen gessammelt: Raumstein Zeitstein Gedankenstein Seelenstein Realitätsstein Machtstein",
       question: "Welche der folgenden Infinity-Steine gibt es nicht?",
       answers : "Zeistein, Geiststein, Gedankenstein, Raumstein",
       answersCorrect: "false,true,false,false"

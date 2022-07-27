@@ -50,10 +50,6 @@ const props = defineProps({
     type: Number,
     required: true
   },
-  fill: {
-    type: Boolean,
-    required: true
-  },
   fillElements: {
     type: String,
     required: true
@@ -63,7 +59,7 @@ const props = defineProps({
     required: true
   }
 });
-const answer = (props.fill) ? props.fillElements : "Question not answered!";
+const answer = (props.fillElements.length !== 0) ? props.fillElements : "Question not answered!";
 const url = "/api/shortText/" + props.id;
 const { data: api } = await useFetch(url, {
   key: hash([url])

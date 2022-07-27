@@ -19,7 +19,7 @@
         <b>Fehler: </b> Ihre Antwort ist leider falsch!
       </div>
       <div class="px-4 py-5">
-        <input type="hidden" :name="'hearingtask-'+props.index+'-id'" :value="props.id+','+input">
+        <input type="hidden" :name="'hearingtask-' + props.index + '-id'" :value="props.id" >
           <AudioPlayer :option=" {
             src: '../../assets/audio/adopted.mp3',
             title: ''
@@ -81,10 +81,6 @@ const props = defineProps({
   },
   index: {
     type: Number,
-    required: true
-  },
-  fill: {
-    type: Boolean,
     required: true
   },
   fillElements: {

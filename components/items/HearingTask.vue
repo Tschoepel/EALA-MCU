@@ -19,7 +19,7 @@
         Click on play, guess the MARVEL movie and write down your answer as fast as you can.
       </div>
       <div class="px-4 py-5">
-        <input type="hidden" :name="'hearingtask-'+props.index+'-id'" :value="props.id+','+input">
+        <input type="hidden" :name="'hearingtask-'+props.index+'-id-' + area + '-' + difficulty + '-' + hint" :value="props.id+','+input">
           <AudioPlayer :option=" {
             src: '../../assets/audio/adopted.mp3',
             title: ''
@@ -45,23 +45,23 @@
         <div class="grid grid-cols-5 cols-gap-1.5">
           <div style="padding:10px;">
             <input id="answerI" v-model="input" type="checkbox" value="answer1" class="mr-2">
-            <label id="aILabel" for="answerI" :style="[!props.fill ? {color: 'black'}: answersCorrect.aCI ? {color:'green'}:{color:'red'}]">{{ answerI }}</label>
+            <label id="aILabel" for="answerI" >{{ answerI }}</label>
           </div>
           <div style="padding:10px;">
             <input id="answerII" v-model="input" type="checkbox" value="answer2" class="mr-2">
-            <label id="aIILabel" for="answerII" :style="[!props.fill ? {color: 'black'}: answersCorrect.aCII ? {color:'green'}:{color:'red'}]">{{ answerII }}</label>
+            <label id="aIILabel" for="answerII" >{{ answerII }}</label>
           </div>
           <div style="padding:10px;" >
             <input id="answerIII" v-model="input" type="checkbox" value="answer3" class="mr-2">
-            <label id="aIIILabel" for="answerIII" :style="[!props.fill ? {color: 'black'}: answersCorrect.aCIII ? {color:'green'}:{color:'red'}]">{{ answerIII }}</label>
+            <label id="aIIILabel" for="answerIII" >{{ answerIII }}</label>
           </div>
           <div style="padding:10px;">
             <input id="answerIV" v-model="input" type="checkbox" value="answer4" class="mr-2">
-            <label id="aIVLabel" for="answerIV" :style="[!props.fill ? {color: 'black'}: answersCorrect.aCIV ? {color:'green'}:{color:'red'}]">{{ answerIV }}</label>
+            <label id="aIVLabel" for="answerIV" >{{ answerIV }}</label>
           </div>
           <div style="padding:10px;">
             <input id="answerV" v-model="input" type="checkbox" value="answer5" class="mr-2">
-            <label id="aVLabel" for="answerV" :style="[!props.fill ? {color: 'black'}: answersCorrect.aCV  ? {color:'green'}:{color:'red'}]">{{ answerV }}</label>
+            <label id="aVLabel" for="answerV" >{{ answerV }}</label>
           </div>
         </div>
       </div>
@@ -82,14 +82,6 @@ const props = defineProps({
   index: {
     type: Number,
     required: true
-  },
-  fill: {
-    type: Boolean,
-    required: true
-  },
-  fillElements: {
-    type: String,
-    required: true
   }
 });
 const url = "/api/hearingTask/" + props.id;
@@ -97,23 +89,15 @@ const { data: api } = await useFetch(url, {
   key: hash([url])
 });
 const question = api.value.question;
+const area = api.value.area;
+const difficulty = api.value.difficulty;
+const hint = api.value.hint;
 const answers = api.value.answers.split(",");
-const answersCorrectList = api.value.answersCorrect.split(",");
-const answersCorrect = { aCI: answersCorrectList[0] === "true", aCII: answersCorrectList[1] === "true", aCIII: answersCorrectList[2] === "true", aCIV: answersCorrectList[3] === "true" };
 const answerI = answers[0];
 const answerII = answers[1];
 const answerIII = answers[2];
 const answerIV = answers[3];
 const answerV = answers[4];
-// const input = reactive("");
-const answersGiven = reactive({ aGI: false, aGII: false, aGIII: false, aGIV: false, aGV: false });
-if (props.fill) {
-  answersGiven.aGI = (props.fillElements.includes("answer1") && answersCorrect.aCI) || (!props.fillElements.includes("answer1") && !answersCorrect.aCI);
-  answersGiven.aGII = (props.fillElements.includes("answer2") && answersCorrect.aCII) || (!props.fillElements.includes("answer2") && !answersCorrect.aCII);
-  answersGiven.aGIII = (props.fillElements.includes("answer3") && answersCorrect.aCIII) || (!props.fillElements.includes("answer3") && !answersCorrect.aCIII);
-  answersGiven.aGIV = (props.fillElements.includes("answer4") && answersCorrect.aCIV) || (!props.fillElements.includes("answer4") && !answersCorrect.aCIV);
-  answersGiven.aGV = (props.fillElements.includes("answer4") && answersCorrect.aCV) || (!props.fillElements.includes("answer4") && !answersCorrect.aCV);
-}
 const helpOpen = ref(false);
 </script>
 <script>

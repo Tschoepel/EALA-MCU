@@ -3,7 +3,6 @@ const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
   const body = Array.from(await useBody(event));
-  // console.log(JSON.stringify(body));
   const submission = await prisma.trainingSubmissions.create({
     data: {
       userId: 1,
@@ -11,7 +10,8 @@ export default defineEventHandler(async (event) => {
       correctionString: ""
     }
   });
-  await createStudentItemActions(body);
+
+  await createStudentTrainingActions(body);
   const [scoredC,totalC, corrC] = await closedText(body);
   const [scoredM,totalM, corrM] = await multipleChoice(body);
   const [scoredI,totalI, corrI] = await imageSelection (body);
@@ -38,9 +38,40 @@ export default defineEventHandler(async (event) => {
   });
   return { id: result.id, correctionString: corrC+corrM+corrI+corrH+corrS };
 });
-async function createStudentItemActions(elements){
-  elements.forEach((item) => {
+async function createStudentTrainingActions(elements){
+  elements.forEach(async (item) => {
     console.log(item);
+    /* const exercise = 101;
+    const userID = 1;
+    const itemType = "hearing";
+    const itemID = 101;
+    const answers = "answer2";
+    const correct = "answer3";
+    const started = set(new Date(), {hours: 18, minutes: 28, seconds: 47});
+    const finished = set(new Date(), {hours: 18, minutes: 29, seconds: 05});
+    const difficulty = "hard";
+    const area = "Multiverse";
+    const score = 0;
+    const total = 1;
+    const keys ="";
+     await prisma.studentTrainingActions.create({
+      data: {
+        exercise:    exercise,
+        userID:      userID,
+        itemType:    itemType,
+        itemID:      itemID,
+        answers:     answers,
+        correct:     correct,
+        started:     started,
+        finished:    finished,
+        difficulty:  difficulty,
+        area:        area,
+        score:       score,
+        total:       total,
+        keys:        keys
+      }
+
+    }) */
   })
 }
 async function shortText (elements) {

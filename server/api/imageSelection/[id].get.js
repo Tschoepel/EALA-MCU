@@ -6,6 +6,9 @@ export default defineEventHandler(async (event) => {
   return await prisma.imageSelection.findFirst({
     where: { id: parseInt(event.context.params.id) },
     select: {
+      area: true,
+      difficulty: true,
+      hint: true,
       question: true,
       answers: true,
     }

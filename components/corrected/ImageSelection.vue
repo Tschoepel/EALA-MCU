@@ -19,7 +19,7 @@
         <b>Fehler: </b> Ihre Antwort ist leider falsch!
       </div>
       <div class="px-4 py-5">
-        <input type="hidden" :name="'imageselection-'+props.index+'-id'" :value="props.id+','+input">
+        <input type="hidden" :name="'imageselection-'+props.index+'-id'" :value="props.id+','">
         <div class="grid grid-cols-5 cols-gap-0.5">
           <div style="padding:10px;">
             <input id="answerI" v-model="inputI" type="checkbox" value="answer1" class="mr-2">
@@ -111,10 +111,6 @@ const props = defineProps({
   },
   index: {
     type: Number,
-    required: true
-  },
-  fill: {
-    type: Boolean,
     required: true
   },
   fillElements: {

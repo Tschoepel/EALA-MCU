@@ -26,7 +26,7 @@
         <input
           v-model="answer"
           type="text"
-          :name="'shorttext-'+props.index+ '-id,' + props.id + answer"
+          :name="'shorttext-'+props.index+ '-id-' + area + '-' + difficulty + '-' + hint+ ',' + props.id + answer"
           size="60"
           height="20"
           :placeholder="placeholder"
@@ -48,40 +48,22 @@ const props = defineProps({
   index: {
     type: Number,
     required: true
-  },
-  fill: {
-    type: Boolean,
-    required: true
-  },
-  fillElements: {
-    type: String,
-    required: true
   }
 });
 const answer = reactive("");
-const placeholder = (props.fill) ? props.fillElements : "Your answer goes here...";
-console.log("PLACEHOLDER: " + placeholder);
+
+const placeholder = "Your answer goes here...";
 const url = "/api/shortText/" + props.id;
-// :style="[!props.fill ? {color: 'black'}: correct.cI ? {color:'green'}:{color:'red'}]"
-// const correct = reactive({ cI: false });const answersGiven = reactive({ aGI: false, aGII: false, aGIII: false, aGIV: false });
+
 const { data: api } = await useFetch(url, {
   key: hash([url])
 });
 const question = api.value.question;
-const correct = reactive({ cI: false });
-// console.log(correct.cI);
+const area = api.value.area;
+const difficulty = api.value.difficulty;
+const hint = api.value.hint;
 const videoEnabled = api.value.videoExists;
 const imageSrcM = "/assets/video/video" + props.id + ".webm";
 const helpOpen = ref(false);
-const correctWords = api.value.answerKeywords.split(",");
-console.log(correctWords);
-// console.log("CorrectBEFORE: " + correct.cI);
-if (props.fill && props.fillElements.length !== 0) {
-  correctWords.array.forEach((element) => {
-    if (props.fillElements.ignoreCase().contains(element.ignoreCase())) {
-      correct.cI = true;
-    }
-  });
-}
-// console.log("CorrectAFTER: " + correct.cI);
+
 </script>
