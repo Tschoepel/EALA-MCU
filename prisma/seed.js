@@ -8,7 +8,6 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"medium",
-      itemType:"closed",
       hint:"Erst ab Avengers spielte Mark Ruffalo den Hulk. 2008 wurde er noch von Edward Norton verkörpert",
       title: "Hulk",
       text: "Hulk ist die einzige Rolle im MCU, bei der der Schauspieler $$ wurde. Sie wurde im Film \"Der unglaubliche \" Hulk von $$ gespielt.",
@@ -19,7 +18,6 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"easy",
-      itemType:"closed",
       hint:"Captain America spielt 1942 im zweiten Weltkrieg und versucht zu verhindern, dass Hydra die Macht des Tessserakt erschließen kann.",
       title: "Captain America: The First Avenger",
       text: "Im Jahr $$, während des Zweiten Weltkriegs, dringen Soldaten der Organisation $$, der Wissenschaftsdivision des Dritten Reichs, in die norwegische Stadt Tønsberg ein. In einem Kloster findet Johann Schmidt, ein mysteriöses, würfelförmiges Artefakt, das er als $$ bezeichnet. Dem Wissenschaftler Arnim Zola gelingt es, die Energien des Würfels zu bändigen und als Quelle für neuartige Energiewaffen zu nutzen.",
@@ -30,7 +28,6 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"easy",
-      itemType:"multiple",
       hint:"Thor, Hulk, Captain America, Iron, Black Widow, Hawkeye stellten sich unter der Leitung von Nick Fury gegen Loki.",
       question: "Welche der folgenden Superhelden traten im ersten Avengersfilm auf?",
       answers : "Dr. Strange,Thor,Loki,Spiderman",
@@ -41,7 +38,6 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"difficult",
-      itemType:"hearing",
       hint:"Hier unterhalten sich Thor und Captain America über Loki. Der Film muss also in Avengers oder Thor 2 spielen.",
       question: "Aus welchem Film ist dieser Ausschnitt?",
       answers : "Black Widow,Iron Man 2,Thor: The Dark Kingdom, Thor: Tag der Entscheidung,Iron Man",
@@ -53,7 +49,6 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"easy",
-      itemType:"multiple",
       hint:"Insgesamt sechs Infinity-Steine werden in den Filmen gessammelt: Raumstein, Zeitstein, Gedankenstein, Seelenstein, Realitätsstein, Machtstein",
       question: "Welche der folgenden Infinity-Steine gibt es nicht?",
       answers : "Zeistein, Geiststein, Gedankenstein, Raumstein",
@@ -70,8 +65,7 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"easy",
-      itemType:"short",
-      hint:"Dies ist der zweite alleinstehende Film von Iron Man. Er ist Teil der ersten Phase der Avengers.",
+      hint:"Tony Stark ist für seine Intelligenz und scharfe Zunge bekannt.",
       title: "Bitte beantworten Sie die Frage in wenigen Worten",
       question: "Nennen sie 2 Stärken von Iron Man.",
       answer: "Hier könnte eine Antwort stehen",
@@ -83,7 +77,6 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"easy",
-      itemType:"short",
       hint:"Dies ist der zweite alleinstehende Film von Iron Man. Er ist Teil der ersten Phase der Avengers.",
       title: "Bitte beantworten Sie die Frage.",
       question: "Um welchen Film handelt es sich im folgenden Video? Begründen ihre Entscheidung.",
@@ -107,7 +100,6 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"medium",
-      itemType:"imageselection",
       hint:"Der Falcon taucht das erste Mal an der Seite von Captain America im Film Winter Soldier auf.",
       question: "Welche Waffe gehört zu Falcon?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
@@ -119,7 +111,6 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"hard",
-      itemType:"imageselection",
       hint:"Clint Burton alias \"Hawkeye\" ist ab Avengers häufig als Nebencharakter zu sehen.",
       question: "Welche Waffe gehört zu Clint Barton?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
@@ -131,7 +122,6 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"easy",
-      itemType:"imageselection",
       hint:"Die Repulsoren befinden sich an den Füßen und Händen von Iron Man's Rüstung.",
       question: "Welche Waffe gehört zu Tony Stark?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
@@ -143,7 +133,6 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"medium",
-      itemType:"imageselection",
       hint:"Natasha Roman alias \"Black Widow\" ist versiert im Umgang mit vielen Waffen. Von diesen benutzt sie aber nur die Batons",
       question: "Welche Waffe gehört zu Natasha Romanoff?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
@@ -155,7 +144,6 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"easy",
-      itemType:"imageselection",
       hint:"Kaum eine Waffe ist so eng mit einem Charakter verbunden wie der Schild von Captain America.",
       question: "Welche Waffe gehört zu Captain America?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
@@ -167,7 +155,6 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"medium",
-      itemType:"imageselection",
       hint:"Der futuristisch anmutende Quadplaster passt gut in die Hände des Raumreisenden Starlord. ",
       question: "Welche Waffe gehört zu Peter Quill?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
@@ -179,8 +166,7 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"easy",
-      itemType:"imageselection",
-      hint:"Niemand außer Thor ist in der Lage seinen Hammer Mjolnir zu schwingen, oder?",
+      hint:"Niemand außer Thor ist in der Lage seinen Hammer Mjolnir zu schwingen.",
       question: "Welche Waffe gehört zu Thor?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
       answersCorrect: "false,false,false,false,false,true,false,false,false,false"
@@ -191,8 +177,7 @@ async function main () {
     data: {
       area: "Infinity Wars",        
       difficulty:"medium",
-      itemType:"imageselection",
-      hint:"Gamora, stets versucht, den verrückten Titan Thanos zu vernichten, führt den Godslayer.",
+      hint:"Gamora versucht den verrückten Titan Thanos zu vernichten. Sie führt den Godslayer.",
       question: "Welche Waffe gehört zu Gamora?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
       answersCorrect: "false,false,false,false,false,false,false,false,false,true"
@@ -203,7 +188,6 @@ async function main () {
     data: {
       area: "Multiverse",        
       difficulty:"difficult",
-      itemType:"imageselection",
       hint:"Wie bereits der Titel des einzigen Auftritts von Wenwu andeutet, nutzt er die Ten Rings",
       question: "Welche Waffe gehört zu Wenwu?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
