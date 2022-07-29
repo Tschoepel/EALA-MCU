@@ -31,7 +31,7 @@ async function main () {
       hint:"Es gibt 7 Helden und einen Supervillain.",
       question: "Welche der folgenden Superhelden traten im ersten Avengersfilm auf?",
       answers : "Dr. Strange,Thor,Loki,Spiderman",
-      answersCorrect: "false,true,true,false"
+      answersCorrect: "answer2,answer3"
     }
   });
   await prisma.hearingTask.create({
@@ -41,7 +41,7 @@ async function main () {
       hint:"Hier unterhalten sich Thor und Hulk über Loki. Der Film muss also in Avengers oder Thor 2 spielen.",
       question: "Aus welchem Film ist dieser Ausschnitt?",
       answers : "Black Widow,Iron Man 2,Thor: The Dark Kingdom, Thor: Tag der Entscheidung,Iron Man",
-      answersCorrect: "false,false,true,false,false"
+      answersCorrect: "answer3"
 
     }
   });
@@ -52,7 +52,7 @@ async function main () {
       hint:"Insgesamt sechs Infinity-Steine werden in den Filmen gessammelt: Raumstein Zeitstein Gedankenstein Seelenstein Realitätsstein Machtstein",
       question: "Welche der folgenden Infinity-Steine gibt es nicht?",
       answers : "Zeistein, Geiststein, Gedankenstein, Raumstein",
-      answersCorrect: "false,true,false,false"
+      answersCorrect: "answer2"
 
     }
   });
@@ -103,7 +103,7 @@ async function main () {
       hint:"Der Falcon taucht das erste Mal an der Seite von Captain America im Film Winter Soldier auf.",
       question: "Welche Waffe gehört zu Falcon?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
-      answersCorrect: "true,false,false,false,false,false,false,false,false,false"
+      answersCorrect: "answer1"
     }
   });
 
@@ -114,7 +114,7 @@ async function main () {
       hint:"Clint Burton alias \"Hawkeye\" ist ab Avengers häufig als Nebencharakter zu sehen.",
       question: "Welche Waffe gehört zu Clint Barton?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
-      answersCorrect: "false,false,true,false,false,false,false,false,false,false"
+      answersCorrect: "answer3"
     }
   });
 
@@ -125,7 +125,7 @@ async function main () {
       hint:"Die Repulsoren befinden sich an den Füßen und Händen von Iron Man's Rüstung.",
       question: "Welche Waffe gehört zu Tony Stark?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
-      answersCorrect: "false,true,false,false,false,false,false,false,false,false"
+      answersCorrect: "answer2"
     }
   });
 
@@ -136,7 +136,7 @@ async function main () {
       hint:"Natasha Roman alias \"Black Widow\" ist versiert im Umgang mit vielen Waffen. Von diesen benutzt sie aber nur die Batons",
       question: "Welche Waffe gehört zu Natasha Romanoff?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
-      answersCorrect: "false,false,false,true,false,false,false,false,false,false"
+      answersCorrect: "answer4"
     }
   });
 
@@ -147,7 +147,7 @@ async function main () {
       hint:"Kaum eine Waffe ist so eng mit einem Charakter verbunden wie der Schild von Captain America.",
       question: "Welche Waffe gehört zu Captain America?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
-      answersCorrect: "false,false,false,false,true,false,false,false,false,false"
+      answersCorrect: "answer5"
     }
   });
 
@@ -158,7 +158,7 @@ async function main () {
       hint:"Der futuristisch anmutende Quadplaster passt gut in die Hände des Raumreisenden Starlord. ",
       question: "Welche Waffe gehört zu Peter Quill?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
-      answersCorrect: "false,false,false,false,false,false,false,true,false,false"
+      answersCorrect: "answer8"
     }
   });
 
@@ -169,7 +169,7 @@ async function main () {
       hint:"Niemand außer Thor ist in der Lage seinen Hammer Mjolnir zu schwingen.",
       question: "Welche Waffe gehört zu Thor?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
-      answersCorrect: "false,false,false,false,false,true,false,false,false,false"
+      answersCorrect: "answer6"
     }
   });
 
@@ -180,7 +180,7 @@ async function main () {
       hint:"Gamora versucht den verrückten Titan Thanos zu vernichten. Sie führt den Godslayer.",
       question: "Welche Waffe gehört zu Gamora?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
-      answersCorrect: "false,false,false,false,false,false,false,false,false,true"
+      answersCorrect: "answer10"
     }
   });
 
@@ -191,7 +191,7 @@ async function main () {
       hint:"Wie bereits der Titel des einzigen Auftritts von Wenwu andeutet, nutzt er die Ten Rings",
       question: "Welche Waffe gehört zu Wenwu?",
       answers : "Redwing,Repulsor,Bow and Arrow,Batons,Vibranium Shield,Mjolnir,Necroswords,Quadblaster,Ten Rings,Godslayer",
-      answersCorrect: "false,false,false,false,false,false,false,false,true,false"
+      answersCorrect: "answer9"
     }
   });
 

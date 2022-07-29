@@ -1,11 +1,11 @@
 <template>
   <form ref="form" action="/api/training" method="POST" class="p-5 rounded bg-gray-300">
     <div v-for="(l, i) in props.list" :key="l.c+':'+l.id">
-      <ItemsClosed-text v-if="l.c == 'ItemsClosed-text'" :id="l.id" :index="i" :fill="false" :fill-elements="'empty'" />
-      <ItemsMultiple-choice v-if="l.c == 'ItemsMultiple-choice'" :id="l.id" :index="i" :fill="false" :fill-elements="'empty'" />
-      <ItemsImage-selection v-if="l.c == 'ItemsImage-selection'" :id="l.id" :index="i" :fill="false" :fill-elements="'empty'" />
-      <ItemsHearing-task v-if="l.c == 'ItemsHearing-task'" :id="l.id" :index="i" :fill="false" :fill-elements="'empty'" />
-      <ItemsShort-text v-if="l.c == 'ItemsShort-text'" :id="l.id" :index="i" :fill="false" :fill-elements="'empty'" />
+      <ItemsClosed-text v-if="l.c == 'ItemsClosed-text'" :id="l.id" :index="i" :ex="l.ex" />
+      <ItemsMultiple-choice v-if="l.c == 'ItemsMultiple-choice'" :id="l.id" :index="i" :ex="l.ex" />
+      <ItemsImage-selection v-if="l.c == 'ItemsImage-selection'" :id="l.id" :index="i" :ex="l.ex" />
+      <ItemsHearing-task v-if="l.c == 'ItemsHearing-task'" :id="l.id" :index="i" :ex="l.ex" />
+      <ItemsShort-text v-if="l.c == 'ItemsShort-text'" :id="l.id" :index="i" :ex="l.ex" />
     </div>
     <div class="max-w-none mx-auto mt-4">
       <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap pt-3">

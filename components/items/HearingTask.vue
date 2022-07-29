@@ -19,7 +19,7 @@
         Click on play, guess the MARVEL movie and write down your answer as fast as you can.
       </div>
       <div class="px-4 py-5">
-        <input type="hidden" :name="'hearingtask-'+props.index+'-id-' + area + '-' + difficulty + '-' + hint" :value="props.id+','+input">
+        <input type="hidden" :name="'hearingtask-'+props.index+'-id-' + area + '-' + difficulty + '-' + hint.replaceAll('-',' ') + '-' + props.ex + '-' + correctVal+ '-' + started + '-' + props.id" :value="props.id+','+input">
           <AudioPlayer :option=" {
             src: '../../assets/audio/adopted.mp3',
             title: ''
@@ -82,6 +82,10 @@ const props = defineProps({
   index: {
     type: Number,
     required: true
+  },
+  ex: {
+    type: String,
+    required: true
   }
 });
 const url = "/api/hearingTask/" + props.id;
@@ -93,6 +97,8 @@ const area = api.value.area;
 const difficulty = api.value.difficulty;
 const hint = api.value.hint;
 const answers = api.value.answers.split(",");
+const correctVal = api.value.answersCorrect;
+const started = new Date().toLocaleDateString("de-DE");
 const answerI = answers[0];
 const answerII = answers[1];
 const answerIII = answers[2];

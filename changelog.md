@@ -1,7 +1,13 @@
 # Changelog
 
 ## [Unreleased]
-## [0.0.20] - 25.07.2022
+## [0.0.21] - 29.07.2022
+### Added
+- Creation of StudentTrainingAction
+### Changed
+- Autocorrection
+### Removed
+## [0.0.20] - 27.07.2022
 ### Added
 - Added metadata on items: hint,difficulty,area,
 - Added new StudentTrainingAction with values for indepth e assessment

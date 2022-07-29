@@ -138,11 +138,7 @@ const answerIX = answers[8];
 const answerX = answers[9];
 
 const helpOpen = ref(answersCorrectList.includes("false"));
-console.log("Correct " + props.correct);
 const answersCorrect = { aCI: answersCorrectList[0] === "true", aCII: answersCorrectList[1] === "true", aCIII: answersCorrectList[2] === "true", aCIV: answersCorrectList[3] === "true", aCV: answersCorrectList[4] === "true", aCVI: answersCorrectList[5] === "true", aCVII: answersCorrectList[6] === "true", aCVIII: answersCorrectList[7] === "true", aCIX: answersCorrectList[8] === "true", aCX: answersCorrectList[9] === "true" };
-console.log(answersCorrect);
-console.log(props.fillElements);
-console.log(answersCorrectList);
 const inputI = (props.fillElements.includes("answer1") ? "true" : "false");
 const inputII = (props.fillElements.includes("answer2") ? "true" : "false");
 const inputIII = (props.fillElements.includes("answer3") ? "true" : "false");
