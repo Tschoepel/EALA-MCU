@@ -229,6 +229,7 @@ async function multipleChoice(elements) {
 
     }
   });
+  let scoreItem = 0;
   let score = 0; let total = 0; let corr = "";
   for (let i = 0; i < items.length; i++) {
     corr = corr + "mc"+items[i].id + "-";
@@ -236,13 +237,13 @@ async function multipleChoice(elements) {
     const given = items[i].answers.join();
     let o = 0;
     for (let k = 0; k < 4; k++) {
-      total = total + 1;
       o = o + 1;
-      if ((answer.includes(o) && given.includes(o))|| (!answer.includes(o) && !given.includes(o))) { score = score + 1; corr = corr + "true,";}
+      if ((answer.includes(o) && given.includes(o))|| (!answer.includes(o) && !given.includes(o))) { scoreItem = scoreItem + 1; corr = corr + "true,";}
       else { corr = corr + "false,";} 
     }
-    (score === 4) ? score = 1 : score = 0;
-    total = 1;
+    (scoreItem === 4) ? score = score + 1 : score = score;
+    total = total + 1;
+    scoreItem = 0;
     corr = corr.slice(0,-1) + ";";
   }
   return [score, total,corr];
@@ -264,6 +265,7 @@ async function imageSelection(elements) {
       items.push(item);
     }
   });
+  let scoreItem = 0;
   let score = 0; let total = 0; let corr = "";
   for (let i = 0; i < items.length; i++) {
     corr = corr + "is"+items[i].id + "-";
@@ -271,13 +273,13 @@ async function imageSelection(elements) {
     const given = items[i].answers.join();
     let o = 0;
     for (let k = 0; k < 10; k++) {
-      total = total + 1;
       o = o + 1;
-      if ((answer.includes(o) && given.includes(o))|| (!answer.includes(o) && !given.includes(o))) { score = score + 1; corr = corr + "true,";}
+      if ((answer.includes(o) && given.includes(o))|| (!answer.includes(o) && !given.includes(o))) { scoreItem = scoreItem + 1; corr = corr + "true,";}
       else { corr = corr + "false,";} 
     }
-    (score === 10) ? score = 1 : score = 0;
-    total = 1;
+    (scoreItem === 10) ? score = score + 1 : score = score;
+    total = total + 1;
+    scoreItem = 0;
     corr = corr.slice(0,-1) + ";";
   }
   return [score, total,corr];
@@ -299,6 +301,7 @@ async function hearingTask (elements) {
       items.push(item);
     }
   });
+  let scoreItem = 0;
   let score = 0; let total = 0; let corr = "";
   for (let i = 0; i < items.length; i++) {
     corr = corr + "ht"+items[i].id + "-";
@@ -306,13 +309,13 @@ async function hearingTask (elements) {
     const given = items[i].answers.join();
     let o = 0;
     for (let k = 0; k < 5; k++) {
-      total = total + 1;
       o = o + 1;
-      if ((answer.includes(o) && given.includes(o))|| (!answer.includes(o) && !given.includes(o))) { score = score + 1; corr = corr + "true,";}
+      if ((answer.includes(o) && given.includes(o))|| (!answer.includes(o) && !given.includes(o))) { scoreItem = scoreItem + 1; corr = corr + "true,";}
       else { corr = corr + "false,";} 
     }
-    (score === 5) ? score = 1 : score = 0;
-    total = 1;
+    (scoreItem === 5) ? score = score + 1 : score = score;
+    total = total + 1;
+    scoreItem = 0;
     corr = corr.slice(0,-1) + ";";
   }
   return [score, total,corr];

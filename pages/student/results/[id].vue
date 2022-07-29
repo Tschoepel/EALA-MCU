@@ -25,6 +25,7 @@
               <h3 class="text-lg leading-6 font-medium text-gray-900">
                 {{ showText }}
               </h3>
+              <img :src="srcimg" style="height: 300px; width: fit-content;"/>
             </template>
           </InfoCard>
           <FilledComponent :list="objects" />
@@ -155,22 +156,27 @@ submissionElements.forEach((element) => {
   }
 });
 let tag;
+let src;
 switch (scored) {
 case 0:
 case 1:
-case 2: tag = "Du bist wie Groot. Du musst noch wachsen!";
+case 2: tag = "Mehr Lernen, weniger Zerschmettern, HULK";
+  src = "../../assets/images/hulk.jpg";
   break;
 case 3:
 case 4: tag = "Nicht aufgeben. Auch Captain America musste hart arbeiten!";
+  src = "../../assets/images/captainAmerica.jpg";
   break;
-case 5: tag = "Einfach Thor, da geht vielleicht noch mehr!";
-  break;
-case 6: tag = "Du vereinst rohe Kraft mit hoher Bildung, HULK!";
+case 5:
+case 6: tag = "Einfach Thor, da geht vielleicht noch mehr!";
+  src = "../../assets/images/thorres.jpg";
   break;
 case 7:
 case 8:
 default: tag = "Ein vollendetes Genie, wie Iron Man!";
+  src = "../../assets/images/ironmanres.jpg";
   break;
 }
 const showText = tag;
+const srcimg = src;
 </script>

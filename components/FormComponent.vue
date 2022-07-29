@@ -68,6 +68,7 @@ onMounted(() => {
 async function sendForm () {
   state.loading = true;
   const formData = new FormData(form.value);
+  window.scroll(0, 0);
   await $fetch("/api/training", {
     method: "POST",
     body: Array.from(formData)

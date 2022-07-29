@@ -210,7 +210,7 @@ async function main () {
     data: {
       exercise:    101,
       userID:      1,
-      itemType:    "hearing",
+      itemType:    "hearingtask",
       itemID:      101,
       answers:     "answer2",
       correct:     "answer3",
@@ -229,7 +229,7 @@ async function main () {
     data: {
       exercise:    100, 
       userID:      1,
-      itemType:    "hearing",
+      itemType:    "hearingtask",
       itemID:      102,
       answers:     "answer1",
       correct:     "answer1",
@@ -269,7 +269,7 @@ async function main () {
     data: {
       exercise:  100,
       userID:      1,
-      itemType:    "short",
+      itemType:    "shorttext",
       itemID:      104,
       answers:     "answer1",
       correct:     "answer1",
@@ -289,7 +289,7 @@ async function main () {
     data: {
       exercise:  100,
       userID:      1,
-      itemType:    "closed",
+      itemType:    "closedtext",
       itemID:      105,
       answers:     "answer1",
       correct:     "answer1",
@@ -309,7 +309,7 @@ async function main () {
     data: {
       exercise:  101,
       userID:      1,
-      itemType:    "multiple",
+      itemType:    "multiplechoice",
       itemID:      106,
       answers:     "answer2,answer3",
       correct:     "answer2,answer4",
@@ -329,7 +329,7 @@ async function main () {
     data: {
       exercise:  101,
       userID:      1,
-      itemType:    "short",
+      itemType:    "shorttext",
       itemID:      107,
       answers:     "answer1",
       correct:     "answer3",
@@ -349,7 +349,7 @@ async function main () {
     data: {
       exercise:  101,
       userID:      1,
-      itemType:    "closed",
+      itemType:    "closedtext",
       itemID:      108,
       answers:     "answer1",
       correct:     "answer1",
