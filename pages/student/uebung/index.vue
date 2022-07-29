@@ -87,7 +87,7 @@
                             {{ dateReal }}
                           </td>
                           <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                            Infinity Wars
+                            Multiverse
                           </td>
                           <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
                             -/10

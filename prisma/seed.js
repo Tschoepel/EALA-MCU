@@ -149,7 +149,7 @@ async function main () {
       question: "Nenne 2 Gegner aus dem Multiverse, die Spider Man einfangen muss.",
       answer: "Hier könnte eine Antwort stehen",
       answerKeywords: "goblin, Dr. Octopus, octopus, green goblin, sandman, lizard, vulture, mysterio",
-      videoExists: true
+      videoExists: false
     
     }
   });
