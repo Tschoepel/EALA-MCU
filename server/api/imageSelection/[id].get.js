@@ -11,6 +11,7 @@ export default defineEventHandler(async (event) => {
       hint: true,
       question: true,
       answers: true,
+      answersCorrect: true
     }
   });
 });

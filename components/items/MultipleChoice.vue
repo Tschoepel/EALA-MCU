@@ -19,7 +19,7 @@
         <b>Hinweistext: </b>Wählen sie die 0,1..n Antworten, die Sie für richtig halten.
       </div>
       <div class="px-4 py-5">
-        <input type="hidden" :name="'multiplechoice-'+props.index+'-id-' + area + '-' + difficulty + '-' + hint" :value="props.id+','+input">
+        <input type="hidden" :name="'multiplechoice-'+props.index+'-id-' + area + '-' + difficulty + '-' + hint.replaceAll('-',' ') + '-' + props.ex + '-' + correctVal+ '-' + started + '-' + props.id" :value="props.id+','+input">
         <div class="grid grid-cols-5 cols-gap-0.5">
           <div>
             <input
@@ -77,6 +77,10 @@ const props = defineProps({
   index: {
     type: Number,
     required: true
+  },
+  ex: {
+    type: String,
+    required: true
   }
 });
 const url = "/api/multipleChoice/" + props.id;
@@ -88,6 +92,8 @@ const area = api.value.area;
 const difficulty = api.value.difficulty;
 const hint = api.value.hint;
 const answers = api.value.answers.split(",");
+const correctVal = api.value.answersCorrect;
+const started = new Date().toLocaleDateString("de-DE");
 const answerI = answers[0];
 const answerII = answers[1];
 const answerIII = answers[2];

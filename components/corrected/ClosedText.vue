@@ -78,16 +78,13 @@ const htmlText = computed(() => {
   for (let j = 0; j < i; j++) {
     o = o + 1;
     const element = props.fillElements.split(",")[j];
-    console.log(element);
     value = value.replaceAll("test" + o, element);
   }
   i = 0;
   return value.replaceAll("calcStyle", () => {
     i = i + 1;
     let color = "color:black";
-    if (props.fill) {
-      color = (correction[i - 1]) ? "color:green" : "color:red";
-    }
+    color = (correction[i - 1]) ? "color:green" : "color:red";
     return (color);
   });
 });

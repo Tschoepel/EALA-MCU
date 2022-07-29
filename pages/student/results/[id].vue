@@ -43,18 +43,17 @@ const valuesArray = Array.from(api.value);
 
 valuesArray.forEach((element) => {
   const currentObject = Object.values(element);
-  console.log("CurrentObject: " + currentObject);
   const id = currentObject[0];
   if (lastEntry <= parseInt(id)) {
     lastEntry = parseInt(id);
     currentSubmission = currentObject;
   }
 });
+console.log(currentSubmission);
 const result = Object.values(currentSubmission[6]);
 const scored = result[2];
 const total = result[3];
 const correctString = currentSubmission[3];
-console.log(correctString);
 const correctArray = correctString.split(";");
 const submission = currentSubmission[2].replace(/"/g, "");
 
@@ -69,11 +68,10 @@ let object;
 let correct;
 const length = submissionElements.length;
 submissionElements.forEach((element) => {
-  console.log("Current submission: " + element);
   counter++;
+  console.log(element);
   if (element.includes("id") && id !== -1) {
     fillElements = fillElements.substring(0, fillElements.length - 1);
-    console.log("correct: " + correct);
     object = { c, id, fillElements, correct };
     objects.push(object);
     id = -1;
@@ -83,12 +81,12 @@ submissionElements.forEach((element) => {
   if (element.includes("closedtext")) {
     c = "ItemsClosed-text";
     if (element.includes("id")) {
-      id = parseInt(element.split(",")[1]);
+      console.log(element.split("-"));
+      const elementParts = element.split("-");
+      id = parseInt(elementParts[9].split(",")[0]);
       correctArray.forEach((elementCorrect) => {
         if (elementCorrect.includes("ct" + id)) {
           const returnElements = elementCorrect.split("-");
-          console.log("Retel: " + returnElements);
-          console.log("Retel[1]: " + returnElements[1]);
           correct = returnElements[1];
         }
       });
@@ -98,54 +96,48 @@ submissionElements.forEach((element) => {
   }
   if (element.includes("imageselection")) {
     c = "ItemsImage-selection";
-    id = parseInt(element.split(",")[1]);
+    console.log(element.split("-"));
+    const elementParts = element.split("-");
+    id = parseInt(elementParts[9].split(",")[0]);
     correctArray.forEach((elementCorrect) => {
       if (elementCorrect.includes("is" + id)) {
         const returnElements = elementCorrect.split("-");
-        console.log("Retel: " + returnElements);
-        console.log("Retel[1]: " + returnElements[1]);
         correct = returnElements[1];
-        console.log("CORRECT IMAGE: " + correct);
       }
     });
     fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (element.includes("multiplechoice")) {
     c = "ItemsMultiple-choice";
-    id = parseInt(element.split(",")[1]);
+    const elementParts = element.split("-");
+    console.log(element.split("-"));
+    id = parseInt(elementParts[9].split(",")[0]);
     correctArray.forEach((elementCorrect) => {
       if (elementCorrect.includes("mc" + id)) {
         const returnElements = elementCorrect.split("-");
-        console.log("Retel: " + returnElements);
-        console.log("Retel[1]: " + returnElements[1]);
         correct = returnElements[1];
       }
     });
     fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (element.includes("shorttext")) {
-    console.log("Short Text");
-    console.log(element);
-    const elementParts = element.split(",");
-    console.log(elementParts);
-    console.log("ShortTextID:" + elementParts[1]);
+    const elementParts = element.split("-");
     c = "ItemsShort-text";
-    id = parseInt(elementParts[1]);
+    console.log(element.split("-"));
+    id = parseInt(elementParts[9].split(",")[0]);
     correctArray.forEach((elementCorrect) => {
       if (elementCorrect.includes("st" + id)) {
         const returnElements = elementCorrect.split("-");
-        console.log("Retel: " + returnElements);
-        console.log("Retel[1]: " + returnElements[1]);
         correct = returnElements[1];
       }
     });
     fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (element.includes("hearingtask")) {
-    console.log("HearingTask");
-    console.log(element);
     c = "ItemsHearing-task";
-    id = parseInt(element.split(",")[1]);
+    const elementParts = element.split("-");
+    console.log(element.split("-"));
+    id = parseInt(elementParts[9].split(",")[0]);
     correctArray.forEach((elementCorrect) => {
       if (elementCorrect.includes("ht" + id)) {
         correct = elementCorrect.split("-")[1];
@@ -155,7 +147,6 @@ submissionElements.forEach((element) => {
   }
   if (counter === length) {
     fillElements = fillElements.substring(0, fillElements.length - 1);
-    console.log("correct: " + correct);
     object = { c, id, fillElements, correct };
     objects.push(object);
   }
@@ -184,7 +175,7 @@ case 15:
 case 16:
 case 17:
 case 18:
-case 19: tag = "Du vereinst rohe Kraft mit hoher Bildung, HUlk!";
+case 19: tag = "Du vereinst rohe Kraft mit hoher Bildung, HULK!";
   break;
 case 20:
 case 21:

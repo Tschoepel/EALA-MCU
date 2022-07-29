@@ -28,7 +28,7 @@
         <input
           v-model="answer"
           type="text"
-          :name="'shorttext-'+props.index+ '-id-' + area + '-' + difficulty + '-' + hint+ ',' + props.id + answer"
+          :name="'shorttext-'+props.index+ '-id-' + area + '-' + difficulty + '-' + hint.replaceAll('-',' ') + '-' + props.ex + '-' + correctVal+ '-' + started + '-' +props.id + ',' + answer"
           size="60"
           height="20"
           :placeholder="placeholder"
@@ -50,6 +50,10 @@ const props = defineProps({
   index: {
     type: Number,
     required: true
+  },
+  ex: {
+    type: String,
+    required: true
   }
 });
 const answer = reactive("");
@@ -64,6 +68,8 @@ const question = api.value.question;
 const area = api.value.area;
 const difficulty = api.value.difficulty;
 const hint = api.value.hint;
+const correctVal = api.value.answerKeywords;
+const started = new Date().toLocaleDateString("de-DE");
 const videoEnabled = api.value.videoExists;
 const imageSrcM = "/assets/video/video" + props.id + ".webm";
 const helpOpen = ref(false);

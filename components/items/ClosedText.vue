@@ -19,7 +19,7 @@
         <b>Hinweistext: </b>Füllen Sie alle leeren Felder korrekt aus. Groß- und Kleinschreibung wird hierbei ignoriert.
       </div>
       <!-- eslint-disable vue/no-v-html -->
-      <input type="hidden" :name="'closedtext-'+props.index+'-id'" :value="props.id">
+      <input type="hidden" :name="'closedtext-'+props.index+'-id-' + area + '-' + difficulty + '-' + hint.replaceAll('-',' ') + '-' + props.ex+ '-' + answers + '-' + started + '-' + props.id" :value="props.id + content">
       <div class="px-4 py-5" v-html="htmlText" />
       <!--eslint-enable-->
     </div>
@@ -37,7 +37,7 @@ const props = defineProps({
     type: Number,
     required: true
   },
-  fillElements: {
+  ex: {
     type: String,
     required: true
   }
@@ -47,18 +47,19 @@ const url = "/api/closedText/" + props.id;
 const { data: api } = await useFetch(url, {
   key: hash([url])
 });
-
+const started = new Date().toLocaleDateString("de-DE");
 const text = api.value.text;
 const title = api.value.title;
 const area = api.value.area;
 const difficulty = api.value.difficulty;
 const hint = api.value.hint;
+const answers = api.value.answers;
 let i = 0;
 const htmlText = computed(() => {
   if (text === null) {
     return "Es gibt aktuell Probleme mit der API";
   }
-  const input = "<input type=\"text\" name=\"closedtext-" + props.index + "-num-" + area + "-" + difficulty + "-" + hint + "\" style=\"calcStyle;\" class=\"shadow-sm text-sm border-gray-300 rounded-md\" value=\"testnum\">";
+  const input = "<input type=\"text\" name=\"closedtext-" + props.index + "-num-\" style=\"calcStyle;\" class=\"shadow-sm text-sm border-gray-300 rounded-md\" :v-model=\"content\">";
   const value = text.replaceAll("$$", () => {
     i = i + 1;
     return input.replaceAll("num", i);
@@ -68,4 +69,13 @@ const htmlText = computed(() => {
   });
 });
 const helpOpen = ref(false);
+</script>
+<script>
+export default {
+  data () {
+    return {
+      content: []
+    };
+  }
+};
 </script>
