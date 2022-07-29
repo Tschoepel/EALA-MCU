@@ -41,31 +41,18 @@ export default defineEventHandler(async (event) => {
   return { id: result.id, correctionString: corrC+corrM+corrI+corrH+corrS };
 });
 async function storeStudentActions(actions){
-  actions.forEach((action) => {
-    console.log("Storing action for "  + action);
-      prisma.studentTrainingAction.create({
-        data: {
-          exercise:    action.exercise,
-          userID:      action.userID,
-          itemType:    action.itemType,
-          itemID:      action.itemID,
-          answers:     action.answers,
-          correct:     action.correct,
-          started:     action.tarted,
-          finished:    action.finished,
-          difficulty:  action.difficulty,
-          area:        action.area,
-          score:       action.score,
-          total:       action.total,
-          keys:        action.keys
-        } 
-      })
+  actions.forEach( async (action) => {
+    console.log("Storing action for "  + action.answers);
+    await $fetch("/api/studentaction", {
+      method: "POST",
+      body: action
+    })
   });
 }
 async function createStudentTrainingActions(elements){
   let actions = [];
   let object ={};
-  let oldStarted = elements[0][0].split(",")[0].split("-")[8];
+  let oldStarted = elements[0][0].split("-")[8];
   let noClosedTextFinished = true;
   let answersCorrectClosedText = "";
   let answersGivenClosedText = "";
@@ -79,7 +66,6 @@ async function createStudentTrainingActions(elements){
   let dct = null;
   let arct = null;
   let kct = null;
-  let countAnswers = 0;
   elements.forEach((item) => {
     if(item[0].includes("id")){
       console.log(item);
@@ -88,7 +74,7 @@ async function createStudentTrainingActions(elements){
       const userID = 1;
       const itemType = itemdata[0];
       const itemID = (itemType === "shorttext") ? Array.from(item[0].split("-")[9])[0] : item[1].split(",")[0];
-      const answers = (itemType === "closedtext") ? "" : (itemType === "shorttext") ? item[1] : item[1].split(",").slice(1);
+      const answers = (itemType === "closedtext") ? "" : (itemType === "shorttext") ? item[1].split(",") : item[1].split(",").slice(1);
       const correct = itemdata[7];
       const started = itemdata[8];
       const finished = oldStarted;
@@ -121,7 +107,7 @@ async function createStudentTrainingActions(elements){
           let answersGivenUse= answersGivenClosedText.slice(0,-1);
           answersGivenClosedText = "";
           const [score,total] = calculateScore("closedtext", answersGivenUse, answersCorrectClosedText)
-          object = { exercise: ect, userID: uct, itemType: ict, itemID: idct, answers: answersGivenUse, correct: cct, started: sct, finished: fct, difficulty:  dct,
+          object = { exercise: ect, userID: uct, itemType: ict, itemID: idct, answers: answersGivenUse.split(","), correct: cct, started: sct, finished: fct, difficulty:  dct,
             area: arct, score: score, total: total, keys: kct};
           actions.push(object);
           console.log(Object.values(object));
@@ -148,7 +134,7 @@ async function createStudentTrainingActions(elements){
       console.log("Entering finally")
       answersGivenClosedText = answersGivenClosedText.slice(0,-1);
       const [score,total] = calculateScore("closedtext", answersGivenClosedText, answersCorrectClosedText)
-      object = { exercise: ect, userID: uct, itemType: ict, itemID: idct, answers: answersGivenClosedText, correct: cct, started: sct, finished: fct, difficulty:  dct,
+      object = { exercise: ect, userID: uct, itemType: ict, itemID: idct, answers: answersGivenClosedText.split(","), correct: cct, started: sct, finished: fct, difficulty:  dct,
         area: arct, score: score, total: total, keys: kct};
       answersGivenClosedText = "";
       actions.push(object);
@@ -162,9 +148,9 @@ function calculateScore (itemtype, answers, correct){
   let total = 0; let score = 0;
   const correctList = correct.split(",");
   switch (itemtype){
-    case "closedtext": for ( let i = 0; i < correctList.length; i++) {
+    case "closedtext": for ( let i = 0; i < answers.split(",").length; i++) {
       total = total +1;
-      score = (correctList[i].toLowerCase() === answers[i].toLowerCase())
+      score = (correctList[i].toLowerCase() === answers.split(",")[i].toLowerCase()) ? score = score + 1 :  score = 0;
     }
     return [score, total];
     case "hearingtask":
@@ -173,7 +159,7 @@ function calculateScore (itemtype, answers, correct){
     case "shorttext":
     default: 
     for ( let i = 0; i < correctList.length; i++) {
-      if(answers.includes(correctList[i])) return [1,1];
+      if(answers.join().includes(correctList[i])) return [1,1];
     } 
     return [0,1];
   }

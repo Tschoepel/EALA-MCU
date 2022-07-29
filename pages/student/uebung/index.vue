@@ -91,6 +91,7 @@
 </template>
 
 <script setup>
-const date = new Date().toLocaleDateString("de-DE");
+const dateReal = new Date();
+const date = dateReal.toString;
 const index = 2;
 </script>
