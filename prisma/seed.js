@@ -93,9 +93,20 @@ async function main () {
   });
   await prisma.drawItem.create({
     data: {
-      question: "Zeichnen sie das S.H.I.E.L.D Logo"
+      question: "Zeichnen Sie das S.H.I.E.L.D Logo"
     }
   });
+  await prisma.drawItem.create({
+    data: {
+      question: "Zeichnen Sie die Maske von Iron Man"
+    }
+  });
+  await prisma.drawItem.create({
+    data: {
+      question: "Zeichnen Sie das Marvel Logo"
+    }
+  });
+
   await prisma.imageSelection.create({
     data: {
       area: "Infinity Wars",        

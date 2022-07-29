@@ -19,10 +19,12 @@
         <b>Hinweistext: </b>Bitte beantworten sie die Frage kurz.
       </div>
       <div class="px-4 py-5">
+        <!-- Alternative Video Input if videoEnabled is set -->
         <video v-show="videoEnabled" id="embVideo" controls>
           <source :src="imageSrcM" type="video/webm">
         </video>
         <br>
+        <!-- Input Area -->
         <input
           v-model="answer"
           type="text"
@@ -52,7 +54,7 @@ const props = defineProps({
 });
 const answer = reactive("");
 
-const placeholder = "Your answer goes here...";
+const placeholder = "Hier ist Platz für deine Lösung...";
 const url = "/api/shortText/" + props.id;
 
 const { data: api } = await useFetch(url, {
