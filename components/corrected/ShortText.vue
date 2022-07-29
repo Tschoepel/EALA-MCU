@@ -16,7 +16,7 @@
         </div>
       </div>
       <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
-        <b>Fehler: </b> Ihre Antwort ist leider falsch!
+        <b>Fehler: </b> {{ props.hint }}
       </div>
       <div class="px-4 py-5">
         <video v-show="videoEnabled" id="embVideo" controls>
@@ -57,6 +57,10 @@ const props = defineProps({
   correct: {
     type: String,
     required: true
+  },
+  hint: {
+    type: String,
+    required: true
   }
 });
 const answer = (props.fillElements.length !== 0) ? props.fillElements : "Question not answered!";
@@ -70,11 +74,15 @@ const imageSrcM = "/assets/video/video" + props.id + ".webm";
 const correctWords = api.value.answerKeywords.split(",");
 const correctValue = computed(() => {
   let isCorrect = false;
-  correctWords.forEach((word) => {
-    if (answer.toLowerCase().includes(word.toLowerCase())) {
+  let counter = 0;
+  for (let i = 0; i < correctWords.length; i++) {
+    if (answer.includes(correctWords[i])) {
+      counter = counter + 1;
+    }
+    if (counter === 2 || counter === correctWords.length) {
       isCorrect = true;
     }
-  });
+  }
   return isCorrect;
 });
 const helpOpen = ref(!correctValue);

@@ -16,7 +16,7 @@
         </div>
       </div>
       <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
-        <b>Fehler: </b> Ihre Antwort ist leider falsch!
+        <b>Fehler: </b> {{ props.hint }}
       </div>
       <div class="px-4 py-5">
         <div class="grid grid-cols-5 cols-gap-0.5">
@@ -82,6 +82,10 @@ const props = defineProps({
     required: true
   },
   correct: {
+    type: String,
+    required: true
+  },
+  hint: {
     type: String,
     required: true
   }

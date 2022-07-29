@@ -16,7 +16,7 @@
         </div>
       </div>
       <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
-        <b>Fehler: </b> Ihre Antwort ist leider falsch!
+        <b>Fehler: </b> {{ props.hint }}
       </div>
       <!-- eslint-disable vue/no-v-html -->
       <input type="hidden" :name="'closedtext-'+props.index+'-id'" :value="props.id">
@@ -42,6 +42,10 @@ const props = defineProps({
     required: true
   },
   correct: {
+    type: String,
+    required: true
+  },
+  hint: {
     type: String,
     required: true
   }

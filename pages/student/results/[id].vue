@@ -61,6 +61,7 @@ const submissionElements = submission.substring(2, submission.length - 2).split(
 const objects = [];
 let counter = 0;
 let c = "";
+let hint = "";
 let id = -1;
 let fillElements = "";
 let object;
@@ -70,7 +71,7 @@ submissionElements.forEach((element) => {
   counter++;
   if (element.includes("id") && id !== -1) {
     fillElements = fillElements.substring(0, fillElements.length - 1);
-    object = { c, id, fillElements, correct };
+    object = { c, id, fillElements, correct, hint };
     objects.push(object);
     id = -1;
     c = "";
@@ -80,6 +81,7 @@ submissionElements.forEach((element) => {
     c = "ItemsClosed-text";
     if (element.includes("id")) {
       const elementParts = element.split("-");
+      hint = elementParts[5];
       id = parseInt(elementParts[9].split(",")[0]);
       correctArray.forEach((elementCorrect) => {
         if (elementCorrect.includes("ct" + id)) {
@@ -101,6 +103,7 @@ submissionElements.forEach((element) => {
         correct = returnElements[1];
       }
     });
+    hint = elementParts[5];
     fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
     // fillElements = element.split(",").slice(2).join(",") + ",";
   }
@@ -114,6 +117,7 @@ submissionElements.forEach((element) => {
         correct = returnElements[1];
       }
     });
+    hint = elementParts[5];
     fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
     // fillElements = element.split(",").slice(2).join(",") + ",";
   }
@@ -128,6 +132,7 @@ submissionElements.forEach((element) => {
         correct = returnElements[1];
       }
     });
+    hint = elementParts[5];
     fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
   }
   if (element.includes("hearingtask")) {
@@ -139,12 +144,13 @@ submissionElements.forEach((element) => {
         correct = elementCorrect.split("-")[1];
       }
     });
+    hint = elementParts[5];
     fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
     // fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (counter === length) {
     fillElements = fillElements.substring(0, fillElements.length - 1);
-    object = { c, id, fillElements, correct };
+    object = { c, id, fillElements, correct, hint };
     objects.push(object);
   }
 });

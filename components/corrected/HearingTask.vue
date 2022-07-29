@@ -16,7 +16,7 @@
         </div>
       </div>
       <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
-        <b>Fehler: </b> Ihre Antwort ist leider falsch!
+        <b>Fehler: </b> {{ props.hint }}
       </div>
       <div class="px-4 py-5">
         <input type="hidden" :name="'hearingtask-' + props.index + '-id'" :value="props.id" >
@@ -90,7 +90,12 @@ const props = defineProps({
   correct: {
     type: String,
     required: true
+  },
+  hint: {
+    type: String,
+    required: true
   }
+
 });
 const url = "/api/hearingTask/" + props.id;
 const { data: api } = await useFetch(url, {

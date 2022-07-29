@@ -6,30 +6,35 @@
         :index="i"
         :fill-elements="l.fillElements"
         :correct="l.correct"
+        :hint="l.hint"
       />
       <CorrectedMultiple-choice v-if="l.c == 'ItemsMultiple-choice'"
         :id="l.id"
         :index="i"
         :fill-elements="l.fillElements"
         :correct="l.correct"
+        :hint="l.hint"
       />
       <CorrectedImage-selection v-if="l.c == 'ItemsImage-selection'"
         :id="l.id"
         :index="i"
         :fill-elements="l.fillElements"
         :correct="l.correct"
+        :hint="l.hint"
       />
       <CorrectedHearing-task v-if="l.c == 'ItemsHearing-task'"
         :id="l.id"
         :index="i"
         :fill-elements="l.fillElements"
         :correct="l.correct"
+        :hint="l.hint"
       />
       <CorrectedShort-text v-if="l.c == 'ItemsShort-text'"
         :id="l.id"
         :index="i"
         :fill-elements="l.fillElements"
         :correct="l.correct"
+        :hint="l.hint"
       />
     </div>
   </form>
