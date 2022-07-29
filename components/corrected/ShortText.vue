@@ -59,7 +59,6 @@ const props = defineProps({
     required: true
   }
 });
-console.log("loading correction");
 const answer = (props.fillElements.length !== 0) ? props.fillElements : "Question not answered!";
 const url = "/api/shortText/" + props.id;
 const { data: api } = await useFetch(url, {

@@ -49,7 +49,6 @@ valuesArray.forEach((element) => {
     currentSubmission = currentObject;
   }
 });
-console.log(currentSubmission);
 const result = Object.values(currentSubmission[6]);
 const scored = result[2];
 const total = result[3];
@@ -69,7 +68,6 @@ let correct;
 const length = submissionElements.length;
 submissionElements.forEach((element) => {
   counter++;
-  console.log(element);
   if (element.includes("id") && id !== -1) {
     fillElements = fillElements.substring(0, fillElements.length - 1);
     object = { c, id, fillElements, correct };
@@ -81,7 +79,6 @@ submissionElements.forEach((element) => {
   if (element.includes("closedtext")) {
     c = "ItemsClosed-text";
     if (element.includes("id")) {
-      console.log(element.split("-"));
       const elementParts = element.split("-");
       id = parseInt(elementParts[9].split(",")[0]);
       correctArray.forEach((elementCorrect) => {
@@ -96,7 +93,6 @@ submissionElements.forEach((element) => {
   }
   if (element.includes("imageselection")) {
     c = "ItemsImage-selection";
-    console.log(element.split("-"));
     const elementParts = element.split("-");
     id = parseInt(elementParts[9].split(",")[0]);
     correctArray.forEach((elementCorrect) => {
@@ -105,12 +101,12 @@ submissionElements.forEach((element) => {
         correct = returnElements[1];
       }
     });
-    fillElements = element.split(",").slice(2).join(",") + ",";
+    fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
+    // fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (element.includes("multiplechoice")) {
     c = "ItemsMultiple-choice";
     const elementParts = element.split("-");
-    console.log(element.split("-"));
     id = parseInt(elementParts[9].split(",")[0]);
     correctArray.forEach((elementCorrect) => {
       if (elementCorrect.includes("mc" + id)) {
@@ -118,12 +114,13 @@ submissionElements.forEach((element) => {
         correct = returnElements[1];
       }
     });
-    fillElements = element.split(",").slice(2).join(",") + ",";
+    fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
+    // fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (element.includes("shorttext")) {
     const elementParts = element.split("-");
     c = "ItemsShort-text";
-    console.log(element.split("-"));
+    // shorttext-6-id-Infinity Wars-easy-Tony Stark ist für seine Intelligenz und scharfe Zunge bekannt.-2-fliegen, unverwundbar, intelligent, reich, innovativ, schlagfertig, gewitzt-28.7.2022-1,,fghj
     id = parseInt(elementParts[9].split(",")[0]);
     correctArray.forEach((elementCorrect) => {
       if (elementCorrect.includes("st" + id)) {
@@ -131,19 +128,19 @@ submissionElements.forEach((element) => {
         correct = returnElements[1];
       }
     });
-    fillElements = element.split(",").slice(2).join(",") + ",";
+    fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
   }
   if (element.includes("hearingtask")) {
     c = "ItemsHearing-task";
     const elementParts = element.split("-");
-    console.log(element.split("-"));
     id = parseInt(elementParts[9].split(",")[0]);
     correctArray.forEach((elementCorrect) => {
       if (elementCorrect.includes("ht" + id)) {
         correct = elementCorrect.split("-")[1];
       }
     });
-    fillElements = element.split(",").slice(2).join(",") + ",";
+    fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
+    // fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (counter === length) {
     fillElements = fillElements.substring(0, fillElements.length - 1);
@@ -155,33 +152,17 @@ let tag;
 switch (scored) {
 case 0:
 case 1:
-case 2:
-case 3:
-case 4: tag = "Du bist wie Groot. Du musst noch wachsen!";
+case 2: tag = "Du bist wie Groot. Du musst noch wachsen!";
   break;
-case 5:
-case 6:
+case 3:
+case 4: tag = "Nicht aufgeben. Auch Captain America musste hart arbeiten!";
+  break;
+case 5: tag = "Einfach Thor, da geht vielleicht noch mehr!";
+  break;
+case 6: tag = "Du vereinst rohe Kraft mit hoher Bildung, HULK!";
+  break;
 case 7:
 case 8:
-case 9: tag = "Nicht aufgeben. Auch Captain America musste hart arbeiten!";
-  break;
-case 10:
-case 11:
-case 12:
-case 13:
-case 14: tag = "Einfach Thor, da geht vielleicht noch mehr!";
-  break;
-case 15:
-case 16:
-case 17:
-case 18:
-case 19: tag = "Du vereinst rohe Kraft mit hoher Bildung, HULK!";
-  break;
-case 20:
-case 21:
-case 22:
-case 23:
-case 24:
 default: tag = "Ein vollendetes Genie, wie Iron Man!";
   break;
 }
