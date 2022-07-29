@@ -88,7 +88,7 @@
           <div class="bg-white px-4 py-5 sm:px-6">
             <div class="flex space-x-4">
               <h3 class="text-sm font-bold text-blue-600">
-               Captain Amerika-Items
+               Captain America-Items
               </h3>
             </div>
             <div class="px-4 pb-5 sm:p-6 sm:pt-0">
@@ -146,7 +146,7 @@
           <div class="bg-white px-4 py-5 sm:px-6">
             <div class="flex space-x-4">
               <h3 class="text-sm font-bold text-blue-600">
-               Captain Amerika-Items
+               Captain America-Items
               </h3>
             </div>
             <div class="px-4 pb-5 sm:p-6 sm:pt-0">
@@ -355,7 +355,7 @@ case hulkSucc: weakness = "Du brauchst einen Hulk in deinem Team, der dir zeigt 
   break;
 case thorSucc: weakness = "Du solltest dir jemanden wie Thor für deine Avengers suchen. Du brauchst Hilfe bei der Bildinterpretation!";
   break;
-case captainSucc: weakness = "Suche dir einen Captain Amerika, der mit dir die Fakten paukt.";
+case captainSucc: weakness = "Suche dir einen Captain America, der mit dir die Fakten paukt.";
   break;
 case ironSucc:
 default: weakness = "Du benötigst die Unterstützung eines Iron Man, um zu lernen, deine eigenene Worte zu finden!";
@@ -380,7 +380,7 @@ default: tag = "Wie Iron Man glänzt du durch die einzigartige Fähigkeit, deine
 switch (parseInt(Math.random() * (4))) {
 case 0: weakness = "Du brauchst einen Hulk in deinem Team, der dir zeigt wie man richtig draufschlägt!";
   break;
-case 1: weakness = "Suche dir einen Captain Amerika, der mit dir die Fakten paukt.";
+case 1: weakness = "Suche dir einen Captain America, der mit dir die Fakten paukt.";
   break;
 case 2: weakness = "Du solltest dir jemanden wie Thor für deine Avengers suchen. Du brauchst Hilfe bei der Bildinterpretation!";
   break;
