@@ -77,10 +77,6 @@ const props = defineProps({
     type: Number,
     required: true
   },
-  fill: {
-    type: Boolean,
-    required: true
-  },
   fillElements: {
     type: String,
     required: true

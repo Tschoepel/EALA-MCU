@@ -3,7 +3,6 @@ const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
   const body = Array.from(await useBody(event));
-  console.log(body);
   const submission = await prisma.trainingSubmissions.create({
     data: {
       userId: 1,
@@ -42,7 +41,6 @@ export default defineEventHandler(async (event) => {
 });
 async function storeStudentActions(actions){
   actions.forEach( async (action) => {
-    console.log("Storing action for "  + action.answers);
     await $fetch("/api/studentaction", {
       method: "POST",
       body: action
@@ -68,7 +66,6 @@ async function createStudentTrainingActions(elements){
   let kct = null;
   elements.forEach((item) => {
     if(item[0].includes("id")){
-      console.log(item);
       const itemdata = item[0].split("-");
       const exercise = itemdata[6];
       const userID = 1;
@@ -87,10 +84,8 @@ async function createStudentTrainingActions(elements){
         object = { exercise: exercise, userID: userID, itemType: itemType, itemID: itemID, answers: answers, correct: correct, started: started, finished: finished, difficulty:  difficulty,
           area: area, score: score, total: total, keys: keys};
         actions.push(object);
-        console.log(Object.values(object));
       } else {
         if(noClosedTextFinished) {
-          console.log("First Time entering for closedtext")
           noClosedTextFinished = false;
           answersCorrectClosedText = correct;
           ect = exercise;
@@ -110,8 +105,6 @@ async function createStudentTrainingActions(elements){
           object = { exercise: ect, userID: uct, itemType: ict, itemID: idct, answers: answersGivenUse.split(","), correct: cct, started: sct, finished: fct, difficulty:  dct,
             area: arct, score: score, total: total, keys: kct};
           actions.push(object);
-          console.log(Object.values(object));
-          console.log("First Time object for closedtext")
           answersCorrectClosedText = correct;
           ect = exercise;
           uct = userID;
@@ -127,24 +120,19 @@ async function createStudentTrainingActions(elements){
       }  
     } else {
        answersGivenClosedText = answersGivenClosedText + item[1] + ",";
-       console.log("AnswersGivenClosedText: " + answersGivenClosedText);
-
     }
     if (item === elements[elements.length-1]){
-      console.log("Entering finally")
       answersGivenClosedText = answersGivenClosedText.slice(0,-1);
       const [score,total] = calculateScore("closedtext", answersGivenClosedText, answersCorrectClosedText)
       object = { exercise: ect, userID: uct, itemType: ict, itemID: idct, answers: answersGivenClosedText.split(","), correct: cct, started: sct, finished: fct, difficulty:  dct,
         area: arct, score: score, total: total, keys: kct};
       answersGivenClosedText = "";
       actions.push(object);
-      console.log(Object.values(object));
     }
   })
   return actions;
 }
 function calculateScore (itemtype, answers, correct){
-  console.log("Entering with " + itemtype + "/ " + answers + "/ " + correct);
   let total = 0; let score = 0;
   const correctList = correct.split(",");
   switch (itemtype){
@@ -172,8 +160,6 @@ async function shortText (elements) {
     if (element[0].includes("shorttext")) {
       let elementArray = element[0].split("-");
       items[realIndex] = {id: elementArray[9], answer: element[1], correct: elementArray[7]};
-      console.log("IDST");
-      console.log(items[realIndex].id);
       currentIndex = realIndex;
       realIndex = realIndex +1;
     }
@@ -182,15 +168,18 @@ async function shortText (elements) {
   for (let i = 0; i < items.length; i++) {
     const answer = items[i].correct.split(",");
     corr = corr + "st"+items[i].id + "-";
+    let scorePer = 1;
     for (let o = 0; o < answer.length; o++) {
+      if (answer.length === 1) scorePer = 2;
       const a = answer[o];
-      if (items[i].answer.toLowerCase().includes(a)) { score = score + 1; corr = corr + "true,"; }
+      if (items[i].answer.toLowerCase().includes(a)) { score = score + scorePer; corr = corr + "true,"; }
       else { corr = corr + "false,";  }
     }
+    (score === 2) ? score = 1 : score = 0;
     corr = corr.slice(0,-1) + ";";
     console.log(corr);
   }
-  return [Math.min(score,4), 4, corr];
+  return [Math.min(score,1), 1, corr];
 }
 async function closedText (elements) {
   const items = [];
@@ -200,8 +189,6 @@ async function closedText (elements) {
     if (element[0].includes("closedtext")) {
       if (element[0].includes("id")) {
         items[realIndex] = {id: element[1], answers: [], correct: element[0].split("-")[7]};
-        console.log("IDCT");
-        console.log(items[realIndex].id);
         currentIndex = realIndex;
         realIndex = realIndex +1;
       } else {
@@ -221,7 +208,6 @@ async function closedText (elements) {
       else{corr = corr + "false,";}
     }
     corr = corr.slice(0,-1) + ";";
-    console.log(corr);
   }
   return [score, total,corr];
 }
@@ -239,8 +225,6 @@ async function multipleChoice(elements) {
         answers : answers,
         correct: correct
       }
-      console.log("IDMC");
-      console.log(item.id);
       items.push(item);
 
     }
@@ -250,13 +234,16 @@ async function multipleChoice(elements) {
     corr = corr + "mc"+items[i].id + "-";
     const answer = items[i].correct;
     const given = items[i].answers.join();
-    for (let o = 0; o < 4; o++) {
+    let o = 0;
+    for (let k = 0; k < 4; k++) {
       total = total + 1;
+      o = o + 1;
       if ((answer.includes(o) && given.includes(o))|| (!answer.includes(o) && !given.includes(o))) { score = score + 1; corr = corr + "true,";}
       else { corr = corr + "false,";} 
     }
+    (score === 4) ? score = 1 : score = 0;
+    total = 1;
     corr = corr.slice(0,-1) + ";";
-    console.log(corr);
   }
   return [score, total,corr];
 }
@@ -275,8 +262,6 @@ async function imageSelection(elements) {
         correct: correct
       }
       items.push(item);
-      console.log("IDIS");
-      console.log(item.id);
     }
   });
   let score = 0; let total = 0; let corr = "";
@@ -284,13 +269,16 @@ async function imageSelection(elements) {
     corr = corr + "is"+items[i].id + "-";
     const answer = items[i].correct;
     const given = items[i].answers.join();
-    for (let o = 0; o < 10; o++) {
+    let o = 0;
+    for (let k = 0; k < 10; k++) {
       total = total + 1;
+      o = o + 1;
       if ((answer.includes(o) && given.includes(o))|| (!answer.includes(o) && !given.includes(o))) { score = score + 1; corr = corr + "true,";}
       else { corr = corr + "false,";} 
     }
+    (score === 10) ? score = 1 : score = 0;
+    total = 1;
     corr = corr.slice(0,-1) + ";";
-    console.log(corr);
   }
   return [score, total,corr];
 }
@@ -309,8 +297,6 @@ async function hearingTask (elements) {
         correct : correct
       }
       items.push(item);
-      console.log("IDHT");
-      console.log(item.id);
     }
   });
   let score = 0; let total = 0; let corr = "";
@@ -318,13 +304,16 @@ async function hearingTask (elements) {
     corr = corr + "ht"+items[i].id + "-";
     const answer = items[i].correct;
     const given = items[i].answers.join();
-    for (let o = 0; o < 5; o++) {
+    let o = 0;
+    for (let k = 0; k < 5; k++) {
       total = total + 1;
+      o = o + 1;
       if ((answer.includes(o) && given.includes(o))|| (!answer.includes(o) && !given.includes(o))) { score = score + 1; corr = corr + "true,";}
       else { corr = corr + "false,";} 
     }
+    (score === 5) ? score = 1 : score = 0;
+    total = 1;
     corr = corr.slice(0,-1) + ";";
-    console.log(corr);
   }
   return [score, total,corr];
 }
