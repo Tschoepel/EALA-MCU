@@ -19,7 +19,7 @@
               </p>
             </template>
           </InfoCard>
-          <FormComponent :list="[{c:'ItemsShort-text',id:2, ex:index}, {c:'ItemsImage-selection', id:1, ex:index},{c: 'ItemsClosed-text', id: 1, ex:index}, {c: 'ItemsMultiple-choice', id: 2, ex:index}, {c: 'ItemsHearing-task', id: 1, ex:index},{c: 'ItemsClosed-text', id: 2, ex:index}, {c: 'ItemsShort-text', id: 1, ex:index}, {c: 'ItemsMultiple-choice', id: 1, ex:index}]">
+          <FormComponent :list="list">
           <!-- <ItemsClosed-text :id="1" />
           <div><b /></div>
           <ItemsMultiple-choice :id="1" /> -->
@@ -36,5 +36,7 @@
 <script setup>
 const route = useRoute();
 const index = route.params.id;
-// const date = new Date().toLocaleDateString("de-DE");
+const listOne = [{ c: "ItemsShort-text", id: 2, ex: index }, { c: "ItemsImage-selection", id: 1, ex: index }, { c: "ItemsClosed-text", id: 1, ex: index }, { c: "ItemsMultiple-choice", id: 2, ex: index }, { c: "ItemsHearing-task", id: 1, ex: index }, { c: "ItemsClosed-text", id: 2, ex: index }, { c: "ItemsShort-text", id: 1, ex: index }, { c: "ItemsMultiple-choice", id: 1, ex: index }];
+const listTwo = [{ c: "ItemsShort-text", id: 3, ex: index }, { c: "ItemsImage-selection", id: 6, ex: index }, { c: "ItemsClosed-text", id: 3, ex: index }, { c: "ItemsMultiple-choice", id: 4, ex: index }, { c: "ItemsImage-selection", id: 4, ex: index }, { c: "ItemsClosed-text", id: 4, ex: index }, { c: "ItemsShort-text", id: 4, ex: index }, { c: "ItemsMultiple-choice", id: 3, ex: index }];
+const list = (index === 1) ? listOne : listTwo;
 </script>

@@ -24,6 +24,26 @@ async function main () {
       answers: "1942,hydra,tesserakt"
     }
   });
+  await prisma.closedText.create({
+    data: {
+      area: "Multiverse",        
+      difficulty:"medium",
+      hint:"Green Goblin in seiner bessessenen Form übernimmt am Ende die Rolle des Bösewichts.",
+      title: "Hulk",
+      text: "$$ wandelt sich Laufe von Spider Man: No Way Home von einer tragischen Figur zum Antagonisten, während $$ diese Entwicklung umkehrt.",
+      answers: "Green Goblin,Dr. Octopus"
+    }
+  });
+  await prisma.closedText.create({
+    data: {
+      area: "Multiverse",        
+      difficulty:"easy",
+      hint:"Captain America spielt 1942 im zweiten Weltkrieg und bekämpft Hydra.",
+      title: "Captain America: The First Avenger",
+      text: "Peter Parkers Wunsch, dass seine Freunde, darunter $$, ihn nicht $$, lösen das Zusammenbrechen des Multiverse aus",
+      answers: "michelle, vergessen"
+    }
+  });
   await prisma.multipleChoice.create({
     data: {
       area: "Infinity Wars",        
@@ -56,6 +76,28 @@ async function main () {
 
     }
   });
+  await prisma.multipleChoice.create({
+    data: {
+      area: "Multiverse",        
+      difficulty:"easy",
+      hint:"Aqua Man gehört nicht in das MCU. Iron Man ist tot.",
+      question: "Welche der folgenden Helden tauchen im Multiverse auf?",
+      answers : "Spider Man, Ant Man, Iron Man, Aqua Man",
+      answersCorrect: "answer1,answer2"
+
+    }
+  });
+  await prisma.multipleChoice.create({
+    data: {
+      area: "Multiverse",        
+      difficulty:"easy",
+      hint:"Wie gewünscht, übernimmt der Falcon den Schild von Captain America und damit seine Rolle.",
+      question: "Welcher Held übernimmt die Rolle von Captain America?",
+      answers : "Captain America, Vision, Falcon, Winter Soldier",
+      answersCorrect: "answer3"
+
+    }
+  });
   await prisma.dragDrop.create({
     data: {
       title: "Drag & Drop: Sortieren Sie die folgenden Filme nach ihrem Erscheinungsjahr von alt nach neu"
@@ -82,6 +124,31 @@ async function main () {
       question: "Um welchen Film handelt es sich im folgenden Video? Begründen ihre Entscheidung.",
       answer: "Hier könnte eine Antwort stehen",
       answerKeywords: "iron man 2",
+      videoExists: true
+    
+    }
+  });
+  await prisma.shortText.create({
+    data: {
+      area: "Multiverse",        
+      difficulty:"easy",
+      hint:"Peter Parker wird von Vielen für einen Massenmörder gehalten.",
+      title: "Bitte beantworten Sie die Frage in wenigen Worten",
+      question: "Welcher Charakter löst mit seiner Bitte an Dr. Strange das Multiverse aus?",
+      answer: "Hier könnte eine Antwort stehen",
+      answerKeywords: "spider man",
+      videoExists: false
+    }
+  });
+  await prisma.shortText.create({
+    data: {
+      area: "Multiverse",        
+      difficulty:"mittel",
+      hint:"Es tauchen Feinde von Spider Man aus alten Reihen auf.",
+      title: "Bitte beantworten Sie die Frage.",
+      question: "Nenne 2 Gegner aus dem Multiverse, die Spider Man einfangen muss.",
+      answer: "Hier könnte eine Antwort stehen",
+      answerKeywords: "goblin, Dr. Octopus, octopus, green goblin, sandman, lizard, vulture, mysterio",
       videoExists: true
     
     }
