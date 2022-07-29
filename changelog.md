@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.22] - 29.07.2022
+### Added
+- DrawItem Feedback
 ## [0.0.21] - 29.07.2022
 ### Added
 - Creation of StudentTrainingAction
