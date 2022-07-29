@@ -363,6 +363,280 @@ async function main () {
     }
   });
 
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "imageselection",
+      itemID:      109,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "imageselection",
+      itemID:      110,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "mittel",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "imageselection",
+      itemID:      111,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "imageselection",
+      itemID:      112,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "multiplechoice",
+      itemID:      113,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "multiplechoice",
+      itemID:      114,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "mittel",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "multiplechoice",
+      itemID:      115,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "multiplechoice",
+      itemID:      116,
+      answers:     "answer2",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "shorttext",
+      itemID:      117,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "shorttext",
+      itemID:      118,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "shorttext",
+      itemID:      119,
+      answers:     "answer2",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "shorttext",
+      itemID:      120,
+      answers:     "answer2",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "closedtext",
+      itemID:      121,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "schwer",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "closedtext",
+      itemID:      122,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "mittel",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "closedtext",
+      itemID:      123,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "mittel",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "closedtext",
+      itemID:      124,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+
+
 }
 
 main()

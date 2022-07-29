@@ -230,7 +230,7 @@ valuesArray.forEach((element) => {
     }
   });
 });
-const itemsDoneLabels = ["Multiple-Choice", "Lückentext", "Kurztext", "Sounderkennung", "Bilderkennung", "Andere"];
+const itemsDoneLabels = ["Multiple-Choice / Hulk", "Lückentext /  Captain America", "Kurztext / Iron Man", "Sounderkennung / Thor", "Bilderkennung / Thor", "Andere"];
 const itemsDoneData = [{
   data: [countMultiple, countClosed, countShort, countSound, countImage, countOther],
   label: "Items",
@@ -272,7 +272,7 @@ valuesItems.forEach((element) => {
   // element.area
   // element.score
   switch (element.itemType) {
-  case "multiplechoice": if (element.area === "multiverse") {
+  case "multiplechoice": if (element.area === "Multiverse") {
     hulkMultiComp = hulkMultiComp + 1;
     if (element.score > 0) { hulkMultiSucc = hulkMultiSucc + 1; }
   } else {
@@ -281,7 +281,7 @@ valuesItems.forEach((element) => {
   }
     break;
   case "imageselection":
-  case "hearingtask": if (element.area === "multiverse") {
+  case "hearingtask": if (element.area === "Multiverse") {
     thorMultiComp = thorMultiComp + 1;
     if (element.score > 0) { thorMultiSucc = thorMultiSucc + 1; }
   } else {
@@ -289,7 +289,7 @@ valuesItems.forEach((element) => {
     if (element.score > 0) { thorInfinitySucc = thorInfinitySucc + 1; }
   }
     break;
-  case "closedtext": if (element.area === "multiverse") {
+  case "closedtext": if (element.area === "Multiverse") {
     captainMultiComp = captainMultiComp + 1;
     if (element.score > 0) { captainMultiSucc = captainMultiSucc + 1; }
   } else {
@@ -298,7 +298,7 @@ valuesItems.forEach((element) => {
   }
     break;
   case "shorttext":
-  default: if (element.area === "multiverse") {
+  default: if (element.area === "Multiverse") {
     ironMultiComp = ironMultiComp + 1;
     if (element.score > 0) { ironMultiSucc = ironMultiSucc + 1; }
   } else {
@@ -331,14 +331,38 @@ const ironInfinityLabels = ["Bestanden", "Gescheitert"];
 const ironMultiData = [{ data: [ironMultiSucc, ironMultiComp - ironMultiSucc], backgroundColor: ["rgba(220, 38, 38, 0.5)", "rgba(110, 38, 38, 0.5)"] }];
 const ironInfinityData = [{ data: [ironInfinitySucc, ironInfinityComp - ironInfinitySucc], backgroundColor: ["rgba(220, 38, 38, 0.5)", "rgba(110, 38, 38, 0.5)"] }];
 const calcStrength = Math.max(hulkSucc, thorSucc, captainSucc, ironSucc);
-console.log(calcStrength);
 const calcWeakness = Math.min(hulkSucc, thorSucc, captainSucc, ironSucc);
-console.log(calcWeakness);
-// switch(calcStrength) case hulk
 let tag;
 let src;
 let weakness;
-switch (parseInt(Math.random() * (4))) {
+switch (calcStrength) {
+case ironSucc:tag = "Wie Iron Man glänzt du durch die einzigartige Fähigkeit, deine eigenen Worte zu finden.";
+  src = "../../assets/images/ironmanres.jpg";
+  break;
+case captainSucc: tag = "Du wars bei Captain Americas Schule des Text-Auswendig-Lernens, oder?";
+  src = "../../assets/images/captainAmerica.jpg";
+  break;
+case thorSucc: tag = "Wie Thor liegen deine Stärken eher in Bildern und Worten, nicht im Lesen.";
+  src = "../../assets/images/thorres.jpg";
+  break;
+case hulkSucc:
+default: tag = "Hulks Stärken gleichen deinen, Rumdrücken und Recht haben!";
+  src = "../../assets/images/hulk.jpg";
+  break;
+}
+switch (calcWeakness) {
+case hulkSucc: weakness = "Du brauchst einen Hulk in deinem Team, der dir zeigt wie man richtig draufschlägt!";
+  break;
+case thorSucc: weakness = "Du solltest dir jemanden wie Thor für deine Avengers suchen. Du brauchst Hilfe bei der Bildinterpretation!";
+  break;
+case captainSucc: weakness = "Suche dir einen Captain Amerika, der mit dir die Fakten paukt.";
+  break;
+case ironSucc:
+default: weakness = "Du benötigst die Unterstützung eines Iron Man, um zu lernen, deine eigenene Worte zu finden!";
+  break;
+}
+
+/* switch (parseInt(Math.random() * (4))) {
 case 0:tag = "Hulks Stärken gleichen deinen, Rumdrücken und Recht haben!";
   src = "../../assets/images/hulk.jpg";
   break;
@@ -363,7 +387,7 @@ case 2: weakness = "Du solltest dir jemanden wie Thor für deine Avengers suchen
 case 3:
 default:weakness = "Du benötigst die Unterstützung eines Iron Man, um zu lernen, deine eigenene Worte zu finden!";
   break;
-}
+} */
 const showText = tag;
 const srcimg = src;
 const showWeakness = weakness;
