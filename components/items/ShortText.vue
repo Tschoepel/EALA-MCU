@@ -19,7 +19,7 @@
         <b>Hinweistext: </b>Bitte beantworten sie die Frage kurz.
       </div>
       <div class="px-4 py-5">
-        <!-- Alternative Video Input if videoEnabled is set -->
+        <!-- Set video if videoEnabled -->
         <video v-show="videoEnabled" id="embVideo" controls>
           <source :src="imageSrcM" type="video/webm">
         </video>
