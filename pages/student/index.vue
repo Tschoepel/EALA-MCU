@@ -7,7 +7,6 @@
         </h1>
       </div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <!-- Replace with your content -->
         <div class="py-4 grid grid-cols-3 grid-flow-row gap-4">
           <div class="bg-white px-4 py-5 sm:px-6">
             <div class="flex space-x-3">
