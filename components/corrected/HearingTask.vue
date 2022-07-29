@@ -19,27 +19,28 @@
         <b>Fehler: </b> {{ props.hint }}
       </div>
       <div class="px-4 py-5">
-        <input type="hidden" :name="'hearingtask-' + props.index + '-id'" :value="props.id" >
-          <AudioPlayer :option=" {
-            src: '../../assets/audio/adopted.mp3',
-            title: ''
-            //coverImage: 'https://your-cover-image.png',
-          }" />
+        <input type="hidden" :name="'hearingtask-' + props.index + '-id'" :value="props.id">
+        <AudioPlayer
+        :option=" {
+          src: '../../assets/audio/adopted.mp3',
+          title: ''
+        }"
+        />
         <div class="grid grid-cols-5 cols-gap-0.5">
           <div style="padding:10px;">
-            <img src="../../assets/images/black_widow.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+            <img src="../../assets/images/black_widow.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/iron_man2.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
-          </div>
-          <div style="padding:10px;" >
-            <img src="../../assets/images/thor_the_dark.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+            <img src="../../assets/images/iron_man2.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/thor.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+            <img src="../../assets/images/thor_the_dark.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
           </div>
           <div style="padding:10px;">
-            <img src="../../assets/images/iron_man.jpg" class="shadow-sm text-sm border-gray-300 rounded-md" />
+            <img src="../../assets/images/thor.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
+          </div>
+          <div style="padding:10px;">
+            <img src="../../assets/images/iron_man.jpg" class="shadow-sm text-sm border-gray-300 rounded-md">
           </div>
         </div>
         <div class="grid grid-cols-5 cols-gap-1.5">
@@ -61,7 +62,7 @@
           </div>
           <div style="padding:10px;">
             <input id="answerV" v-model="inputV" type="checkbox" value="answer5" class="mr-2">
-            <label id="aVLabel" for="answerV" :style="[answersCorrect.aCV  ? {color:'green'}:{color:'red'}]">{{ answerV }}</label>
+            <label id="aVLabel" for="answerV" :style="[answersCorrect.aCV ? {color:'green'}:{color:'red'}]">{{ answerV }}</label>
           </div>
         </div>
       </div>
@@ -70,6 +71,7 @@
 </template>
 
 <script setup>
+// This component is used to show corrected hearing-task-item with feedback (red/green text + hint if wrong)
 import { hash } from "ohash";
 import { ref } from "vue";
 import AudioPlayer from "vue3-audio-player";

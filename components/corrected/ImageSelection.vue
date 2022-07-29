@@ -39,7 +39,7 @@
           </div>
           <div style="padding:10px;">
             <input id="answerV" v-model="inputV" type="checkbox" value="answer5" class="mr-2">
-            <label id="aVLabel" for="answerV" :style="[answersCorrect.aCV  ? {color:'green'}:{color:'red'}]">{{ answerV }}</label>
+            <label id="aVLabel" for="answerV" :style="[answersCorrect.aCV ? {color:'green'}:{color:'red'}]">{{ answerV }}</label>
           </div>
         </div>
         <div class="grid grid-cols-5 cols-gap-0.5">
@@ -68,7 +68,7 @@
             <input id="answerVII" v-model="inputVII" type="checkbox" value="answer7" class="mr-2">
             <label id="aVIILabel" for="answerVII" :style="[answersCorrect.aCVII ? {color:'green'}:{color:'red'}]">{{ answerVII }}</label>
           </div>
-          <div style="padding:10px;" >
+          <div style="padding:10px;">
             <input id="answerVIII" v-model="inputVIII" type="checkbox" value="answer8" class="mr-2">
             <label id="aVIIILabel" for="answerVIII" :style="[answersCorrect.aCVIII ? {color:'green'}:{color:'red'}]">{{ answerVIII }}</label>
           </div>
@@ -78,7 +78,7 @@
           </div>
           <div style="padding:10px;">
             <input id="answerX" v-model="inputX" type="checkbox" value="answer10" class="mr-2">
-            <label id="aXLabel" for="answerX" :style="[answersCorrect.aCX  ? {color:'green'}:{color:'red'}]">{{ answerX }}</label>
+            <label id="aXLabel" for="answerX" :style="[answersCorrect.aCX ? {color:'green'}:{color:'red'}]">{{ answerX }}</label>
           </div>
         </div>
         <div class="grid grid-cols-5 cols-gap-0.5">
@@ -103,6 +103,7 @@
   </div>
 </template>
 <script setup>
+// This component is used to show corrected image-selection-item with feedback (red/green text + hint if wrong)
 import { ref } from "vue";
 const props = defineProps({
   id: {

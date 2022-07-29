@@ -39,6 +39,7 @@
 </template>
 
 <script setup>
+// This component is used to show corrected short-text-item with feedback (red/green text + hint if wrong)
 import { ref } from "vue";
 import { hash } from "ohash";
 const props = defineProps({

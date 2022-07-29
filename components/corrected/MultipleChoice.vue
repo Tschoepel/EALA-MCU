@@ -66,6 +66,7 @@
   </div>
 </template>
 <script setup>
+// This component is used to show corrected multiple-choice-item with feedback (red/green text + hint if wrong)
 import { hash } from "ohash";
 import { ref } from "vue";
 const props = defineProps({

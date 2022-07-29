@@ -188,7 +188,6 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  // console.log(props.nav);
   navigation.forEach((element) => {
     if (element.name.toLowerCase() === props.nav) { element.current = true; }
   });

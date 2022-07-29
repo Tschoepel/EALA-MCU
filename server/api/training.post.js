@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
+// responsible for correcting and storing itemactions and exercise sheets
 
+// stores exercise input in database
 export default defineEventHandler(async (event) => {
   const body = Array.from(await useBody(event));
   const submission = await prisma.trainingSubmissions.create({
@@ -10,14 +12,16 @@ export default defineEventHandler(async (event) => {
       correctionString: ""
     }
   });
-
+  // calls function to grade and store item inputs
   const studentActions = await createStudentTrainingActions(body);
   await storeStudentActions(studentActions);
+  // calls functions grade exercise
   const [scoredC,totalC, corrC] = await closedText(body);
   const [scoredM,totalM, corrM] = await multipleChoice(body);
   const [scoredI,totalI, corrI] = await imageSelection (body);
   const [scoredH,totalH, corrH] = await hearingTask (body);
   const [scoredS,totalS, corrS] = await shortText(body);
+  // stores result in database
   const result = await prisma.trainingResults.create({
     data: {
       userId: 1,
@@ -39,6 +43,7 @@ export default defineEventHandler(async (event) => {
   });
   return { id: result.id, correctionString: corrC+corrM+corrI+corrH+corrS };
 });
+// function to store item actions in database
 async function storeStudentActions(actions){
   actions.forEach( async (action) => {
     await $fetch("/api/studentaction", {
@@ -47,6 +52,7 @@ async function storeStudentActions(actions){
     })
   });
 }
+// function to collect data for item actions
 async function createStudentTrainingActions(elements){
   let actions = [];
   let object ={};
@@ -132,6 +138,7 @@ async function createStudentTrainingActions(elements){
   })
   return actions;
 }
+// function to calculate score of item actions
 function calculateScore (itemtype, answers, correct){
   let total = 0; let score = 0;
   const correctList = correct.split(",");
@@ -152,6 +159,7 @@ function calculateScore (itemtype, answers, correct){
     return [0,1];
   }
 }
+// function to evaluate short text items of exercise sheet
 async function shortText (elements) {
   const items = [];
   let realIndex = 0;
@@ -183,6 +191,7 @@ async function shortText (elements) {
   }
   return [Math.min(score,1), items.length, corr];
 }
+// function to evaluate closed text items of exercise sheet
 async function closedText (elements) {
   const items = [];
   let realIndex = 0;
@@ -253,6 +262,7 @@ async function multipleChoice(elements) {
   }
   return [score, total,corr];
 }
+// function to evaluate image selection items of exercise sheet
 async function imageSelection(elements) {
 
   const items = [];
@@ -289,6 +299,7 @@ async function imageSelection(elements) {
   }
   return [score, total,corr];
 }
+// function to evaluate hearing task items of exercise sheet
 async function hearingTask (elements) {
 
   const items = [];

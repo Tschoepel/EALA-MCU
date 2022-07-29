@@ -6,9 +6,9 @@
           Ergebnisse
         </h1>
       </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-      <div class="py-4">
-      <InfoCard>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        <div class="py-4">
+          <InfoCard>
             <template #title>
               Ergebnisse für das Übungsblatt {{ index }}
             </template>
@@ -25,7 +25,7 @@
               <h3 class="text-lg leading-6 font-medium text-gray-900">
                 {{ showText }}
               </h3>
-              <img :src="srcimg" style="height: 300px; width: fit-content;"/>
+              <img :src="srcimg" style="height: 300px; width: fit-content;">
             </template>
           </InfoCard>
           <FilledComponent :list="objects" />
@@ -35,6 +35,7 @@
   </dashboardsStudent-dashboard>
 </template>
 <script setup>
+// Pulls last try on the exercise sheet, collects data for correction items.
 const route = useRoute();
 const index = route.params.id;
 const { data: api } = await useFetch("/api/training/" + index);
@@ -58,7 +59,6 @@ const correctArray = correctString.split(";");
 const submission = currentSubmission[2].replace(/"/g, "");
 
 const submissionElements = submission.substring(2, submission.length - 2).split("],[");
-// "mc1-true,true,true,true;mc2-true,true,true,true;"
 const objects = [];
 let counter = 0;
 let c = "";
@@ -106,7 +106,6 @@ submissionElements.forEach((element) => {
     });
     hint = elementParts[5];
     fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
-    // fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (element.includes("multiplechoice")) {
     c = "ItemsMultiple-choice";
@@ -120,12 +119,10 @@ submissionElements.forEach((element) => {
     });
     hint = elementParts[5];
     fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
-    // fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (element.includes("shorttext")) {
     const elementParts = element.split("-");
     c = "ItemsShort-text";
-    // shorttext-6-id-Infinity Wars-easy-Tony Stark ist für seine Intelligenz und scharfe Zunge bekannt.-2-fliegen, unverwundbar, intelligent, reich, innovativ, schlagfertig, gewitzt-28.7.2022-1,,fghj
     id = parseInt(elementParts[9].split(",")[0]);
     correctArray.forEach((elementCorrect) => {
       if (elementCorrect.includes("st" + id)) {
@@ -147,7 +144,6 @@ submissionElements.forEach((element) => {
     });
     hint = elementParts[5];
     fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
-    // fillElements = element.split(",").slice(2).join(",") + ",";
   }
   if (counter === length) {
     fillElements = fillElements.substring(0, fillElements.length - 1);

@@ -27,6 +27,7 @@
 </template>
 
 <script setup>
+// This component is used to show corrected closed-text-item with feedback (red/green text + hint if wrong)
 import { hash } from "ohash";
 const props = defineProps({
   id: {

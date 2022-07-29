@@ -6,11 +6,11 @@
           Übersicht
         </h1>
         <h3 class="text-lg leading-6 font-medium text-gray-900">
-                {{ showText }}
+          {{ showText }}
         </h3>
-        <img :src="srcimg" style="height: 300px; width: fit-content;"/>
-         <h3 class="text-lg leading-6 font-medium text-gray-900">
-                {{ showWeakness}}
+        <img :src="srcimg" style="height: 300px; width: fit-content;">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          {{ showWeakness }}
         </h3>
       </div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -57,9 +57,9 @@
         <h1 class="text-2xl font-semibold text-gray-900">
           Infinity Wars
         </h1>
-        <img src="../../assets/images/infinitywardash.jpg" style="height: 300px; width: fit-content;"/>
+        <img src="../../assets/images/infinitywardash.jpg" style="height: 300px; width: fit-content;">
       </div>
-<div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div class="py-4 grid grid-cols-4 grid-flow-row gap-4">
           <div class="bg-white px-4 py-5 sm:px-6">
             <div class="flex space-x-4">
@@ -67,7 +67,7 @@
                 Hulk-Items
               </h3>
             </div>
-             <div class="px-4 pb-5 sm:p-6 sm:pt-0">
+            <div class="px-4 pb-5 sm:p-6 sm:pt-0">
               <ClientOnly>
                 <ChartsDoughnutChart :labels="hulkInfinityLabels" :datasets="hulkInfinityData" />
               </ClientOnly>
@@ -79,7 +79,7 @@
                 Thor-Items
               </h3>
             </div>
-             <div class="px-4 pb-5 sm:p-6 sm:pt-0">
+            <div class="px-4 pb-5 sm:p-6 sm:pt-0">
               <ClientOnly>
                 <ChartsDoughnutChart :labels="thorInfinityLabels" :datasets="thorInfinityData" />
               </ClientOnly>
@@ -88,7 +88,7 @@
           <div class="bg-white px-4 py-5 sm:px-6">
             <div class="flex space-x-4">
               <h3 class="text-sm font-bold text-blue-600">
-               Captain America-Items
+                Captain America-Items
               </h3>
             </div>
             <div class="px-4 pb-5 sm:p-6 sm:pt-0">
@@ -115,7 +115,7 @@
         <h1 class="text-2xl font-semibold text-gray-900">
           Multiverse
         </h1>
-        <img src="../../assets/images/multiversedash.jpg" style="height: 300px; width: fit-content;"/>
+        <img src="../../assets/images/multiversedash.jpg" style="height: 300px; width: fit-content;">
       </div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div class="py-4 grid grid-cols-4 grid-flow-row gap-4">
@@ -125,7 +125,7 @@
                 Hulk-Items
               </h3>
             </div>
-             <div class="px-4 pb-5 sm:p-6 sm:pt-0">
+            <div class="px-4 pb-5 sm:p-6 sm:pt-0">
               <ClientOnly>
                 <ChartsDoughnutChart :labels="hulkMultiLabels" :datasets="hulkMultiData" />
               </ClientOnly>
@@ -137,7 +137,7 @@
                 Thor-Items
               </h3>
             </div>
-             <div class="px-4 pb-5 sm:p-6 sm:pt-0">
+            <div class="px-4 pb-5 sm:p-6 sm:pt-0">
               <ClientOnly>
                 <ChartsDoughnutChart :labels="thorMultiLabels" :datasets="thorMultiData" />
               </ClientOnly>
@@ -146,7 +146,7 @@
           <div class="bg-white px-4 py-5 sm:px-6">
             <div class="flex space-x-4">
               <h3 class="text-sm font-bold text-blue-600">
-               Captain America-Items
+                Captain America-Items
               </h3>
             </div>
             <div class="px-4 pb-5 sm:p-6 sm:pt-0">
@@ -173,6 +173,12 @@
   </dashboardsStudent-dashboard>
 </template>
 <script setup>
+// Dashboard used for student self-assessement: currently shows how they do in different item categories and areas of learning
+// Based on this data, student's strength is shown with avatar of hero, proposal of looking for students with other avatars
+// based on biggest weakness
+// this should only show one possible example of self-assessement we could do based on the data we currently collect.
+// grab data for charts
+
 const { data: apiResults } = await useFetch("/api/studentres/1");
 const arrayResults = Array.from(apiResults.value);
 let passedEx = 0;
@@ -207,8 +213,6 @@ let countSound = 0;
 let countOther = 0;
 valuesArray.forEach((element) => {
   const currentObject = Object.values(element);
-  const id = currentObject[0];
-  console.log(id);
   const submission = currentObject[2].replace(/"/g, "");
   const submissionElements = submission.substring(2, submission.length - 2).split("],[");
   submissionElements.forEach((element) => {
@@ -266,11 +270,6 @@ let ironMultiComp = 0;
 let ironInfinitySucc = 0;
 let ironInfinityComp = 0;
 valuesItems.forEach((element) => {
-  console.log(element);
-  console.log();
-  // alternative element.itemType;
-  // element.area
-  // element.score
   switch (element.itemType) {
   case "multiplechoice": if (element.area === "Multiverse") {
     hulkMultiComp = hulkMultiComp + 1;
@@ -312,6 +311,9 @@ const hulkSucc = hulkMultiSucc + hulkInfinitySucc;
 const thorSucc = thorMultiSucc + thorInfinitySucc;
 const captainSucc = captainMultiSucc + captainInfinitySucc;
 const ironSucc = ironMultiSucc + ironInfinitySucc;
+
+// Filling charts with content
+
 const trainingDistributionLabels = ["Hulk", "Thor", "Captain America", "Iron Man"];
 const trainingDistributionData = [{ data: [hulkSucc, thorSucc, captainSucc, ironSucc], backgroundColor: ["rgba(38, 220, 38, 0.5)", "rgba(178, 178, 38, 0.5)", "rgba(38, 38, 220, 0.5)", "rgba(220, 38, 38, 0.5)"] }];
 const hulkMultiLabels = ["Bestanden", "Gescheitert"];
@@ -330,6 +332,9 @@ const ironMultiLabels = ["Bestanden", "Gescheitert"];
 const ironInfinityLabels = ["Bestanden", "Gescheitert"];
 const ironMultiData = [{ data: [ironMultiSucc, ironMultiComp - ironMultiSucc], backgroundColor: ["rgba(220, 38, 38, 0.5)", "rgba(110, 38, 38, 0.5)"] }];
 const ironInfinityData = [{ data: [ironInfinitySucc, ironInfinityComp - ironInfinitySucc], backgroundColor: ["rgba(220, 38, 38, 0.5)", "rgba(110, 38, 38, 0.5)"] }];
+
+// Classify student
+
 const calcStrength = Math.max(hulkSucc, thorSucc, captainSucc, ironSucc);
 const calcWeakness = Math.min(hulkSucc, thorSucc, captainSucc, ironSucc);
 let tag;
@@ -362,32 +367,6 @@ default: weakness = "Du benötigst die Unterstützung eines Iron Man, um zu lern
   break;
 }
 
-/* switch (parseInt(Math.random() * (4))) {
-case 0:tag = "Hulks Stärken gleichen deinen, Rumdrücken und Recht haben!";
-  src = "../../assets/images/hulk.jpg";
-  break;
-case 1: tag = "Du wars bei Captain Americas Schule des Text-Auswendig-Lernens, oder?";
-  src = "../../assets/images/captainAmerica.jpg";
-  break;
-case 2: tag = "Wie Thor liegen deine Stärken eher in Bildern und Worten, nicht im Lesen.";
-  src = "../../assets/images/thorres.jpg";
-  break;
-case 3:
-default: tag = "Wie Iron Man glänzt du durch die einzigartige Fähigkeit, deine eigenen Worte zu finden.";
-  src = "../../assets/images/ironmanres.jpg";
-  break;
-}
-switch (parseInt(Math.random() * (4))) {
-case 0: weakness = "Du brauchst einen Hulk in deinem Team, der dir zeigt wie man richtig draufschlägt!";
-  break;
-case 1: weakness = "Suche dir einen Captain America, der mit dir die Fakten paukt.";
-  break;
-case 2: weakness = "Du solltest dir jemanden wie Thor für deine Avengers suchen. Du brauchst Hilfe bei der Bildinterpretation!";
-  break;
-case 3:
-default:weakness = "Du benötigst die Unterstützung eines Iron Man, um zu lernen, deine eigenene Worte zu finden!";
-  break;
-} */
 const showText = tag;
 const srcimg = src;
 const showWeakness = weakness;
