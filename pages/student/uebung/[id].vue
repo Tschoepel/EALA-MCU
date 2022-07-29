@@ -7,7 +7,6 @@
         </h1>
       </div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <!-- Replace with your content -->
         <div class="py-4">
           <InfoCard>
             <template #title>
@@ -20,14 +19,8 @@
             </template>
           </InfoCard>
           <FormComponent :list="list">
-          <!-- <ItemsClosed-text :id="1" />
-          <div><b /></div>
-          <ItemsMultiple-choice :id="1" /> -->
           </FormComponent>
-          <!-- <ItemsDragDrop :id="1" class="mt-6" />
-          <ItemsHearingTask :id="1" class="mt-6" /> -->
         </div>
-        <!-- /End replace -->
       </div>
     </div>
   </dashboardsStudent-dashboard>

@@ -164,6 +164,7 @@ async function shortText (elements) {
       realIndex = realIndex +1;
     }
   });
+  let scoreItem = 0;
   let score = 0; let corr = "";
   for (let i = 0; i < items.length; i++) {
     const answer = items[i].correct.split(",");
@@ -172,14 +173,15 @@ async function shortText (elements) {
     for (let o = 0; o < answer.length; o++) {
       if (answer.length === 1) scorePer = 2;
       const a = answer[o];
-      if (items[i].answer.toLowerCase().includes(a)) { score = score + scorePer; corr = corr + "true,"; }
+      if (items[i].answer.toLowerCase().includes(a)) { scoreItem = scoreItem + scorePer; corr = corr + "true,"; }
       else { corr = corr + "false,";  }
     }
-    (score === 2) ? score = 1 : score = 0;
+    if (scoreItem === 2) { score = score + 1; }
     corr = corr.slice(0,-1) + ";";
-    console.log(corr);
+    scoreItem = 0;
+
   }
-  return [Math.min(score,1), 1, corr];
+  return [Math.min(score,1), items.length, corr];
 }
 async function closedText (elements) {
   const items = [];
@@ -197,16 +199,19 @@ async function closedText (elements) {
       }
     }
   });
+  let scoreItem = 0;
   let score = 0; let total = 0; let corr = "";
   for (let i = 0; i < items.length; i++) {
     const answer = items[i].correct.split(",");
     corr = corr + "ct"+items[i].id + "-";
     for (let o = 0; o < answer.length; o++) {
-      total = total + 1;
       const a = answer[o];
-      if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { score = score + 1; corr = corr + "true,"; }
+      if (a.toLowerCase() === items[i].answers[o].toLowerCase()) { scoreItem = scoreItem + 1; corr = corr + "true,"; }
       else{corr = corr + "false,";}
     }
+    total = total + 1;
+    if (scoreItem == answer.length) score = score + 1;
+    scoreItem = 0;
     corr = corr.slice(0,-1) + ";";
   }
   return [score, total,corr];
@@ -241,7 +246,7 @@ async function multipleChoice(elements) {
       if ((answer.includes(o) && given.includes(o))|| (!answer.includes(o) && !given.includes(o))) { scoreItem = scoreItem + 1; corr = corr + "true,";}
       else { corr = corr + "false,";} 
     }
-    (scoreItem === 4) ? score = score + 1 : score = score;
+    if (scoreItem === 4) score = score + 1;
     total = total + 1;
     scoreItem = 0;
     corr = corr.slice(0,-1) + ";";

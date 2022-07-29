@@ -71,19 +71,6 @@ const { data: api } = await useFetch(url, {
 const question = api.value.question;
 const videoEnabled = api.value.videoExists;
 const imageSrcM = "/assets/video/video" + props.id + ".webm";
-const correctWords = api.value.answerKeywords.split(",");
-const correctValue = computed(() => {
-  let isCorrect = false;
-  let counter = 0;
-  for (let i = 0; i < correctWords.length; i++) {
-    if (answer.includes(correctWords[i])) {
-      counter = counter + 1;
-    }
-    if (counter === 2 || counter === correctWords.length) {
-      isCorrect = true;
-    }
-  }
-  return isCorrect;
-});
+const correctValue = props.correct.includes("true");
 const helpOpen = ref(!correctValue);
 </script>

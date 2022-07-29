@@ -71,7 +71,7 @@
                             Infinity Wars
                           </td>
                           <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                            -/10
+                            -/8
                           </td>
                           <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 md:pr-0">
                             <a v-bind:href="'/student/uebung/'+ exOne" class="text-indigo-600 hover:text-indigo-900">Abgabe hochladen</a>
@@ -90,7 +90,7 @@
                             Multiverse
                           </td>
                           <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                            -/10
+                            -/8
                           </td>
                           <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 md:pr-0">
                             <a v-bind:href="'/student/uebung/'+ exTwo" class="text-indigo-600 hover:text-indigo-900">Abgabe hochladen</a>
