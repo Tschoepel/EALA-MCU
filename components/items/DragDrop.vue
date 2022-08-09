@@ -12,7 +12,7 @@
             </button>
           </div>
            <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
-            Durch Drag and Drop mit der Maus können Sie die Filme an die richtige Stelle verschieben. Sortieren Sie die Filme von oben nach unten vom Ältesten zum Neuesten.
+            Durch Drag and Drop mit der Maus können Sie die Filme an die richtige Stelle verschieben. Sortieren Sie die Filme vom Ältesten zum Neuesten.
           </div>
           <input type="hidden" :name="'dragDrop'" :value="test3">
           <div>
