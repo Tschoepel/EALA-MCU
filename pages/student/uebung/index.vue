@@ -65,35 +65,16 @@
                             Übungsblatt {{ index }}
                           </td>
                           <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                            {{ dateReal }}
+                            {{ date }}
                           </td>
                           <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                            Infinity Wars
+                            Captain America &amp; Captain Marvel
                           </td>
                           <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                            -/8
+                            -/10
                           </td>
                           <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 md:pr-0">
-                            <a :href="'/student/uebung/'+ exOne" class="text-indigo-600 hover:text-indigo-900">Abgabe hochladen</a>
-                          </td>
-                        </tr>
-                      </tbody>
-                      <tbody class="divide-y divide-gray-200">
-                        <tr>
-                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 md:pl-0">
-                            Übungsblatt {{ index + 1 }}
-                          </td>
-                          <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                            {{ dateReal }}
-                          </td>
-                          <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                            Multiverse
-                          </td>
-                          <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                            -/8
-                          </td>
-                          <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 md:pr-0">
-                            <a :href="'/student/uebung/'+ exTwo" class="text-indigo-600 hover:text-indigo-900">Abgabe hochladen</a>
+                            <a v-bind:href="'/student/uebung/'+ index" class="text-indigo-600 hover:text-indigo-900">Abgabe hochladen</a>
                           </td>
                         </tr>
                       </tbody>
@@ -110,9 +91,6 @@
 </template>
 
 <script setup>
-// Shows available exercise sheets for student.
-const dateReal = new Date();
-const index = 1;
-const exOne = 1;
-const exTwo = 2;
+const date = new Date().toLocaleDateString("de-DE");
+const index = 2;
 </script>

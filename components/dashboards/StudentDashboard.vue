@@ -170,6 +170,7 @@ import {
 const navigation = reactive([
   { name: "Dashboard", href: "/student", icon: HomeIcon, current: false },
   // { name: "Feedback", href: "/student/feedback", icon: ChatAlt2Icon, current: false },
+  { name: "Training", href: "/student/training", icon: BookOpenIcon, current: false },
   // { name: "Exam", href: "/student/training", icon: ClipboardCheckIcon, current: false }
   { name: "Übung", href: "/student/uebung", icon: BookOpenIcon, current: false },
   { name: "Interaktives", href: "/student/interaktiv", icon: BookOpenIcon, current: false }
@@ -188,6 +189,7 @@ const props = defineProps({
 });
 
 onMounted(() => {
+  // console.log(props.nav);
   navigation.forEach((element) => {
     if (element.name.toLowerCase() === props.nav) { element.current = true; }
   });

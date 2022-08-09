@@ -41,7 +41,6 @@
             width="400px"
             height="500px"
           >
-          <div class ="img3">
             <img
               id="solutionPlaceholder"
               src="/assets/images/bg.jpg"
@@ -49,7 +48,6 @@
               width="fit-content"
               height="500px"
             >
-          </div>
           </div>
         </div>
         <br>
@@ -180,7 +178,7 @@ export default {
 
 <!-- Style Img Grid-->
 <style>
-  .img3 {
+  img {
     width:  550px;
     height: 500px;
   }

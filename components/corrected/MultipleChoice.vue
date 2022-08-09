@@ -16,7 +16,7 @@
         </div>
       </div>
       <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
-        <b>Fehler: </b> {{ props.hint }}
+        <b>Fehler: </b> Ihre Antwort ist leider falsch!
       </div>
       <div class="px-4 py-5">
         <div class="grid grid-cols-5 cols-gap-0.5">
@@ -66,7 +66,6 @@
   </div>
 </template>
 <script setup>
-// This component is used to show corrected multiple-choice-item with feedback (red/green text + hint if wrong)
 import { hash } from "ohash";
 import { ref } from "vue";
 const props = defineProps({
@@ -78,15 +77,15 @@ const props = defineProps({
     type: Number,
     required: true
   },
+  fill: {
+    type: Boolean,
+    required: true
+  },
   fillElements: {
     type: String,
     required: true
   },
   correct: {
-    type: String,
-    required: true
-  },
-  hint: {
     type: String,
     required: true
   }

@@ -16,7 +16,7 @@
         </div>
       </div>
       <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
-        <b>Fehler: </b> {{ props.hint }}
+        <b>Fehler: </b> Ihre Antwort ist leider falsch!
       </div>
       <!-- eslint-disable vue/no-v-html -->
       <input type="hidden" :name="'closedtext-'+props.index+'-id'" :value="props.id">
@@ -27,7 +27,6 @@
 </template>
 
 <script setup>
-// This component is used to show corrected closed-text-item with feedback (red/green text + hint if wrong)
 import { hash } from "ohash";
 const props = defineProps({
   id: {
@@ -43,10 +42,6 @@ const props = defineProps({
     required: true
   },
   correct: {
-    type: String,
-    required: true
-  },
-  hint: {
     type: String,
     required: true
   }
