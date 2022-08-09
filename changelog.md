@@ -1,6 +1,14 @@
 # Changelog
 
 ## [Unreleased]
+## [0.0.23] - 29.07.2022
+### Added
+- Extended assessement varying by area and item
+- gamification of showing students status
+- small motivation for students to search help in other students
+## [0.0.22] - 29.07.2022
+### Added
+- DrawItem Feedback
 ## [0.0.21] - 29.07.2022
 ### Added
 - Creation of StudentTrainingAction

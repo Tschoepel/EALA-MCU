@@ -24,6 +24,26 @@ async function main () {
       answers: "1942,hydra,tesserakt"
     }
   });
+  await prisma.closedText.create({
+    data: {
+      area: "Multiverse",        
+      difficulty:"medium",
+      hint:"Green Goblin in seiner bessessenen Form übernimmt am Ende die Rolle des Bösewichts.",
+      title: "Hulk",
+      text: "$$ wandelt sich Laufe von Spider Man: No Way Home von einer tragischen Figur zum Antagonisten, während $$ diese Entwicklung umkehrt.",
+      answers: "Green Goblin,Dr. Octopus"
+    }
+  });
+  await prisma.closedText.create({
+    data: {
+      area: "Multiverse",        
+      difficulty:"easy",
+      hint:"Captain America spielt 1942 im zweiten Weltkrieg und bekämpft Hydra.",
+      title: "Captain America: The First Avenger",
+      text: "Peter Parkers Wunsch, dass seine Freunde, darunter $$, ihn nicht $$, lösen das Zusammenbrechen des Multiverse aus",
+      answers: "michelle, vergessen"
+    }
+  });
   await prisma.multipleChoice.create({
     data: {
       area: "Infinity Wars",        
@@ -56,6 +76,28 @@ async function main () {
 
     }
   });
+  await prisma.multipleChoice.create({
+    data: {
+      area: "Multiverse",        
+      difficulty:"easy",
+      hint:"Aqua Man gehört nicht in das MCU. Iron Man ist tot.",
+      question: "Welche der folgenden Helden tauchen im Multiverse auf?",
+      answers : "Spider Man, Ant Man, Iron Man, Aqua Man",
+      answersCorrect: "answer1,answer2"
+
+    }
+  });
+  await prisma.multipleChoice.create({
+    data: {
+      area: "Multiverse",        
+      difficulty:"easy",
+      hint:"Wie gewünscht, übernimmt der Falcon den Schild von Captain America und damit seine Rolle.",
+      question: "Welcher Held übernimmt die Rolle von Captain America?",
+      answers : "Captain America, Vision, Falcon, Winter Soldier",
+      answersCorrect: "answer3"
+
+    }
+  });
   await prisma.dragDrop.create({
     data: {
       title: "Drag & Drop: Sortieren Sie die folgenden Filme nach ihrem Erscheinungsjahr von alt nach neu"
@@ -83,6 +125,31 @@ async function main () {
       answer: "Hier könnte eine Antwort stehen",
       answerKeywords: "iron man 2",
       videoExists: true
+    
+    }
+  });
+  await prisma.shortText.create({
+    data: {
+      area: "Multiverse",        
+      difficulty:"easy",
+      hint:"Peter Parker wird von Vielen für einen Massenmörder gehalten.",
+      title: "Bitte beantworten Sie die Frage in wenigen Worten",
+      question: "Welcher Charakter löst mit seiner Bitte an Dr. Strange das Multiverse aus?",
+      answer: "Hier könnte eine Antwort stehen",
+      answerKeywords: "spider man",
+      videoExists: false
+    }
+  });
+  await prisma.shortText.create({
+    data: {
+      area: "Multiverse",        
+      difficulty:"mittel",
+      hint:"Es tauchen Feinde von Spider Man aus alten Reihen auf.",
+      title: "Bitte beantworten Sie die Frage.",
+      question: "Nenne 2 Gegner aus dem Multiverse, die Spider Man einfangen muss.",
+      answer: "Hier könnte eine Antwort stehen",
+      answerKeywords: "goblin, Dr. Octopus, octopus, green goblin, sandman, lizard, vulture, mysterio",
+      videoExists: false
     
     }
   });
@@ -210,7 +277,7 @@ async function main () {
     data: {
       exercise:    101,
       userID:      1,
-      itemType:    "hearing",
+      itemType:    "hearingtask",
       itemID:      101,
       answers:     "answer2",
       correct:     "answer3",
@@ -229,7 +296,7 @@ async function main () {
     data: {
       exercise:    100, 
       userID:      1,
-      itemType:    "hearing",
+      itemType:    "hearingtask",
       itemID:      102,
       answers:     "answer1",
       correct:     "answer1",
@@ -269,7 +336,7 @@ async function main () {
     data: {
       exercise:  100,
       userID:      1,
-      itemType:    "short",
+      itemType:    "shorttext",
       itemID:      104,
       answers:     "answer1",
       correct:     "answer1",
@@ -289,7 +356,7 @@ async function main () {
     data: {
       exercise:  100,
       userID:      1,
-      itemType:    "closed",
+      itemType:    "closedtext",
       itemID:      105,
       answers:     "answer1",
       correct:     "answer1",
@@ -309,7 +376,7 @@ async function main () {
     data: {
       exercise:  101,
       userID:      1,
-      itemType:    "multiple",
+      itemType:    "multiplechoice",
       itemID:      106,
       answers:     "answer2,answer3",
       correct:     "answer2,answer4",
@@ -329,7 +396,7 @@ async function main () {
     data: {
       exercise:  101,
       userID:      1,
-      itemType:    "short",
+      itemType:    "shorttext",
       itemID:      107,
       answers:     "answer1",
       correct:     "answer3",
@@ -349,7 +416,7 @@ async function main () {
     data: {
       exercise:  101,
       userID:      1,
-      itemType:    "closed",
+      itemType:    "closedtext",
       itemID:      108,
       answers:     "answer1",
       correct:     "answer1",
@@ -362,6 +429,280 @@ async function main () {
       keys:        "[testdata]"
     }
   });
+
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "imageselection",
+      itemID:      109,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "imageselection",
+      itemID:      110,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "mittel",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "imageselection",
+      itemID:      111,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "imageselection",
+      itemID:      112,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "multiplechoice",
+      itemID:      113,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "multiplechoice",
+      itemID:      114,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "mittel",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "multiplechoice",
+      itemID:      115,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "multiplechoice",
+      itemID:      116,
+      answers:     "answer2",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "shorttext",
+      itemID:      117,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "shorttext",
+      itemID:      118,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       1,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "shorttext",
+      itemID:      119,
+      answers:     "answer2",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "shorttext",
+      itemID:      120,
+      answers:     "answer2",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "closedtext",
+      itemID:      121,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "schwer",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "closedtext",
+      itemID:      122,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "mittel",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "closedtext",
+      itemID:      123,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "mittel",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+  await prisma.studentTrainingAction.create({
+    data: {
+      exercise:  101,
+      userID:      1,
+      itemType:    "closedtext",
+      itemID:      124,
+      answers:     "answer1",
+      correct:     "answer1",
+      started:     set(new Date(), {hours: 18, minutes: 34, seconds: 02}),
+      finished:    set(new Date(), {hours: 18, minutes: 33, seconds: 34}),
+      difficulty:  "einfach",
+      area:        "Multiverse",
+      score:       0,
+      total:       1,
+      keys:        "[testdata]"
+    }
+  });
+
 
 }
 

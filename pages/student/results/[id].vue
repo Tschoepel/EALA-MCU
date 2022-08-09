@@ -6,9 +6,9 @@
           Ergebnisse
         </h1>
       </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-      <div class="py-4">
-      <InfoCard>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        <div class="py-4">
+          <InfoCard>
             <template #title>
               Ergebnisse für das Übungsblatt {{ index }}
             </template>
@@ -25,6 +25,7 @@
               <h3 class="text-lg leading-6 font-medium text-gray-900">
                 {{ showText }}
               </h3>
+              <img :src="srcimg" style="height: 300px; width: fit-content;">
             </template>
           </InfoCard>
           <FilledComponent :list="objects" />
@@ -34,6 +35,7 @@
   </dashboardsStudent-dashboard>
 </template>
 <script setup>
+// Pulls last try on the exercise sheet, collects data for correction items.
 const route = useRoute();
 const index = route.params.id;
 const { data: api } = await useFetch("/api/training/" + index);
@@ -49,7 +51,6 @@ valuesArray.forEach((element) => {
     currentSubmission = currentObject;
   }
 });
-console.log(currentSubmission);
 const result = Object.values(currentSubmission[6]);
 const scored = result[2];
 const total = result[3];
@@ -58,10 +59,10 @@ const correctArray = correctString.split(";");
 const submission = currentSubmission[2].replace(/"/g, "");
 
 const submissionElements = submission.substring(2, submission.length - 2).split("],[");
-// "mc1-true,true,true,true;mc2-true,true,true,true;"
 const objects = [];
 let counter = 0;
 let c = "";
+let hint = "";
 let id = -1;
 let fillElements = "";
 let object;
@@ -69,10 +70,9 @@ let correct;
 const length = submissionElements.length;
 submissionElements.forEach((element) => {
   counter++;
-  console.log(element);
   if (element.includes("id") && id !== -1) {
     fillElements = fillElements.substring(0, fillElements.length - 1);
-    object = { c, id, fillElements, correct };
+    object = { c, id, fillElements, correct, hint };
     objects.push(object);
     id = -1;
     c = "";
@@ -81,8 +81,8 @@ submissionElements.forEach((element) => {
   if (element.includes("closedtext")) {
     c = "ItemsClosed-text";
     if (element.includes("id")) {
-      console.log(element.split("-"));
       const elementParts = element.split("-");
+      hint = elementParts[5];
       id = parseInt(elementParts[9].split(",")[0]);
       correctArray.forEach((elementCorrect) => {
         if (elementCorrect.includes("ct" + id)) {
@@ -96,7 +96,6 @@ submissionElements.forEach((element) => {
   }
   if (element.includes("imageselection")) {
     c = "ItemsImage-selection";
-    console.log(element.split("-"));
     const elementParts = element.split("-");
     id = parseInt(elementParts[9].split(",")[0]);
     correctArray.forEach((elementCorrect) => {
@@ -105,12 +104,12 @@ submissionElements.forEach((element) => {
         correct = returnElements[1];
       }
     });
-    fillElements = element.split(",").slice(2).join(",") + ",";
+    hint = elementParts[5];
+    fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
   }
   if (element.includes("multiplechoice")) {
     c = "ItemsMultiple-choice";
     const elementParts = element.split("-");
-    console.log(element.split("-"));
     id = parseInt(elementParts[9].split(",")[0]);
     correctArray.forEach((elementCorrect) => {
       if (elementCorrect.includes("mc" + id)) {
@@ -118,12 +117,12 @@ submissionElements.forEach((element) => {
         correct = returnElements[1];
       }
     });
-    fillElements = element.split(",").slice(2).join(",") + ",";
+    hint = elementParts[5];
+    fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
   }
   if (element.includes("shorttext")) {
     const elementParts = element.split("-");
     c = "ItemsShort-text";
-    console.log(element.split("-"));
     id = parseInt(elementParts[9].split(",")[0]);
     correctArray.forEach((elementCorrect) => {
       if (elementCorrect.includes("st" + id)) {
@@ -131,59 +130,49 @@ submissionElements.forEach((element) => {
         correct = returnElements[1];
       }
     });
-    fillElements = element.split(",").slice(2).join(",") + ",";
+    hint = elementParts[5];
+    fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
   }
   if (element.includes("hearingtask")) {
     c = "ItemsHearing-task";
     const elementParts = element.split("-");
-    console.log(element.split("-"));
     id = parseInt(elementParts[9].split(",")[0]);
     correctArray.forEach((elementCorrect) => {
       if (elementCorrect.includes("ht" + id)) {
         correct = elementCorrect.split("-")[1];
       }
     });
-    fillElements = element.split(",").slice(2).join(",") + ",";
+    hint = elementParts[5];
+    fillElements = elementParts[9].split(",").slice(2).join(",") + ",";
   }
   if (counter === length) {
     fillElements = fillElements.substring(0, fillElements.length - 1);
-    object = { c, id, fillElements, correct };
+    object = { c, id, fillElements, correct, hint };
     objects.push(object);
   }
 });
 let tag;
+let src;
 switch (scored) {
 case 0:
 case 1:
-case 2:
+case 2: tag = "Mehr Lernen, weniger Zerschmettern, HULK";
+  src = "../../assets/images/hulk.jpg";
+  break;
 case 3:
-case 4: tag = "Du bist wie Groot. Du musst noch wachsen!";
+case 4: tag = "Nicht aufgeben. Auch Captain America musste hart arbeiten!";
+  src = "../../assets/images/captainAmerica.jpg";
   break;
 case 5:
-case 6:
+case 6: tag = "Einfach Thor, da geht vielleicht noch mehr!";
+  src = "../../assets/images/thorres.jpg";
+  break;
 case 7:
 case 8:
-case 9: tag = "Nicht aufgeben. Auch Captain America musste hart arbeiten!";
-  break;
-case 10:
-case 11:
-case 12:
-case 13:
-case 14: tag = "Einfach Thor, da geht vielleicht noch mehr!";
-  break;
-case 15:
-case 16:
-case 17:
-case 18:
-case 19: tag = "Du vereinst rohe Kraft mit hoher Bildung, HULK!";
-  break;
-case 20:
-case 21:
-case 22:
-case 23:
-case 24:
 default: tag = "Ein vollendetes Genie, wie Iron Man!";
+  src = "../../assets/images/ironmanres.jpg";
   break;
 }
 const showText = tag;
+const srcimg = src;
 </script>

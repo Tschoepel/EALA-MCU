@@ -16,7 +16,7 @@
         </div>
       </div>
       <div v-show="helpOpen" class="px-4 py-5 border-b border-gray-200 sm:px-6">
-        <b>Fehler: </b> Ihre Antwort ist leider falsch!
+        <b>Fehler: </b> {{ props.hint }}
       </div>
       <div class="px-4 py-5">
         <video v-show="videoEnabled" id="embVideo" controls>
@@ -39,6 +39,7 @@
 </template>
 
 <script setup>
+// This component is used to show corrected short-text-item with feedback (red/green text + hint if wrong)
 import { ref } from "vue";
 import { hash } from "ohash";
 const props = defineProps({
@@ -57,9 +58,12 @@ const props = defineProps({
   correct: {
     type: String,
     required: true
+  },
+  hint: {
+    type: String,
+    required: true
   }
 });
-console.log("loading correction");
 const answer = (props.fillElements.length !== 0) ? props.fillElements : "Question not answered!";
 const url = "/api/shortText/" + props.id;
 const { data: api } = await useFetch(url, {
@@ -68,15 +72,6 @@ const { data: api } = await useFetch(url, {
 const question = api.value.question;
 const videoEnabled = api.value.videoExists;
 const imageSrcM = "/assets/video/video" + props.id + ".webm";
-const correctWords = api.value.answerKeywords.split(",");
-const correctValue = computed(() => {
-  let isCorrect = false;
-  correctWords.forEach((word) => {
-    if (answer.toLowerCase().includes(word.toLowerCase())) {
-      isCorrect = true;
-    }
-  });
-  return isCorrect;
-});
+const correctValue = props.correct.includes("true");
 const helpOpen = ref(!correctValue);
 </script>

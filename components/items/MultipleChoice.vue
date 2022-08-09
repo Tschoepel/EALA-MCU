@@ -29,7 +29,7 @@
               value="answer1"
               class="mr-2"
             >
-            <label id="aILabel" for="answerI" >{{ answerI }}</label>
+            <label id="aILabel" for="answerI">{{ answerI }}</label>
           </div>
           <div>
             <input
@@ -39,7 +39,7 @@
               value="answer2"
               class="mr-2"
             >
-            <label id="aIILabel" for="answerII" >{{ answerII }}</label>
+            <label id="aIILabel" for="answerII">{{ answerII }}</label>
           </div>
           <div>
             <input
@@ -49,7 +49,7 @@
               value="answer3"
               class="mr-2"
             >
-            <label id="aIIILabel" for="answerIII" >{{ answerIII }}</label>
+            <label id="aIIILabel" for="answerIII">{{ answerIII }}</label>
           </div>
           <div>
             <input
@@ -59,7 +59,7 @@
               value="answer4"
               class="mr-2"
             >
-            <label id="aIVLabel" for="answerIV" >{{ answerIV }}</label>
+            <label id="aIVLabel" for="answerIV">{{ answerIV }}</label>
           </div>
         </div>
       </div>
@@ -67,6 +67,7 @@
   </div>
 </template>
 <script setup>
+// This component offers an item of type Multiple Choice to be answered by students
 import { hash } from "ohash";
 import { ref } from "vue";
 const props = defineProps({
